@@ -1,0 +1,58 @@
+
+.Leiste {
+    background-color: #f4f4f4;
+    height: 60px;
+    font-weight: 400;
+}
+
+.Logo {
+    width: 125px;
+}
+
+.Collapsable{
+    background-color: #f4f4f4;
+}
+
+.Hamburger {
+    font-size: 35px;
+}
+
+.Hamburger:hover{
+    color: #af368c;
+}
+
+.Center{
+    text-align: center;
+}
+
+
+
+.LeistenSchrift{
+    font-weight: 500;
+}
+
+.hoverRed{
+    color:black;
+}
+
+.hoverRed:hover{
+    color: #cf1820;
+}
+
+.hoverOrange{
+    color:black;
+}
+
+.hoverOrange:hover{
+    color: #ec6525;
+}
+
+.hoverPurple{
+    color:black;
+}
+
+.hoverPurple:hover{
+    color: #af368c;
+}
+
+
