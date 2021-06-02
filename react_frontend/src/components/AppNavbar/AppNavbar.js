@@ -3,7 +3,6 @@ import { ReactComponent as Wortmarke } from '../../assets/icons/wortmarke.svg';
 import './AppNavbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
 
 
 
