@@ -18,4 +18,6 @@ function FAQ ({faq, index, toggleFAQ}) {
 	)
 }
 
+
+
 export default FAQ

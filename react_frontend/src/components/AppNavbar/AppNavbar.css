@@ -39,6 +39,10 @@
     color: #cf1820;
 }
 
+.hoverRed:active{
+    color: #cf1820;
+}
+
 .hoverOrange{
     color:black;
 }

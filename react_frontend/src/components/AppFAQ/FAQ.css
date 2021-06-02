@@ -31,7 +31,7 @@
 	width: 30px;
 	height: 30px;
 
-	background-image: url('./icons/pfeilUnten.svg');
+	background-image: url('../../assets/icons/pfeilUnten.svg');
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
