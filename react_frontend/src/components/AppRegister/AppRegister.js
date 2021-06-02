@@ -9,7 +9,7 @@ function AppRegister() {
   return (
 
     <Container className="Body">
-      <Logo className="Logo" />
+      <Logo className="LogoLogin" />
 
       <Form>
         <Form.Group controlId="formBasicEmail">
