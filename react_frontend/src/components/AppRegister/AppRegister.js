@@ -17,15 +17,15 @@ function AppRegister() {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Control type="password" placeholder="E-Mail.." />
+          <Form.Control type="email" placeholder="E-Mail.." />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Control type="password" placeholder="Password.." />
+          <Form.Control type="password" placeholder="Passwort.." />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Control type="password" placeholder="repeat Password.." />
+          <Form.Control type="password" placeholder="Passwort wiederholen.." />
         </Form.Group>
 
         <Row>

@@ -1,8 +1,10 @@
 
+
 .Leiste {
     background-color: #f4f4f4;
     height: 60px;
-    font-weight: 400;
+    font-weight: 500;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .Logo {

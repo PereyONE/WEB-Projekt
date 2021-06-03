@@ -31,12 +31,12 @@ function AppNavbar() {
 
           <Col xs="auto">
             <Row>
-              
+
               <Nav.Link className="hoverRed" href="/studienverlaufsplan">Studienverlaufsplaner</Nav.Link>
 
               <Nav.Link className="hoverOrange" href="/stundenplan">Stundenplan</Nav.Link>
 
-              <Nav.Link className="hoverPurple" href="/kalender">Kalender</Nav.Link>
+              {/* <Nav.Link className="hoverPurple" href="/kalender">Kalender</Nav.Link> */}
 
               <Nav.Link className="hoverOrange" href="/module">Module</Nav.Link>
 
@@ -47,6 +47,11 @@ function AppNavbar() {
             </Row>
 
           </Col>
+
+          <Col className="Center">
+            <FontAwesomeIcon className="Hamburger" icon={faBars} />
+          </Col>
+
 
 
 

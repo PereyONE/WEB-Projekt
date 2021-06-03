@@ -13,11 +13,11 @@ function AppLogin() {
 
       <Form>
         <Form.Group controlId="formBasicEmail">
-          <Form.Control type="email" placeholder="Username.." />
+          <Form.Control type="email" placeholder="E-Mail.." />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Control type="password" placeholder="Password.." />
+          <Form.Control type="password" placeholder="Passwort.." />
         </Form.Group>
 
         <Row>
