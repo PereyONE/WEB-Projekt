@@ -47,7 +47,7 @@ function AppLehrende() {
 
     <div>
       <div className="profs">
-        <Row className="justify-content-md-center" xs={1} md={2}>
+        <Row className="justify-content-md-center" xs={2} md={2}>
           {profs.map((prof, i) => (
 
             <Lehrende prof={prof} index={i} />
