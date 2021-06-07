@@ -12,6 +12,7 @@ import AppLehrende from '../AppLehrende/AppLehrende';
 import AppLogin from '../AppLogin/AppLogin'
 import AppRegister from '../AppRegister/AppRegister';
 import AppImpressum from '../AppImpressum/AppImpressum';
+import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 
 
 
@@ -29,8 +30,9 @@ function App() {
         <Route path="/" exact component={AppHome} />
         <Route path="/studienverlaufsplan" component={AppVerlaufsplan} />
         <Route path="/stundenplan" component={AppStundenplan} />
-        <Route path="/module" component={AppModule} />
-        <Route path="/lehrende" component={AppLehrende} />
+        <Route path="/module" exact component={AppModule} />
+        <Route path="/lehrende" exact component={AppLehrende} />
+          <Route path="/lehrende/prof.name" component={AppLehrendeProfil} />
         <Route path="/faq" component={AppFAQ} />
 
         <Route path="/impressum" component={AppImpressum} />
