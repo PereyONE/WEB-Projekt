@@ -28,7 +28,7 @@ public class StudentService implements UserDetailsService {
         boolean studentExists = studentRepository.findByEmail(student.getEmail()).isPresent();
 
         if (studentExists) {
-            throw new IllegalStateException("email already taken");
+            throw new IllegalStateException("email already taken!");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(student.getPassword());
