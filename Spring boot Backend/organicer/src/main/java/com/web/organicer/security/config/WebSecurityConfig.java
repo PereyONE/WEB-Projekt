@@ -19,13 +19,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final StudentService studentService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/registration/**")
-                .permitAll()
+                    .antMatchers("/api/registration/**")
+                    .permitAll()
                 .anyRequest()
                 .authenticated().and()
                 .formLogin();

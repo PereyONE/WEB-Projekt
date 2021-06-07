@@ -1,6 +1,5 @@
 package com.web.organicer.student;
 
-import com.sun.istack.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -19,45 +17,46 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@Table(name = "student")
 public class Student implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
     private Long id;
-    @NotNull
     private String username;
-    @NotNull
-    private String password;
-    @NotNull
     private String email;
-    private StudentRole studentRole;
-    private boolean locked;
+    private String password;
     @Enumerated(EnumType.STRING)
-    private boolean enabled;
+    private StudentRole studentRole;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    private int semester;
-    private int spid;
-    private int svpid;
-    private int kalenderid;
-    private ArrayList<Integer> vertifungen;
-    private ArrayList<Integer> wahlfaecher;
-
-    public Student(String username, String password, String email, StudentRole studentRole, boolean locked, boolean enabled, int semester, int spid, int svpid, int kalenderid, ArrayList<Integer> vertifungen, ArrayList<Integer> wahlfaecher) {
+    public Student(String username, String email, String password, StudentRole studentRole) {
         this.username = username;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.studentRole = studentRole;
-        this.locked = locked;
-        this.enabled = enabled;
-        this.semester = semester;
-        this.spid = spid;
-        this.svpid = svpid;
-        this.kalenderid = kalenderid;
-        this.vertifungen = vertifungen;
-        this.wahlfaecher = wahlfaecher;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(studentRole.name());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -80,20 +79,5 @@ public class Student implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(studentRole.name());
-        return Collections.singletonList(authority);
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 }
