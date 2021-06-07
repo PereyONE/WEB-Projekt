@@ -1,3 +1,0 @@
-Bilder müssen warum auch immer im public Folder sein!
-
-Sie werden über src="/images.." angesprochen
