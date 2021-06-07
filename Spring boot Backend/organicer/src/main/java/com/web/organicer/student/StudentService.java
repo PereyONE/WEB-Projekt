@@ -1,17 +1,30 @@
 package com.web.organicer.student;
 
-import org.springframework.stereotype.Component;
+import com.web.organicer.repository.StudentRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StudentService {
+@AllArgsConstructor
+public class StudentService implements UserDetailsService {
+
+    private final StudentRepository studentRepository;
 
     public List<Student> getStudent() {
 
-        return List.of(
-                new Student(1L, "Perey", "pw123", "marius@perey.net",
-                        10, 1, 1, 1));
+         return studentRepository.findAll();
+    }
+
+    private final static String MSG = "user with email %s not found";
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return studentRepository.findByEmail(email);
     }
 }
