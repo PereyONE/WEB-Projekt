@@ -1,0 +1,24 @@
+.Body{
+    text-align: center;
+    width:500px;
+    margin-top: 50px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.LogoLogin{
+    width: 200px;
+}
+
+
+
+.Login{
+    background-color: #ef814c;
+    justify-content: left;
+    
+}
+
+.Register{
+    background-color: #bd5aa1;
+    justify-content: right;
+    
+}
