@@ -12,6 +12,7 @@ public class FaqController {
 
     private final FaqService faqService;
 
+
     @Autowired
     public FaqController(FaqService faqService){
         this.faqService = faqService;
@@ -22,5 +23,9 @@ public class FaqController {
         return faqService.getFaq();
 
     }
+    @PostMapping
+    public Faq registerNewFaq(@RequestBody FaqRequest request){
+        return faqService.addNewFaq(request);
 
+    }
 }
