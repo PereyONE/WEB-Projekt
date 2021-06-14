@@ -17,9 +17,24 @@ public class FaqService {
 
     }
 
-    public Faq addNewFaq(Faq faq){
+    public String postFaq(Faq faq){
+        if (faq.getId()==null){
+            if (!faqRepository.findByFrage(faq.getFrage()).isEmpty()){
+                return "Question already exists";
+            }
+            return addNewFaq(faq);
+        }
+        return updateFaq(faq);
+    }
+
+    public String addNewFaq(Faq faq){
         faqRepository.save(faq);
-        return faq;
+        return "Faq created";
+    }
+
+    public String updateFaq(Faq faq){
+        faqRepository.save(faq);
+        return "Faq updated";
     }
 }
 

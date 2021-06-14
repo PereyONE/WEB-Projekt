@@ -20,9 +20,8 @@ public class FaqController {
         return faqService.getFaq();
 
     }
-    @PostMapping()
-    public Faq registerNewFaq(@RequestBody Faq faq){
-        return faqService.addNewFaq(faq);
-
+    @PostMapping
+    public String registerNewFaq(@RequestBody Faq faq){
+        return faqService.postFaq(faq);
     }
 }
