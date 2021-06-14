@@ -36,6 +36,14 @@ public class FaqService {
         faqRepository.save(faq);
         return "Faq updated";
     }
+
+    public String deleteFaq(Faq faq){
+        if (faq.getId()==null){
+            return "No Fq Id";
+            }
+        faqRepository.delete(faq);
+        return "Faq has been deleted";
+    }
 }
 
 

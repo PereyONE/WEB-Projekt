@@ -18,10 +18,15 @@ public class FaqController {
     @GetMapping
     public List<Faq> getFaq(){
         return faqService.getFaq();
-
     }
+
     @PostMapping
     public String registerNewFaq(@RequestBody Faq faq){
         return faqService.postFaq(faq);
+    }
+
+    @DeleteMapping
+    public String deleteFaq(@RequestBody Faq faq){
+        return faqService.deleteFaq(faq);
     }
 }
