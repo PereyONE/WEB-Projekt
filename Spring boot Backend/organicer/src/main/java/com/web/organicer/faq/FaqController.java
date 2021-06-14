@@ -8,12 +8,11 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/api/faq")
+@RequestMapping(path = "/api/faqs")
 @AllArgsConstructor
 public class FaqController {
 
     private final FaqService faqService;
-
 
     @GetMapping
     public List<Faq> getFaq(){

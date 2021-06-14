@@ -1,6 +1,7 @@
 package com.web.organicer.module;
 
 import com.web.organicer.instructor.Instructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,9 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @Entity
 public class Module {
 
@@ -24,12 +23,11 @@ public class Module {
             strategy = GenerationType.SEQUENCE,
             generator = "module_sequence"
     )
-
     private Long id;
     private String moduleName;
     private String moduleabbreviation;
     private int ects;
-    private String moduleType;
+    private int moduleType;
     private String specialization;
     private String examDescription;
     private String description;
@@ -41,4 +39,7 @@ public class Module {
     private String courseEnd;
     private ArrayList<Instructor> instructors;
     private String picture;
+
+
 }
+

@@ -12,9 +12,7 @@ public class FaqService {
     public final FaqRepository faqRepository;
 
     public List<Faq> getFaq() {
-
         return faqRepository.findAll();
-
     }
 
     public String postFaq(Faq faq){
@@ -39,7 +37,7 @@ public class FaqService {
 
     public String deleteFaq(Faq faq){
         if (faq.getId()==null){
-            return "No Fq Id";
+            return "No Faq Id";
             }
         faqRepository.delete(faq);
         return "Faq has been deleted";
