@@ -1,19 +1,18 @@
 package com.web.organicer.faq;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @Entity
+@NoArgsConstructor
 public class Faq {
 
 
-    public Faq() {
+    public Faq(String frage, String antwort) {
+        this.frage = frage;
+        this.antwort = antwort;
     }
 
     @Id
@@ -26,8 +25,7 @@ public class Faq {
             strategy = GenerationType.SEQUENCE,
             generator = "faq_sequence"
     )
-
     private Long id;
-    private String question;
-    private String answer;
+    private String frage;
+    private String antwort;
 }

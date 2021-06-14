@@ -9,23 +9,17 @@ import java.util.List;
 @AllArgsConstructor
 public class FaqService {
 
-
     public final FaqRepository faqRepository;
+
     public List<Faq> getFaq() {
 
-        return List.of(
-            new Faq(1L,"Was ist eine ULP","Ja ist schon wichtig")
-        );
+        return faqRepository.findAll();
 
     }
 
-    public Faq addNewFaq(FaqRequest request){
-        Faq faq = new Faq();
-        faq.setQuestion(request.getFrage());
-        faq.setAnswer(request.getAntwort());
+    public Faq addNewFaq(Faq faq){
         faqRepository.save(faq);
         return faq;
-
     }
 }
 

@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin();
 
          */
+        http.cors().and().csrf().disable();
     }
 
     @Override
