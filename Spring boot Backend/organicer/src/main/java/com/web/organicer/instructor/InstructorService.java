@@ -17,7 +17,7 @@ public class InstructorService {
 
     public String postInstructor(Instructor instructor){
         if(instructor.getId()==null){
-            if(!instructorRepository.findByInstructorName(instructor.getSurname()).isEmpty()){
+            if(!instructorRepository.findBySurname(instructor.getSurname()).isEmpty()){
                 return "Instuctor already exists";
             }
             return addNewInstructor(instructor);

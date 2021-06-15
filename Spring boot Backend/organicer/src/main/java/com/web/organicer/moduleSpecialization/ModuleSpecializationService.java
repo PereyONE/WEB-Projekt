@@ -20,7 +20,7 @@ public class ModuleSpecializationService {
 
     public String postModuleSpecialization(ModuleSpecialization moduleSpecialization){
         if(moduleSpecialization.getId()==null){
-            if(!moduleSpecializationRepository.findByModuleSpecializationName(moduleSpecialization.getName()).isEmpty()){
+            if(!moduleSpecializationRepository.findByName(moduleSpecialization.getName()).isEmpty()){
                 return "Specialization already exists";
             }
             return addNewModuleSpecialization(moduleSpecialization);

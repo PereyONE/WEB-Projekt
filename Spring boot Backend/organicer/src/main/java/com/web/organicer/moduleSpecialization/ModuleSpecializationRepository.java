@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ModuleSpecializationRepository extends JpaRepository<ModuleSpecialization, Long> {
 
-    Optional<Module> findByModuleSpecializationName(String ModuleSpecializationName);
+    Optional<ModuleSpecialization> findByName(String ModuleSpecializationName);
 }
