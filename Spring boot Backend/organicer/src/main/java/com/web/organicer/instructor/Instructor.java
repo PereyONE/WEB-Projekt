@@ -1,5 +1,6 @@
 package com.web.organicer.instructor;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 @Setter
 @NoArgsConstructor
 @Entity
+@Data
 public class Instructor {
 
     @Id
@@ -24,7 +26,7 @@ public class Instructor {
             strategy = GenerationType.SEQUENCE,
             generator = "instructor_sequence"
     )
-    private long id;
+    private Long id;
     private String title;
     private String forename;
     private String surname;

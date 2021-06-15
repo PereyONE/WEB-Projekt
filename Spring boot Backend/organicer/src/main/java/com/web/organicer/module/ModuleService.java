@@ -19,7 +19,7 @@ public class ModuleService {
     public String postModule(Module module){
         if (module.getId()==null){
             if (!moduleRepository.findByModuleName(module.getModuleName()).isEmpty()){
-                return "Question already exists";
+                return "Module already exists";
             }
             return addNewModule(module);
         }

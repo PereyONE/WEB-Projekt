@@ -39,7 +39,5 @@ public class Module {
     private String courseEnd;
     private ArrayList<Instructor> instructors;
     private String picture;
-
-
 }
 
