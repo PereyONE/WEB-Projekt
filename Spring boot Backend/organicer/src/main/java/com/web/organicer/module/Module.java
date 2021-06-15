@@ -13,6 +13,24 @@ import java.util.ArrayList;
 @Entity
 public class Module {
 
+    public Module(String moduleName, String moduleabbreviation, int ects, int moduleType, String specialization, String examDescription, String description, String availability, int normalPeriodseven, int normalPeriodtwelve, String courseDay, String courseStart, String courseEnd, ArrayList<Instructor> instructors, String picture) {
+        this.moduleName = moduleName;
+        this.moduleabbreviation = moduleabbreviation;
+        this.ects = ects;
+        this.moduleType = moduleType;
+        this.specialization = specialization;
+        this.examDescription = examDescription;
+        this.description = description;
+        this.availability = availability;
+        this.normalPeriodseven = normalPeriodseven;
+        this.normalPeriodtwelve = normalPeriodtwelve;
+        this.courseDay = courseDay;
+        this.courseStart = courseStart;
+        this.courseEnd = courseEnd;
+        this.instructors = instructors;
+        this.picture = picture;
+    }
+
     @Id
     @SequenceGenerator(
             name = "module_sequence",

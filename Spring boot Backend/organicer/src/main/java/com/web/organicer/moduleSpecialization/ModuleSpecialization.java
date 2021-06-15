@@ -12,6 +12,11 @@ import javax.persistence.*;
 @Entity
 @Table
 public class ModuleSpecialization {
+
+    public ModuleSpecialization(String name) {
+        this.name = name;
+    }
+
     @Id
     @SequenceGenerator(
             name = "moduleSpecialization_sequence",

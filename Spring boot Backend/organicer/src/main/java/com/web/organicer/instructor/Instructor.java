@@ -16,6 +16,21 @@ import java.util.ArrayList;
 @Data
 public class Instructor {
 
+    public Instructor(String title, String forename, String surname, String email, String phoneNumber, String room, String consultationDay, String consultationStart, String consultationEnd, String consultationDescription, String picture, ArrayList modules) {
+        this.title = title;
+        this.forename = forename;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.room = room;
+        this.consultationDay = consultationDay;
+        this.consultationStart = consultationStart;
+        this.consultationEnd = consultationEnd;
+        this.consultationDescription = consultationDescription;
+        this.picture = picture;
+        this.modules = modules;
+    }
+
     @Id
     @SequenceGenerator(
             name = "instructor_sequence",
