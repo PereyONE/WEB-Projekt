@@ -1,14 +1,13 @@
 package com.web.organicer.instructor;
 
 
-import com.web.organicer.module.Module;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface InstructorRepository extends JpaRepository<Instructor, Long> {
+public interface LehrendeRepository extends JpaRepository<Lehrende, Long> {
 
-    Optional<Instructor> findBySurname(String Surname);
+    Optional<Lehrende> findByVorname(String Vorname);
 }

@@ -1,10 +1,7 @@
 package com.web.organicer.module;
 
-import com.web.organicer.instructor.Instructor;
+import com.web.organicer.instructor.Lehrende;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ import java.util.ArrayList;
 @Entity
 public class Module {
 
-    public Module(String moduleName, String moduleabbreviation, int ects, int moduleType, String specialization, String examDescription, String description, String availability, int normalPeriodseven, int normalPeriodtwelve, String courseDay, String courseStart, String courseEnd, ArrayList<Instructor> instructors, String picture) {
+    public Module(String moduleName, String moduleabbreviation, int ects, int moduleType, String specialization, String examDescription, String description, String availability, int normalPeriodseven, int normalPeriodtwelve, String courseDay, String courseStart, String courseEnd, ArrayList<Lehrende> instructors, String picture) {
         this.moduleName = moduleName;
         this.moduleabbreviation = moduleabbreviation;
         this.ects = ects;
@@ -55,7 +52,7 @@ public class Module {
     private String courseDay;
     private String courseStart;
     private String courseEnd;
-    private ArrayList<Instructor> instructors;
+    private ArrayList<Lehrende> instructors;
     private String picture;
 }
 
