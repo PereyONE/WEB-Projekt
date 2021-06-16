@@ -11,21 +11,21 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-public class ModuleSpecialization {
+public class Vertiefung {
 
-    public ModuleSpecialization(String name) {
+    public Vertiefung(String name) {
         this.name = name;
     }
 
     @Id
     @SequenceGenerator(
-            name = "moduleSpecialization_sequence",
-            sequenceName = "moduleSpecialization_sequence",
+            name = "vertiefung_sequence",
+            sequenceName = "vertiefung_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "moduleSpecialization_sequence"
+            generator = "vertiefung_sequence"
     )
 
     private Long id;

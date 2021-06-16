@@ -10,22 +10,22 @@ import java.util.ArrayList;
 @Entity
 public class Module {
 
-    public Module(String moduleName, String moduleabbreviation, int ects, int moduleType, String specialization, String examDescription, String description, String availability, int normalPeriodseven, int normalPeriodtwelve, String courseDay, String courseStart, String courseEnd, ArrayList<Lehrende> instructors, String picture) {
+    public Module(String moduleName, String moduleAbkürzung, int ects, int moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, int regelstudienzeitsieben, int regelstudienzeitzwölf, String vorlesungTag, String vorlesungStart, String vorlesungEnde, ArrayList<Lehrende> lehrende, String bild) {
         this.moduleName = moduleName;
-        this.moduleabbreviation = moduleabbreviation;
+        this.moduleAbkürzung = moduleAbkürzung;
         this.ects = ects;
-        this.moduleType = moduleType;
-        this.specialization = specialization;
-        this.examDescription = examDescription;
-        this.description = description;
-        this.availability = availability;
-        this.normalPeriodseven = normalPeriodseven;
-        this.normalPeriodtwelve = normalPeriodtwelve;
-        this.courseDay = courseDay;
-        this.courseStart = courseStart;
-        this.courseEnd = courseEnd;
-        this.instructors = instructors;
-        this.picture = picture;
+        this.moduleTyp = moduleTyp;
+        this.vertiefung = vertiefung;
+        this.prüfungsart = prüfungsart;
+        this.beschreibung = beschreibung;
+        this.verfügbarkeit = verfügbarkeit;
+        this.regelstudienzeitsieben = regelstudienzeitsieben;
+        this.regelstudienzeitzwölf = regelstudienzeitzwölf;
+        this.vorlesungTag = vorlesungTag;
+        this.vorlesungStart = vorlesungStart;
+        this.vorlesungEnde = vorlesungEnde;
+        this.lehrende = lehrende;
+        this.bild = bild;
     }
 
     @Id
@@ -40,19 +40,19 @@ public class Module {
     )
     private Long id;
     private String moduleName;
-    private String moduleabbreviation;
+    private String moduleAbkürzung;
     private int ects;
-    private int moduleType;
-    private String specialization;
-    private String examDescription;
-    private String description;
-    private String availability;
-    private int normalPeriodseven;
-    private int normalPeriodtwelve;
-    private String courseDay;
-    private String courseStart;
-    private String courseEnd;
-    private ArrayList<Lehrende> instructors;
-    private String picture;
+    private int moduleTyp;
+    private String vertiefung;
+    private String prüfungsart;
+    private String beschreibung;
+    private String verfügbarkeit;
+    private int regelstudienzeitsieben;
+    private int regelstudienzeitzwölf;
+    private String vorlesungTag;
+    private String vorlesungStart;
+    private String vorlesungEnde;
+    private ArrayList<Lehrende> lehrende;
+    private String bild;
 }
 

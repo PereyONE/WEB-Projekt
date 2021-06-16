@@ -33,13 +33,13 @@ public class Lehrende {
 
     @Id
     @SequenceGenerator(
-            name = "instructor_sequence",
-            sequenceName = "instructor_sequence",
+            name = "lehrende_sequence",
+            sequenceName = "lehrende_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "instructor_sequence"
+            generator = "lehrende_sequence"
     )
     private Long id;
     private String titel;
