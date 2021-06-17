@@ -1,6 +1,6 @@
 package com.web.organicer.module;
 
-import com.web.organicer.instructor.Lehrende;
+import com.web.organicer.lehrende.Lehrende;
 import lombok.Data;
 
 import javax.persistence.*;

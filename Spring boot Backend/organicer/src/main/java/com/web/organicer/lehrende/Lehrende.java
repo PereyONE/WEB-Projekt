@@ -1,4 +1,4 @@
-package com.web.organicer.instructor;
+package com.web.organicer.lehrende;
 
 import lombok.Data;
 import lombok.Getter;

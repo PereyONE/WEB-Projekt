@@ -19,7 +19,7 @@ public class VertiefungService {
     public String postVertiefung(Vertiefung vertiefung){
         if(vertiefung.getId()==null){
             if(!vertiefungRepository.findByName(vertiefung.getName()).isEmpty()){
-                return "Vertiefungsrichtung" + vertiefung.getName()+ " existiert bereits";
+                return "Vertiefungsrichtung " + vertiefung.getName()+ " existiert bereits";
             }
             return addVertiefung(vertiefung);
         }
@@ -28,12 +28,12 @@ public class VertiefungService {
 
     public String addVertiefung(Vertiefung vertiefung){
         vertiefungRepository.save(vertiefung);
-        return "Vertiefungsrichtung" + vertiefung.getName()+ " wurde hinzugefügt";
+        return "Vertiefungsrichtung " + vertiefung.getName()+ " wurde hinzugefügt";
     }
 
     public String updateVertiefung(Vertiefung vertiefung){
         vertiefungRepository.save(vertiefung);
-            return "Vertiefungsrichtung" + vertiefung.getName()+ " wurde aktualisiert";
+            return "Vertiefungsrichtung " + vertiefung.getName()+ " wurde aktualisiert";
 
     }
 
@@ -42,7 +42,7 @@ public class VertiefungService {
             return "Keine Vertiefungs Id";
         }
         vertiefungRepository.delete(vertiefung);
-        return "Vertiefungsrichtung" + vertiefung.getName()+ " wurde gelöscht";
+        return "Vertiefungsrichtung " + vertiefung.getName()+ " wurde gelöscht";
     }
 
 }

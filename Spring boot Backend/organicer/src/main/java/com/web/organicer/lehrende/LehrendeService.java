@@ -1,4 +1,4 @@
-package com.web.organicer.instructor;
+package com.web.organicer.lehrende;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,12 +28,12 @@ public class LehrendeService {
 
     public String addNewLehrende(Lehrende lehrende){
         lehrendeRepository.save(lehrende);
-        return "Mitarbeiter" + lehrende.getNachname() + "hinzugefügt";
+        return "Mitarbeiter " + lehrende.getNachname() + " hinzugefügt";
     }
 
     public String updateLehrende(Lehrende lehrende){
         lehrendeRepository.save(lehrende);
-        return "Mitarbeiter" + lehrende.getNachname() + "aktualisiert";
+        return "Mitarbeiter " + lehrende.getNachname() + " aktualisiert";
     }
 
     public String deleteLehrende(Lehrende lehrende){
@@ -41,7 +41,7 @@ public class LehrendeService {
             return "Keine Mitarbeiter Id";
         }
         lehrendeRepository.delete(lehrende);
-        return "Mitarbeiter" + lehrende.getNachname() + "wurde gelöscht";
+        return "Mitarbeiter " + lehrende.getNachname() + " wurde gelöscht";
     }
 }
 

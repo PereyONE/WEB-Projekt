@@ -1,4 +1,4 @@
-package com.web.organicer.instructor;
+package com.web.organicer.lehrende;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -28,12 +28,12 @@ public class ModuleService {
 
     public String addNewModule(Module module){
         moduleRepository.save(module);
-        return "Module" + module.getModuleName() +"wurde hinzugefügt";
+        return "Module " + module.getModuleName() +" wurde hinzugefügt";
     }
 
     public String updateModule(Module module){
         moduleRepository.save(module);
-        return "Module" + module.getModuleName() +"wurde aktualisiert";
+        return "Module " + module.getModuleName() +" wurde aktualisiert";
     }
 
     public String deleteModule(Module module){
@@ -41,7 +41,7 @@ public class ModuleService {
             return "Keine Modul id";
         }
         moduleRepository.delete(module);
-        return "Module" + module.getModuleName() +"wurde gelöscht";
+        return "Module " + module.getModuleName() +" wurde gelöscht";
     }
 
 }
