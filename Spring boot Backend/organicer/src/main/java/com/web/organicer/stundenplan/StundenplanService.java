@@ -3,20 +3,17 @@ package com.web.organicer.stundenplan;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class StundenplanService {
-    /*
+
     private final StundenplanRepository stundenplanRepository;
 
-    public Stundenplan getStundenplan(){
-
+    public Stundenplan getStundenplan(Long id){
+        return stundenplanRepository.getById(id);
     }
-
     public String postStundenplan(Stundenplan stundenplan){
         if (stundenplan.getId()==null){
             return addNewStundenplan(stundenplan);
@@ -41,8 +38,6 @@ public class StundenplanService {
         stundenplanRepository.delete(stundenplan);
         return "Stundenplan wurde gelöscht";
     }
-
-     */
 }
 
 

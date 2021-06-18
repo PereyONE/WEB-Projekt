@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface StundenplanRepository extends JpaRepository<Module, Long>{
-
-    Optional<Stundenplan> findByStundenplanId(Long id);
+public interface StundenplanRepository extends JpaRepository<Stundenplan, Long>{
 
 }
 
