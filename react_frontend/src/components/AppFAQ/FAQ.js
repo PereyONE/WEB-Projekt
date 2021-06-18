@@ -3,6 +3,8 @@ import './FAQ.css'
 
 function FAQ({ faq, index, toggleFAQ, color }) {
 	const colori = color;
+
+	
 	if (colori === "rot") {
 		return (
 			<div

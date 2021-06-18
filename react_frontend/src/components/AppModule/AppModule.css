@@ -1,0 +1,65 @@
+h1, h2, h3, h4, h5{
+    font-weight: 300;
+}
+
+.titel{
+    text-align: center;
+    position: relative;
+    margin-bottom: 2%;
+}
+
+.titelbild{
+    height: 300px;
+    width: 100%;
+    margin-top: -40px;
+    object-fit: cover;
+}
+
+
+
+.titeltext{
+    position: absolute;
+  bottom:0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+
+.personCard{
+    margin-bottom: 5%;
+}
+
+.thumbnailperson{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nameFrame{
+    text-align: left;
+    height:100px;
+}
+
+.nameperson{
+    margin-top: 15%;
+    color:black;
+}
+
+.ModulIcon{
+    color: #ec6525;
+    background-color: #ef814c;
+    padding: 25px;
+    font-size: 100px;
+    max-width: 100px;
+    min-width: 100px; 
+}
+
+.factCard{
+    margin-bottom: 5%;
+}
+
+.Centro{
+    text-align: center;
+}
+

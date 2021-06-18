@@ -100,7 +100,7 @@ bei Prof. v. Seelen, Institut für Zoologie                                     
 
 
     return (
-        <div>
+        
             <Container>
                 <div >
                     <LehrendeProfil prof={prof} />
@@ -114,7 +114,7 @@ bei Prof. v. Seelen, Institut für Zoologie                                     
             </Container>
 
 
-        </div>
+        
 
     )
 }

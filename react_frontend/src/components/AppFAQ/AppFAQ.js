@@ -59,6 +59,7 @@ function AppFAQ() {
 
 
       <Container>
+        <h1>FAQ</h1>
         <div className="faqs">
           {faqs.map((faq, i) => (
             <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} color="rot" />
