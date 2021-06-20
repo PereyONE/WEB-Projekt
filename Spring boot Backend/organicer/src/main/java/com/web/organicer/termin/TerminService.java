@@ -39,4 +39,3 @@ public class TerminService {
         return "Termin wurde gelöscht";
     }
 }
-}

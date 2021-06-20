@@ -10,9 +10,9 @@ import javax.persistence.*;
 public class Faq {
 
 
-    public Faq(String frage, String antwort) {
-        this.frage = frage;
-        this.antwort = antwort;
+    public Faq(String question, String answer) {
+        this.question = question;
+        this.answer = answer;
     }
 
     @Id
@@ -26,6 +26,6 @@ public class Faq {
             generator = "faq_sequence"
     )
     private Long id;
-    private String frage;
-    private String antwort;
+    private String question;
+    private String answer;
 }

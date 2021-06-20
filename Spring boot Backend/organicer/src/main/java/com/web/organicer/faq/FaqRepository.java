@@ -11,6 +11,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface FaqRepository extends JpaRepository<Faq, Long> {
 
-    Optional<Faq> findByFrage(String frage);
+    Optional<Faq> findByQuestion(String question);
 
 }

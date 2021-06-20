@@ -17,7 +17,7 @@ public class FaqService {
 
     public String postFaq(Faq faq){
         if (faq.getId()==null){
-            if (!faqRepository.findByFrage(faq.getFrage()).isEmpty()){
+            if (!faqRepository.findByQuestion(faq.getQuestion()).isEmpty()){
                 return "Frage existiert bereits";
             }
             return addNewFaq(faq);
