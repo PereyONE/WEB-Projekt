@@ -1,132 +1,83 @@
 package com.web.organicer.student;
 
-import java.util.ArrayList;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class Student {
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@Entity
+public class Student implements UserDetails {
+
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
     private Long id;
-    private String name;
-    private String password;
+    private String username;
     private String email;
-    private int semester;
-    private int spid;
-    private int svpid;
-    private int kalenderid;
-    private ArrayList<Integer> vertifungen;
-    private ArrayList<Integer> wahlfaecher;
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private StudentRole studentRole;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    public Student(String name, String password, String email, int spid, int svpid, int kalenderid) {
-        this.name = name;
-        this.password = password;
+    public Student(String username, String email, String password, StudentRole studentRole) {
+        this.username = username;
         this.email = email;
-        this.spid = spid;
-        this.svpid = svpid;
-        this.kalenderid = kalenderid;
-    }
-
-    public Student(Long id, String name, String password, String email, int semester, int spid, int svpid, int kalenderid) {
-        this.id = id;
-        this.name = name;
         this.password = password;
-        this.email = email;
-        this.semester = semester;
-        this.spid = spid;
-        this.svpid = svpid;
-        this.kalenderid = kalenderid;
+        this.studentRole = studentRole;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(studentRole.name());
+        return Collections.singletonList(authority);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
     }
 
-    public int getSemester() {
-        return semester;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public int getSpid() {
-        return spid;
-    }
-
-    public void setSpid(int spid) {
-        this.spid = spid;
-    }
-
-    public int getSvpid() {
-        return svpid;
-    }
-
-    public void setSvpid(int svpid) {
-        this.svpid = svpid;
-    }
-
-    public int getKalenderid() {
-        return kalenderid;
-    }
-
-    public void setKalenderid(int kalenderid) {
-        this.kalenderid = kalenderid;
-    }
-
-    public ArrayList<Integer> getVertifungen() {
-        return vertifungen;
-    }
-
-    public void setVertifungen(ArrayList<Integer> vertifungen) {
-        this.vertifungen = vertifungen;
-    }
-
-    public ArrayList<Integer> getWahlfaecher() {
-        return wahlfaecher;
-    }
-
-    public void setWahlfaecher(ArrayList<Integer> wahlfaecher) {
-        this.wahlfaecher = wahlfaecher;
-    }
-
-    public Student(Long id, String name, String password, String email, int semester, int spid, int svpid,
-                   int kalenderid, ArrayList<Integer> vertifungen, ArrayList<Integer> wahlfaecher) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.semester = semester;
-        this.spid = spid;
-        this.svpid = svpid;
-        this.kalenderid = kalenderid;
-        this.vertifungen = vertifungen;
-        this.wahlfaecher = wahlfaecher;
-
-
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }

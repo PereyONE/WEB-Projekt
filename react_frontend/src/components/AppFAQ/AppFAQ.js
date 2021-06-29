@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import FAQ from './FAQ';
 
 
@@ -40,7 +41,7 @@ function AppFAQ() {
       open: false
     }
   ]);
-  
+
   const toggleFAQ = index => {
     setfaqs(faqs.map((faq, i) => {
       if (i === index) {
@@ -48,25 +49,27 @@ function AppFAQ() {
       } else {
         faq.open = false;
       }
-  
+
       return faq;
     }))
   }
 
   return (
     <div >
-      
-      
-      
-      <div className="faqs">
-        {faqs.map((faq, i) => (
-          <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
-        ))}
-      </div>
-      
-      
+
+
+      <Container>
+        <h1>FAQ</h1>
+        <div className="faqs">
+          {faqs.map((faq, i) => (
+            <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} color="rot" />
+          ))}
+        </div>
+      </Container>
+
+
     </div>
-    
+
   );
 }
 
