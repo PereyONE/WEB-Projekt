@@ -1,0 +1,48 @@
+.EreignisErstellen{
+    width: 160px;
+    font-size: larger;
+    color: #000;
+    padding: 0px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    border: 0px;
+    border-bottom: 3px solid #ec6525;
+    background-color: white;
+
+}
+.titel{
+    padding-left: 10px;
+    font-size: large;
+    margin-bottom: 5px;
+}
+.input{
+    border: 1px solid black;
+    margin: 10px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+.input2{
+    border: 1px solid black;
+    margin: 10px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    display: inline;
+    text-align: left;
+    width: 2em;
+}
+.button1{
+    background-color: #ec6525;
+    justify-content: left;
+    text-align: left;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.button2{
+    background-color: #ec6525;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}

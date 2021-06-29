@@ -1,0 +1,27 @@
+.ereignis{
+    font-size: medium;
+    background-color: blueviolet;
+    margin: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+}
+.abstand{
+    margin: 0px;
+}
+.Vorlesung{
+    background-color: #ef814c;
+    color:white;
+}
+.Praktikum{
+    background-color: #af368c;
+    color:white;
+}
+.Übung{
+    background-color: #d84248;
+    color:white;
+}
+.Tutorial{
+    background-color: #f4f4f4;
+    color:black;
+}
