@@ -1,0 +1,38 @@
+.Drag{
+    color: white;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 4px;
+}
+
+#red{
+    background-color: #d84248;
+}
+
+#orange{
+    background-color:#ef814c;;
+}
+
+#violet{
+   background-color:  #bd5aa1;;
+       
+}
+
+
+.Semester{
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    height:70vh;
+    margin: 10px;
+    text-align: center;
+}
+
+.SemesterButtons{
+    text-align: right;
+}
+
+
+
+
+

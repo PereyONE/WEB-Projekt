@@ -14,6 +14,7 @@ import AppRegister from '../AppRegister/AppRegister';
 import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
+import Test from '../AppXXX/Test'
 
 
 
@@ -40,6 +41,8 @@ function App() {
         <Route path="/faq" component={AppFAQ} />
 
         <Route path="/impressum" component={AppImpressum} />
+
+        <Route path="/test" component={Test} />
 
       </div>
     </Router>
