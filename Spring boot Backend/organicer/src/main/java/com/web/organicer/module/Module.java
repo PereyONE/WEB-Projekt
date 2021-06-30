@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Data
-@NoArgsConstructor
 @Entity
 public class Module {
 
