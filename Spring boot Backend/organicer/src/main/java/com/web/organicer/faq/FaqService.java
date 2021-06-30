@@ -17,8 +17,8 @@ public class FaqService {
 
     public String postFaq(Faq faq){
         if (faq.getId()==null){
-            if (!faqRepository.findByFrage(faq.getFrage()).isEmpty()){
-                return "Question already exists";
+            if (!faqRepository.findByQuestion(faq.getQuestion()).isEmpty()){
+                return "Frage existiert bereits";
             }
             return addNewFaq(faq);
         }
@@ -27,20 +27,20 @@ public class FaqService {
 
     public String addNewFaq(Faq faq){
         faqRepository.save(faq);
-        return "Faq created";
+        return "Faq erstellt";
     }
 
     public String updateFaq(Faq faq){
         faqRepository.save(faq);
-        return "Faq updated";
+        return "Faq aktualisiert";
     }
 
     public String deleteFaq(Faq faq){
         if (faq.getId()==null){
-            return "No Faq Id";
+            return "Keine Faq Id";
             }
         faqRepository.delete(faq);
-        return "Faq has been deleted";
+        return "Faq wurde gelöscht";
     }
 }
 

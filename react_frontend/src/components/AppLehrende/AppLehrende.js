@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Lehrende from './Lehrende'
 
 
@@ -45,9 +45,10 @@ function AppLehrende() {
 
   return (
 
-    <div>
+    <Container>
+      <h1>Professor*innen</h1>
       <div className="profs">
-        <Row className="justify-content-md-center" xs={2} md={2}>
+        <Row xs={2} lg={3}>
           {profs.map((prof, i) => (
 
             <Lehrende prof={prof} index={i} />
@@ -55,7 +56,18 @@ function AppLehrende() {
           ))}
         </Row>
       </div>
-    </div>
+
+      <h1>Mitarbeiter*innen</h1>
+      <div className="profs">
+        <Row >
+          {profs.map((prof, i) => (
+
+            <Lehrende prof={prof} index={i} />
+
+          ))}
+        </Row>
+      </div>
+    </Container>
 
 
   );

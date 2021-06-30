@@ -1,46 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import FAQ from './FAQ';
+import axios from 'axios';
+
 
 
 function AppFAQ() {
-  const [faqs, setfaqs] = useState([
-    {
-      question: 'How many programmers does it take to screw in a lightbulb?',
-      answer: 'None. We don\'t address hardware issues.',
-      open: false
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    },
-    {
-      question: 'How many questions does it take to make a successful FAQ Page?',
-      answer: 'This many.',
-      open: false
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    },
-    {
-      question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
-      open: false
-    }
-  ]);
+  
+  const [faqs, setfaqs] = useState([]);
+
+  useEffect(()=> {
+    axios.get('http://localhost:8080/api/faqs')
+    .then(res => {
+      console.log(res)
+      setfaqs(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[])
 
   const toggleFAQ = index => {
     setfaqs(faqs.map((faq, i) => {
@@ -59,6 +37,7 @@ function AppFAQ() {
 
 
       <Container>
+        <h1>FAQ</h1>
         <div className="faqs">
           {faqs.map((faq, i) => (
             <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} color="rot" />

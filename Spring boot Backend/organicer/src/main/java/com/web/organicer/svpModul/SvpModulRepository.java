@@ -1,16 +1,10 @@
-package com.web.organicer.faq;
-
+package com.web.organicer.svpModul;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Repository
 @Transactional(readOnly = true)
-public interface FaqRepository extends JpaRepository<Faq, Long> {
-
-    Optional<Faq> findByQuestion(String question);
-
+public interface SvpModulRepository extends JpaRepository<SvpModul, Long> {
 }

@@ -19,7 +19,7 @@ public class ModuleService {
     public String postModule(Module module){
         if (module.getId()==null){
             if (!moduleRepository.findByModuleName(module.getModuleName()).isEmpty()){
-                return "Module already exists";
+                return "Module" + module.getModuleName() +"existiert bereits";
             }
             return addNewModule(module);
         }
@@ -28,20 +28,20 @@ public class ModuleService {
 
     public String addNewModule(Module module){
         moduleRepository.save(module);
-        return "Module created";
+        return "Module " + module.getModuleName() +" wurde hinzugefügt";
     }
 
     public String updateModule(Module module){
         moduleRepository.save(module);
-        return "Module updated";
+        return "Module " + module.getModuleName() +" wurde aktualisiert";
     }
 
     public String deleteModule(Module module){
         if (module.getId()==null){
-            return "No Module Id";
+            return "Keine Modul id";
         }
         moduleRepository.delete(module);
-        return "Module has been deleted";
+        return "Module " + module.getModuleName() +" wurde gelöscht";
     }
 
 }
