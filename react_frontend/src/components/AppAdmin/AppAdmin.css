@@ -1,0 +1,52 @@
+.lenge{
+    width: 119px;
+}
+.greatLenge{
+    width: 220px;
+}
+
+.hohe{
+    height: 200px;
+}
+
+.ligru{
+    max-height: 300px;
+    margin-bottom: 10px;
+}
+
+.rightcol{
+    padding-bottom: 20px;
+}
+
+.marg{
+    margin-top: 20px;
+}
+
+
+
+.anyClass {
+    position: relative;
+    height:150px;
+    overflow-y: scroll;
+  }
+
+  .half {
+    width: 40%;
+  }
+
+  .Scroll {
+    height:200px;
+    overflow-y: scroll;
+  }
+  .pad{
+      margin-right: 20px;
+  }
+
+  .font{
+    color: black;
+    margin-top: 10px;
+    font-family: 'Quicksand', 'sans-serif';
+}
+
+
+

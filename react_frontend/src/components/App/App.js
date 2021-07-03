@@ -15,7 +15,7 @@ import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
 import Test from '../AppXXX/Test'
-
+import AppAdmin from '../AppAdmin/AppAdmin';
 
 
 
@@ -39,7 +39,7 @@ function App() {
         <Route path="/lehrende" exact component={AppLehrende} />
           <Route path="/lehrende/prof.name" component={AppLehrendeProfil} />
         <Route path="/faq" component={AppFAQ} />
-
+        <Route path = "/admin" component= {AppAdmin}/>
         <Route path="/impressum" component={AppImpressum} />
 
         <Route path="/test" component={Test} />
