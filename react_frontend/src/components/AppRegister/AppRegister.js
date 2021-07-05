@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import './AppRegister.css'
 import { ReactComponent as Logo } from '../../assets/icons/bildmarke_unterschrift.svg';
@@ -8,9 +8,9 @@ import axios from 'axios';
 export default class AppRegister extends React.Component {
   state =
     {
-      username: '',
-      email:'',
-      password:'',
+      'username': '',
+      'email':'',
+      'password':'',
     };
 
   handleChange = event => {
@@ -20,14 +20,8 @@ export default class AppRegister extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const user = {
-      name: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-    };
-
     axios
-      .post('http://localhost:8080/api/registration', { user })
+      .post('http://localhost:8080/api/registration', {"username":this.state.username,"email":this.state.email,"password":this.state.password})
       .then(res => {
         console.log(res);
         console.log(res.data);

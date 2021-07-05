@@ -20,22 +20,19 @@ public class RegistrationService {
     private EmailValidator emailValidator;
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request){
+    public String register(Student student){
 
-        boolean isValidEmail = emailValidator.test(request.getEmail());
+        boolean isValidEmail = emailValidator.test(student.getEmail());
 
         if(!isValidEmail){
             throw new IllegalStateException("email not valid");
         }
 
-        String token =  studentService.signUpStudent(new Student(
-                request.getUsername(),
-                request.getEmail(),
-                request.getPassword(),
-                StudentRole.USER
-        ));
+        student.setStudentRole(StudentRole.USER);
+        String token = studentService.signUpStudent(student);
+
         String link = "http://localhost:8080/api/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(), buildEmail(request.getUsername(), link));
+        emailSender.send(student.getEmail(), buildEmail(student.getUsername(), link));
         return token;
     }
 
