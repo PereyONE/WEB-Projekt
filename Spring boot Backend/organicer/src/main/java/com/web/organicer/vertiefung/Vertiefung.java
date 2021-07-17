@@ -1,4 +1,4 @@
-package com.web.organicer.moduleSpecialization;
+package com.web.organicer.vertiefung;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

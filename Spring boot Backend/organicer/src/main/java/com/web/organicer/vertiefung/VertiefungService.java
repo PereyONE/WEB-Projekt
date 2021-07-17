@@ -1,4 +1,4 @@
-package com.web.organicer.moduleSpecialization;
+package com.web.organicer.vertiefung;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
