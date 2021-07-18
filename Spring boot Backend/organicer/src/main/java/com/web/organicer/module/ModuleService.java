@@ -16,6 +16,12 @@ public class ModuleService {
         return moduleRepository.findAll();
     }
 
+    /*
+    public Module getModuleByName(String modulename) {return moduleRepository.findByModuleName(modulename);}
+
+    public List<Module> getModulesByVertiefung(String vertiefung){return moduleRepository.findByVertiefung(vertiefung);}
+    */
+
     public String postModule(Module module){
         if (module.getId()==null){
             if (!moduleRepository.findByModuleName(module.getModuleName()).isEmpty()){

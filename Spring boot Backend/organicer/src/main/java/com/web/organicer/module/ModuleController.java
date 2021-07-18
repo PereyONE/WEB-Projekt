@@ -17,6 +17,14 @@ public class ModuleController {
         return moduleService.getModules();
     }
 
+    /*
+    @GetMapping (path = "/{modulename}")
+    public Module getModuleByName(@PathVariable String modulename){return moduleService.getModuleByName(modulename);}
+
+    @GetMapping (path = "/{vertiefung}")
+    public List<Module> getModulesByVertiefung(@PathVariable String vertiefung){return moduleService.getModulesByVertiefung(vertiefung);}
+    */
+
     @PostMapping
     public String postModule(@RequestBody Module module){
         return moduleService.postModule(module);

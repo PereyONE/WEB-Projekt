@@ -3,7 +3,10 @@ package com.web.organicer.lehrende;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +18,19 @@ public class LehrendeService {
         return lehrendeRepository.findAll();
     }
 
+    public List<Lehrende> getLehrendeByModul(String modul){
+
+        ArrayList<Lehrende> temp = new ArrayList<>();
+        temp = lehrendeRepository.findByModul(modul);
+        return temp;
+    }
+    /*
+    public List<Lehrende> getLehrendeByFunktion(String funktion){
+        ArrayList<Lehrende> temp = new ArrayList<>();
+        temp = lehrendeRepository.findByFunktion(funktion);
+        return temp;
+    }
+    */
     public String postLehrende(Lehrende lehrende){
         if(lehrende.getId()==null){
             if(!lehrendeRepository.findByVorname(lehrende.getVorname()).isEmpty()){

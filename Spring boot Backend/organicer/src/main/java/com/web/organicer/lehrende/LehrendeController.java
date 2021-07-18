@@ -12,10 +12,18 @@ public class LehrendeController {
 
     private final LehrendeService lehrendeService;
 
-    @GetMapping
+    @GetMapping // gibt alle Lehrende zurück
     public List<Lehrende> getLehrende(){
         return lehrendeService.getLehrende();
     }
+
+    /*
+    @GetMapping(path = "/{funktion") // gibt alle Mitarbeiter mit der gleichen Funktion zurück
+    public List<Lehrende> getLehrendeByFunktion(@PathVariable String funktion) {return lehrendeService.getLehrendeByFunktion(funktion);}
+    */
+
+    @GetMapping(path = "/{modul}")
+    public List<Lehrende> getLehrendeByModul(@PathVariable String modul){return lehrendeService.getLehrendeByModul(modul);}
 
     @PostMapping
     public String postInstructor(@RequestBody Lehrende lehrende){

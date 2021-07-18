@@ -10,9 +10,10 @@ import javax.persistence.*;
 public class Faq {
 
 
-    public Faq(String frage, String antwort) {
+    public Faq(String frage, String antwort,String kategorie) {
         this.frage = frage;
         this.antwort = antwort;
+        this.kategorie = kategorie;
     }
 
     @Id
@@ -28,4 +29,5 @@ public class Faq {
     private Long id;
     private String frage;
     private String antwort;
+    private String kategorie;
 }
