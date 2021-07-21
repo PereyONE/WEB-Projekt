@@ -17,20 +17,6 @@ public class LehrendeService {
     public List<Lehrende> getLehrende(){
         return lehrendeRepository.findAll();
     }
-
-    public List<Lehrende> getLehrendeByModul(String modul){
-
-        ArrayList<Lehrende> temp = new ArrayList<>();
-        temp = lehrendeRepository.findByModul(modul);
-        return temp;
-    }
-    /*
-    public List<Lehrende> getLehrendeByFunktion(String funktion){
-        ArrayList<Lehrende> temp = new ArrayList<>();
-        temp = lehrendeRepository.findByFunktion(funktion);
-        return temp;
-    }
-    */
     public String postLehrende(Lehrende lehrende){
         if(lehrende.getId()==null){
             if(!lehrendeRepository.findByVorname(lehrende.getVorname()).isEmpty()){
@@ -40,7 +26,6 @@ public class LehrendeService {
         }
         return updateLehrende(lehrende);
     }
-
 
     public String addNewLehrende(Lehrende lehrende){
         lehrendeRepository.save(lehrende);

@@ -25,11 +25,13 @@ formData.append('username', this.state.username);   //append the values with key
 formData.append('password', this.state.password);
 
 const config = {     
-    headers: { 'content-type': 'multipart/form-data' }
+    headers: 
+    { 
+      'content-type': 'multipart/form-data' }
 }
 
     axios
-      .post('http://localhost:8080/login', formData, config)
+      .post('http://localhost:8080/api/authenticate', {"username":this.state.username,"password":this.state.password})
       .then(res => {
         console.log(res);
         console.log(res.data);

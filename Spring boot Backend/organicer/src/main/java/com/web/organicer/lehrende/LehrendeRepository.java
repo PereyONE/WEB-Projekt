@@ -12,9 +12,4 @@ public interface LehrendeRepository extends JpaRepository<Lehrende, Long> {
 
     Optional<Lehrende> findByVorname(String vorname);
 
-    ArrayList<Lehrende> findByModul(String modul);
-/*
-    ArrayList<Lehrende> findByFunktion(String funktion);
-
- */
 }

@@ -24,6 +24,10 @@ public class StudentService implements UserDetailsService {
         return studentRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User nor found"));
     }
 
+    public Student loadUserByEmail(String email) throws UsernameNotFoundException {
+        return studentRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User nor found"));
+    }
+
     public String signUpStudent(Student student) {
         boolean studentExists = studentRepository.findByEmail(student.getEmail()).isPresent();
 
