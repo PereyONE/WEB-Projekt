@@ -24,7 +24,8 @@ public class SvpModul {
 
     private Long id;
     private String name;
-    private String wasNochSoHierReinKommt;
-
+    private int ects;
+    private String typ;
+    private boolean ulp;
 }
 

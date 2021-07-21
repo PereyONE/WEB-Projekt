@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @Data
 public class Lehrende {
 
-    public Lehrende(String titel, String vorname, String nachname,String funktion, String email, String telefonnummer, String raum, String sprechstundeTag, String sprechstundeStart, String sprechstundeEnd, String sprechstundeBeschreibung, String bild, ArrayList<Module> module) {
+    public Lehrende(String titel, String vorname, String nachname, String funktion, String email, String telefonnummer, String raum, String sprechstunde, String bild, ArrayList<Long> moduleId) {
         this.titel = titel;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -25,12 +25,9 @@ public class Lehrende {
         this.email = email;
         this.telefonnummer = telefonnummer;
         this.raum = raum;
-        this.sprechstundeTag = sprechstundeTag;
-        this.sprechstundeStart = sprechstundeStart;
-        this.sprechstundeEnd = sprechstundeEnd;
-        this.sprechstundeBeschreibung = sprechstundeBeschreibung;
+        this.sprechstunde = sprechstunde;
         this.bild = bild;
-        this.module = module;
+        this.moduleId = moduleId;
     }
 
     @Id
@@ -51,10 +48,7 @@ public class Lehrende {
     private String email;
     private String telefonnummer;
     private String raum;
-    private String sprechstundeTag;
-    private String sprechstundeStart;
-    private String sprechstundeEnd;
-    private String sprechstundeBeschreibung;
+    private String sprechstunde;
     private String bild;
-    private ArrayList<Module> module;
+    private ArrayList<Long> moduleId;
 }

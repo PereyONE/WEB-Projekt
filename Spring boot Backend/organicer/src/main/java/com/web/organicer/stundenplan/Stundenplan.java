@@ -9,9 +9,7 @@ import java.util.ArrayList;
 @Entity
 public class Stundenplan {
 
-    public Stundenplan(ArrayList<Integer> termine) {
-        this.termine = termine;
-    }
+
 
     @Id
     @SequenceGenerator(
@@ -25,5 +23,6 @@ public class Stundenplan {
     )
 
     private Long id;
-    private ArrayList<Integer> termine;
+    private ArrayList<Long> terminId;
+    private Long studentId;
 }

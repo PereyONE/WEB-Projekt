@@ -23,9 +23,12 @@ public class Termin {
     )
 
     private Long id;
+    private String beschreibung;
     private String wochentag;
     private String startzeit;
     private String endzeit;
     private String raum;
     private String typ;
+    private int semester;
+
 }

@@ -1,6 +1,7 @@
 package com.web.organicer.module;
 
 import com.web.organicer.lehrende.Lehrende;
+import com.web.organicer.termin.Termin;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 @Entity
 public class Module {
 
-    public Module(String moduleName, String moduleAbkürzung, int ects, int moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, int regelstudienzeitsieben, int regelstudienzeitzwölf, String vorlesungTag, String vorlesungStart, String vorlesungEnde, ArrayList<Lehrende> lehrende, String bild) {
+    public Module(String moduleName, String moduleAbkürzung, int ects, int moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, int regelstudienzeitsieben, int regelstudienzeitzwölf, ArrayList<Long> terminId, ArrayList<Long> lehrendeId, String bild) {
         this.moduleName = moduleName;
         this.moduleAbkürzung = moduleAbkürzung;
         this.ects = ects;
@@ -21,10 +22,8 @@ public class Module {
         this.verfügbarkeit = verfügbarkeit;
         this.regelstudienzeitsieben = regelstudienzeitsieben;
         this.regelstudienzeitzwölf = regelstudienzeitzwölf;
-        this.vorlesungTag = vorlesungTag;
-        this.vorlesungStart = vorlesungStart;
-        this.vorlesungEnde = vorlesungEnde;
-        this.lehrende = lehrende;
+        this.terminId = terminId;
+        this.lehrendeId = lehrendeId;
         this.bild = bild;
     }
 
@@ -49,10 +48,8 @@ public class Module {
     private String verfügbarkeit;
     private int regelstudienzeitsieben;
     private int regelstudienzeitzwölf;
-    private String vorlesungTag;
-    private String vorlesungStart;
-    private String vorlesungEnde;
-    private ArrayList<Lehrende> lehrende;
+    private ArrayList<Long> terminId;
+    private ArrayList<Long> lehrendeId;
     private String bild;
 }
 

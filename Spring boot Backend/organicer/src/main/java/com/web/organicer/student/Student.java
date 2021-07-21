@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -31,10 +32,14 @@ public class Student implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private int semester;
+    private ArrayList<Long> vertiefungsID;
+    private ArrayList<Long> wahlID;
     @Enumerated(EnumType.STRING)
     private StudentRole studentRole;
     private Boolean locked = false;
     private Boolean enabled = false;
+
 
     public Student(String username, String email, String password, StudentRole studentRole) {
         this.username = username;

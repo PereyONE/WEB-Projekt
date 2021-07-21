@@ -1,5 +1,6 @@
 package com.web.organicer.faq;
 
+import com.web.organicer.termin.TerminRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +30,5 @@ public class FaqController {
     public String deleteFaq(@RequestBody Faq faq){
         return faqService.deleteFaq(faq);
     }
+
 }
