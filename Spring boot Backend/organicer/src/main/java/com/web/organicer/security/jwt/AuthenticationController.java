@@ -19,7 +19,7 @@ public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
     private final StudentService studentService;
-    private final JwtUtil jwtTokenMokenUtil;
+    private final JwtUtil jwtTokenUtil;
 
     @PostMapping(consumes = "application/json", path = "/authenticate")
     public Jwt createAuthenticationToken(@RequestBody Student student) throws Exception {
@@ -28,8 +28,8 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(student.getUsername(), student.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or passwort", e);
+            throw new Exception("Incorrect username or password", e);
         }
-        return new Jwt(jwtTokenMokenUtil.generateToken(student));
+        return new Jwt(jwtTokenUtil.generateToken(student));
     }
 }
