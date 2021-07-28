@@ -1,9 +1,39 @@
+*{
+    list-style: none;
+    
+}
+
+body{
+    overflow-y: auto;
+}
+
+.Speichern{
+    border-radius: 100%;
+    background-color: aquamarine;
+    font-size: large;
+    margin: 10px;
+    padding: 50px;
+}
+
+.Loeschen{
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+    font-size: 40px;
+    margin: 5px;
+}
+
 .Drag{
     color: white;
     text-align: center;
     padding: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     margin: 4px;
+    
+}
+
+.Dropzone{
+    overflow-x: scroll;
 }
 
 #red{
@@ -19,9 +49,13 @@
        
 }
 
+#gold{
+    background-color: gold;
+}
+
 
 .Semester{
-    background-color: #f4f4f4;
+    background: #f4f4f4;
     border-radius: 20px;
     height:70vh;
     margin: 10px;
@@ -29,7 +63,8 @@
 }
 
 .SemesterButtons{
-    text-align: right;
+    text-align: right;  
+    align-self: flex-end;
 }
 
 

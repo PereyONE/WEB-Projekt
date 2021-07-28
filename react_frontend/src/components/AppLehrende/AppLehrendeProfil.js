@@ -32,7 +32,7 @@ function AppLehrendeProfil() {
     const [faqs, setfaqs] = useState([
         {
             question: 'Module',
-            answer: [
+            answer: 
                 <ul>
                     {prof.module.map((modul, i) => (
                         <div>
@@ -41,7 +41,7 @@ function AppLehrendeProfil() {
 
                     ))}
                 </ul>
-            ],
+            ,
             open: false
         },
         {
