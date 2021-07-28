@@ -1,6 +1,7 @@
 
 body{
-    overflow-x: hidden;
+    width:100%;
+    overflow-x: hidden;    
 }
 .Leiste {
     background-color: #f4f4f4;
@@ -9,6 +10,9 @@ body{
     font-family: 'Quicksand', sans-serif;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    left: 0px;
+   
    
 }
 
@@ -110,6 +114,7 @@ button{
     width:23%;
     transform: translateX(100%);
     transition: transform 0.5s ease-in;
+    display: none;
 }
 
 .NavLinksSide-Active{

@@ -66,7 +66,7 @@ function AppNavbar() {
                 <li>
                   <Nav.Link className="hoverRed" href="/faq">FAQ</Nav.Link>
                 </li>
-                <li><Nav.Link className="hoverRed" href="/faq">Einstellungen</Nav.Link></li>
+                <li><Nav.Link className="hoverPurple" href="/faq">Einstellungen</Nav.Link></li>
                 <li><Nav.Link className="hoverRed" href="/impressum" id="shown">Impressum</Nav.Link></li>
 
               </ul>
@@ -96,7 +96,7 @@ function AppNavbar() {
           <Nav.Link className="Red" href="/login">Logout</Nav.Link>
         </li>
         <li>
-          <Nav.Link href="/login">Impressum</Nav.Link>
+          <Nav.Link href="/impressum">Impressum</Nav.Link>
         </li>
       </ul>
 

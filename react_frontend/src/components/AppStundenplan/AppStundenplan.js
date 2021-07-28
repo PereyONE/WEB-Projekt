@@ -24,12 +24,12 @@ const Tage = () => {
       typ: 'Übung',
     },
     {
-      name: 'Phot0 2',
+      name: 'Photo 2',
       von: '08:00',
       bis: '10:00',
       Raum: 'H1',
       tag: 'Dienstag',
-      typ: 'Tutorial',
+      typ: 'Tutorium',
     },
   ]);
   const [width, setWidth] = React.useState(window.innerWidth);

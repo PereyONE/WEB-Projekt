@@ -5,7 +5,7 @@ import AppNavbar from '../AppNavbar/AppNavbar';
 import AppFAQ from '../AppFAQ/AppFAQ';
 import AppHome from '../AppHome/AppHome'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import AppVerlaufsplan from '../AppVerlaufsplan/AppVerlaufplan';
+import AppVerlaufsplan from '../AppVerlaufsplan/AppVerlaufsplan';
 import AppStundenplan from '../AppStundenplan/AppStundenplan';
 import AppModule from '../AppModule/AppModule';
 import AppLehrende from '../AppLehrende/AppLehrende';
@@ -20,6 +20,10 @@ import AppAdmin from '../AppAdmin/AppAdmin';
 
 
 function App() {
+
+  fetch('/URI', {
+    credentials: 'same-origin'
+  })
 
   return (
     <Router>
