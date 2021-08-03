@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 import './Einstellungen.css';
 
-
+//To run this: npm install multiselect-react-dropdown OR yarn add multiselect-react-dropdown
     const AppEinstellungen = () => {
         return (
             <div className="create container">
