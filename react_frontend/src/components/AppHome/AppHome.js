@@ -11,8 +11,8 @@ import './AppHome.css'
 //Notiz: Die Margin-Bottom im CSS von der NavBar (die 40px) wegmachen oder verringern :-( (Default:50px)
 function AppHome() {
   return(
-<div class="container ">
-    <Row xs={2} md={3} xl={3} className="justify-content-center mx-auto">
+<div class="container " >
+    <Row xs={2} md={3} xl={3} className="justify-content-center mx-auto" >
         <Col class=" mx-auto">
             <Link to="/studienverlaufsplan">
                     <div  class="btn btn-sq-lg boxred rounded-0 toprow" > 
