@@ -21,6 +21,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+import static org.springframework.http.HttpMethod.POST;
+
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
@@ -32,6 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http
+                .authorizeRequests().antMatchers(POST, "/api/faqs", "/api/modules", "/api/lehrende")
+                .hasAnyAuthority("ADMIN");
 
         http
                 .cors().and().csrf().disable()
@@ -48,8 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(studentService);
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(studentService).passwordEncoder(bCryptPasswordEncoder);
+        //auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Bean
