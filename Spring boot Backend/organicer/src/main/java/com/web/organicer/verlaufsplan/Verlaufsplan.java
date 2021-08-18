@@ -1,12 +1,14 @@
 package com.web.organicer.verlaufsplan;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Verlaufsplan {
 
 
@@ -22,7 +24,7 @@ public class Verlaufsplan {
     )
     private Long id;
     private Long studentId;
-    private ArrayList<Integer> semesterId;
+    private ArrayList<Long> semesterId;
 }
 
 

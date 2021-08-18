@@ -1,7 +1,7 @@
 package com.web.organicer.module;
 
-import com.web.organicer.faq.Faq;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +16,10 @@ public class ModuleService {
         return moduleRepository.findAll();
     }
 
-    /*
-    public Module getModuleByName(String modulename) {return moduleRepository.findByModuleName(modulename);}
+    public Module getModulById(Long modulId) {
+        return moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul nor found"));
+    }
 
-    public List<Module> getModulesByVertiefung(String vertiefung){return moduleRepository.findByVertiefung(vertiefung);}
-    */
 
     public String postModule(Module module){
         if (module.getId()==null){

@@ -1,5 +1,6 @@
 package com.web.organicer.lehrende;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+
 
 @Component
 @Getter
@@ -51,4 +53,5 @@ public class Lehrende {
     private String sprechstunde;
     private String bild;
     private ArrayList<Long> moduleId;
+
 }

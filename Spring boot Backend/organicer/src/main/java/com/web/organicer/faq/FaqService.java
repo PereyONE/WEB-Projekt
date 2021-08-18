@@ -15,6 +15,10 @@ public class FaqService {
         return faqRepository.findAll();
     }
 
+    public List<Faq> getFaqByKategorie(String kategorie){
+        return faqRepository.findByKategorie(kategorie);
+    }
+
     public String postFaq(Faq faq){
         if (faq.getId()==null){
             if (!faqRepository.findByFrage(faq.getFrage()).isEmpty()){

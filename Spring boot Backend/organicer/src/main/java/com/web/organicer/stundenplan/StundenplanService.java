@@ -11,11 +11,13 @@ public class StundenplanService {
 
     private final StundenplanRepository stundenplanRepository;
 
-    public Stundenplan getStundenplan(Long id){
-        return stundenplanRepository.getById(id);
+    public Stundenplan getStundenplanById(Long id){
+        return stundenplanRepository.findByStudentId(id);
     }
+
     public String postStundenplan(Stundenplan stundenplan){
         if (stundenplan.getId()==null){
+
             return addNewStundenplan(stundenplan);
             }
         return updateStundenplan(stundenplan);

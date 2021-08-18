@@ -21,6 +21,9 @@ public class FaqController {
         return faqService.getFaq();
     }
 
+    @GetMapping (path = "/{kategorie}")
+    public List<Faq> getFaqByKategorie(@PathVariable String kategorie){ return faqService.getFaqByKategorie(kategorie);}
+
     @PostMapping
     public String registerNewFaq(@RequestBody Faq faq){
         return faqService.postFaq(faq);

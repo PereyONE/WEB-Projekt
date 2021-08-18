@@ -24,8 +24,10 @@ public class SvpModul {
 
     private Long id;
     private String name;
-    private int ects;
+    private Long modulId;
     private String typ;
-    private boolean ulp;
+    private int semester;
+    private int position;
+
 }
 

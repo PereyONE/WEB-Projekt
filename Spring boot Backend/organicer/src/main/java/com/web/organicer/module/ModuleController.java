@@ -17,13 +17,12 @@ public class ModuleController {
         return moduleService.getModules();
     }
 
-    /*
-    @GetMapping (path = "/{modulename}")
-    public Module getModuleByName(@PathVariable String modulename){return moduleService.getModuleByName(modulename);}
+    @GetMapping (path = "/{id}")// gibt Modul mit entsprechener ID zurück
+    public Module getModulById(@PathVariable("id") Long id){
 
-    @GetMapping (path = "/{vertiefung}")
-    public List<Module> getModulesByVertiefung(@PathVariable String vertiefung){return moduleService.getModulesByVertiefung(vertiefung);}
-    */
+        return moduleService.getModulById(id);
+    }
+
 
     @PostMapping
     public String postModule(@RequestBody Module module){
