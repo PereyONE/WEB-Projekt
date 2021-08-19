@@ -15,13 +15,13 @@ function FAQ({ faq, index, toggleFAQ, color }) {
 			onClick={() => toggleFAQ(index)}
 		>
 			<div className="faq-question-rot">
-				{faq.question}
+				{faq.frage}
 
 			</div>
 			<hr />
 
 			<div className="faq-answer">
-				{faq.answer}
+				{faq.antwort}
 			</div>
 
 		</div>
