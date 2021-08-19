@@ -11,18 +11,20 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping(path = "/api")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class AuthenticationController {
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final StudentService studentService;
     private final JwtUtil jwtTokenUtil;
 
     @PostMapping(consumes = "application/json", path = "/authenticate")
-    public Jwt createAuthenticationToken(@RequestBody Student student) throws Exception {
+    public Jwt createAuthenticationToken(@RequestBody Student student, HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(student.getUsername(), student.getPassword())

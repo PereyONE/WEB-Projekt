@@ -19,23 +19,11 @@ export default class AppLogin extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    let formData = new FormData();    //formdata object
-
-formData.append('username', this.state.username);   //append the values with key, value pair
-formData.append('password', this.state.password);
-
-const config = {     
-    headers: 
-    { 
-      'content-type': 'multipart/form-data' }
-}
-
-    axios
-      .post('http://localhost:8080/api/authenticate', {"username":this.state.username,"password":this.state.password})
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
+  axios
+    .post('/api/authenticate', {"username":this.state.username,"password":this.state.password})
+    .then(res => {
+      localStorage.setItem('token', res.data.token);
+    });
   }
   render(){
     return (

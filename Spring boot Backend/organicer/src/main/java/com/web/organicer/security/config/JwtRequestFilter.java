@@ -4,6 +4,7 @@ import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,13 +32,18 @@ public class JwtRequestFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        /*if(request.getRequestURI().equals("/api/authenticate") || request.getRequestURI().equals("/api/registration")){
+            chain.doFilter(request,response);
+        }*/
+
         final String authorizationHeader = request.getHeader("Authorization");
 
+        System.out.println(request.getHeader("Authorization"));
 
         String username = null;
         String jwt = null;
 
-        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
+        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ") && !authorizationHeader.equals("Bearer null")){
             jwt = authorizationHeader.substring(7);
             username = jwtUtil.extractUsername(jwt);
 
