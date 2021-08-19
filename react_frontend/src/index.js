@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App';
+import App from './components/App/App.js';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios'
+
+axios.defaults.baseURL= 'http://localhost:8080/';
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 ReactDOM.render(
   <React.StrictMode>
