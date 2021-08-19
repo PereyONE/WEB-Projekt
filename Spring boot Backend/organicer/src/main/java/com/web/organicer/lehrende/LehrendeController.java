@@ -26,8 +26,6 @@ public class LehrendeController {
         return lehrendeService.getLehrendeById(id);
     }
 
-
-
     @PostMapping
     public String postLehrende(@RequestBody Lehrende lehrende){
         return lehrendeService.postLehrende(lehrende);

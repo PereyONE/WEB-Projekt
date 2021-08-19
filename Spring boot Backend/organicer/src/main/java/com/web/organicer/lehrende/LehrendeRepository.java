@@ -13,6 +13,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface LehrendeRepository extends JpaRepository<Lehrende, Long> {
 
-    Optional<Lehrende> findByNachname(String nachname);
+    ArrayList<Lehrende> findByNachname(String nachname);
+
+
+
 
 }

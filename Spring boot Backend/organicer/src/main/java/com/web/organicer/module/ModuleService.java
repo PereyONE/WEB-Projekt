@@ -17,13 +17,14 @@ public class ModuleService {
     }
 
     public Module getModulById(Long modulId) {
-        return moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul nor found"));
+
+        return moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
     }
 
 
     public String postModule(Module module){
         if (module.getId()==null){
-            if (!moduleRepository.findByModuleName(module.getModuleName()).isEmpty()){
+            if (moduleRepository.findByModuleName(module.getModuleName()).isPresent()){
                 return "Module" + module.getModuleName() +"existiert bereits";
             }
             return addNewModule(module);
