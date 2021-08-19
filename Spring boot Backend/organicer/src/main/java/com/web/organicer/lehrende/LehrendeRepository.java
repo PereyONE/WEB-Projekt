@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface LehrendeRepository extends JpaRepository<Lehrende, Long> {
 
     ArrayList<Lehrende> findByNachname(String nachname);
-
+    Optional<Lehrende>findById(Long id);
 
 
 

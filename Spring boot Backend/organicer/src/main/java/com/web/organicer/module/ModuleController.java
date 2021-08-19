@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/modules")
@@ -18,11 +19,10 @@ public class ModuleController {
     }
 
     @GetMapping (path = "/{id}")// gibt Modul mit entsprechener ID zurück
-    public Module getModulById(@PathVariable("id") Long id){
+    public Map<String,Object> getModulById(@PathVariable("id") Long id){
 
         return moduleService.getModulById(id);
     }
-
 
     @PostMapping
     public String postModule(@RequestBody Module module){

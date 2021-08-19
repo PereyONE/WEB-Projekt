@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface ModuleRepository extends JpaRepository<Module, Long> {
 
     Optional<Module> findByModuleName(String modulename);
+    Optional<Module> findById(Long id);
 
 }

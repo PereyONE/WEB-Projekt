@@ -2,6 +2,7 @@ package com.web.organicer.lehrende;
 
 
 import com.web.organicer.module.Module;
+import com.web.organicer.module.ModuleRepository;
 import com.web.organicer.module.ModuleService;
 import com.web.organicer.student.Student;
 import lombok.AllArgsConstructor;
@@ -19,12 +20,15 @@ import java.util.Map;
 public class LehrendeService {
 
 
-    private final ModuleService moduleService;
-
+    private final ModuleRepository moduleRepository;
     private final LehrendeRepository lehrendeRepository;
 
     public List<Lehrende> getLehrende(){
         return lehrendeRepository.findAll();
+    }
+
+    public Lehrende getOnlyLehrendeById(Long lehrendeId){
+        return lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende nor found"));
     }
 
     public Map<String,Object> getLehrendeById(Long lehrendeId) {
@@ -42,7 +46,7 @@ public class LehrendeService {
     }
 
     public ArrayList<Module> getModuleByLehrendeId(Long lehrendeId){
-        Lehrende lehrende = lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende nor found"));
+        Lehrende lehrende = lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende not found"));
         ArrayList<Long> id = lehrende.getModuleId();
 
         if(id==null){
@@ -50,7 +54,7 @@ public class LehrendeService {
         }
                 ArrayList<Module> module = new ArrayList<>();
                 for(Long tmp : id){
-                    Module modul = moduleService.getModulById(tmp);
+                    Module modul = moduleRepository.findById(tmp).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
                     if(modul != null){
                         module.add(modul);
             }
