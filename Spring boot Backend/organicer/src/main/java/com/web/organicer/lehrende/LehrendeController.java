@@ -10,6 +10,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/api/lehrende")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class LehrendeController {
 
     private final LehrendeService lehrendeService;

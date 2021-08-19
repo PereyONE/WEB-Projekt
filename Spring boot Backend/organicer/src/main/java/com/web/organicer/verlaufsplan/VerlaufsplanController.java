@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(path = "/api/verlaufsplan")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class VerlaufsplanController {
 
     private final VerlaufsplanService verlaufsplanService;

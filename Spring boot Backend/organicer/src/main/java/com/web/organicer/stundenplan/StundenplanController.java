@@ -8,6 +8,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/stundenplan")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class StundenplanController {
 
 

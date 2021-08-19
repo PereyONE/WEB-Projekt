@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/faqs")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class FaqController {
 
     private final FaqService faqService;

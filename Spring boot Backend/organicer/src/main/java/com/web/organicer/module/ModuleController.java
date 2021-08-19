@@ -9,6 +9,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "api/modules")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ModuleController {
 
     private final ModuleService moduleService;
