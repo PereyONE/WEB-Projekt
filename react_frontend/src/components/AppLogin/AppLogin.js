@@ -17,8 +17,9 @@ export default class AppLogin extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
-
+    localStorage.clear();
+    event.preventDefault(); 
+    
   axios
     .post('/api/authenticate', {"username":this.state.username,"password":this.state.password})
     .then(res => {
