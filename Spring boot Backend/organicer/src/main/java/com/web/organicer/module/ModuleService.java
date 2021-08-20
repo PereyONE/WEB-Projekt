@@ -42,18 +42,19 @@ public class ModuleService {
 
     public ArrayList<Lehrende> getLehrendeByModuleId(Long modulId){
 
-        Module modul = moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul nor found"));
-        ArrayList<Long> id = modul.getLehrendeId();
-
-        if(id==null){
-            return null;
-        }
         ArrayList<Lehrende> lehrende = new ArrayList<>();
-        for(Long tmp : id){
-            Lehrende lehrenden = lehrendeRepository.findById(tmp).orElseThrow(() -> new UsernameNotFoundException("Lehrende nor found"));
-            lehrende.add(lehrenden);
+        lehrende = lehrendeRepository.findAll();
+        ArrayList<Lehrende> rueckgabe = new ArrayList<>();
+
+        for(Lehrende tmp:lehrende){
+            ArrayList<Long> ids = tmp.getModuleId();
+            for(Long id:ids){
+                if(modulId.equals(id)){
+                    rueckgabe.add(tmp);
+                }
+            }
         }
-        return lehrende;
+        return rueckgabe;
     }
 
 

@@ -1,8 +1,14 @@
 package com.web.organicer.stundenplan;
 
 
+import com.web.organicer.termin.Termin;
+import com.web.organicer.termin.TerminRepository;
+import com.web.organicer.termin.TerminService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 
 @Service
@@ -10,9 +16,20 @@ import org.springframework.stereotype.Service;
 public class StundenplanService {
 
     private final StundenplanRepository stundenplanRepository;
+    private final TerminRepository terminrepository;
 
-    public Stundenplan getStundenplanById(Long id){
-        return stundenplanRepository.findByStudentId(id);
+    public ArrayList<Termin> getStundenplanById(Long id){
+
+        ArrayList<Termin> termine = new ArrayList<>();
+        ArrayList<Long> terminId = new ArrayList<>();
+
+        Stundenplan stundenplan = stundenplanRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Stundenplan not found"));
+        terminId = stundenplan.getTerminId();
+
+        for(Long ids:terminId){
+            termine.add(terminrepository.findById(ids).orElseThrow(() -> new UsernameNotFoundException("Termin not found")));
+        }
+        return termine;
     }
 
     public String postStundenplan(Stundenplan stundenplan){

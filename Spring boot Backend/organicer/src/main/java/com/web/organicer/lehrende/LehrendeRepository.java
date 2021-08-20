@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface LehrendeRepository extends JpaRepository<Lehrende, Long> {
-
+    ArrayList<Lehrende> findAll();
     ArrayList<Lehrende> findByNachname(String nachname);
     Optional<Lehrende>findById(Long id);
 

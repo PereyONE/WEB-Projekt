@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface StundenplanRepository extends JpaRepository<Stundenplan, Long>{
-    Stundenplan findByStudentId(Long studentId);
+    Optional<Stundenplan> findById(Long studentId);
 }
 

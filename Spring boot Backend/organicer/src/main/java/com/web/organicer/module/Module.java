@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @Data
 public class Module {
 
-    public Module(String moduleName, String moduleAbkürzung, String ects, String moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, String regelstudienzeitsieben, String regelstudienzeitzwölf, ArrayList<Long> terminId, ArrayList<Long> lehrendeId, String bild) {
+    public Module(String moduleName, String moduleAbkürzung, String ects, String moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, String regelstudienzeitsieben, String regelstudienzeitzwölf, ArrayList<Long> terminId, String bild) {
         this.moduleName = moduleName;
         this.moduleAbkürzung = moduleAbkürzung;
         this.ects = ects;
@@ -29,7 +29,6 @@ public class Module {
         this.regelstudienzeitsieben = regelstudienzeitsieben;
         this.regelstudienzeitzwölf = regelstudienzeitzwölf;
         this.terminId = terminId;
-        this.lehrendeId = lehrendeId;
         this.bild = bild;
     }
 
@@ -55,7 +54,6 @@ public class Module {
     private String regelstudienzeitsieben;//int
     private String regelstudienzeitzwölf;//int
     private ArrayList<Long> terminId;
-    private ArrayList<Long> lehrendeId;
     private String bild;
 }
 

@@ -14,6 +14,7 @@ public class TerminService {
         return terminRepository.findAll();
     }
 
+
     public String postTermin(Termin termin){
         if(termin.getId()==null){
             return addNewTermin(termin);
