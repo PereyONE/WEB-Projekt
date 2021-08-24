@@ -24,10 +24,13 @@ public class SvpModul {
 
     private Long id;
     private String name;
-    private Long modulId;
-    private String typ;
-    private int semester;
+    private String typ;//Pflichtmodul,Wahlmodul,Vertiefungsmodul
+    private int ects;
     private int position;
+    private int semester7;
+    private int semester12;
+    private String art;//ULP,Klausur,Modul
+
 
 }
 

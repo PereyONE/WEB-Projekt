@@ -14,6 +14,7 @@
     "hamburger-react": "^2.4.1",
     "multiselect-react-dropdown": "^2.0.5",
     "react": "^17.0.2",
+    "react-admin": "^3.17.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "^1.6.0",
     "react-bootstrap-time-picker": "^2.0.1",
