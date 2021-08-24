@@ -8,28 +8,28 @@ import CheckBox from "./CheckBox";
 
 
 const itemsFromBackend = [
-    { id: uuid(), content: "Mathe 1", color: "red", semester: 1, semesterZ: 1, ects: 10, art: 'modul' },
-    { id: uuid(), content: "Photo 1", color: "red", semester: 1, semesterZ: 3, ects: 5, art: 'modul' },
-    { id: uuid(), content: "Info 1", color: "red", semester: 1, semesterZ: 3, ects: 6, art: 'modul' },
+    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws' },
+    { id: uuid(), content: "Photo 1", color: "pflicht", semester: 1, semesterZ: 3, ects: 5, art: 'modul' },
+    { id: uuid(), content: "Info 1", color: "pflicht", semester: 1, semesterZ: 3, ects: 6, art: 'modul' },
     { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'modul' },
     { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'modul' },
     { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'modul' },
 
-    { id: uuid(), content: "Mathe 1", color: "red", semester: 1, semesterZ: 1, ects: 10, art: 'ulp' },
+    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws' },
     { id: uuid(), content: "Photo 1", color: "red", semester: 1, semesterZ: 3, ects: 5, art: 'ulp' },
     { id: uuid(), content: "Info 1", color: "red", semester: 1, semesterZ: 3, ects: 6, art: 'ulp' },
     { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'ulp' },
     { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'ulp' },
     { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'ulp' },
 
-    { id: uuid(), content: "Mathe 1", color: "red", semester: 1, semesterZ: 1, ects: 10, art: 'pf' },
-    { id: uuid(), content: "Photo 1", color: "red", semester: 1, semesterZ: 3, ects: 5, art: 'pf' },
+    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'pf' },
+    { id: uuid(), content: "Photo 1", color: "", semester: 1, semesterZ: 3, ects: 5, art: 'pf' },
     { id: uuid(), content: "Info 1", color: "red", semester: 1, semesterZ: 3, ects: 6, art: 'pf' },
     { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'pf' },
     { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'pf' },
     { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'pf' },
 
-    { id: uuid(), content: "Mathe 2", color: "red", semester: 2, semesterZ: 2, art: 'modul' },
+    { id: uuid(), content: "Mathe 2", color: "pflicht", semester: 2, semesterZ: 2, art: 'modul', verfuegbarkeit: 'ss' },
     { id: uuid(), content: "Photo 2", color: "red", semester: 2, semesterZ: 4, art: 'modul' },
     { id: uuid(), content: "Info 2", color: "red", semester: 2, semesterZ: 4, art: 'modul' },
     { id: uuid(), content: "EM 1", color: "red", semester: 2, semesterZ: 2, art: 'modul' },
@@ -66,10 +66,10 @@ const itemsFromBackend = [
 
 ];
 
-const semesterZahl = 1;
+const semesterZahl = 7;
 
 
-
+//Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
 const moduleSemester = (semester) => {
     const module = []
     for (let index = 0; index < itemsFromBackend.length; index++) {
@@ -83,6 +83,7 @@ const moduleSemester = (semester) => {
     return module;
 }
 
+//Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 12 Semester)
 const moduleSemesterZ = (semester) => {
     const module = []
     for (let index = 0; index < itemsFromBackend.length; index++) {
@@ -96,7 +97,8 @@ const moduleSemesterZ = (semester) => {
     return module;
 }
 
-const moduleULPPF = (test) => {
+
+const moduleULPPF = () => {
     const module = []
     for (let index = 0; index < itemsFromBackend.length; index++) {
         if (itemsFromBackend[index].art !== 'modul') {
@@ -106,7 +108,7 @@ const moduleULPPF = (test) => {
     module.sort(function (a, b) {
         return b.ects - a.ects;
     })
-    console.log(test)
+
     return module;
 }
 
@@ -166,28 +168,26 @@ const columnsFromBackend = () => {
 }
 
 
-
-
+//Hauptfunktion für Drag&Drop-Logik
 const onDragEnd = (result, columns, setColumns) => {
+
+    //Falls Drag-Objekt nicht auf eine Fläche außerhalb des Drag&Drop-Systems gezogen wird
     if (!result.destination) return;
+
+    //Falls Drag-Objekt auf eine gültige Fläche gezogen wird
     const { source, destination } = result;
-
-    console.log("element soll von " + source.droppableId + " nach " + destination.droppableId + " verschoben werden");
-
-
-
+    //Abfrage ob Drag-Objekt nicht auf seine ursprüngliche Fläche gezogen wurde
     if (source.droppableId !== destination.droppableId) {
 
-
-
+        //Falls Drag-Objekt auf Mülleimer gezogen wird
         if (result.destination.droppableId === 'delete') {
+            if (source.droppableId == 0) { return }
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[0];
             const sourceItems = [...sourceColumn.items];
             const destItems = [...destColumn.items];
             const [removed] = sourceItems.splice(source.index, 1);
             destItems.splice(destination.index, 0, removed);
-            console.log("element wird von " + sourceColumn + " nach " + destColumn + " verschoben werden");
             setColumns({
                 ...columns,
                 [source.droppableId]: {
@@ -200,9 +200,26 @@ const onDragEnd = (result, columns, setColumns) => {
                 }
             });
         }
+
+        //Falls Drag-Objekt auf neue Spalte gezogen wird
         else {
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[destination.droppableId];
+
+            //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
+            var dragItem
+            {
+                sourceColumn.items.map((item, index) => {
+                    if (item.id === result.draggableId) {
+                        dragItem = item;
+                    }
+                })
+            }
+
+            //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
+            if (!(destination.droppableId == 0)) {
+                if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) { return }
+            }
             const sourceItems = [...sourceColumn.items];
             const destItems = [...destColumn.items];
             const [removed] = sourceItems.splice(source.index, 1);
@@ -219,7 +236,10 @@ const onDragEnd = (result, columns, setColumns) => {
                 }
             });
         }
-    } else {
+    }
+
+    //Falls Drag-Objekt innerhalb seiner ursprünglichen Spalte verschoben wurde
+    else {
         const column = columns[source.droppableId];
         const copiedItems = [...column.items];
         const [removed] = copiedItems.splice(source.index, 1);
@@ -234,29 +254,32 @@ const onDragEnd = (result, columns, setColumns) => {
     }
 };
 
-function App() {
+//Zusatzfunktion für Logikabfrage
+function isOdd(num) { return num % 2; }
+
+
+//Exportierter React-Component
+function AppVerlaufsplan() {
+
+    //State für erstellte Semester, essenziell für Drag&Drop
     const [columns, setColumns] = useState(columnsFromBackend());
 
+    //State für Tabauswahl (Modul, ULP, Prüfung)
     const [anzeige, setAnzeige] = useState(0)
 
-    // const setDrag = e  => {
-    //     e.preventDefault();
-    //     setAnzeige(2);
-    //     return;
-    // }
-
+    //Funktion für Tabauswahl
     const setModul = e => {
         e.preventDefault();
         setAnzeige(0)
         return;
-
     }
+    //Funktion für Tabauswahl
     const setULP = e => {
         e.preventDefault();
         setAnzeige(1)
         return;
-
     }
+    //Funktion für Tabauswahl
     const setPF = e => {
         e.preventDefault();
         setAnzeige(2)
@@ -264,6 +287,7 @@ function App() {
 
     }
 
+    //Funktion um eine zusätzliche Semesterspalte zu erstellen
     const addSemester = e => {
         e.preventDefault();
         setColumns({
@@ -278,6 +302,7 @@ function App() {
 
     }
 
+    //Funktion um eine erstellte Semesterspalte zu löschen
     const deleteSemester = e => {
 
         if (Object.entries(columns).length > 8 && Object.entries(columns).length > semesterZahl + 1) {
@@ -305,12 +330,14 @@ function App() {
         }
     }
 
+    //Funktion um Semester spalten auf letzten gespeicherten Stand zurück zu setzen
     const resetSemester = e => {
         e.preventDefault();
         setColumns(columnsFromBackend());
     }
 
 
+    //Funktion um SVP nach 7 Semester Regelstudienzeit zu befüllen
     const siebenSemester = e => {
 
         const newColumns = {
@@ -351,6 +378,7 @@ function App() {
         setColumns(newColumns);
     }
 
+    //Funktion um SVP nach 12 Semester Regelstudienzeit zu befüllen
     const zwoelfSemester = e => {
 
         const newColumns = {
@@ -411,10 +439,13 @@ function App() {
         setColumns(newColumns);
     }
 
+
+    //States für Checkbox-Button Auswahl
     const [checkedP, setCheckedP] = useState(true);
     const [checkedV, setCheckedV] = useState(true);
     const [checkedW, setCheckedW] = useState(true);
 
+    //Funktionen für Checkbox-Button Auswahl
     const handleChangeP = () => {
         setCheckedP(!checkedP);
     };
@@ -427,98 +458,8 @@ function App() {
         setCheckedW(!checkedW);
     };
 
-    // const [pflichtmodule, updatePflichtmodule] = useState([
-    //     {
-    //         name: 'Mathe 1'
-    //     },
-    //     {
-    //         name: 'Mathe 2'
-    //     },
-    //     {
-    //         name: 'Siga'
-    //     }
-    // ])
-
-
-
-    // const [faqs, setfaqs] = useState([
-    //     {
-    //         question: 'Pflichtmodule',
-    //         answer:''
-    //             // Object.entries(columns).map(([columnID, column], index) => {
-    //             //     if (index === 0) {
-    //             //         return (
-    //             //             Object.entries(column.items).map(([itemID, item], index) => {
-    //             //                 if (item.vType === 'pflicht') {
-    //             //                     return (
-    //             //                         <Draggable
-    //             //                             key={item.id}
-    //             //                             draggableId={item.id}
-    //             //                             index={index}
-    //             //                         >
-    //             //                             {(provided, snapshot) => {
-    //             //                                 return (
-    //             //                                     <div
-    //             //                                         className="Drag"
-    //             //                                         id={item.color}
-    //             //                                         ref={provided.innerRef}
-    //             //                                         {...provided.draggableProps}
-    //             //                                         {...provided.dragHandleProps}
-
-    //             //                                     >
-    //             //                                         {item.content}
-    //             //                                     </div>
-    //             //                                 );
-    //             //                             }}
-    //             //                         </Draggable>
-    //             //                     )
-    //             //                 }
-
-    //             //             }))
-
-    //             //     }
-    //             // })
-    //             ,
-    //         open: false,
-    //         color: 'rot'
-    //     },
-    //     {
-    //         question: 'Vertiefungsmodule',
-    //         answer:
-    //             <div>
-
-    //             </div>,
-    //         open: false,
-    //         color: 'orange'
-    //     },
-    //     {
-    //         question: 'Wahlmodule',
-    //         answer:
-    //             <div>
-
-
-    //             </div>,
-    //         open: false,
-    //         color: 'lila'
-    //     }
-    // ]);
-
-    // const toggleFAQ = index => {
-    //     setfaqs(faqs.map((faq, i) => {
-    //         if (i === index) {
-    //             faq.open = !faq.open
-    //         } else {
-    //             faq.open = false;
-    //         }
-
-    //         return faq;
-    //     }))
-    // }
 
     return (
-
-
-
         <DragDropContext
             onDragEnd={result => onDragEnd(result, columns, setColumns)}>
 
@@ -619,7 +560,7 @@ function App() {
 
 
                                                     {column.items.map((item, index) => {
-                                                        if (anzeige === 0 && item.art === 'modul'&&(checkedP&&(item.color==='red'|| item.color==='gold') || checkedV&&item.color==='orange' ||checkedW&&item.color==='violet' ) ) {
+                                                        if (anzeige === 0 && item.art === 'modul' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
 
                                                             return (
                                                                 <Draggable
@@ -647,7 +588,7 @@ function App() {
                                                                 </Draggable>
                                                             );
                                                         }
-                                                        else if (anzeige === 1 && item.art === 'ulp'&&(checkedP&&(item.color==='red'|| item.color==='gold') || checkedV&&item.color==='orange' ||checkedW&&item.color==='violet')) {
+                                                        else if (anzeige === 1 && item.art === 'ulp' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
 
                                                             return (
                                                                 <Draggable
@@ -675,7 +616,7 @@ function App() {
                                                                 </Draggable>
                                                             );
                                                         }
-                                                        else if (anzeige === 2 && item.art === 'pf'&&(checkedP&&(item.color==='red'|| item.color==='gold') || checkedV&&item.color==='orange' ||checkedW&&item.color==='violet')) {
+                                                        else if (anzeige === 2 && item.art === 'pf' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
 
                                                             return (
                                                                 <Draggable
@@ -895,4 +836,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppVerlaufsplan;
