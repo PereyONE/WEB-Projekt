@@ -33,7 +33,7 @@ function AppHome() {
       </Col>
 
       <Col class=" mx-auto" >
-      <Link to="/studienverlaufsplan">
+      <Link to="/einstellungen">
       <div class="btn btn-sq-lg boxpurple rounded-0 toprow"> 
                   <i class="fas fa-cog icons iconcolpurple "></i>
                   <h5 class="textbox">Einstellungen</h5>
