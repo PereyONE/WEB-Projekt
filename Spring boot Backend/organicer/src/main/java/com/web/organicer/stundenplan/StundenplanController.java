@@ -1,21 +1,26 @@
 package com.web.organicer.stundenplan;
 
+import com.web.organicer.termin.Termin;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping(path = "/api/stundenplan")
 @AllArgsConstructor
 public class StundenplanController {
-    /*
+
+
     private final StundenplanService stundenplanService;
 
-    @GetMapping
-    public List<Stundenplan> getStundenplan(){
-            return stundenplanService.getStundenplan();
+    @GetMapping (path = "/{studentId}")
+    public ArrayList<Termin> getStundenplanById(@PathVariable Long studentId){
+            return stundenplanService.getStundenplanById(studentId);
     }
+
+
     @PostMapping public String postStundenplan(@RequestBody Stundenplan stundenplan){
             return stundenplanService.postStundenplan(stundenplan);
     }
@@ -25,5 +30,5 @@ public class StundenplanController {
             return stundenplanService.deleteStundenplan(stundenplan);
     }
 
-     */
+
 }

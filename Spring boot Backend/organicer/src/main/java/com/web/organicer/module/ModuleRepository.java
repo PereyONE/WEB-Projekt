@@ -10,8 +10,6 @@ import java.util.Optional;
 public interface ModuleRepository extends JpaRepository<Module, Long> {
 
     Optional<Module> findByModuleName(String modulename);
-/*
-    ArrayList<Module> findByVertiefung(String vertiefung);
-    */
+    Optional<Module> findById(Long id);
 
 }

@@ -1,31 +1,67 @@
 package com.web.organicer.module;
 
-import com.web.organicer.faq.Faq;
+import com.web.organicer.lehrende.Lehrende;
+import com.web.organicer.lehrende.LehrendeController;
+import com.web.organicer.lehrende.LehrendeRepository;
+import com.web.organicer.lehrende.LehrendeService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class ModuleService {
 
     private final ModuleRepository moduleRepository;
+    private final LehrendeRepository lehrendeRepository;
 
     public List<Module> getModules(){
         return moduleRepository.findAll();
     }
 
-    /*
-    public Module getModuleByName(String modulename) {return moduleRepository.findByModuleName(modulename);}
+    public Module getOnlyModulById(Long modulId){
+        return moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
+    }
+    public Map<String,Object> getModulById(Long modulId) {
 
-    public List<Module> getModulesByVertiefung(String vertiefung){return moduleRepository.findByVertiefung(vertiefung);}
-    */
+        Map<String,Object> map = new HashMap<>();
+        Module modul = moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
+        ArrayList<Lehrende> lehrende = getLehrendeByModuleId(modulId);
+
+        map.put("Module",modul);
+        if(lehrende!=null) {
+            map.put("Lehrende", lehrende);
+        }
+        return map;
+    }
+
+    public ArrayList<Lehrende> getLehrendeByModuleId(Long modulId){
+
+        ArrayList<Lehrende> lehrende = new ArrayList<>();
+        lehrende = lehrendeRepository.findAll();
+        ArrayList<Lehrende> rueckgabe = new ArrayList<>();
+
+        for(Lehrende tmp:lehrende){
+            ArrayList<Long> ids = tmp.getModuleId();
+            for(Long id:ids){
+                if(modulId.equals(id)){
+                    rueckgabe.add(tmp);
+                }
+            }
+        }
+        return rueckgabe;
+    }
+
 
     public String postModule(Module module){
         if (module.getId()==null){
-            if (!moduleRepository.findByModuleName(module.getModuleName()).isEmpty()){
-                return "Module" + module.getModuleName() +"existiert bereits";
+            if (moduleRepository.findByModuleName(module.getModuleName()).isPresent()){
+                return "Module " + module.getModuleName() +"existiert bereits";
             }
             return addNewModule(module);
         }

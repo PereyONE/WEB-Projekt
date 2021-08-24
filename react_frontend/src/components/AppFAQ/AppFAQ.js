@@ -9,17 +9,10 @@ function AppFAQ() {
   
   const [faqs, setfaqs] = useState([]);
 
-  const config = {     
-    headers: 
-    { 
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpdXNAcGVyZXkubmV0IiwiZXhwIjoxNjI2ODYxOTgwLCJpYXQiOjE2MjY4NTgzODB9.22FdYj5kdCBsUivFheRqZlsjJOpStMIeB3TeE_R55Wo', 
-      'Access-Control-Allow-Origin':'*'
-    }
-  }
+
   useEffect(()=> {
-    axios.get('http://localhost:8080/api/faqs', config)
+    axios.get('/api/faqs')
     .then(res => {
-      console.log(res)
       setfaqs(res.data)
     })
     .catch(err => {
