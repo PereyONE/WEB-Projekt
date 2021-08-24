@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { Admin, Resource } from 'react-admin';
 import axios from 'axios';
 
-import FaqList from '/Users/mert_gececi/Desktop/WEB-Projekt-3/react_frontend/src/components/AppAdmin/components/FaqList'
-import FaqCreate from '/Users/mert_gececi/Desktop/WEB-Projekt-3/react_frontend/src/components/AppAdmin/components/FaqCreate'
-import FaqEdit from '/Users/mert_gececi/Desktop/WEB-Projekt-3/react_frontend/src/components/AppAdmin/components/FaqEdit'
+import FaqList from './components/FaqList'
+import FaqCreate from './components/FaqCreate'
+import FaqEdit from './components/FaqEdit'
 import dataProvider from './dataProvider';
 
 
