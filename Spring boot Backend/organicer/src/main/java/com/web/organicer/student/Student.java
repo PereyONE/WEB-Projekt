@@ -1,5 +1,6 @@
 package com.web.organicer.student;
 
+import com.web.organicer.svpModul.SvpModul;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,6 +37,8 @@ public class Student implements UserDetails {
     private int semester;
     private ArrayList<Long> vertiefungsID;
     private ArrayList<Long> wahlID;
+    @OneToMany(mappedBy = "student",cascade = CascadeType.MERGE)
+    private List<SvpModul> svpModuls;
     @Enumerated(EnumType.STRING)
     private StudentRole studentRole;
     private Boolean locked = false;

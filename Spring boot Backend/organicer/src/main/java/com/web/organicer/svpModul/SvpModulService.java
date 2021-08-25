@@ -1,8 +1,11 @@
 package com.web.organicer.svpModul;
 
+import com.web.organicer.student.Student;
+import com.web.organicer.student.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -10,6 +13,7 @@ import java.util.List;
 public class SvpModulService {
 
     public final SvpModulRepository svpModulRepository;
+    public final StudentRepository studentRepository;
 
     public List<SvpModul> getSvpModul() {
         return svpModulRepository.findAll();
@@ -41,6 +45,28 @@ public class SvpModulService {
         return "Studienverlaufplanmodul wurde gelöscht";
     }
 
+    public String createSvpModule(Long studentId){
+
+        Long dummyId= studentRepository.findByEmail("dummy@svp.com").get().getId();
+
+        ArrayList<SvpModul> Module= new ArrayList<>(svpModulRepository.findByStudentId(dummyId));
+
+        Student student = studentRepository.getById(studentId);
+
+        for(SvpModul svpMod : Module){
+            SvpModul newMod = new SvpModul(student, svpMod.getName(), svpMod.getTyp(),svpMod.getEcts(),
+                    svpMod.getPosition(),svpMod.getSemester7(),svpMod.getSemester12(),svpMod.getArt());
+            svpModulRepository.save(newMod);
+        }
+
+        return "Studienverlaufsplanmodule wurden erstellt";
+    }
+
+    /*public ArrayList<SvpModul> svpModulArrayList(Long studentId){
+        ArrayList<SvpModul> module = new ArrayList<>();
+        SvpModul Mathe1 = SvpModul(studentId, "Mathe 1", );
+        return module;
+    }*/
 }
 
 

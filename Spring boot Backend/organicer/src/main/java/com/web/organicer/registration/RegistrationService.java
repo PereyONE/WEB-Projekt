@@ -40,7 +40,8 @@ public class RegistrationService {
     public String confirmToken(String token){
         ConfirmationToken conformationToken = conformationTokenService.getToken(token).orElseThrow(() -> new IllegalStateException("token not found"));
         studentService.enableStudent(conformationToken.getStudent().getEmail());
-        return "confirmed";
+
+        return conformationToken.getStudent().getEmail();
     }
 
     private String buildEmail(String name, String link) {
