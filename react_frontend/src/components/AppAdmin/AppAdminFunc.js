@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AppAdmin from './AppAdmin'
+import AppAdmin from './AppAdminX'
 import { Container} from 'react-bootstrap';
 
 function AppAdminFunction({prof}) {

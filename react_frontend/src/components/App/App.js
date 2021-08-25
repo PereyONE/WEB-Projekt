@@ -15,9 +15,8 @@ import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
 import Test from '../AppXXX/Test'
-import AppAdmin from '../AppAdmin/AppAdmin';
 import AppEinstellungen from '../AppEinstellungen/AppEinstellungen';
-
+import AppAdmin from '../AppAdmin/AppAdmin';
 
 function App() {
 
@@ -46,6 +45,7 @@ function App() {
         <Route path="/einstellungen" component={AppEinstellungen}/>
         <Route path = "/admin" component= {AppAdmin}/>
         <Route path="/impressum" component={AppImpressum} />
+        <Route path="/appadmin" component={AppAdmin} />
 
 
         <Route path="/test" component={Test} />

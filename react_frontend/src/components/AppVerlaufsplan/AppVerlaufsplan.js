@@ -13,7 +13,7 @@ const itemsFromBackend = [
     { id: uuid(), content: "Info 1", color: "pflicht", semester: 1, semesterZ: 3, ects: 6, art: 'modul' },
     { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'modul' },
     { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'modul' },
-    { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'modul' },
+    { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'modul', position: 1},
 
     { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws' },
     { id: uuid(), content: "Photo 1", color: "red", semester: 1, semesterZ: 3, ects: 5, art: 'ulp' },
@@ -66,7 +66,7 @@ const itemsFromBackend = [
 
 ];
 
-const semesterZahl = 7;
+const semesterZahl = 12;
 
 
 //Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
@@ -336,6 +336,11 @@ function AppVerlaufsplan() {
         setColumns(columnsFromBackend());
     }
 
+    const saveSemester = e =>{
+        e.preventDefault();
+        console.log(columns)
+    }
+
 
     //Funktion um SVP nach 7 Semester Regelstudienzeit zu befüllen
     const siebenSemester = e => {
@@ -486,7 +491,7 @@ function AppVerlaufsplan() {
 
                     </Droppable>
 
-                    <Button variant="outline-dark" className="Loeschen" ><i class="far fa-save"></i></Button>
+                    <Button variant="outline-dark" className="Loeschen" onClick={saveSemester} ><i class="far fa-save"></i></Button>
                     <Button variant="outline-dark" className="Loeschen" onClick={siebenSemester}>7</Button>
                     <Button variant="outline-dark" className="Loeschen" onClick={zwoelfSemester}>12</Button>
 
