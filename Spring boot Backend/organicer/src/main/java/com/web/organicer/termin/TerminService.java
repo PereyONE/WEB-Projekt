@@ -1,42 +1,87 @@
 package com.web.organicer.termin;
 
+import com.web.organicer.security.jwt.JwtUtil;
+import com.web.organicer.student.Student;
+import com.web.organicer.student.StudentService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+
 
 @Service
 @AllArgsConstructor
 public class TerminService {
     public final TerminRepository terminRepository;
+    private final StudentService studentService;
+    private final JwtUtil jwtUtil;
 
-    public List<Termin> getTermin(){
-        return terminRepository.findAll();
-    }
+    public ArrayList<Termin> getTermineById(HttpServletRequest request){
 
+        String token = request.getHeader("Authorization").substring(7);
+        String email = jwtUtil.extractUsername(token);
+        Student student = studentService.loadUserByEmail(email);
 
-    public String postTermin(Termin termin){
-        if(termin.getId()==null){
-            return addNewTermin(termin);
+        ArrayList<Long> studentenTermineId = student.getTerminId();
+        ArrayList<Termin> termine = new ArrayList<>();
+
+        for(Long id:studentenTermineId){
+            Termin tmp = terminRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Termin not found"));
+            termine.add(tmp);
         }
-        return updateTermin(termin);
+        return termine;
     }
 
-    public String addNewTermin(Termin termin){
-        terminRepository.save(termin);
-        return "Neuen Termin erstellt";
+    // erstellen eines neuen Termins eines Studenten
+    public String postTermin(Termin termin,HttpServletRequest request){
+
+        //Studenten über den Token herausfinden
+        String token = request.getHeader("Authorization").substring(7);
+        String email = jwtUtil.extractUsername(token);
+        Student student = studentService.loadUserByEmail(email);
+
+        if(termin.getId()==null){
+            Termin tmp = addNewTermin(termin);
+            student.getTerminId().add(tmp.getId());
+            return "Neuen Termin erstellt";
+        }
+        Termin tmp = updateTermin(termin);
+        if(tmp != null) {
+            return "Termin aktualisiert";
+        }
+        else return null;
     }
 
-    public String updateTermin(Termin termin){
-        terminRepository.save(termin);
-        return "Termin wurde aktualisiert";
+    //Termin in der Datenbank anlegen
+    public Termin addNewTermin(Termin termin){
+
+        return terminRepository.save(termin);
+    }
+    //Termin in der Datenbank aktualisieren
+    public Termin updateTermin(Termin termin){
+
+        return terminRepository.save(termin);
     }
 
-    public String deleteTermin(Termin termin){
+    //Termin aus der Datenbank und der Terminliste eines Studenten löschen
+    public String deleteTermin(Termin termin,HttpServletRequest request){
+
+        //Den Studenten über den Token herausfinden
+        String token = request.getHeader("Authorization").substring(7);
+        String email = jwtUtil.extractUsername(token);
+        Student student = studentService.loadUserByEmail(email);
+
         if (termin.getId()==null){
             return "Keine Termin Id";
         }
+        //löschen eines Termines aus der Datenbank
         terminRepository.delete(termin);
+
+        //löschen des Termines aus der Terminliste
+        student.getTerminId().remove(termin.getId());
+
         return "Termin wurde gelöscht";
     }
 }
