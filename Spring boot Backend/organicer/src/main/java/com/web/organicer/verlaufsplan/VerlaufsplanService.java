@@ -18,11 +18,7 @@ public class VerlaufsplanService {
     private final VerlaufsplanRepository verlaufsplanRepository;
     private final StudentService studentService;
     private final JwtUtil jwtUtil;
-/*
-    public Verlaufsplan getVerlaufsplanById(Long Id) {
-        return verlaufsplanRepository.findById(Id).orElseThrow(() -> new UsernameNotFoundException("Verlaufsplan nor found"));
-    }
-*/
+
 
     public Verlaufsplan getVerlaufsplanById(HttpServletRequest request) {
 
@@ -32,8 +28,6 @@ public class VerlaufsplanService {
 
         return verlaufsplanRepository.findById(student.getId()).orElseThrow(() -> new UsernameNotFoundException("Verlaufsplan nor found"));
     }
-
-
 
 
     public String postVerlaufsplan(Verlaufsplan verlaufsplan){

@@ -1,6 +1,7 @@
 package com.web.organicer.student;
 
 import com.web.organicer.svpModul.SvpModul;
+import com.web.organicer.termin.Termin;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,8 +36,9 @@ public class Student implements UserDetails {
     private String email;
     private String password;
     private int semester;
-    private ArrayList<Long> vertiefungsID;
-    private ArrayList<Long> wahlID;
+    private ArrayList<Long> vertiefungsId;
+    private ArrayList<Long> wahlId;
+    private ArrayList<Long> terminId;
     @OneToMany(mappedBy = "student",cascade = CascadeType.MERGE)
     private List<SvpModul> svpModuls;
     @Enumerated(EnumType.STRING)

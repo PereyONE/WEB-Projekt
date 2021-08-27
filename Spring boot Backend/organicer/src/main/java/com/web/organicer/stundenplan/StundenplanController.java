@@ -4,6 +4,7 @@ import com.web.organicer.termin.Termin;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 
@@ -21,8 +22,8 @@ public class StundenplanController {
     }
 
 
-    @PostMapping public String postStundenplan(@RequestBody Stundenplan stundenplan){
-            return stundenplanService.postStundenplan(stundenplan);
+    @PostMapping public String postStundenplan(@RequestBody Stundenplan stundenplan, HttpServletRequest request){
+            return stundenplanService.postStundenplan(stundenplan,request);
     }
 
     @DeleteMapping

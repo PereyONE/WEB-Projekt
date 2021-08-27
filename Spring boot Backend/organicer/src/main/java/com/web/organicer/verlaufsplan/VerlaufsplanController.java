@@ -16,7 +16,6 @@ public class VerlaufsplanController {
 
     @GetMapping // gibt Verlaufsplan mit entsprechener ID zurück
     public Verlaufsplan getVerlaufsplanById(HttpServletRequest request){
-
         return verlaufsplanService.getVerlaufsplanById(request);
     }
 
