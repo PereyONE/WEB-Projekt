@@ -52,6 +52,8 @@ public class StudentService implements UserDetailsService {
         return token;
     }
 
+    public void saveStudent(Student student){ studentRepository.save(student);}
+
     public int enableStudent(String email){
         return studentRepository.enableStudent(email);
     }

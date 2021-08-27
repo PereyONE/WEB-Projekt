@@ -24,13 +24,9 @@ public class TerminService {
         String email = jwtUtil.extractUsername(token);
         Student student = studentService.loadUserByEmail(email);
 
-        ArrayList<Long> studentenTermineId = student.getTerminId();
-        ArrayList<Termin> termine = new ArrayList<>();
 
-        for(Long id:studentenTermineId){
-            Termin tmp = terminRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Termin not found"));
-            termine.add(tmp);
-        }
+        ArrayList<Termin> termine = terminRepository.findByStudentId(student.getId());
+
         return termine;
     }
 
@@ -42,16 +38,19 @@ public class TerminService {
         String email = jwtUtil.extractUsername(token);
         Student student = studentService.loadUserByEmail(email);
 
-        if(termin.getId()==null){
+        termin.setStudent(student);
+
+        terminRepository.save(termin);
+        /*if(termin.getId()==null){
             Termin tmp = addNewTermin(termin);
-            student.getTerminId().add(tmp.getId());
             return "Neuen Termin erstellt";
         }
         Termin tmp = updateTermin(termin);
         if(tmp != null) {
             return "Termin aktualisiert";
         }
-        else return null;
+        else return null;*/
+        return "Yo läuft!";
     }
 
     //Termin in der Datenbank anlegen
@@ -80,7 +79,7 @@ public class TerminService {
         terminRepository.delete(termin);
 
         //löschen des Termines aus der Terminliste
-        student.getTerminId().remove(termin.getId());
+        //student.getTerminId().remove(termin.getId());
 
         return "Termin wurde gelöscht";
     }

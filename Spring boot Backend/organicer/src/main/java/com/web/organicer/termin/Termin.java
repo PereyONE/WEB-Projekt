@@ -1,5 +1,7 @@
 package com.web.organicer.termin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.organicer.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +23,12 @@ public class Termin {
             strategy = GenerationType.SEQUENCE,
             generator = "termin_sequence"
     )
-
     private Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Student student;
+
     private String beschreibung;
     private String wochentag;
     private String startzeit;

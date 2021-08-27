@@ -31,10 +31,11 @@ public class RegistrationController {
     @GetMapping(path = "confirm")
     public String confirm(@RequestParam("token") String token, HttpServletRequest request){
 
-        String username = registrationService.confirmToken(token);;
-        Student student = studentRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        String username = registrationService.confirmToken(token);
+        Student student = studentRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        svpModulService.createSvpModule(student.getId());
+        svpModulService.connectSvpModules(student.getId());
 
         return "Deine Email-Addresse ist verifiziert, Du kannst dich jetzt einloggen";
     }

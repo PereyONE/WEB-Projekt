@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 
 @RestController
@@ -14,14 +15,15 @@ public class VerlaufsplanController {
 
     private final VerlaufsplanService verlaufsplanService;
 
-    @GetMapping // gibt Verlaufsplan mit entsprechener ID zurück
-    public Verlaufsplan getVerlaufsplanById(HttpServletRequest request){
+    // gibt Verlaufsplan mit entsprechener ID zurück
+    @GetMapping
+    public ArrayList<Verlaufsplan> getVerlaufsplanById(HttpServletRequest request){
         return verlaufsplanService.getVerlaufsplanById(request);
     }
 
     @PostMapping
-    public String postVerlaufsplan(@RequestBody Verlaufsplan verlaufsplan){
-        return verlaufsplanService.postVerlaufsplan(verlaufsplan);
+    public String updateVerlaufsplan(@RequestBody Verlaufsplan verlaufsplan){
+        return verlaufsplanService.updateVerlaufsplan(verlaufsplan);
     }
 
     @DeleteMapping

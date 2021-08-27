@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 
 @Service
@@ -20,27 +21,13 @@ public class VerlaufsplanService {
     private final JwtUtil jwtUtil;
 
 
-    public Verlaufsplan getVerlaufsplanById(HttpServletRequest request) {
+    public ArrayList<Verlaufsplan> getVerlaufsplanById(HttpServletRequest request) {
 
         String token = request.getHeader("Authorization").substring(7);
         String email = jwtUtil.extractUsername(token);
         Student student = studentService.loadUserByEmail(email);
 
-        return verlaufsplanRepository.findById(student.getId()).orElseThrow(() -> new UsernameNotFoundException("Verlaufsplan nor found"));
-    }
-
-
-    public String postVerlaufsplan(Verlaufsplan verlaufsplan){
-        if (verlaufsplan.getId()==null){
-
-            return addNewVerlaufsplan(verlaufsplan);
-        }
-        return updateVerlaufsplan(verlaufsplan);
-    }
-
-    public String addNewVerlaufsplan(Verlaufsplan verlaufsplan){
-        verlaufsplanRepository.save(verlaufsplan);
-        return "Verlaufsplan wurde hinzugefügt";
+        return verlaufsplanRepository.findByStudentId(student.getId());
     }
 
     public String updateVerlaufsplan(Verlaufsplan verlaufsplan){

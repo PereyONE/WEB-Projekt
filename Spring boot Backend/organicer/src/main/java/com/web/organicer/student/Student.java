@@ -1,7 +1,10 @@
 package com.web.organicer.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.organicer.svpModul.SvpModul;
 import com.web.organicer.termin.Termin;
+import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,10 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -38,9 +38,15 @@ public class Student implements UserDetails {
     private int semester;
     private ArrayList<Long> vertiefungsId;
     private ArrayList<Long> wahlId;
-    private ArrayList<Long> terminId;
-    @OneToMany(mappedBy = "student",cascade = CascadeType.MERGE)
-    private List<SvpModul> svpModuls;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<Termin> termin;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    private Set<Verlaufsplan> verlaufsplan;
+
     @Enumerated(EnumType.STRING)
     private StudentRole studentRole;
     private Boolean locked = false;

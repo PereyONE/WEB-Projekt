@@ -2,11 +2,15 @@ package com.web.organicer.svpModul;
 
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentRepository;
+import com.web.organicer.verlaufsplan.Verlaufsplan;
+import com.web.organicer.verlaufsplan.VerlaufsplanRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +18,7 @@ public class SvpModulService {
 
     public final SvpModulRepository svpModulRepository;
     public final StudentRepository studentRepository;
+    public final VerlaufsplanRepository verlaufsplanRepository;
 
     public List<SvpModul> getSvpModul() {
         return svpModulRepository.findAll();
@@ -45,28 +50,18 @@ public class SvpModulService {
         return "Studienverlaufplanmodul wurde gelöscht";
     }
 
-    public String createSvpModule(Long studentId){
+    public String connectSvpModules(Long studentId){
 
-        Long dummyId= studentRepository.findByEmail("dummy@svp.com").get().getId();
-
-        ArrayList<SvpModul> Module= new ArrayList<>(svpModulRepository.findByStudentId(dummyId));
-
+        ArrayList<SvpModul> module = new ArrayList<>(svpModulRepository.findByCustom(0));
         Student student = studentRepository.getById(studentId);
 
-        for(SvpModul svpMod : Module){
-            SvpModul newMod = new SvpModul(student, svpMod.getName(), svpMod.getTyp(),svpMod.getEcts(),
-                    svpMod.getPosition(),svpMod.getSemester7(),svpMod.getSemester12(),svpMod.getArt());
-            svpModulRepository.save(newMod);
+        for(SvpModul modul : module){
+            Verlaufsplan verlaufsplan = new Verlaufsplan(student, modul, 0);
+            verlaufsplanRepository.save(verlaufsplan);
         }
 
-        return "Studienverlaufsplanmodule wurden erstellt";
+        return "Studienverlaufsplanmodule wurden verbunden";
     }
-
-    /*public ArrayList<SvpModul> svpModulArrayList(Long studentId){
-        ArrayList<SvpModul> module = new ArrayList<>();
-        SvpModul Mathe1 = SvpModul(studentId, "Mathe 1", );
-        return module;
-    }*/
 }
 
 

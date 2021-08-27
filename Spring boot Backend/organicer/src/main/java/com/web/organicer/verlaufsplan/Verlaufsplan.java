@@ -1,5 +1,8 @@
 package com.web.organicer.verlaufsplan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.organicer.student.Student;
+import com.web.organicer.svpModul.SvpModul;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,8 +26,23 @@ public class Verlaufsplan {
             generator = "verlaufsplan_sequence"
     )
     private Long id;
-    private Long studentId;
-    private ArrayList<Long> semesterId;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "svpmodul_id")
+    private SvpModul svpModul;
+
+    private int position;
+
+    public Verlaufsplan(Student student, SvpModul svpModul, int position) {
+        this.student = student;
+        this.svpModul = svpModul;
+        this.position = position;
+    }
 }
 
 

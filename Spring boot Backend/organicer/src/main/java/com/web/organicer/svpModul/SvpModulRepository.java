@@ -10,6 +10,6 @@ import java.util.ArrayList;
 @Transactional(readOnly = true)
 public interface SvpModulRepository extends JpaRepository<SvpModul, Long> {
 
-    ArrayList<SvpModul> findByStudentId(Long StudentId);
+    ArrayList<SvpModul> findByCustom(int Custom);
 
 }
