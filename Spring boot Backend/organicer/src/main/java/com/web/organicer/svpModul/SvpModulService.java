@@ -62,6 +62,12 @@ public class SvpModulService {
 
         return "Studienverlaufsplanmodule wurden verbunden";
     }
+
+    public SvpModul findByName(String name){return svpModulRepository.findByName(name);}
+
+    public SvpModul getSvpModulByVertiefungspaket(int Vertiefungspaket) {
+        return svpModulRepository.findByVertiefungspaket(Vertiefungspaket);
+    }
 }
 
 

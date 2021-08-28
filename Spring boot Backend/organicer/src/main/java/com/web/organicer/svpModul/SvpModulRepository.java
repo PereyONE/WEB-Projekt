@@ -12,4 +12,7 @@ public interface SvpModulRepository extends JpaRepository<SvpModul, Long> {
 
     ArrayList<SvpModul> findByCustom(int Custom);
 
+    SvpModul findByName (String Name);
+
+    SvpModul findByVertiefungspaket(int Vertiefungspaket);
 }

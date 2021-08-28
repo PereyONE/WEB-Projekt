@@ -38,6 +38,7 @@ public class Verlaufsplan {
 
     private int position;
 
+
     public Verlaufsplan(Student student, SvpModul svpModul, int position) {
         this.student = student;
         this.svpModul = svpModul;

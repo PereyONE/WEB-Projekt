@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.organicer.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Termin {
 
@@ -26,7 +28,7 @@ public class Termin {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
 
     private String beschreibung;

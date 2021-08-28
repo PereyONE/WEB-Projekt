@@ -17,21 +17,6 @@ import java.util.ArrayList;
 @Data
 public class Module {
 
-    public Module(String moduleName, String moduleAbkürzung, String ects, String moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, String regelstudienzeitsieben, String regelstudienzeitzwölf, ArrayList<Long> terminId, String bild) {
-        this.moduleName = moduleName;
-        this.moduleAbkürzung = moduleAbkürzung;
-        this.ects = ects;
-        this.moduleTyp = moduleTyp;
-        this.vertiefung = vertiefung;
-        this.prüfungsart = prüfungsart;
-        this.beschreibung = beschreibung;
-        this.verfügbarkeit = verfügbarkeit;
-        this.regelstudienzeitsieben = regelstudienzeitsieben;
-        this.regelstudienzeitzwölf = regelstudienzeitzwölf;
-        this.terminId = terminId;
-        this.bild = bild;
-    }
-
     @Id
     @SequenceGenerator(
             name = "module_sequence",
@@ -51,9 +36,26 @@ public class Module {
     private String prüfungsart;
     private String beschreibung;
     private String verfügbarkeit;
+    private String oberkategorie;
     private String regelstudienzeitsieben;//int
     private String regelstudienzeitzwölf;//int
     private ArrayList<Long> terminId;
     private String bild;
+
+
+    public Module(String moduleName, String moduleAbkürzung, String ects, String moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, String regelstudienzeitsieben, String regelstudienzeitzwölf, ArrayList<Long> terminId, String bild) {
+        this.moduleName = moduleName;
+        this.moduleAbkürzung = moduleAbkürzung;
+        this.ects = ects;
+        this.moduleTyp = moduleTyp;
+        this.vertiefung = vertiefung;
+        this.prüfungsart = prüfungsart;
+        this.beschreibung = beschreibung;
+        this.verfügbarkeit = verfügbarkeit;
+        this.regelstudienzeitsieben = regelstudienzeitsieben;
+        this.regelstudienzeitzwölf = regelstudienzeitzwölf;
+        this.terminId = terminId;
+        this.bild = bild;
+    }
 }
 

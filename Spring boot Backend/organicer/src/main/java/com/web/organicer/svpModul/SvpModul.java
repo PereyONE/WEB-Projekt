@@ -36,6 +36,7 @@ public class SvpModul {
     private int ects;
     private int semester7;
     private int semester12;
+    private int vertiefungspaket;
     private String art;//ULP,Klausur,Modul
 
     public SvpModul(String name, int custom, String typ, int ects, int semester7, int semester12, String art) {
