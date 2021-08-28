@@ -1,319 +1,393 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/dist/v4";
 import { ButtonGroup, Button } from 'react-bootstrap'
-// import FAQ from '../AppFAQ/FAQ';
 import './Verlaufsplan.css'
 import CheckBox from "./CheckBox";
 import { Redirect } from "react-router";
-import axios from 'axios'; 
+import axios from 'axios';
 
 
 
-const itemsFromBackend = [
-    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+function AppVerlaufsplan({ auth }) {
 
-    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'ulp', verfuegbarkeit: 'ws', position: 0},
-    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+    const [itemsFromBackend, setItemsFromBackend] = useState([
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
 
-    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'pf', position: 0 },
-    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'pf', position: 0 },
-    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'pf', position: 0 },
-    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'pf', position: 0 },
-    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'pf', position: 0 },
-    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'pf', position: 0 },
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
 
-    { id: uuid(), content: "Mathe 2", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', verfuegbarkeit: 'ss', position: 0 },
-    { id: uuid(), content: "Photo 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
-    { id: uuid(), content: "Info 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
-    { id: uuid(), content: "EM 1", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', position: 0 },
-    { id: uuid(), content: "GMG 1", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'pf', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'pf', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'pf', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'pf', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'pf', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'pf', position: 0 },
 
-    { id: uuid(), content: "Siga", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
-    { id: uuid(), content: "Photo 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
-    { id: uuid(), content: "Info 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
-    { id: uuid(), content: "EM 2", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
-    { id: uuid(), content: "GMG 2", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+        { id: uuid(), name: "Mathe 2", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', verfuegbarkeit: 'ss', position: 0 },
+        { id: uuid(), name: "Photo 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+        { id: uuid(), name: "Info 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+        { id: uuid(), name: "EM 1", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', position: 0 },
+        { id: uuid(), name: "GMG 1", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPB 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPC 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPD 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
-    { id: uuid(), content: "WPB 1", typ: "wahl", semester7: 4, semester12: 10, art: 'modul', position: 0 },
+        { id: uuid(), name: "Siga", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+        { id: uuid(), name: "Photo 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+        { id: uuid(), name: "Info 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+        { id: uuid(), name: "EM 2", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+        { id: uuid(), name: "GMG 2", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPB 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPC 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPD 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-    { id: uuid(), content: "WPB 2", typ: "wahl", semester7: 5, semester12: 11, art: 'modul', position: 0 },
-    { id: uuid(), content: "BWR", typ: "pflicht", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-    { id: uuid(), content: "REC", typ: "pflicht", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPA 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+        { id: uuid(), name: "WPB 1", typ: "wahl", semester7: 4, semester12: 10, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPB 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPC 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
-    { id: uuid(), content: "VPD 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPA 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "WPB 2", typ: "wahl", semester7: 5, semester12: 11, art: 'modul', position: 0 },
+        { id: uuid(), name: "BWR", typ: "pflicht", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "REC", typ: "pflicht", semester7: 5, semester12: 9, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
-    { id: uuid(), content: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
-    { id: uuid(), content: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPA 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
 
-];
-
-const semesterZahl = 8;
-
-//Funktion um alle Module für das jeweils angegebene Semester anhand ihrer Position 
-const modulePosition = (position) => {
-    const module = []
-    for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].position === position) {
-            module.push(itemsFromBackend[index])
-        }
-    }
-    module.sort(function (a, b) {
-        return b.ects - a.ects;
-    })
-    return module;
-}
-
-//Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
-const moduleSemester = (semester) => {
-    const module = []
-    for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].semester7 === semester && itemsFromBackend[index].art === 'modul') {
-            module.push(itemsFromBackend[index])
-        }
-    }
-    module.sort(function (a, b) {
-        return b.ects - a.ects;
-    })
-    return module;
-}
-
-//Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 12 Semester)
-const moduleSemesterZ = (semester) => {
-    const module = []
-    for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].semester12 === semester && itemsFromBackend[index].art === 'modul') {
-            module.push(itemsFromBackend[index])
-        }
-    }
-    module.sort(function (a, b) {
-        return b.ects - a.ects;
-    })
-    return module;
-}
+        { id: uuid(), name: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+        { id: uuid(), name: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
+        { id: uuid(), name: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+        
+    ]);
 
 
-const moduleULPPF = () => {
-    const module = []
-    for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].art !== 'modul') {
-            module.push(itemsFromBackend[index])
-        }
-    }
-    module.sort(function (a, b) {
-        return b.ects - a.ects;
-    })
-
-    return module;
-}
-
-
-
-const columnsFromBackend = () => {
-    var columns = {
-        0: {
-            name: "Semester 0",
-            items: modulePosition(0)
-        },
-        1: {
-            name: "Semester 1",
-            items: modulePosition(1)
-        },
-        2: {
-            name: "Semester 2",
-            items: modulePosition(2)
-        },
-        3: {
-            name: "Semester 3",
-            items: modulePosition(3)
-        },
-        4: {
-            name: "Semester 4",
-            items: modulePosition(4)
-        },
-        5: {
-            name: "Semester 5",
-            items: modulePosition(5)
-        },
-        6: {
-            name: "Semester 6",
-            items: modulePosition(6)
-        },
-        7: {
-            name: "Semester 7",
-            items: modulePosition(7)
-        }
-    }
-
-    if (semesterZahl > 7) {
-        for (let index = 8; index <= semesterZahl; index++) {
-            columns = {
-                ...columns,
-                [index]: {
-                    name: "Semester " + index,
-                    items: modulePosition(index)
-                }
-
-            }
-
-        }
-
-    }
-    return columns;
-}
-
-
-//Hauptfunktion für Drag&Drop-Logik
-const onDragEnd = (result, columns, setColumns) => {
-
-    //Falls Drag-Objekt nicht auf eine Fläche außerhalb des Drag&Drop-Systems gezogen wird
-    if (!result.destination) return;
-
-    //Falls Drag-Objekt auf eine gültige Fläche gezogen wird
-    const { source, destination } = result;
-    //Abfrage ob Drag-Objekt nicht auf seine ursprüngliche Fläche gezogen wurde
-    if (source.droppableId !== destination.droppableId) {
-
-        //Falls Drag-Objekt auf Mülleimer gezogen wird
-        if (result.destination.droppableId === 'delete') {
-            if (source.droppableId == 0) { return }
-            const sourceColumn = columns[source.droppableId];
-            const destColumn = columns[0];
-
-            //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
-            var dragItem
-            {
-                sourceColumn.items.map((item, index) => {
-                    if (item.id === result.draggableId) {
-                        dragItem = item;
-                    }
-                })
-            }
-
-            //Das verschobene Modul soll sich seine neue position merken
-            dragItem.position = 0
-            console.log(dragItem.position)
-
-            const sourceItems = [...sourceColumn.items];
-            const destItems = [...destColumn.items];
-            const [removed] = sourceItems.splice(source.index, 1);
-            destItems.splice(destination.index, 0, removed);
-            setColumns({
-                ...columns,
-                [source.droppableId]: {
-                    ...sourceColumn,
-                    items: sourceItems
-                },
-                0: {
-                    ...destColumn,
-                    items: destItems
-                }
-            });
-        }
-
-        //Falls Drag-Objekt auf neue Spalte gezogen wird
-        else {
-            const sourceColumn = columns[source.droppableId];
-            const destColumn = columns[destination.droppableId];
-
-            //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
-            var dragItem
-            {
-                sourceColumn.items.map((item, index) => {
-                    if (item.id === result.draggableId) {
-                        dragItem = item;
-                    }
-                })
-            }
-
-
-
-            //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
-            if (!(destination.droppableId == 0)) {
-                if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) { return }
-            }
-
-            //Das verschobene Modul soll sich seine neue position merken
-            console.log(dragItem.position)
-            dragItem.position = destination.droppableId
-            console.log(dragItem.position)
-
-            const sourceItems = [...sourceColumn.items];
-            const destItems = [...destColumn.items];
-            const [removed] = sourceItems.splice(source.index, 1);
-            destItems.splice(destination.index, 0, removed);
-            setColumns({
-                ...columns,
-                [source.droppableId]: {
-                    ...sourceColumn,
-                    items: sourceItems
-                },
-                [destination.droppableId]: {
-                    ...destColumn,
-                    items: destItems
-                }
-            });
-        }
-    }
-
-    //Falls Drag-Objekt innerhalb seiner ursprünglichen Spalte verschoben wurde
-    else {
-        const column = columns[source.droppableId];
-        const copiedItems = [...column.items];
-        const [removed] = copiedItems.splice(source.index, 1);
-        copiedItems.splice(destination.index, 0, removed);
-        setColumns({
-            ...columns,
-            [source.droppableId]: {
-                ...column,
-                items: copiedItems
-            }
-        });
-    }
-};
-
-//Zusatzfunktion für Logikabfrage
-function isOdd(num) { return num % 2; }
-
-
-//Exportierter React-Component
-function AppVerlaufsplan({auth}) {
+    useEffect(() => {
+        axios.get('/api/verlaufsplan')
+            .then(res => {
+                setItemsFromBackend(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
 
     console.log(itemsFromBackend)
 
-    const [semesterZahlState, setSemesterZahl]=useState(semesterZahl)
+    const itemsFromBackend2 = [
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
 
-    //State für erstellte Semester, essenziell für Drag&Drop
-    const [columns, setColumns] = useState(columnsFromBackend());
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
 
-    //State für Tabauswahl (Modul, ULP, Prüfung)
-    const [anzeige, setAnzeige] = useState(0)
+        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'pf', position: 0 },
+        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'pf', position: 0 },
+        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'pf', position: 0 },
+        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'pf', position: 0 },
+        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'pf', position: 0 },
+        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'pf', position: 0 },
 
-    //States für Checkbox-Button Auswahl
-    const [checkedP, setCheckedP] = useState(true);
-    const [checkedV, setCheckedV] = useState(true);
-    const [checkedW, setCheckedW] = useState(true);
+        { id: uuid(), name: "Mathe 2", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', verfuegbarkeit: 'ss', position: 0 },
+        { id: uuid(), name: "Photo 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+        { id: uuid(), name: "Info 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+        { id: uuid(), name: "EM 1", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', position: 0 },
+        { id: uuid(), name: "GMG 1", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+
+        { id: uuid(), name: "Siga", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+        { id: uuid(), name: "Photo 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+        { id: uuid(), name: "Info 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+        { id: uuid(), name: "EM 2", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+        { id: uuid(), name: "GMG 2", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+
+        { id: uuid(), name: "VPA 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+        { id: uuid(), name: "WPB 1", typ: "wahl", semester7: 4, semester12: 10, art: 'modul', position: 0 },
+
+        { id: uuid(), name: "VPA 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "WPB 2", typ: "wahl", semester7: 5, semester12: 11, art: 'modul', position: 0 },
+        { id: uuid(), name: "BWR", typ: "pflicht", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+        { id: uuid(), name: "REC", typ: "pflicht", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+
+        { id: uuid(), name: "VPA 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPB 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPC 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+        { id: uuid(), name: "VPD 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
+
+        { id: uuid(), name: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+        { id: uuid(), name: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
+        { id: uuid(), name: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+       
+
+    ];
+
+    //State für Anzahl erstellter Semester
+    const [semesterZahl, setSemesterZahl] = useState(8)
+
+     //State für erstellte Semester, essenziell für Drag&Drop
+     const [columns, setColumns] = useState(columnsFromBackend());
+
+     //State für Tabauswahl (Modul, ULP, Prüfung)
+     const [anzeige, setAnzeige] = useState(0)
+ 
+     //States für Checkbox-Button Auswahl
+     const [checkedP, setCheckedP] = useState(true);
+     const [checkedV, setCheckedV] = useState(true);
+     const [checkedW, setCheckedW] = useState(true);
+
+    //Funktion um alle Module für das jeweils angegebene Semester anhand ihrer Position 
+    const modulePosition = (position) => {
+        const module = []
+        for (let index = 0; index < itemsFromBackend.length; index++) {
+            if (itemsFromBackend[index].position === position) {
+                module.push(itemsFromBackend[index])
+            }
+        }
+        module.sort(function (a, b) {
+            return b.ects - a.ects;
+        })
+        return module;
+    }
+
+    //Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
+    const moduleSemester = (semester) => {
+        const module = []
+        for (let index = 0; index < itemsFromBackend.length; index++) {
+            if (itemsFromBackend[index].semester7 === semester && itemsFromBackend[index].art === 'modul') {
+                module.push(itemsFromBackend[index])
+            }
+        }
+        module.sort(function (a, b) {
+            return b.ects - a.ects;
+        })
+        return module;
+    }
+
+    //Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 12 Semester)
+    const moduleSemesterZ = (semester) => {
+        const module = []
+        for (let index = 0; index < itemsFromBackend.length; index++) {
+            if (itemsFromBackend[index].semester12 === semester && itemsFromBackend[index].art === 'modul') {
+                module.push(itemsFromBackend[index])
+            }
+        }
+        module.sort(function (a, b) {
+            return b.ects - a.ects;
+        })
+        return module;
+    }
+
+
+    const moduleULPPF = () => {
+        const module = []
+        for (let index = 0; index < itemsFromBackend.length; index++) {
+            if (itemsFromBackend[index].art !== 'modul') {
+                module.push(itemsFromBackend[index])
+            }
+        }
+        module.sort(function (a, b) {
+            return b.ects - a.ects;
+        })
+
+        return module;
+    }
+
+
+
+    const columnsFromBackend = () => {
+        var columns = {
+            0: {
+                name: "Semester 0",
+                items: modulePosition(0)
+            },
+            1: {
+                name: "Semester 1",
+                items: modulePosition(1)
+            },
+            2: {
+                name: "Semester 2",
+                items: modulePosition(2)
+            },
+            3: {
+                name: "Semester 3",
+                items: modulePosition(3)
+            },
+            4: {
+                name: "Semester 4",
+                items: modulePosition(4)
+            },
+            5: {
+                name: "Semester 5",
+                items: modulePosition(5)
+            },
+            6: {
+                name: "Semester 6",
+                items: modulePosition(6)
+            },
+            7: {
+                name: "Semester 7",
+                items: modulePosition(7)
+            }
+        }
+
+        if (semesterZahl > 7) {
+            for (let index = 8; index <= semesterZahl; index++) {
+                columns = {
+                    ...columns,
+                    [index]: {
+                        name: "Semester " + index,
+                        items: modulePosition(index)
+                    }
+
+                }
+
+            }
+
+        }
+        return columns;
+    }
+
+
+
+
+    //Zusatzfunktion für Logikabfrage
+    function isOdd(num) { return num % 2; }
+
+
+   
+
+    //Hauptfunktion für Drag&Drop-Logik
+    const onDragEnd = (result, columns, setColumns) => {
+
+        //Falls Drag-Objekt nicht auf eine Fläche außerhalb des Drag&Drop-Systems gezogen wird
+        if (!result.destination) return;
+
+        //Falls Drag-Objekt auf eine gültige Fläche gezogen wird
+        const { source, destination } = result;
+        //Abfrage ob Drag-Objekt nicht auf seine ursprüngliche Fläche gezogen wurde
+        if (source.droppableId !== destination.droppableId) {
+
+            //Falls Drag-Objekt auf Mülleimer gezogen wird
+            if (result.destination.droppableId === 'delete') {
+                if (source.droppableId == 0) { return }
+                const sourceColumn = columns[source.droppableId];
+                const destColumn = columns[0];
+
+                //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
+                var dragItem
+                {
+                    sourceColumn.items.map((item, index) => {
+                        if (item.id === result.draggableId) {
+                            dragItem = item;
+                        }
+                    })
+                }
+
+                //Das verschobene Modul soll sich seine neue position merken
+                dragItem.position = 0
+                console.log(dragItem.position)
+
+                const sourceItems = [...sourceColumn.items];
+                const destItems = [...destColumn.items];
+                const [removed] = sourceItems.splice(source.index, 1);
+                destItems.splice(destination.index, 0, removed);
+                setColumns({
+                    ...columns,
+                    [source.droppableId]: {
+                        ...sourceColumn,
+                        items: sourceItems
+                    },
+                    0: {
+                        ...destColumn,
+                        items: destItems
+                    }
+                });
+            }
+
+            //Falls Drag-Objekt auf neue Spalte gezogen wird
+            else {
+                const sourceColumn = columns[source.droppableId];
+                const destColumn = columns[destination.droppableId];
+
+                //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
+                var dragItem
+                {
+                    sourceColumn.items.map((item, index) => {
+                        if (item.id === result.draggableId) {
+                            dragItem = item;
+                        }
+                    })
+                }
+
+
+
+                //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
+                if (!(destination.droppableId == 0)) {
+                    if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) { return }
+                }
+
+                //Das verschobene Modul soll sich seine neue position merken
+                console.log(dragItem.position)
+                dragItem.position = destination.droppableId
+                console.log(dragItem.position)
+
+                const sourceItems = [...sourceColumn.items];
+                const destItems = [...destColumn.items];
+                const [removed] = sourceItems.splice(source.index, 1);
+                destItems.splice(destination.index, 0, removed);
+                setColumns({
+                    ...columns,
+                    [source.droppableId]: {
+                        ...sourceColumn,
+                        items: sourceItems
+                    },
+                    [destination.droppableId]: {
+                        ...destColumn,
+                        items: destItems
+                    }
+                });
+            }
+        }
+
+        //Falls Drag-Objekt innerhalb seiner ursprünglichen Spalte verschoben wurde
+        else {
+            const column = columns[source.droppableId];
+            const copiedItems = [...column.items];
+            const [removed] = copiedItems.splice(source.index, 1);
+            copiedItems.splice(destination.index, 0, removed);
+            setColumns({
+                ...columns,
+                [source.droppableId]: {
+                    ...column,
+                    items: copiedItems
+                }
+            });
+        }
+    };
+
+
 
     //Funktionen für Checkbox-Button Auswahl
     const handleChangeP = () => {
@@ -410,7 +484,7 @@ function AppVerlaufsplan({auth}) {
         console.log(columns)
     }
 
-   
+
 
     //Funktion um SVP nach 7 Semester Regelstudienzeit zu befüllen
     const siebenSemester = e => {
@@ -421,7 +495,7 @@ function AppVerlaufsplan({auth}) {
         })
 
         setSemesterZahl(7)
-        console.log(semesterZahlState)
+        console.log(semesterZahl)
 
         const newColumns = {
             0: {
@@ -528,7 +602,7 @@ function AppVerlaufsplan({auth}) {
     }
 
 
-    
+
 
 
     return (
@@ -648,7 +722,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>{item.ects} ECTS</div>
+                                                                                <div>{item.name}</div><div>{item.ects} ECTS</div>
 
                                                                             </div>
                                                                         );
@@ -676,7 +750,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>ULP</div>
+                                                                                <div>{item.name}</div><div>ULP</div>
 
                                                                             </div>
                                                                         );
@@ -704,7 +778,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>PF</div>
+                                                                                <div>{item.name}</div><div>PF</div>
 
                                                                             </div>
                                                                         );
@@ -776,7 +850,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>{item.ects} ECTS</div>
+                                                                                <div>{item.name}</div><div>{item.ects} ECTS</div>
 
                                                                             </div>
                                                                         );
@@ -804,7 +878,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>ULP</div>
+                                                                                <div>{item.name}</div><div>ULP</div>
 
                                                                             </div>
                                                                         );
@@ -832,7 +906,7 @@ function AppVerlaufsplan({auth}) {
 
 
                                                                             >
-                                                                                <div>{item.content}</div><div>PF</div>
+                                                                                <div>{item.name}</div><div>PF</div>
 
                                                                             </div>
                                                                         );
