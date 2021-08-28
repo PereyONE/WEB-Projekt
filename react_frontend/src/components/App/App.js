@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from '../AppNavbar/AppNavbar';
@@ -24,26 +24,32 @@ function App() {
     credentials: 'same-origin'
   })
 
+  const [auth, setAuth]=useState(true)
+
   return (
+    
     <Router>
       <div className="App">
-        <AppNavbar />
 
-        <Route path="/login" component={AppLogin} />
-        <Route path="/register" component={AppRegister} />
+        <AppNavbar auth={auth}/>
+        
+        <Route path="/login" component={AppLogin} /> {/* auth implementiert */}
+        <Route path="/register" component={AppRegister} /> {/* auth implementiert */}
 
-        <Route path="/" exact component={AppHome} />
-        <Route path="/studienverlaufsplan" component={AppVerlaufsplan} />
-        <Route path="/stundenplan" component={AppStundenplan} />
-        <Route path="/module" exact component={AppModule} />
-        <Route path="/module/modul.name" component={AppModuleProfil} />
-        
-        
+       
+
+        <Route path="/" exact component={()=> <AppHome auth={auth} />} /> {/* auth implementiert */} 
+        <Route path="/studienverlaufsplan" component={()=><AppVerlaufsplan auth={auth} />} /> {/* auth implementiert */}
+        <Route path="/stundenplan" component={()=> <AppStundenplan auth={auth} />} />{/* auth implementiert */}
+        <Route path="/module" exact component={()=> <AppModule auth={auth} />} />{/* auth implementiert */}
+        <Route path="/module/modul.name" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
+
+
         <Route path="/lehrende" exact component={AppLehrende} />
-          <Route path="/lehrende/prof.name" component={AppLehrendeProfil} />
+        <Route path="/lehrende/prof.name" component={AppLehrendeProfil} />
         <Route path="/faq" component={AppFAQ} />
-        <Route path="/einstellungen" component={AppEinstellungen}/>
-        <Route path = "/admin" component= {AppAdmin}/>
+        <Route path="/einstellungen" component={AppEinstellungen} />
+        <Route path="/admin" component={AppAdmin} />
         <Route path="/impressum" component={AppImpressum} />
         <Route path="/appadmin" component={AppAdmin} />
 

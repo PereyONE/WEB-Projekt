@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Lehrende from './Lehrende'
+import {Redirect} from 'react-router-dom'
 
 
+function AppLehrende({auth}) {
 
-function AppLehrende() {
+
 
   const [profs] = useState([
     {
@@ -42,6 +44,10 @@ function AppLehrende() {
     },
 
   ]);
+
+  if (!auth) {
+    return <Redirect to="/login" />
+}
 
   return (
 

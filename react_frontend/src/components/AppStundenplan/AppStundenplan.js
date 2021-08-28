@@ -4,6 +4,7 @@ import { Row } from 'react-bootstrap';
 import { Carousel } from 'react-bootstrap';
 import Ereignis from'./Ereignis';
 import Popup from'./Popup';
+import { Redirect } from 'react-router';
 
 const Tage = () => {
   const [eintraege] = useState([
@@ -124,7 +125,11 @@ const Tage = () => {
   );
 }
 
-function AppStundenplan() {
+function AppStundenplan({auth}) {
+
+  if (!auth) {
+    return <Redirect to="/login" />
+}
   
   return (
     

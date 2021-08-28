@@ -3,6 +3,8 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import './AppLogin.css'
 import { ReactComponent as Logo } from '../../assets/icons/bildmarke_unterschrift.svg';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 
 
 export default class AppLogin extends React.Component {
@@ -11,6 +13,8 @@ export default class AppLogin extends React.Component {
       'username':'',
       'password':'',
     };
+
+  
 
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value});
@@ -24,6 +28,9 @@ export default class AppLogin extends React.Component {
     .post('/api/authenticate', {"username":this.state.username,"password":this.state.password})
     .then(res => {
       localStorage.setItem('token', res.data.token);
+      return(
+      <Redirect to='/'/>
+      )
     });
   }
   render(){

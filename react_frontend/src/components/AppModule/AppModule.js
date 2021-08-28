@@ -2,11 +2,16 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import './AppModule.css'
 import Module from './Module';
+import { Redirect } from 'react-router';
 
 
 
 
-function AppModule() {
+function AppModule({auth}) {
+
+  if (!auth) {
+    return <Redirect to="/login" />
+}
 
   const module = [
     {

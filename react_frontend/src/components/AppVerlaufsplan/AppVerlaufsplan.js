@@ -5,75 +5,91 @@ import { ButtonGroup, Button } from 'react-bootstrap'
 // import FAQ from '../AppFAQ/FAQ';
 import './Verlaufsplan.css'
 import CheckBox from "./CheckBox";
+import { Redirect } from "react-router";
+import axios from 'axios'; 
+
 
 
 const itemsFromBackend = [
-    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws' },
-    { id: uuid(), content: "Photo 1", color: "pflicht", semester: 1, semesterZ: 3, ects: 5, art: 'modul' },
-    { id: uuid(), content: "Info 1", color: "pflicht", semester: 1, semesterZ: 3, ects: 6, art: 'modul' },
-    { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'modul' },
-    { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'modul' },
-    { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'modul', position: 1},
+    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
 
-    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws' },
-    { id: uuid(), content: "Photo 1", color: "red", semester: 1, semesterZ: 3, ects: 5, art: 'ulp' },
-    { id: uuid(), content: "Info 1", color: "red", semester: 1, semesterZ: 3, ects: 6, art: 'ulp' },
-    { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'ulp' },
-    { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'ulp' },
-    { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'ulp' },
+    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'ulp', verfuegbarkeit: 'ws', position: 0},
+    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
+    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
 
-    { id: uuid(), content: "Mathe 1", color: "pflicht", semester: 1, semesterZ: 1, ects: 10, art: 'pf' },
-    { id: uuid(), content: "Photo 1", color: "", semester: 1, semesterZ: 3, ects: 5, art: 'pf' },
-    { id: uuid(), content: "Info 1", color: "red", semester: 1, semesterZ: 3, ects: 6, art: 'pf' },
-    { id: uuid(), content: "Elektronik", color: "red", semester: 1, semesterZ: 1, ects: 5, art: 'pf' },
-    { id: uuid(), content: "SMM", color: "red", semester: 1, semesterZ: 1, ects: 1, art: 'pf' },
-    { id: uuid(), content: "AVW", color: "red", semester: 1, semesterZ: 1, ects: 3, art: 'pf' },
+    { id: uuid(), content: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'pf', position: 0 },
+    { id: uuid(), content: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'pf', position: 0 },
+    { id: uuid(), content: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'pf', position: 0 },
+    { id: uuid(), content: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'pf', position: 0 },
+    { id: uuid(), content: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'pf', position: 0 },
+    { id: uuid(), content: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'pf', position: 0 },
 
-    { id: uuid(), content: "Mathe 2", color: "pflicht", semester: 2, semesterZ: 2, art: 'modul', verfuegbarkeit: 'ss' },
-    { id: uuid(), content: "Photo 2", color: "red", semester: 2, semesterZ: 4, art: 'modul' },
-    { id: uuid(), content: "Info 2", color: "red", semester: 2, semesterZ: 4, art: 'modul' },
-    { id: uuid(), content: "EM 1", color: "red", semester: 2, semesterZ: 2, art: 'modul' },
-    { id: uuid(), content: "GMG 1", color: "red", semester: 2, semesterZ: 4, art: 'modul' },
+    { id: uuid(), content: "Mathe 2", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', verfuegbarkeit: 'ss', position: 0 },
+    { id: uuid(), content: "Photo 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+    { id: uuid(), content: "Info 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
+    { id: uuid(), content: "EM 1", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', position: 0 },
+    { id: uuid(), content: "GMG 1", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "Siga", color: "red", semester: 3, semesterZ: 3, art: 'modul' },
-    { id: uuid(), content: "Photo 3", color: "red", semester: 3, semesterZ: 5, art: 'modul' },
-    { id: uuid(), content: "Info 3", color: "red", semester: 3, semesterZ: 5, art: 'modul' },
-    { id: uuid(), content: "EM 2", color: "red", semester: 3, semesterZ: 3, art: 'modul' },
-    { id: uuid(), content: "GMG 2", color: "red", semester: 3, semesterZ: 5, art: 'modul' },
+    { id: uuid(), content: "Siga", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+    { id: uuid(), content: "Photo 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+    { id: uuid(), content: "Info 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
+    { id: uuid(), content: "EM 2", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
+    { id: uuid(), content: "GMG 2", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 1", color: "orange", semester: 4, semesterZ: 6, art: 'modul' },
-    { id: uuid(), content: "VPB 1", color: "orange", semester: 4, semesterZ: 8, art: 'modul' },
-    { id: uuid(), content: "VPC 1", color: "orange", semester: 4, semesterZ: 8, art: 'modul' },
-    { id: uuid(), content: "VPD 1", color: "orange", semester: 4, semesterZ: 6, art: 'modul' },
-    { id: uuid(), content: "WPB 1", color: "violet", semester: 4, semesterZ: 10, art: 'modul' },
+    { id: uuid(), content: "VPA 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPB 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPC 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPD 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
+    { id: uuid(), content: "WPB 1", typ: "wahl", semester7: 4, semester12: 10, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 2", color: "orange", semester: 5, semesterZ: 7, art: 'modul' },
-    { id: uuid(), content: "VPB 2", color: "orange", semester: 5, semesterZ: 9, art: 'modul' },
-    { id: uuid(), content: "VPC 2", color: "orange", semester: 5, semesterZ: 9, art: 'modul' },
-    { id: uuid(), content: "VPD 2", color: "orange", semester: 5, semesterZ: 7, art: 'modul' },
-    { id: uuid(), content: "WPB 2", color: "violet", semester: 5, semesterZ: 11, art: 'modul' },
-    { id: uuid(), content: "BWR", color: "red", semester: 5, semesterZ: 7, art: 'modul' },
-    { id: uuid(), content: "REC", color: "red", semester: 5, semesterZ: 9, art: 'modul' },
+    { id: uuid(), content: "VPA 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPB 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPC 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPD 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+    { id: uuid(), content: "WPB 2", typ: "wahl", semester7: 5, semester12: 11, art: 'modul', position: 0 },
+    { id: uuid(), content: "BWR", typ: "pflicht", semester7: 5, semester12: 7, art: 'modul', position: 0 },
+    { id: uuid(), content: "REC", typ: "pflicht", semester7: 5, semester12: 9, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "VPA 3", color: "orange", semester: 6, semesterZ: 8, art: 'modul' },
-    { id: uuid(), content: "VPB 3", color: "orange", semester: 6, semesterZ: 10, art: 'modul' },
-    { id: uuid(), content: "VPC 3", color: "orange", semester: 6, semesterZ: 10, art: 'modul' },
-    { id: uuid(), content: "VPD 3", color: "orange", semester: 6, semesterZ: 8, art: 'modul' },
+    { id: uuid(), content: "VPA 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPB 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPC 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
+    { id: uuid(), content: "VPD 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
 
-    { id: uuid(), content: "Praktikum", color: "gold", semester: 7, semesterZ: 12, art: 'modul' },
-    { id: uuid(), content: "Bachelorarbeit", color: "gold", semester: 7, semesterZ: 11, art: 'modul' },
-    { id: uuid(), content: "Kolloquium", color: "gold", semester: 7, semesterZ: 12, art: 'modul' },
+    { id: uuid(), content: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
+    { id: uuid(), content: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
+    { id: uuid(), content: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
 
 ];
 
-const semesterZahl = 12;
+const semesterZahl = 8;
 
+//Funktion um alle Module für das jeweils angegebene Semester anhand ihrer Position 
+const modulePosition = (position) => {
+    const module = []
+    for (let index = 0; index < itemsFromBackend.length; index++) {
+        if (itemsFromBackend[index].position === position) {
+            module.push(itemsFromBackend[index])
+        }
+    }
+    module.sort(function (a, b) {
+        return b.ects - a.ects;
+    })
+    return module;
+}
 
 //Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
 const moduleSemester = (semester) => {
     const module = []
     for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].semester === semester && itemsFromBackend[index].art === 'modul') {
+        if (itemsFromBackend[index].semester7 === semester && itemsFromBackend[index].art === 'modul') {
             module.push(itemsFromBackend[index])
         }
     }
@@ -87,7 +103,7 @@ const moduleSemester = (semester) => {
 const moduleSemesterZ = (semester) => {
     const module = []
     for (let index = 0; index < itemsFromBackend.length; index++) {
-        if (itemsFromBackend[index].semesterZ === semester && itemsFromBackend[index].art === 'modul') {
+        if (itemsFromBackend[index].semester12 === semester && itemsFromBackend[index].art === 'modul') {
             module.push(itemsFromBackend[index])
         }
     }
@@ -118,35 +134,35 @@ const columnsFromBackend = () => {
     var columns = {
         0: {
             name: "Semester 0",
-            items: itemsFromBackend
+            items: modulePosition(0)
         },
         1: {
             name: "Semester 1",
-            items: []
+            items: modulePosition(1)
         },
         2: {
             name: "Semester 2",
-            items: []
+            items: modulePosition(2)
         },
         3: {
             name: "Semester 3",
-            items: []
+            items: modulePosition(3)
         },
         4: {
             name: "Semester 4",
-            items: []
+            items: modulePosition(4)
         },
         5: {
             name: "Semester 5",
-            items: []
+            items: modulePosition(5)
         },
         6: {
             name: "Semester 6",
-            items: []
+            items: modulePosition(6)
         },
         7: {
             name: "Semester 7",
-            items: []
+            items: modulePosition(7)
         }
     }
 
@@ -156,7 +172,7 @@ const columnsFromBackend = () => {
                 ...columns,
                 [index]: {
                     name: "Semester " + index,
-                    items: []
+                    items: modulePosition(index)
                 }
 
             }
@@ -184,6 +200,21 @@ const onDragEnd = (result, columns, setColumns) => {
             if (source.droppableId == 0) { return }
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[0];
+
+            //Um das gezogene Objekt herauszufinden(nötig für folgende Logikabfrage)
+            var dragItem
+            {
+                sourceColumn.items.map((item, index) => {
+                    if (item.id === result.draggableId) {
+                        dragItem = item;
+                    }
+                })
+            }
+
+            //Das verschobene Modul soll sich seine neue position merken
+            dragItem.position = 0
+            console.log(dragItem.position)
+
             const sourceItems = [...sourceColumn.items];
             const destItems = [...destColumn.items];
             const [removed] = sourceItems.splice(source.index, 1);
@@ -216,10 +247,18 @@ const onDragEnd = (result, columns, setColumns) => {
                 })
             }
 
+
+
             //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
             if (!(destination.droppableId == 0)) {
                 if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) { return }
             }
+
+            //Das verschobene Modul soll sich seine neue position merken
+            console.log(dragItem.position)
+            dragItem.position = destination.droppableId
+            console.log(dragItem.position)
+
             const sourceItems = [...sourceColumn.items];
             const destItems = [...destColumn.items];
             const [removed] = sourceItems.splice(source.index, 1);
@@ -259,13 +298,39 @@ function isOdd(num) { return num % 2; }
 
 
 //Exportierter React-Component
-function AppVerlaufsplan() {
+function AppVerlaufsplan({auth}) {
+
+    console.log(itemsFromBackend)
+
+    const [semesterZahlState, setSemesterZahl]=useState(semesterZahl)
 
     //State für erstellte Semester, essenziell für Drag&Drop
     const [columns, setColumns] = useState(columnsFromBackend());
 
     //State für Tabauswahl (Modul, ULP, Prüfung)
     const [anzeige, setAnzeige] = useState(0)
+
+    //States für Checkbox-Button Auswahl
+    const [checkedP, setCheckedP] = useState(true);
+    const [checkedV, setCheckedV] = useState(true);
+    const [checkedW, setCheckedW] = useState(true);
+
+    //Funktionen für Checkbox-Button Auswahl
+    const handleChangeP = () => {
+        setCheckedP(!checkedP);
+    };
+
+    const handleChangeV = () => {
+        setCheckedV(!checkedV);
+    };
+
+    const handleChangeW = () => {
+        setCheckedW(!checkedW);
+    };
+
+    if (!auth) {
+        return <Redirect to="/login" />
+    }
 
     //Funktion für Tabauswahl
     const setModul = e => {
@@ -333,17 +398,30 @@ function AppVerlaufsplan() {
     //Funktion um Semester spalten auf letzten gespeicherten Stand zurück zu setzen
     const resetSemester = e => {
         e.preventDefault();
+        itemsFromBackend.map((item, index) => {
+            item.position = 0;
+
+        })
         setColumns(columnsFromBackend());
     }
 
-    const saveSemester = e =>{
+    const saveSemester = e => {
         e.preventDefault();
         console.log(columns)
     }
 
+   
 
     //Funktion um SVP nach 7 Semester Regelstudienzeit zu befüllen
     const siebenSemester = e => {
+
+        itemsFromBackend.map((item, index) => {
+            item.position = item.semester7;
+
+        })
+
+        setSemesterZahl(7)
+        console.log(semesterZahlState)
 
         const newColumns = {
             0: {
@@ -385,6 +463,11 @@ function AppVerlaufsplan() {
 
     //Funktion um SVP nach 12 Semester Regelstudienzeit zu befüllen
     const zwoelfSemester = e => {
+
+        itemsFromBackend.map((item, index) => {
+            item.position = item.semester12;
+
+        })
 
         const newColumns = {
             0: {
@@ -445,23 +528,7 @@ function AppVerlaufsplan() {
     }
 
 
-    //States für Checkbox-Button Auswahl
-    const [checkedP, setCheckedP] = useState(true);
-    const [checkedV, setCheckedV] = useState(true);
-    const [checkedW, setCheckedW] = useState(true);
-
-    //Funktionen für Checkbox-Button Auswahl
-    const handleChangeP = () => {
-        setCheckedP(!checkedP);
-    };
-
-    const handleChangeV = () => {
-        setCheckedV(!checkedV);
-    };
-
-    const handleChangeW = () => {
-        setCheckedW(!checkedW);
-    };
+    
 
 
     return (
@@ -556,16 +623,12 @@ function AppVerlaufsplan() {
 
 
 
-                                                    {/* <div className="faqs">
-                                                        {faqs.map((faq, i) => (
-                                                            <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} color={faq.color} />
-                                                        ))}
-                                                    </div> */}
+
 
 
 
                                                     {column.items.map((item, index) => {
-                                                        if (anzeige === 0 && item.art === 'modul' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
+                                                        if (anzeige === 0 && item.art === 'modul' && (checkedP && (item.typ === 'pflicht' || item.typ === 'gold') || checkedV && item.typ === 'vertiefung' || checkedW && item.typ === 'wahl')) {
 
                                                             return (
                                                                 <Draggable
@@ -577,7 +640,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
@@ -593,7 +656,7 @@ function AppVerlaufsplan() {
                                                                 </Draggable>
                                                             );
                                                         }
-                                                        else if (anzeige === 1 && item.art === 'ulp' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
+                                                        else if (anzeige === 1 && item.art === 'ulp' && (checkedP && (item.typ === 'pflicht' || item.typ === 'gold') || checkedV && item.typ === 'vertiefung' || checkedW && item.typ === 'wahl')) {
 
                                                             return (
                                                                 <Draggable
@@ -605,7 +668,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
@@ -621,7 +684,7 @@ function AppVerlaufsplan() {
                                                                 </Draggable>
                                                             );
                                                         }
-                                                        else if (anzeige === 2 && item.art === 'pf' && (checkedP && (item.color === 'pflicht' || item.color === 'gold') || checkedV && item.color === 'orange' || checkedW && item.color === 'violet')) {
+                                                        else if (anzeige === 2 && item.art === 'pf' && (checkedP && (item.typ === 'pflicht' || item.typ === 'gold') || checkedV && item.typ === 'vertiefung' || checkedW && item.typ === 'wahl')) {
 
                                                             return (
                                                                 <Draggable
@@ -633,7 +696,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
@@ -705,7 +768,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
@@ -733,7 +796,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
@@ -761,7 +824,7 @@ function AppVerlaufsplan() {
                                                                         return (
                                                                             <div
                                                                                 className="Drag"
-                                                                                id={item.color}
+                                                                                id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
