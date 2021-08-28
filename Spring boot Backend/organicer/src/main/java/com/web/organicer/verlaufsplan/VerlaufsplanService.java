@@ -4,11 +4,14 @@ import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentRepository;
 import com.web.organicer.student.StudentService;
+import com.web.organicer.svpModul.SvpModul;
+import com.web.organicer.svpModul.SvpModulService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -18,20 +21,27 @@ public class VerlaufsplanService {
 
     private final VerlaufsplanRepository verlaufsplanRepository;
     private final StudentService studentService;
-    private final JwtUtil jwtUtil;
+    private final SvpModulService svpModulService;
 
 
     public ArrayList<Verlaufsplan> getVerlaufsplanById(HttpServletRequest request) {
 
-        String token = request.getHeader("Authorization").substring(7);
-        String email = jwtUtil.extractUsername(token);
-        Student student = studentService.loadUserByEmail(email);
+        Long id= studentService.getStudentIdFromRequest(request);
 
-        return verlaufsplanRepository.findByStudentId(student.getId());
+        return verlaufsplanRepository.findByStudentId(id);
     }
 
-    public String updateVerlaufsplan(Verlaufsplan verlaufsplan){
-        verlaufsplanRepository.save(verlaufsplan);
+    public String updateVerlaufsplan(ArrayList<Verlaufsplan> verlaufsplan, HttpServletRequest request){
+
+        Student student = studentService.getStudentFromRequest(request);
+        //Set student svp semesters
+
+        ArrayList<Verlaufsplan> plan = getVerlaufsplanById(request);
+
+        for(Verlaufsplan modul : verlaufsplan) {
+            modul.setStudent(student);
+            verlaufsplanRepository.save(modul);
+        }
         return "Module wurde aktualisiert";
     }
 
@@ -43,4 +53,37 @@ public class VerlaufsplanService {
         return "Verlaufsplan wurde gelöscht";
     }
 
+    public int getSvpSemesterByStudent(HttpServletRequest request){
+        return studentService.getStudentFromRequest(request).getSvpSemester();
+    }
+
+    /*public String addVertiefungsModulToVerlaufsplan(int vertiefung, HttpServletRequest request) {
+
+        if(vertiefung!=0) {
+            ArrayList<SvpModul> module = new ArrayList<>();
+            Student student = studentService.getStudentFromRequest(request);
+            if (!student.getVertiefungen().contains(vertiefung)) {
+                student.setVertiefungen(vertiefung);
+                svpModulService.getSvpModulByVertiefungspaket(vertiefung);
+
+                switch (student.getVertiefungen().size()){
+                    case 0:
+                        verlaufsplanService.getSvpModuleByVertiefungspaket(request,vertiefung);
+                        break;
+                }
+
+                return "Vertiefung wurde hinzugefügt";
+            }
+            return "Vertiefung schon drin";
+        }
+        return "Vertiefung ist null";
+    }*/
+
+    /*private ArrayList<SvpModul> getSvpModuleByVertiefungspaket(HttpServletRequest request, int vertiefungspaket) {
+
+        Long id = studentService.getStudentIdFromRequest(request);
+        //ArrayList<SvpModul> vertiefungen = new ArrayList<>(verlaufsplanRepository.findByStudentIdAndVertiefungspaket(id,vertiefungspaket));
+
+        return vertiefungen;
+    }*/
 }

@@ -14,8 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
@@ -36,11 +35,12 @@ public class Student implements UserDetails {
     private String email;
     private String password;
     private int semester;
-    private ArrayList<Long> vertiefungsId;
+    private int svpSemester;
+    private ArrayList<Integer> vertiefungen;
     private ArrayList<Long> wahlId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Termin> termin;
 
     @JsonIgnore
@@ -65,6 +65,8 @@ public class Student implements UserDetails {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(studentRole.name());
         return Collections.singletonList(authority);
     }
+
+    public void setVertiefungen(int vertiefung){vertiefungen.add(vertiefung);}
 
     @Override
     public String getPassword() {

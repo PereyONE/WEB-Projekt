@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -17,13 +19,16 @@ public class VerlaufsplanController {
 
     // gibt Verlaufsplan mit entsprechener ID zurück
     @GetMapping
-    public ArrayList<Verlaufsplan> getVerlaufsplanById(HttpServletRequest request){
-        return verlaufsplanService.getVerlaufsplanById(request);
+    public Map<String, Object> getVerlaufsplanById(HttpServletRequest request){
+        Map<String, Object> plan = new HashMap<>();
+        plan.put("SvpSemester",verlaufsplanService.getSvpSemesterByStudent(request));
+        plan.put("Verlaufsplan", verlaufsplanService.getVerlaufsplanById(request));
+        return plan;
     }
 
     @PostMapping
-    public String updateVerlaufsplan(@RequestBody Verlaufsplan verlaufsplan){
-        return verlaufsplanService.updateVerlaufsplan(verlaufsplan);
+    public String updateVerlaufsplan(@RequestBody ArrayList<Verlaufsplan> verlaufsplan, HttpServletRequest request){
+        return verlaufsplanService.updateVerlaufsplan(verlaufsplan, request);
     }
 
     @DeleteMapping
