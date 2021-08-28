@@ -24,7 +24,7 @@ function App() {
     credentials: 'same-origin'
   })
 
-  const [auth, setAuth]=useState(true)
+  const [auth, setAuth]=useState(false)
 
   return (
     
@@ -45,13 +45,13 @@ function App() {
         <Route path="/module/modul.name" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
 
 
-        <Route path="/lehrende" exact component={AppLehrende} />
-        <Route path="/lehrende/prof.name" component={AppLehrendeProfil} />
-        <Route path="/faq" component={AppFAQ} />
+        <Route path="/lehrende" exact component={()=><AppLehrende auth={auth}/>} /> {/* auth implementiert */}
+        <Route path="/lehrende/prof.name" component={()=><AppLehrendeProfil auth={auth}/>} />{/* auth implementiert */}
+        <Route path="/faq" component={()=><AppFAQ auth={auth} />} /> {/* auth implementiert */}
         <Route path="/einstellungen" component={AppEinstellungen} />
         <Route path="/admin" component={AppAdmin} />
-        <Route path="/impressum" component={AppImpressum} />
-        <Route path="/appadmin" component={AppAdmin} />
+        <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
+        <Route path="/appadmin" component={()=><AppAdmin auth={auth}/>} />
 
 
         <Route path="/test" component={Test} />
