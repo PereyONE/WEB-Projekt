@@ -12,14 +12,18 @@ import { setAutomaticRefresh } from "react-admin";
 
 function AppNavbar({ auth }) {
 
-
-
+  const [auth2, setAuth2]=useState(auth)
 
   const [show, setShow] = useState(false)
 
   function clickHandler() {
     setShow(!show);
     console.log(show);
+  }
+
+  function logoutLeiste(){
+    console.log('heyo')
+    setAuth2(false)
   }
   if (!auth) { return null }
   else {
@@ -91,7 +95,7 @@ function AppNavbar({ auth }) {
 
         <ul className={(show ? "NavLinksSide-Active" : "NavLinksSide")}>
           <li>
-            <Nav.Link className="Red" href="/login">Logout</Nav.Link>
+            <button className="Red" onClick={logoutLeiste}>Logout</button>
           </li>
           <li>
             <Nav.Link href="/impressum">Impressum</Nav.Link>

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 
 
 
-function AppImpressum() {
+function AppImpressum({auth}) {
+
+    if (!auth) {
+        return <Redirect to="/login" />
+    }
 
     return (
         <div>

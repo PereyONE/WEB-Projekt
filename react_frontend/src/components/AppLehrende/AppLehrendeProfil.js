@@ -3,10 +3,13 @@ import LehrendeProfil from './LehrendeProfil';
 import FAQ from '../AppFAQ/FAQ'
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 
 
 
-function AppLehrendeProfil() {
+function AppLehrendeProfil({auth}) {
+
+    
 
     const prof =
     {
@@ -95,6 +98,10 @@ bei Prof. v. Seelen, Institut für Zoologie                                     
 
             return faq;
         }))
+    }
+
+    if (!auth) {
+        return <Redirect to="/login" />
     }
 
 

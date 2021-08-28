@@ -2,10 +2,11 @@ import React, { useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import FAQ from './FAQ';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 
 
-function AppFAQ() {
+function AppFAQ({auth}) {
   
   const [faqs, setfaqs] = useState([]);
 
@@ -31,6 +32,10 @@ function AppFAQ() {
       return faq;
     }))
   }
+
+  if (!auth) {
+    return <Redirect to="/login" />
+}
 
   return (
     <div >

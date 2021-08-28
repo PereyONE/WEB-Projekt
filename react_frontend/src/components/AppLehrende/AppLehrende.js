@@ -4,7 +4,7 @@ import Lehrende from './Lehrende'
 import {Redirect} from 'react-router-dom'
 
 
-function AppLehrende({auth}) {
+function AppLehrende({ auth }) {
 
 
 

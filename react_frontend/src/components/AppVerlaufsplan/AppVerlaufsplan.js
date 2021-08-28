@@ -11,8 +11,7 @@ import axios from 'axios';
 
 function AppVerlaufsplan({ auth }) {
 
-    const [itemsFromBackend, setItemsFromBackend] = useState([
-    ]);
+    const [itemsFromBackend, setItemsFromBackend] = useState([]);
 
     useEffect(() => {
         axios.get('/api/verlaufsplan')
@@ -82,7 +81,7 @@ function AppVerlaufsplan({ auth }) {
         { id: uuid(), name: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
         { id: uuid(), name: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
         { id: uuid(), name: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
-       
+
 
     ];
 
@@ -156,18 +155,18 @@ function AppVerlaufsplan({ auth }) {
         return columns;
     }
 
-     //State für erstellte Semester, essenziell für Drag&Drop
-     const [columns, setColumns] = useState(columnsFromBackend());
+    //State für erstellte Semester, essenziell für Drag&Drop
+    const [columns, setColumns] = useState(columnsFromBackend());
 
-     //State für Tabauswahl (Modul, ULP, Prüfung)
-     const [anzeige, setAnzeige] = useState(0)
- 
-     //States für Checkbox-Button Auswahl
-     const [checkedP, setCheckedP] = useState(true);
-     const [checkedV, setCheckedV] = useState(true);
-     const [checkedW, setCheckedW] = useState(true);
+    //State für Tabauswahl (Modul, ULP, Prüfung)
+    const [anzeige, setAnzeige] = useState(0)
 
-    
+    //States für Checkbox-Button Auswahl
+    const [checkedP, setCheckedP] = useState(true);
+    const [checkedV, setCheckedV] = useState(true);
+    const [checkedW, setCheckedW] = useState(true);
+
+
 
     //Funktion um alle Module für das jeweils angegebene Semester zu sammeln (Regelstudienzeit 7 Semester)
     const moduleSemester = (semester) => {
@@ -220,7 +219,7 @@ function AppVerlaufsplan({ auth }) {
     function isOdd(num) { return num % 2; }
 
 
-   
+
 
     //Hauptfunktion für Drag&Drop-Logik
     const onDragEnd = (result, columns, setColumns) => {
@@ -346,9 +345,7 @@ function AppVerlaufsplan({ auth }) {
         setCheckedW(!checkedW);
     };
 
-    if (!auth) {
-        return <Redirect to="/login" />
-    }
+    
 
     //Funktion für Tabauswahl
     const setModul = e => {
@@ -546,7 +543,9 @@ function AppVerlaufsplan({ auth }) {
     }
 
 
-
+    if (!auth) {
+        return <Redirect to="/login" />
+    }
 
 
     return (
@@ -846,9 +845,6 @@ function AppVerlaufsplan({ auth }) {
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
-
-
-
                                                                             >
                                                                                 <div>{item.name}</div><div>PF</div>
 
@@ -908,13 +904,8 @@ function AppVerlaufsplan({ auth }) {
 
 
                         </div>
-
-
-
                     </div>
                 </div>
-
-
             </div>
         </DragDropContext>
 
