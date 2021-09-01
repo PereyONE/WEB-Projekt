@@ -25,4 +25,7 @@ public class StudentController {
         return studentService.addVertiefungsModuleToStuden(vertiefungen, request);
     }*/
 
+    @PostMapping("/updateSemester")
+    public String updateSemester(@RequestBody Student student, HttpServletRequest request){ return studentService.updateSemester(student, request); }
+
 }

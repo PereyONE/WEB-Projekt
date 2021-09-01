@@ -15,7 +15,6 @@ import javax.persistence.*;
 import java.util.*;
 
 @Data
-@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 public class Student implements UserDetails {
@@ -39,12 +38,14 @@ public class Student implements UserDetails {
     private ArrayList<Integer> vertiefungen;
     private ArrayList<Long> wahlId;
 
+    @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Termin> termin;
 
+    @Transient
     @JsonIgnore
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student")
     private Set<Verlaufsplan> verlaufsplan;
 
     @Enumerated(EnumType.STRING)
