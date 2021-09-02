@@ -83,4 +83,17 @@ public class StudentService implements UserDetailsService {
 
         return "yo";
     }
+
+    public String updateSemester(Student studentSemester, HttpServletRequest request) {
+
+        Student student = getStudentFromRequest(request);
+
+        if(student.getSvpSemester() != studentSemester.getSvpSemester()){
+            student.setSvpSemester(studentSemester.getSvpSemester());
+            studentRepository.save(student);
+            return "Semester wurden upgedatet";
+        }
+        return "Semester bleibt gleich";
+    }
+
 }
