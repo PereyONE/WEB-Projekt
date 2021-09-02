@@ -294,7 +294,7 @@ function AppVerlaufsplan({ auth }) {
                 //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
                 if (!(destination.droppableId == 0)) {
                     if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) {
-                        alert(dragItem.name + " wird nicht im " + dragItem.verfuegbarkeit + " angeboten. Ziehe es in eine andere Semesterspalte.");
+                        alert(dragItem.name + " wird nur im " + dragItem.verfuegbarkeit + " angeboten. Ziehe es in eine andere Semesterspalte.");
                         return
                     }
                 }
