@@ -1,3 +1,4 @@
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { row, col } from 'react-bootstrap';
 import './AppAdmin.css'
@@ -5,25 +6,15 @@ import AppAdminFunc from './AppAdminFunc';
 
 
 
-function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!export default class AppRegister extends React.Component {
-    //Schriftart ändern :-)
+function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Register!export default class AppRegister extends React.Component {
     const [profs, setName] = useState([
         { id: 1, titel: 'Herr Fischer', vorname: 'Gregor', nachname: "Fischer", email: 'xyz@gmail.com', telefonnummer: '11111111', raum: 'ZW- 08', sprechstunde: 'montags 11-12', funktion: 'prof', bild: 'platzhalter.jpg' },
         { id: 2, titel: 'Herr Wischer', vorname: 'Stefan', nachname: "Wischer", email: 'xyzss@gmail.com', telefonnummer: '111111131', raum: 'ZW- 09', sprechstunde: 'dienstags 13-14', funktion: 'prof', bild: 'platzhalter.jpg' },
     ])
 
-    const platzhalter = { id: 1, titel: 'Herr Fischer', vorname: 'Gregor', nachname: "Fischer", email: 'xyz@gmail.com', telefonnummer: '11111111', raum: 'ZW- 08', sprechstunde: '', funktion: 'prof', bild: '' }
+    const defaultProf = { id: 0, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '' }
 
-    const [profUpdate, setProfUpdate] = useState(platzhalter)
-
-    const [kurse] = useState([
-        { id: 1, titel: 'Herr Fischer', vorname: 'Gregor', nachname: "Fischer", email: 'xyz@gmail.com', telefonnummer: '11111111', raum: 'ZW- 08', VonZeit: '10:00Uhr', BisZeit: '14Uhr', Verfügbarkeit: true, },
-        { id: 2, titel: 'Herr Fischer', vorname: 'Stefan', nachname: "Wischer", email: 'xyzss@gmail.com', telefonnummer: '111111131', raum: 'ZW- 08', VonZeit: '10:02Uhr', BisZeit: '14Uhr', Verfügbarkeit: true, },
-        { id: 3, titel: 'Herr Reiter', vorname: 'Greg', nachname: "Ulrich", email: 'xyzaa@gmail.com', telefonnummer: '11622111111', raum: 'ZW- 08', VonZeit: '10:03Uhr', BisZeit: '14Uhr', Verfügbarkeit: true, },
-        { id: 4, titel: 'Herr Rühlberg', vorname: 'Wegl', nachname: "Wilhelm", email: 'xyzqq@gmail.com', telefonnummer: '1111131121', raum: 'ZW- 08', VonZeit: '10:04Uhr', BisZeit: '14:05Uhr', Verfügbarkeit: true, },
-        { id: 5, titel: 'Herr Fischer', vorname: 'Hector', nachname: "Greg", email: 'xyyyz@gmail.com', telefonnummer: '1112211111', raum: 'ZW- 08', VonZeit: '10:05Uhr', BisZeit: '14Uhr', Verfügbarkeit: true, },
-    ])
-
+    const [profUpdate, setProfUpdate] = useState(defaultProf)
 
     function handleClick(prof) {
         //preventDefault();
@@ -32,11 +23,72 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
         console.log(profUpdate)
     }
 
-    function onTodoChange(value) {
+    // Für jeden Bereich wird eine onTodoChange- Funktion angelegt, 
+    // damit sich die Eingabedaten nicht gegenseitig überschreiben.
+    function onTodoChangeTitel(value) {
         setProfUpdate({
-            vorname: value
+            titel: value,
         });
     }
+    function onTodoChangeVorname(value) {
+        setProfUpdate({
+            vorname: value,
+        });
+    }
+    function onTodoChangeNachname(value) {
+        setProfUpdate({
+            nachname: value,
+        });
+    }
+    function onTodoChangeEmail(value) {
+        setProfUpdate({
+            email: value,
+        });
+    }
+    function onTodoChangeTelefonnummer(value) {
+        setProfUpdate({
+            telefonnummer: value,
+        });
+    }
+    function onTodoChangeRaum(value) {
+        setProfUpdate({
+            raum: value,
+        });
+    }
+    function onTodoChangeZeit(value) {
+        setProfUpdate({
+            sprechstunde: value,
+        });
+    }
+
+    const [courses, setCourses] = useState([
+        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen', verfügbarkeit:'Wintersemester', regelstudienzeitsieben:'erstes Semester', regelstudienzeitzwölf:'drittes Semester', terminID: 'keine Ahnung', bild:'Pfad einfügen oder so'},
+        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit:'Sommersemester', regelstudienzeitsieben:'zweites Semester', regelstudienzeitzwölf:'viertes Semester', terminID: 'keine Ahnung', bild:'Pfad einfügen oder so'}
+    ])
+
+    const defaultCourse = { id: 0, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen', verfügbarkeit:'Wintersemester', regelstudienzeitsieben:'erstes Semester', regelstudienzeitzwölf:'drittes Semester', terminID:'keine Ahnung', bild:'Pfad einfügen oder so'};
+    const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
+
+
+    function handleClickCourse(course) {
+        //preventDefault();
+        setCourseUpdate(course)
+        console.log(course);
+        console.log(coursesUpdate)
+    }
+
+    function onTodoChangeModulname(value) {
+        setCourseUpdate({
+            modulname: value,
+        });
+    }
+
+    function onTodoChangeAbkuerzung(value) {
+        setCourseUpdate({
+            modulabkürzung: value,
+        });
+    }
+
 
     return (
         <div className="container">
@@ -64,7 +116,7 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                             ))}
                         </div>
                     </div>
-                    
+
 
                     <div>
                         <br></br>
@@ -75,7 +127,7 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Titel</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.titel} onChange={e => onTodoChange(e.target.value)}></input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.titel} onChange={e => onTodoChangeTitel(e.target.value)}></input>
                         </div>
 
                         {/* Inputfeld Vorname */}
@@ -83,7 +135,7 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vorname</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.vorname} onChange={e => onTodoChange(e.target.value)}></input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.vorname} onChange={e => onTodoChangeVorname(e.target.value)}></input>
                         </div>
 
                         {/* Inputfeld Nachname */}
@@ -91,62 +143,49 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Nachname</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.nachname} onChange={e => onTodoChange(e.target.value)}></input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.nachname} onChange={e => onTodoChangeNachname(e.target.value)}></input>
                         </div>
-                        
 
 
+
+                        {/* Inputfeld E-Mail */}   
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">E-Mail</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            </input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.email} onChange={e => onTodoChangeEmail(e.target.value)}></input>
                         </div>
 
 
+                        {/* Inputfeld Telefonnummer */}
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">telefonnummer</span>
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Telefonnummer</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            </input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.telefonnummer} onChange={e => onTodoChangeTelefonnummer(e.target.value)}></input>
                         </div>
 
-
+                        {/* Inputfeld Raumnummer */}
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">raum</span>
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Raumnummer</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            </input>
-
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.raum} onChange={e => onTodoChangeRaum(e.target.value)}></input>
                         </div>
 
+                        {/* Inputfeld Sprechzeiten */}
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Sprechzeit</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.sprechstunde} onChange={e => onTodoChangeZeit(e.target.value)}></input>
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="col ">
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Sprechstunde</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Small" placeholder="Wochentag" aria-describedby="inputGroup-sizing-sm">
-                        </input>
 
-                        <input type="text" class="form-control" aria-label="Small" placeholder="Beginnende Uhrzeit " aria-describedby="inputGroup-sizing-sm">
-                        </input>
-
-                        <input type="text" class="form-control" aria-label="Small" placeholder="Endende Uhrzeit" aria-describedby="inputGroup-sizing-sm">
-                        </input>
-
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"></input>
-                        <label class="form-check-label" for="inlineCheckbox1">Nach Vereinbarung</label>
-                    </div>
 
 
 
@@ -205,10 +244,10 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
             </br>
             <div class="row">
                 <div class="col" >
-                    <div class="Scroll">
+                <div class="Scroll">
                         <div class="list-group" >
-                            {profs.map((prof, i) => (
-                                <button type="button" class="list-group-item list-group-item-action" ><AppAdminFunc prof={prof} index={i} />  </button>
+                            {courses.map((course, i) => (
+                                <button key={i} onClick={() => handleClickCourse(course)} type="button" class="list-group-item list-group-item-action" > {course.modulname}  </button>
                             ))}
                         </div>
                     </div>
@@ -220,20 +259,20 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                     <div>
                         <br></br>
 
+                        {/* Inputfeld Modulname */}
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulname </span>
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulname</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            </input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={coursesUpdate.modulname} onChange={e => onTodoChangeModulname(e.target.value)}></input>
                         </div>
 
+                            {/* Inputfeld Modulname */}
                         <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend ">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm ">Modulabkürzung </span>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulabkürzung</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                            </input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={coursesUpdate.modulabkürzung} onChange={e => onTodoChangeAbkuerzung(e.target.value)}></input>
                         </div>
 
 
@@ -270,10 +309,7 @@ function AppAdmin({ prof }) { //evtl zu class umändern!!!!! Siehe Register!expo
                             </div>
                             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                             </input>
-
                         </div>
-
-
                     </div>
                 </div>
 
