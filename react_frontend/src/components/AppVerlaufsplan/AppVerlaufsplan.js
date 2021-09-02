@@ -11,7 +11,7 @@ import axios from 'axios';
 
 function AppVerlaufsplan({ auth }) {
 
-    const [itemsFromBackend, setItemsFromBackend] = useState([]);
+    const [itemsFromBackend2, setItemsFromBackend] = useState([]);
 
     useEffect(() => {
         axios.get('/api/verlaufsplan')
@@ -23,9 +23,8 @@ function AppVerlaufsplan({ auth }) {
             })
     }, [])
 
-    console.log(itemsFromBackend)
 
-    const itemsFromBackend2 = [
+    const itemsFromBackend = [
         { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
         { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
         { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
@@ -86,7 +85,7 @@ function AppVerlaufsplan({ auth }) {
     ];
 
     //State für Anzahl erstellter
-    const [semesterZahl, setSemesterZahl] = useState(8)
+    const [semesterZahl, setSemesterZahl] = useState(7)
 
     //Funktion um alle Module für das jeweils angegebene Semester anhand ihrer Position 
     const modulePosition = (position) => {
@@ -176,6 +175,7 @@ function AppVerlaufsplan({ auth }) {
                 module.push(itemsFromBackend[index])
             }
         }
+        setSemesterZahl(7);
         module.sort(function (a, b) {
             return b.ects - a.ects;
         })
@@ -190,6 +190,7 @@ function AppVerlaufsplan({ auth }) {
                 module.push(itemsFromBackend[index])
             }
         }
+        setSemesterZahl(12)
         module.sort(function (a, b) {
             return b.ects - a.ects;
         })
@@ -225,7 +226,12 @@ function AppVerlaufsplan({ auth }) {
     const onDragEnd = (result, columns, setColumns) => {
 
         //Falls Drag-Objekt nicht auf eine Fläche außerhalb des Drag&Drop-Systems gezogen wird
-        if (!result.destination) return;
+        if (!result.destination) {
+
+            alert("Module können nur in die grauen Semesterspalten gezogen werden");
+
+            return;
+        }
 
         //Falls Drag-Objekt auf eine gültige Fläche gezogen wird
         const { source, destination } = result;
@@ -250,7 +256,6 @@ function AppVerlaufsplan({ auth }) {
 
                 //Das verschobene Modul soll sich seine neue position merken
                 dragItem.position = 0
-                console.log(dragItem.position)
 
                 const sourceItems = [...sourceColumn.items];
                 const destItems = [...destColumn.items];
@@ -288,13 +293,43 @@ function AppVerlaufsplan({ auth }) {
 
                 //Logikabfrage ob dieses Modul in dem jeweiligen Semester angeboten wird
                 if (!(destination.droppableId == 0)) {
-                    if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) { return }
+                    if ((isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ss') || (!isOdd(destination.droppableId) && dragItem.verfuegbarkeit === 'ws')) {
+                        alert(dragItem.name + " wird nicht im " + dragItem.verfuegbarkeit + " angeboten. Ziehe es in eine andere Semesterspalte.");
+                        return
+                    }
                 }
 
+                //Logikabfrage ob die ULP(falls vorhanden) vor dem jeweiligen Modul absolviert wird
+                if (dragItem.art === 'ulp') {
+                    for (var i = parseInt(destination.droppableId) - 1; i > 0; i--) {
+                        console.log(columns[i].items)
+                        for (var j = 0; j < columns[i].items.length; j++)
+                            if ((columns[i].items[j].name === dragItem.name) && (!(columns[i].items[j] === dragItem))) {
+                                alert('Eine ULP muss VOR einer Prüfung absolviert werden. Kontrolliere deinen Plan. Gefunden bei Semester ' + i)
+                                return;
+                            }
+
+                    }
+                }
+
+                if (!(dragItem.art === 'ulp')) {
+                    for (var i = parseInt(destination.droppableId) + 1; i < semesterZahl + 1; i++) {
+                        console.log(columns[i].items)
+                        for (var j = 0; j < columns[i].items.length; j++)
+                            if ((columns[i].items[j].name === dragItem.name) && (!(columns[i].items[j] === dragItem)) && ((!destination.droppableId === 0))) {
+                                alert('Eine Prüfung darf nur NACH bestandener ULP absolviert werden. Kontrolliere deinen Plan. Gefunden bei Semester ' + i)
+                                return;
+                            }
+
+                    }
+                }
+
+
+
+
                 //Das verschobene Modul soll sich seine neue position merken
-                console.log(dragItem.position)
-                dragItem.position = destination.droppableId
-                console.log(dragItem.position)
+
+                dragItem.position = parseInt(destination.droppableId)
 
                 const sourceItems = [...sourceColumn.items];
                 const destItems = [...destColumn.items];
@@ -345,7 +380,7 @@ function AppVerlaufsplan({ auth }) {
         setCheckedW(!checkedW);
     };
 
-    
+
 
     //Funktion für Tabauswahl
     const setModul = e => {
@@ -378,6 +413,7 @@ function AppVerlaufsplan({ auth }) {
                 items: []
             }
         });
+        setSemesterZahl(semesterZahl + 1)
         return;
 
     }
@@ -385,7 +421,7 @@ function AppVerlaufsplan({ auth }) {
     //Funktion um eine erstellte Semesterspalte zu löschen
     const deleteSemester = e => {
 
-        if (Object.entries(columns).length > 8 && Object.entries(columns).length > semesterZahl + 1) {
+        if (Object.entries(columns).length > 8) {
             const tmp = columns;
             const index = Object.entries(columns).length - 1;
             const destColumn = tmp[0];
@@ -406,6 +442,7 @@ function AppVerlaufsplan({ auth }) {
                     items: destItems
                 }
             });
+            setSemesterZahl(semesterZahl - 1)
             return;
         }
     }
@@ -413,30 +450,43 @@ function AppVerlaufsplan({ auth }) {
     //Funktion um Semester spalten auf letzten gespeicherten Stand zurück zu setzen
     const resetSemester = e => {
         e.preventDefault();
-        itemsFromBackend.map((item, index) => {
-            item.position = 0;
+        if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan zurücksetzen möchtest?")) {
+            itemsFromBackend.map((item, index) => {
+                item.position = 0;
 
-        })
-        setColumns(columnsFromBackend());
+            })
+            setSemesterZahl(7)
+            setColumns(columnsFromBackend());
+        } else {
+            console.log('abgrebrochen')
+        }
+
     }
 
     const saveSemester = e => {
         e.preventDefault();
-        console.log(columns)
+        if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan speicher möchtest?")) {
+            console.log(columns)
+        }
+        else {
+            console.log('abgrebrochen')
+        }
+
+
     }
 
 
 
     //Funktion um SVP nach 7 Semester Regelstudienzeit zu befüllen
     const siebenSemester = e => {
+        if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan verwerfen und den Standardverlaufsplan für 7 Semester einstellen möchtest?")) {
 
-        itemsFromBackend.map((item, index) => {
-            item.position = item.semester7;
+            itemsFromBackend.map((item, index) => {
+                item.position = item.semester7;
+    
+            })
 
-        })
-
-        setSemesterZahl(7)
-        console.log(semesterZahl)
+            setSemesterZahl(7)
 
         const newColumns = {
             0: {
@@ -474,72 +524,86 @@ function AppVerlaufsplan({ auth }) {
         }
 
         setColumns(newColumns);
+        }
+        else {
+            console.log('abgebrochen')
+        }
+
+        
+
+        
     }
 
     //Funktion um SVP nach 12 Semester Regelstudienzeit zu befüllen
     const zwoelfSemester = e => {
 
-        itemsFromBackend.map((item, index) => {
-            item.position = item.semester12;
-
-        })
-
-        const newColumns = {
-            0: {
-                name: "Semester 0",
-                items: moduleULPPF(1)
-            },
-            1: {
-                name: "Semester 1",
-                items: moduleSemesterZ(1)
-            },
-            2: {
-                name: "Semester 2",
-                items: moduleSemesterZ(2)
-            },
-            3: {
-                name: "Semester 3",
-                items: moduleSemesterZ(3)
-            },
-            4: {
-                name: "Semester 4",
-                items: moduleSemesterZ(4)
-            },
-            5: {
-                name: "Semester 5",
-                items: moduleSemesterZ(5)
-            },
-            6: {
-                name: "Semester 6",
-                items: moduleSemesterZ(6)
-            },
-            7: {
-                name: "Semester 7",
-                items: moduleSemesterZ(7)
-            },
-            8: {
-                name: "Semester 8",
-                items: moduleSemesterZ(8)
-            },
-            9: {
-                name: "Semester 9",
-                items: moduleSemesterZ(9)
-            },
-            10: {
-                name: "Semester 10",
-                items: moduleSemesterZ(10)
-            },
-            11: {
-                name: "Semester 11",
-                items: moduleSemesterZ(11)
-            },
-            12: {
-                name: "Semester 12",
-                items: moduleSemesterZ(12)
-            },
+        if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan verwerfen und den Standardverlaufsplan für 12 Semester einstellen möchtest?")) {
+            itemsFromBackend.map((item, index) => {
+                item.position = item.semester12;
+    
+            })
+    
+            const newColumns = {
+                0: {
+                    name: "Semester 0",
+                    items: moduleULPPF(1)
+                },
+                1: {
+                    name: "Semester 1",
+                    items: moduleSemesterZ(1)
+                },
+                2: {
+                    name: "Semester 2",
+                    items: moduleSemesterZ(2)
+                },
+                3: {
+                    name: "Semester 3",
+                    items: moduleSemesterZ(3)
+                },
+                4: {
+                    name: "Semester 4",
+                    items: moduleSemesterZ(4)
+                },
+                5: {
+                    name: "Semester 5",
+                    items: moduleSemesterZ(5)
+                },
+                6: {
+                    name: "Semester 6",
+                    items: moduleSemesterZ(6)
+                },
+                7: {
+                    name: "Semester 7",
+                    items: moduleSemesterZ(7)
+                },
+                8: {
+                    name: "Semester 8",
+                    items: moduleSemesterZ(8)
+                },
+                9: {
+                    name: "Semester 9",
+                    items: moduleSemesterZ(9)
+                },
+                10: {
+                    name: "Semester 10",
+                    items: moduleSemesterZ(10)
+                },
+                11: {
+                    name: "Semester 11",
+                    items: moduleSemesterZ(11)
+                },
+                12: {
+                    name: "Semester 12",
+                    items: moduleSemesterZ(12)
+                },
+            }
+    
+            setColumns(newColumns);
+        }
+        else {
+            console.log('abgrebrochen')
         }
 
-        setColumns(newColumns);
     }
 
 

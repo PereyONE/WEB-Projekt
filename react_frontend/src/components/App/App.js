@@ -24,7 +24,7 @@ function App() {
     credentials: 'same-origin'
   })
 
-  const [auth, setAuth]=useState(false)
+  const [auth, setAuth]=useState(true)
 
   return (
     
