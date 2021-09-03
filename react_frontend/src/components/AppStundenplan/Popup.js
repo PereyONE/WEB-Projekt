@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import './Popup.css';
 import { Row } from 'react-bootstrap';
-
+import TimePicker from 'react-time-picker';
 
 
 function Popup() {
     const [show, setShow] = useState(false);
-  
+    const [value, onChange] = useState('10:00');
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
@@ -50,14 +50,18 @@ function Popup() {
                   <option>Freitag</option>
                 </select>
               </div>
-              <p className="titel">Uhrzeit:</p>
-              <div></div>
+              
+              <div>
+                <p className="titel">Uhrzeit:</p>
+                <TimePicker
+                  className="input"
+                  onChange={onChange}
+                  value={value}
+                />
+              </div>
               
             </Row>
-            <Row sm={3}>
-              <input className="input2" name="stunden" type="number" min="0" max="23" placeholder="0" size="number"/>:
-              <input className="input2" name="minuten" type="number" min="0" max="59" placeholder="0" size="number"/>
-            </Row>
+            
           </Modal.Body>
           <Modal.Footer>
             <div className="button1" onClick={handleClose}>

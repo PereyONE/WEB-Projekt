@@ -10,7 +10,7 @@ import './AppModule.css'
 
 function Module({ modul }) {
 
-
+    /*
     const toggleFAQ = index => {
         setfaqs(faqs.map((faq, i) => {
             if (i === index) {
@@ -56,6 +56,17 @@ function Module({ modul }) {
         </div>
 
 
+    );
+    */
+    return (
+        <div>
+            <div className="faqs">
+                <Link to={`/module/${modul.moduleId}`}>
+                    <Image className="" src={modul.bild} alt="modul" fluid />
+                </Link>
+                {modul.moduleName}
+            </div>
+        </div>
     );
 }
 

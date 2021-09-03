@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from '../AppNavbar/AppNavbar';
@@ -24,7 +24,17 @@ function App() {
     credentials: 'same-origin'
   })
 
-  const [auth, setAuth]=useState(false)
+  const [auth, setAuth]=useState(true)
+  
+  const changeAuth=()=> {
+    if(localStorage.getItem('token')!=null){
+      setAuth(true)
+    }
+    else{
+      setAuth(false)
+    }
+  }
+  
 
   return (
     
@@ -33,20 +43,20 @@ function App() {
 
         <AppNavbar auth={auth}/>
         
-        <Route path="/login" component={AppLogin} /> {/* auth implementiert */}
+        <Route path="/login" component={AppLogin} onChange={changeAuth} /> {/* auth implementiert */}
         <Route path="/register" component={AppRegister} /> {/* auth implementiert */}
 
        
 
-        <Route path="/" exact component={()=> <AppHome auth={auth} />} /> {/* auth implementiert */} 
+        <Route path="/" exact component={()=> <AppHome auth={auth} />} onChange={changeAuth}/> {/* auth implementiert */} 
         <Route path="/studienverlaufsplan" component={()=><AppVerlaufsplan auth={auth} />} /> {/* auth implementiert */}
         <Route path="/stundenplan" component={()=> <AppStundenplan auth={auth} />} />{/* auth implementiert */}
         <Route path="/module" exact component={()=> <AppModule auth={auth} />} />{/* auth implementiert */}
-        <Route path="/module/modul.name" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
+        <Route path="/module/:modulid" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
 
 
         <Route path="/lehrende" exact component={()=><AppLehrende auth={auth}/>} /> {/* auth implementiert */}
-        <Route path="/lehrende/prof.name" component={()=><AppLehrendeProfil auth={auth}/>} />{/* auth implementiert */}
+        <Route path="/lehrende/:profid" component={()=><AppLehrendeProfil auth={auth}/>} />{/* auth implementiert */}
         <Route path="/faq" component={()=><AppFAQ auth={auth} />} /> {/* auth implementiert */}
         <Route path="/einstellungen" component={AppEinstellungen} />
         <Route path="/admin" component={AppAdmin} />

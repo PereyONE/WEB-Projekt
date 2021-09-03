@@ -1,38 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './AppStundenplan.css';
 import { Row } from 'react-bootstrap';
 import { Carousel } from 'react-bootstrap';
 import Ereignis from'./Ereignis';
 import Popup from'./Popup';
 import { Redirect } from 'react-router';
+import axios from 'axios';
 
 const Tage = () => {
-  const [eintraege] = useState([
-    {
-      name: 'Mathe 1',
-      von: '08:00',
-      bis: '10:00',
-      Raum: 'H1',
-      tag: 'Montag',
-      typ: 'Vorlesung',
-    },
-    {
-      name: 'Mathe 1',
-      von: '10:00',
-      bis: '12:00',
-      Raum: 'H1',
-      tag: 'Montag',
-      typ: 'Übung',
-    },
-    {
-      name: 'Photo 2',
-      von: '08:00',
-      bis: '10:00',
-      Raum: 'H1',
-      tag: 'Dienstag',
-      typ: 'Tutorium',
-    },
-  ]);
+  const [eintraege, seteintraege] = useState([]);
+
+  useEffect(()=> {
+    axios.get('/api/stundenplan')
+    .then(res => {
+      seteintraege(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[])
   const [width, setWidth] = React.useState(window.innerWidth);
   const breakpoint = 700;
   React.useEffect(() => {
@@ -50,7 +36,7 @@ const Tage = () => {
         <div className="tag1">
           Montag<br></br>
           {eintraege.map((eintrag, i) => {
-            if(eintrag.tag == "Montag"){
+            if(eintrag.wochentag == "Montag"){
               return(<Ereignis eintrag={eintrag} index={i} />)
             }
           })}
@@ -58,7 +44,7 @@ const Tage = () => {
         <div className="tag2">
           Dienstag<br></br>
           {eintraege.map((eintrag, i) => {
-            if(eintrag.tag == "Dienstag"){
+            if(eintrag.wochentag == "Dienstag"){
               return(<Ereignis eintrag={eintrag} index={i} />)
             }
           })}
@@ -66,7 +52,7 @@ const Tage = () => {
         <div className="tag2">
           Mittwoch<br></br>
           {eintraege.map((eintrag, i) => {
-            if(eintrag.tag == "Mittwoch"){
+            if(eintrag.wochentag == "Mittwoch"){
               return(<Ereignis eintrag={eintrag} index={i} />)
             }
           })}
@@ -74,7 +60,7 @@ const Tage = () => {
         <div className="tag2">
           Donnerstag<br></br>
           {eintraege.map((eintrag, i) => {
-            if(eintrag.tag == "Donnerstag"){
+            if(eintrag.wochentag == "Donnerstag"){
               return(<Ereignis eintrag={eintrag} index={i} />)
             }
           })}
@@ -82,7 +68,7 @@ const Tage = () => {
         <div className="tag3">
           Freitag<br></br>
           {eintraege.map((eintrag, i) => {
-            if(eintrag.tag == "Freitag"){
+            if(eintrag.wochentag == "Freitag"){
               return(<Ereignis eintrag={eintrag} index={i} />)
             }
           })}
@@ -95,29 +81,51 @@ const Tage = () => {
       <Carousel.Item>
         <div className="tag4">
           Montag<br></br>
-          {eintraege.map((eintrag, i) => (
-            <Ereignis className="Vorlesung" eintrag={eintrag} index={i} />
-          ))}
+          {eintraege.map((eintrag, i) => {
+            if(eintrag.wochentag == "Montag"){
+              return(<Ereignis eintrag={eintrag} index={i} />)
+            }
+          })}
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <div className="tag4">
           Dienstag<br></br>
+          {eintraege.map((eintrag, i) => {
+            if(eintrag.wochentag == "Dienstag"){
+              return(<Ereignis eintrag={eintrag} index={i} />)
+            }
+          })}
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <div className="tag4">
           Mittwoch<br></br>
+          {eintraege.map((eintrag, i) => {
+            if(eintrag.wochentag == "Mittwoch"){
+              return(<Ereignis eintrag={eintrag} index={i} />)
+            }
+          })}
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <div className="tag4">
           Donnerstag<br></br>
+          {eintraege.map((eintrag, i) => {
+            if(eintrag.wochentag == "Donnerstag"){
+              return(<Ereignis eintrag={eintrag} index={i} />)
+            }
+          })}
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <div className="tag4">
           Freitag<br></br>
+          {eintraege.map((eintrag, i) => {
+            if(eintrag.wochentag == "Freitag"){
+              return(<Ereignis eintrag={eintrag} index={i} />)
+            }
+          })}
         </div>
       </Carousel.Item>
     </Carousel>

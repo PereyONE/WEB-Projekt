@@ -1,92 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import './AppModule.css'
 import Module from './Module';
 import { Redirect } from 'react-router';
-
+import axios from 'axios';
 
 
 
 function AppModule({auth}) {
+  const [module, setmodule] = useState([]);
+
+  useEffect(()=> {
+    axios.get('/api/modules')
+    .then(res => {
+      setmodule(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[])
 
   if (!auth) {
     return <Redirect to="/login" />
-}
-
-  const module = [
-    {
-      name: 'Mathematik',
-      module: [
-        {
-          name: 'Mathematik 1',
-          picture: '/images/module/platzhalter.jpg',
-        },
-        {
-          name: 'Mathematik 2',
-          picture: '/images/module/platzhalter.jpg',
-        },
-        {
-          name: 'Mathematik 3',
-          picture: '/images/module/platzhalter.jpg',
-        }
-
-      ],
-    },
-    {
-      name: 'Phototechnik',
-      module: [
-        {
-          name: 'PHO1',
-          picture: '/images/module/platzhalter.jpg',
-        },
-        {
-          name: 'PHO 2',
-          picture: '/images/module/platzhalter.jpg',
-        },
-        {
-          name: 'PHO 3',
-          picture: '/images/module/platzhalter.jpg',
-        }
-
-      ],
-    },
-    {
-      name: 'Elektronische Medien',
-      module: [
-        {
-          name: 'EM1',
-          picture: '/images/module/platzhalter.jpg',
-        },
-        {
-          name: 'EM2',
-          picture: '/images/module/platzhalter.jpg',
-        }
-
-      ],
-    }
-  ];
+  }
 
   return (
 
     <Container>
 
       <h1>Pflichtmodule</h1>
-
-
-      {module.map((modul, i) => (
-        <Module modul={modul} />
-      ))}
-
-
+      {module.map((modul, i) => {
+        if(modul.moduleTyp == "Pflichtmodule"){
+          return(<Module modul={modul} />)
+        }
+      })}
 
       <h1>Vertiefungsmodule</h1>
-      {module.map((modul, i) => (
-        <Module modul={modul} />
-      ))}
+      {module.map((modul, i) => {
+        if(modul.moduleTyp == "Vertiefungsmodule"){
+          return(<Module modul={modul} />)
+        }
+      })}
+
       <h1>Wahlmodule</h1>
-      {module.map((modul, i) => (
-        <Module modul={modul} />
-      ))}
+      {module.map((modul, i) => {
+        if(modul.moduleTyp == "Wahlmodule"){
+          return(<Module modul={modul} />)
+        }
+      })}
 
     </Container>
 

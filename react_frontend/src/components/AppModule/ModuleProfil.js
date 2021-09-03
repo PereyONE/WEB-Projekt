@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentDots, faSnowflake, faUserClock, faWallet } from '@fortawesome/free-solid-svg-icons'
 import './AppModule.css'
-
-
+import {useParams} from "react-router-dom";
+import axios from 'axios';
 
 function ModuleProfil({ modul }) {
+    const {modulid} =useParams()
+    /*
+    const [modul, setmodul] = useState([]);
 
+    useEffect(()=> {
+        axios.get('/api/modules/'+{modulid})
+        .then(res => {
+        setmodul(res.data)
+        })
+        .catch(err => {
+        console.log(err)
+        })
+    },[])
+    */
     return (
 
         <div>

@@ -20,15 +20,10 @@
     margin: 10px;
     margin-bottom: 20px;
     margin-top: 0px;
-}
-.input2{
-    border: 1px solid black;
-    margin: 10px;
-    margin-bottom: 20px;
-    margin-top: 0px;
-    display: inline;
     text-align: left;
-    width: 2em;
+    justify-content: left;
+    width: 200px;
+    height: 30px;
 }
 .button1{
     background-color: #ec6525;
