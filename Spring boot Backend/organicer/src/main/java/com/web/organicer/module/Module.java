@@ -1,17 +1,16 @@
 package com.web.organicer.module;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.organicer.termin.Termin;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Set;
 
+@AllArgsConstructor
 @Component
-@Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Data
@@ -39,23 +38,11 @@ public class Module {
     private String oberkategorie;
     private String regelstudienzeitsieben;//int
     private String regelstudienzeitzwölf;//int
-    private ArrayList<Long> terminId;
+    @JsonIgnore
+    @OneToMany(mappedBy = "modul")
+    private Set<Termin> termin;
     private String bild;
 
 
-    public Module(String moduleName, String moduleAbkürzung, String ects, String moduleTyp, String vertiefung, String prüfungsart, String beschreibung, String verfügbarkeit, String regelstudienzeitsieben, String regelstudienzeitzwölf, ArrayList<Long> terminId, String bild) {
-        this.moduleName = moduleName;
-        this.moduleAbkürzung = moduleAbkürzung;
-        this.ects = ects;
-        this.moduleTyp = moduleTyp;
-        this.vertiefung = vertiefung;
-        this.prüfungsart = prüfungsart;
-        this.beschreibung = beschreibung;
-        this.verfügbarkeit = verfügbarkeit;
-        this.regelstudienzeitsieben = regelstudienzeitsieben;
-        this.regelstudienzeitzwölf = regelstudienzeitzwölf;
-        this.terminId = terminId;
-        this.bild = bild;
-    }
 }
 

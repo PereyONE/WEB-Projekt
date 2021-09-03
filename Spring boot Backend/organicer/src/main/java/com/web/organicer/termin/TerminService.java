@@ -1,14 +1,19 @@
 package com.web.organicer.termin;
 
+import com.web.organicer.module.Module;
+import com.web.organicer.module.ModuleService;
 import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
+import com.web.organicer.svpModul.SvpModul;
+import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 @Service
@@ -16,6 +21,8 @@ import java.util.ArrayList;
 public class TerminService {
     public final TerminRepository terminRepository;
     private final StudentService studentService;
+    private final ModuleService moduleService;
+
     private final JwtUtil jwtUtil;
 
     public ArrayList<Termin> getTermineById(HttpServletRequest request){
@@ -24,10 +31,28 @@ public class TerminService {
         String email = jwtUtil.extractUsername(token);
         Student student = studentService.loadUserByEmail(email);
 
-
         ArrayList<Termin> termine = terminRepository.findByStudentId(student.getId());
 
+        //Termine aus den Wahlmodulen abfragen
+        ArrayList<Long>wahlId = student.getWahlId();
+        for(Long id:wahlId){
+            Module moduleWahl = moduleService.getOnlyModulById(id);
+            Set<Termin> termineWahl = moduleWahl.getTermin();
+            termine.addAll(termineWahl);
+        }
+
+        //Temrine aus den Vertiefungsmodulen abfragen
+        //ArrayList<Long>vertiefungId = student.getVertiefungen();
+
+        Set<Verlaufsplan> verlaufsplan = student.getVerlaufsplan();
+        for(Verlaufsplan verlauf:verlaufsplan){
+            verlauf.
+        }
+
+
         return termine;
+
+
     }
 
     // erstellen eines neuen Termins eines Studenten
@@ -39,9 +64,13 @@ public class TerminService {
         Student student = studentService.loadUserByEmail(email);
 
         termin.setStudent(student);
+        System.out.println(termin.getBeschreibung());
 
-        terminRepository.save(termin);
-        /*if(termin.getId()==null){
+        //terminRepository.save(termin);
+        //return "Neuer Termin wurde angelegt";
+
+        if(termin.getId()==null){
+            System.out.println("1");
             Termin tmp = addNewTermin(termin);
             return "Neuen Termin erstellt";
         }
@@ -49,8 +78,7 @@ public class TerminService {
         if(tmp != null) {
             return "Termin aktualisiert";
         }
-        else return null;*/
-        return "Yo läuft!";
+        else return null;
     }
 
     //Termin in der Datenbank anlegen
@@ -83,4 +111,6 @@ public class TerminService {
 
         return "Termin wurde gelöscht";
     }
+
+
 }

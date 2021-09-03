@@ -1,17 +1,16 @@
 package com.web.organicer.termin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.organicer.module.Module;
 import com.web.organicer.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@EqualsAndHashCode
 @NoArgsConstructor
 public class Termin {
 
@@ -30,6 +29,10 @@ public class Termin {
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Module modul;
 
     private String beschreibung;
     private String wochentag;

@@ -1,8 +1,6 @@
 package com.web.organicer.verlaufsplan;
 
-import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
-import com.web.organicer.student.StudentRepository;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
 import com.web.organicer.svpModul.SvpModulService;
@@ -34,11 +32,8 @@ public class VerlaufsplanService {
     public String updateVerlaufsplan(ArrayList<Verlaufsplan> verlaufsplan, HttpServletRequest request){
 
         Student student = studentService.getStudentFromRequest(request);
-        //Set student svp semesters
 
-        ArrayList<Verlaufsplan> plan = getVerlaufsplanById(request);
-
-        for(Verlaufsplan modul : verlaufsplan) {
+        for(Verlaufsplan modul : verlaufsplan){
             modul.setStudent(student);
             verlaufsplanRepository.save(modul);
         }

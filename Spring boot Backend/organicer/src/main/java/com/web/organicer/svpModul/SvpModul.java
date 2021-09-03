@@ -27,6 +27,8 @@ public class SvpModul {
             generator = "svpModul_sequence"
     )
     private Long id;
+
+    @Transient
     @JsonIgnore
     @OneToMany( mappedBy = "svpModul",cascade = CascadeType.ALL)
     private Set<Verlaufsplan> verlaufsplan;

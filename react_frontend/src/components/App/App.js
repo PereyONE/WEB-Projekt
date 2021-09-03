@@ -25,7 +25,7 @@ function App() {
   })
 
   const [auth, setAuth]=useState(true)
-  
+
   const changeAuth=()=> {
     if(localStorage.getItem('token')!=null){
       setAuth(true)
@@ -34,7 +34,7 @@ function App() {
       setAuth(false)
     }
   }
-  
+
 
   return (
     
@@ -43,12 +43,12 @@ function App() {
 
         <AppNavbar auth={auth}/>
         
-        <Route path="/login" component={AppLogin} onChange={changeAuth} /> {/* auth implementiert */}
+        <Route path="/login" component={AppLogin} /> {/* auth implementiert */}
         <Route path="/register" component={AppRegister} /> {/* auth implementiert */}
 
        
 
-        <Route path="/" exact component={()=> <AppHome auth={auth} />} onChange={changeAuth}/> {/* auth implementiert */} 
+        <Route path="/" exact component={()=> <AppHome auth={auth} />} /> {/* auth implementiert */} 
         <Route path="/studienverlaufsplan" component={()=><AppVerlaufsplan auth={auth} />} /> {/* auth implementiert */}
         <Route path="/stundenplan" component={()=> <AppStundenplan auth={auth} />} />{/* auth implementiert */}
         <Route path="/module" exact component={()=> <AppModule auth={auth} />} />{/* auth implementiert */}
