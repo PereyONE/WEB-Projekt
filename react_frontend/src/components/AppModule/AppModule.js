@@ -13,6 +13,7 @@ function AppModule({auth}) {
   useEffect(()=> {
     axios.get('/api/modules')
     .then(res => {
+      console.log(res.data[0].oberkategorie);
       setmodule(res.data)
     })
     .catch(err => {

@@ -61,8 +61,8 @@ function Module({ modul }) {
     return (
         <div>
             <div className="faqs">
-                <Link to={`/module/${modul.moduleId}`}>
-                    <Image className="" src={modul.bild} alt="modul" fluid />
+                <Link to={`/module/${modul.id}`}>
+                    <Image className="" src={"/images/module/"+modul.bild} alt="modul" fluid />
                 </Link>
                 {modul.moduleName}
             </div>

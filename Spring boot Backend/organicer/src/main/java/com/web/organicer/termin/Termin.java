@@ -3,6 +3,7 @@ package com.web.organicer.termin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.organicer.module.Module;
 import com.web.organicer.student.Student;
+import com.web.organicer.svpModul.SvpModul;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,13 @@ public class Termin {
     @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
 
-    @JsonIgnore
+   /* @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    private Module modul;
+    private Module modul;*/
+
+    @JsonIgnore
+    @ManyToOne
+    SvpModul svpModul;
 
     private String beschreibung;
     private String wochentag;

@@ -2,6 +2,7 @@ package com.web.organicer.svpModul;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.organicer.student.Student;
+import com.web.organicer.termin.Termin;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,8 +31,14 @@ public class SvpModul {
 
     @Transient
     @JsonIgnore
-    @OneToMany( mappedBy = "svpModul",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "svpModul", cascade = CascadeType.ALL)
     private Set<Verlaufsplan> verlaufsplan;
+
+
+    @Transient
+    @OneToMany(mappedBy = "svpModul",cascade = CascadeType.ALL)
+    private Set<Termin> termin;
+
     int custom;
     private String name;
     private String typ;//Pflichtmodul,Wahlmodul,Vertiefungsmodul
@@ -49,6 +56,10 @@ public class SvpModul {
         this.semester7 = semester7;
         this.semester12 = semester12;
         this.art = art;
+    }
+
+    public void setTermin(Termin addTermin) {
+        termin.add(addTermin);
     }
 }
 

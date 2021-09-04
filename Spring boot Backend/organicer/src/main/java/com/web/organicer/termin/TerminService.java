@@ -6,7 +6,9 @@ import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
+import com.web.organicer.svpModul.SvpModulService;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
+import com.web.organicer.verlaufsplan.VerlaufsplanService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,34 +22,25 @@ import java.util.Set;
 @AllArgsConstructor
 public class TerminService {
     public final TerminRepository terminRepository;
+    public final VerlaufsplanService verlaufsplanService;
     private final StudentService studentService;
+    private final SvpModulService svpModulService;
     private final ModuleService moduleService;
 
     private final JwtUtil jwtUtil;
 
     public ArrayList<Termin> getTermineById(HttpServletRequest request){
 
-        String token = request.getHeader("Authorization").substring(7);
-        String email = jwtUtil.extractUsername(token);
-        Student student = studentService.loadUserByEmail(email);
+        Student student = studentService.getStudentFromRequest(request);
 
+        ArrayList<Verlaufsplan> verlaufsplan = verlaufsplanService.getVerlaufplanWithoutKlausur(request);
+
+        ArrayList<Module> module = moduleService.getModuleBySvpModule(verlaufsplan);
+
+
+        //Persöhnliche Termine
         ArrayList<Termin> termine = terminRepository.findByStudentId(student.getId());
 
-        //Termine aus den Wahlmodulen abfragen
-        ArrayList<Long>wahlId = student.getWahlId();
-        for(Long id:wahlId){
-            Module moduleWahl = moduleService.getOnlyModulById(id);
-            Set<Termin> termineWahl = moduleWahl.getTermin();
-            termine.addAll(termineWahl);
-        }
-
-        //Temrine aus den Vertiefungsmodulen abfragen
-        //ArrayList<Long>vertiefungId = student.getVertiefungen();
-
-        Set<Verlaufsplan> verlaufsplan = student.getVerlaufsplan();
-        for(Verlaufsplan verlauf:verlaufsplan){
-            verlauf.
-        }
 
 
         return termine;
@@ -59,9 +52,7 @@ public class TerminService {
     public String postTermin(Termin termin,HttpServletRequest request){
 
         //Studenten über den Token herausfinden
-        String token = request.getHeader("Authorization").substring(7);
-        String email = jwtUtil.extractUsername(token);
-        Student student = studentService.loadUserByEmail(email);
+        Student student = studentService.getStudentFromRequest(request);
 
         termin.setStudent(student);
         System.out.println(termin.getBeschreibung());
@@ -79,6 +70,14 @@ public class TerminService {
             return "Termin aktualisiert";
         }
         else return null;
+    }
+    public String postTermin(SvpModul modul, Termin termin, HttpServletRequest request){
+
+        //add Modul to Termin
+        termin.setSvpModul(modul);
+        terminRepository.save(termin);
+
+        return "allet joot!";
     }
 
     //Termin in der Datenbank anlegen

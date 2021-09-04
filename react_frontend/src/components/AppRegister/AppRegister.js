@@ -18,6 +18,7 @@ export default class AppRegister extends React.Component {
   };  
 
   handleSubmit = event => {
+    localStorage.clear();
     event.preventDefault();
 
     axios

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 @Entity
 public class Stundenplan {
 
-
-
     @Id
     @SequenceGenerator(
             name = "stundenplan_sequence",
@@ -21,7 +19,6 @@ public class Stundenplan {
             strategy = GenerationType.SEQUENCE,
             generator = "stundenplan_sequence"
     )
-
     private Long id;
     private ArrayList<Long> terminId;
     private Long studentId;

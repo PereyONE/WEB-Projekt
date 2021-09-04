@@ -38,9 +38,6 @@ public class Module {
     private String oberkategorie;
     private String regelstudienzeitsieben;//int
     private String regelstudienzeitzwölf;//int
-    @JsonIgnore
-    @OneToMany(mappedBy = "modul")
-    private Set<Termin> termin;
     private String bild;
 
 

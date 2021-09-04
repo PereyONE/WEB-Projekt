@@ -4,6 +4,8 @@ import com.web.organicer.lehrende.Lehrende;
 import com.web.organicer.lehrende.LehrendeController;
 import com.web.organicer.lehrende.LehrendeRepository;
 import com.web.organicer.lehrende.LehrendeService;
+import com.web.organicer.svpModul.SvpModul;
+import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class ModuleService {
     public Map<String,Object> getModulById(Long modulId) {
 
         Map<String,Object> map = new HashMap<>();
-        Module modul = moduleRepository.findById(modulId).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
+        Module modul = getOnlyModulById(modulId);
         ArrayList<Lehrende> lehrende = getLehrendeByModuleId(modulId);
 
         map.put("Module",modul);
@@ -84,6 +86,15 @@ public class ModuleService {
         }
         moduleRepository.delete(module);
         return "Module " + module.getModuleName() +" wurde gelöscht";
+    }
+
+    public ArrayList<Module> getModuleBySvpModule(ArrayList<Verlaufsplan> verlaufsplan){
+        ArrayList<Module> module = new ArrayList<>();
+
+        for (Verlaufsplan plan: verlaufsplan){
+            module.add(moduleRepository.getByModuleName(plan.getSvpModul().getName()));
+        }
+        return module;
     }
 
 }

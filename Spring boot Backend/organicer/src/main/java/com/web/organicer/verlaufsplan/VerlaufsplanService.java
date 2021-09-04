@@ -52,6 +52,10 @@ public class VerlaufsplanService {
         return studentService.getStudentFromRequest(request).getSvpSemester();
     }
 
+    public ArrayList<Verlaufsplan> getVerlaufplanWithoutKlausur(HttpServletRequest request){
+        return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request),"ULP");
+    }
+
     /*public String addVertiefungsModulToVerlaufsplan(int vertiefung, HttpServletRequest request) {
 
         if(vertiefung!=0) {

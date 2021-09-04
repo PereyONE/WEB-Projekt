@@ -35,7 +35,7 @@ public class LehrendeService {
 
         Map<String,Object> map = new HashMap<>();
 
-        Lehrende lehrende = lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende nor found"));
+        Lehrende lehrende = getOnlyLehrendeById(lehrendeId);
         ArrayList<Module> module= getModuleByLehrendeId(lehrendeId);
 
         map.put("Lehrende",lehrende);

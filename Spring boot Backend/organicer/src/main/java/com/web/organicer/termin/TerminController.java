@@ -1,5 +1,6 @@
 package com.web.organicer.termin;
 
+import com.web.organicer.svpModul.SvpModul;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,11 @@ public class TerminController {
     @PostMapping
     public String postTermin(@RequestBody Termin termin,HttpServletRequest request){
         return terminService.postTermin(termin,request);
+    }
+
+    @PostMapping("/add")
+    public String postCustomTermin(@RequestBody TerminRequest terminRequest, HttpServletRequest request){
+        return terminService.postTermin(terminRequest.getSvpModul(),terminRequest.getTermin(),request);
     }
 
     @DeleteMapping

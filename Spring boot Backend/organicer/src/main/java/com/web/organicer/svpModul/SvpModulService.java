@@ -2,6 +2,7 @@ package com.web.organicer.svpModul;
 
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentRepository;
+import com.web.organicer.termin.Termin;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import com.web.organicer.verlaufsplan.VerlaufsplanRepository;
 import lombok.AllArgsConstructor;
@@ -67,6 +68,18 @@ public class SvpModulService {
 
     public SvpModul getSvpModulByVertiefungspaket(int Vertiefungspaket) {
         return svpModulRepository.findByVertiefungspaket(Vertiefungspaket);
+    }
+
+    public String addTerminToModul(Termin termin, SvpModul modul){
+
+        SvpModul realModul = svpModulRepository.getById(modul.getId());
+
+        if(termin!=null&&modul!=null) {
+            realModul.setTermin(termin);
+            svpModulRepository.save(realModul);
+            return "Termin wurde hinzugefügt";
+        }
+        return "Termin oder Modul sind nicht korrekt";
     }
 }
 
