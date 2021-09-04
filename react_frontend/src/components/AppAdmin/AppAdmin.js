@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 import { row, col } from 'react-bootstrap';
 import './AppAdmin.css'
 import AppAdminFunc from './AppAdminFunc';
+import CheckBox from '../AppVerlaufsplan/CheckBox';
 
 
 
 function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Register!export default class AppRegister extends React.Component {
     const [profs, setName] = useState([
-        { id: 1, titel: 'Herr Fischer', vorname: 'Gregor', nachname: "Fischer", email: 'xyz@gmail.com', telefonnummer: '11111111', raum: 'ZW- 08', sprechstunde: 'montags 11-12', funktion: 'prof', bild: 'platzhalter.jpg' },
-        { id: 2, titel: 'Herr Wischer', vorname: 'Stefan', nachname: "Wischer", email: 'xyzss@gmail.com', telefonnummer: '111111131', raum: 'ZW- 09', sprechstunde: 'dienstags 13-14', funktion: 'prof', bild: 'platzhalter.jpg' },
+        { id: 1, titel: 'Herr Fischer', vorname: 'Gregor', nachname: "Fischer", email: 'xyz@gmail.com', telefonnummer: '11111111', raum: 'ZW- 08', sprechstunde: 'montags 11-12', funktion: 'prof', bild: 'platzhalter.jpg', module: [1] },
+        { id: 2, titel: 'Herr Wischer', vorname: 'Stefan', nachname: "Wischer", email: 'xyzss@gmail.com', telefonnummer: '111111131', raum: 'ZW- 09', sprechstunde: 'dienstags 13-14', funktion: 'prof', bild: 'platzhalter.jpg', module: [1, 2] },
     ])
 
-    const defaultProf = { id: 0, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '' }
+    const defaultProf = { id: 0, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', module: [] }
 
     const [profUpdate, setProfUpdate] = useState(defaultProf)
 
@@ -27,46 +28,68 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
     // damit sich die Eingabedaten nicht gegenseitig überschreiben.
     function onTodoChangeTitel(value) {
         setProfUpdate({
+            ...profUpdate,
             titel: value,
         });
     }
     function onTodoChangeVorname(value) {
         setProfUpdate({
+            ...profUpdate,
             vorname: value,
         });
     }
     function onTodoChangeNachname(value) {
         setProfUpdate({
+            ...profUpdate,
             nachname: value,
         });
     }
     function onTodoChangeEmail(value) {
         setProfUpdate({
+            ...profUpdate,
             email: value,
         });
     }
     function onTodoChangeTelefonnummer(value) {
         setProfUpdate({
+            ...profUpdate,
             telefonnummer: value,
         });
     }
     function onTodoChangeRaum(value) {
         setProfUpdate({
+            ...profUpdate,
             raum: value,
         });
     }
     function onTodoChangeZeit(value) {
         setProfUpdate({
+            ...profUpdate,
             sprechstunde: value,
+        });
+    }
+    function onTodoChangeModule(value) {
+        setProfUpdate({
+            ...profUpdate,
+            [module]: value,
         });
     }
 
     const [courses, setCourses] = useState([
-        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen', verfügbarkeit:'Wintersemester', regelstudienzeitsieben:'erstes Semester', regelstudienzeitzwölf:'drittes Semester', terminID: 'keine Ahnung', bild:'Pfad einfügen oder so'},
-        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit:'Sommersemester', regelstudienzeitsieben:'zweites Semester', regelstudienzeitzwölf:'viertes Semester', terminID: 'keine Ahnung', bild:'Pfad einfügen oder so'}
+        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen', verfügbarkeit: 'Wintersemester', regelstudienzeitsieben: 'erstes Semester', regelstudienzeitzwölf: 'drittes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 3, modulname: 'Mathematik 3', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 4, modulname: 'Mathematik 4', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 5, modulname: 'Mathematik 5', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 6, modulname: 'Mathematik 6', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 7, modulname: 'Mathematik 7', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+
     ])
 
-    const defaultCourse = { id: 0, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung:'keine', prüfungsart:'schriftlich', beschreibung:'Es geht um lineare Algebra und Funktionen', verfügbarkeit:'Wintersemester', regelstudienzeitsieben:'erstes Semester', regelstudienzeitzwölf:'drittes Semester', terminID:'keine Ahnung', bild:'Pfad einfügen oder so'};
+    const [courseAdd, setCourseAdd] = useState({ id: null })
+    const [courseRemove, setCourseRemove] = useState({ id: null })
+
+    const defaultCourse = { id: 0, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen', verfügbarkeit: 'Wintersemester', regelstudienzeitsieben: 'erstes Semester', regelstudienzeitzwölf: 'drittes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' };
     const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
 
 
@@ -88,6 +111,63 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
             modulabkürzung: value,
         });
     }
+
+    // function addModul(e) {
+    //     e.preventDefault();
+    //     console.log('lol')
+    // }
+
+    const addModul = (evt) => {
+        evt.preventDefault();
+        if ((!(profUpdate.id === 0)) && (!(courseAdd.id === null))) {
+            console.log(courseAdd)
+            var tmp = profUpdate.module
+            tmp.push(parseInt(courseAdd))
+            setProfUpdate(
+                {
+                    ...profUpdate,
+                    module: tmp
+
+                }
+
+            )
+            console.log(profUpdate)
+            setCourseAdd({ id: null })
+        }
+
+    }
+
+
+
+    const removeModul = (evt) => {
+        evt.preventDefault()
+        if ((!(profUpdate.id === 0)) && (!(courseRemove.id === null))) {
+            console.log(courseRemove)
+            var tmp = profUpdate.module
+            var pos
+            for (var i = 0; i < tmp.length; i++) {
+                if (tmp[i] === parseInt(courseRemove)) {
+                    pos = i
+                }
+
+            }
+
+            console.log(pos)
+            tmp.splice(pos, 1)
+            setProfUpdate(
+                {
+                    ...profUpdate,
+                    module: tmp
+                }
+
+            )
+            console.log(profUpdate)
+            setCourseRemove({ id: null })
+        }
+    }
+
+
+
 
 
     return (
@@ -148,7 +228,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
 
 
 
-                        {/* Inputfeld E-Mail */}   
+                        {/* Inputfeld E-Mail */}
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">E-Mail</span>
@@ -181,37 +261,113 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
                             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.sprechstunde} onChange={e => onTodoChangeZeit(e.target.value)}></input>
                         </div>
 
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Module</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="col ">
 
+                    {/* <div style={{}}>
+                        
+                        {courses.map((course, i) =>{
+                        console.log(course.id)
+                        if(profUpdate.module.includes(course.id)){
+                            return(
+                            <CheckBox label={course.modulname} value={true} />
+                            )
+                        }
+                        else{
+                            return(
+                            <CheckBox label={course.modulname} value={false} />
+                            )
+                        }
+                        })}
 
+                    </div> */}
 
 
                     <div class="input-group marg">
-                        <select class="custom-select" id="inputGroupSelect04">
-                            <option selected>Modul hinzufügen</option>
-                            <option value="1">Mathematik 1</option>
-                            <option value="2">Mathematik 2</option>
-                            <option value="3">Geschichtsunterricht</option>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Hinzufügen</button>
-                        </div>
+                        {/* <form onSubmit={addModul('lol')}>
+                            <label>Modul hinzufügen
+                                <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={courseAddChange(Event)}>
+
+                                    {courses.map((modul) => {
+                                        if (!(profUpdate.module.includes(modul.id))) {
+                                            return (
+                                                <option value={modul.id} >{modul.modulname}</option>
+
+                                            )
+                                        }
+                                    })}
+
+                                </select>
+                            </label>
+                            <input type="submit" value='hinzufügen' />
+
+                        </form> */}
+
+
+                        <form onSubmit={addModul}>
+                            <label>
+                                Modul hinzufügen
+                                <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
+
+                                    {courses.map((modul) => {
+                                        if (!(profUpdate.module.includes(modul.id))) {
+                                            return (
+                                                <option value={modul.id} >{modul.modulname}</option>
+
+                                            )
+                                        }
+                                    })}
+
+                                </select>
+                            </label>
+                            <input type="submit" value="hinzufügen" />
+                        </form>
+
+                    </div>
+
+                    <div class="input-group marg">
+                        <form onSubmit={removeModul}>
+                            <label>
+                                Modul entfernen
+                                <select class="custom-select" id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
+
+                                    {profUpdate.module.map((modulID) => {
+                                        var m
+                                        courses.map((course) => {
+                                            if (course.id === modulID) { m = course }
+                                        })
+                                        return (
+                                            <option value={m.id} >{m.modulname}</option>
+
+                                        )
+                                    }
+                                    )}
+
+                                </select>
+                            </label>
+                            <input type="submit" value="enfernen" />
+                        </form>
                     </div>
 
 
-
-                    <form>
-                        <fieldset disabled>
+                    {/* <form>
+                        <fieldset>
                             <div class="form-group">
                                 <label for="disabledTextInput"></label>
                                 <input type="text" id="disabledTextInput" class="form-control" placeholder="Modulliste"></input>
                             </div>
                         </fieldset>
 
-                    </form>
+                    </form> */}
 
                     <label for="formFileSm" class="form-label">Bild auswählen: </label>
                     <input class=" form-control-sm" id="formFileSm" type="file" />
@@ -244,7 +400,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
             </br>
             <div class="row">
                 <div class="col" >
-                <div class="Scroll">
+                    <div class="Scroll">
                         <div class="list-group" >
                             {courses.map((course, i) => (
                                 <button key={i} onClick={() => handleClickCourse(course)} type="button" class="list-group-item list-group-item-action" > {course.modulname}  </button>
@@ -267,7 +423,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
                             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={coursesUpdate.modulname} onChange={e => onTodoChangeModulname(e.target.value)}></input>
                         </div>
 
-                            {/* Inputfeld Modulname */}
+                        {/* Inputfeld Modulname */}
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulabkürzung</span>
