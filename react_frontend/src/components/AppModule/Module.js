@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FAQ from '../AppFAQ/FAQ';
 import { Link } from 'react-router-dom';
 import { Col, Image, Row } from 'react-bootstrap';
@@ -8,9 +8,15 @@ import './AppModule.css'
 
 
 
-function Module({ modul }) {
 
-    /*
+function Module({ kategorie, mod }) {
+    const module=mod
+
+    useEffect(() => {
+        console.log(module)
+    })
+
+
     const toggleFAQ = index => {
         setfaqs(faqs.map((faq, i) => {
             if (i === index) {
@@ -23,25 +29,31 @@ function Module({ modul }) {
         }))
     }
 
+
     const [faqs, setfaqs] = useState([
         {
-            question: modul.name,
+            question: kategorie,
             answer:
                 <Row xs={1} sm={3}>
-                    {modul.module.map((m) => (
-                        <Col className="Centro">
-                            <Link to="/module/modul.name">
-                                <Image className="" src={m.picture} alt="modul" fluid />
-                            </Link>
+                    {module.map((m) => {
+                        if(m.oberkategorie===kategorie)
 
-                            {m.name}
-                        </Col>
-                    ))}
+                        return (
+                            <Col className="Centro">
+                                <Link to={`/module/${m.id}`}>
+                                    <Image className="" src={'/images/module/'+m.bild} alt="modul" fluid />
+                                </Link>
+                                {m.moduleName}
+                            </Col>
+                        )
+                    })}
                 </Row>,
 
             open: false
         }
     ]);
+
+
 
     return (
 
@@ -57,17 +69,25 @@ function Module({ modul }) {
 
 
     );
-    */
-    return (
-        <div>
-            <div className="faqs">
-                <Link to={`/module/${modul.id}`}>
-                    <Image className="" src={"/images/module/"+modul.bild} alt="modul" fluid />
-                </Link>
-                {modul.moduleName}
-            </div>
-        </div>
-    );
+
+
+    // return (
+    //     <div>
+    //         <div className="faqs">
+
+    //             <div style={{}}>
+
+    //                 <Link to={`/module/${modul.id}`}>
+    //                     <Image className="" src={'/images/module/platzhalter.jpg'} alt="modul" fluid
+    //                         style={{ height: '200px' }} />
+    //                 </Link>
+    //                 {modul.moduleName}
+
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
 }
+
 
 export default Module;
