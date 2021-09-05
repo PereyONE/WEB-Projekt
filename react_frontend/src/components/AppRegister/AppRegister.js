@@ -3,6 +3,7 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import './AppRegister.css'
 import { ReactComponent as Logo } from '../../assets/icons/bildmarke_unterschrift.svg';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 
 export default class AppRegister extends React.Component {
@@ -27,6 +28,7 @@ export default class AppRegister extends React.Component {
         console.log(res);
         console.log(res.data);
       });
+
   }
 
   render() {
