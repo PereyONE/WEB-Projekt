@@ -8,9 +8,9 @@ import axios from 'axios';
 
 
 function AppModule({ auth }) {
-  const [module2, setmodule2] = useState([]);
+  const [module, setmodule] = useState([]);
 
-  const [module, setmodule] = useState([
+  const [module2, setmodule2] = useState([
     {
       id : 1,
       "beschreibung" : "a",
@@ -102,7 +102,7 @@ function AppModule({ auth }) {
   useEffect(() => {
     axios.get('/api/modules')
       .then(res => {
-        setmodule2(res.data)
+        setmodule(res.data)
       })
       .catch(err => {
         console.log(err)

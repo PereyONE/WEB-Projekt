@@ -28,7 +28,7 @@ function ModuleProfil({ modul }) {
 
             <div className="titel">
                 <Image className="titelbild" src={modul.picture} alt="prof" fluid />
-                <h1 className="titeltext">{modul.name}</h1>
+                <h1 className="titeltext" style={{color:'white'}}>{modul.name}</h1>
             </div>
 
             <div>

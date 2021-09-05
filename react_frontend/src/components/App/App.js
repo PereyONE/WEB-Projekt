@@ -14,7 +14,6 @@ import AppRegister from '../AppRegister/AppRegister';
 import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
-import Test from '../AppXXX/Test'
 import AppEinstellungen from '../AppEinstellungen/AppEinstellungen';
 import AppAdmin from '../AppAdmin/AppAdmin';
 
@@ -27,14 +26,20 @@ function App() {
   const [auth, setAuth]=useState(true)
 
   const changeAuth=()=> {
+    
+  }
+
+  useEffect(() => {
     if(localStorage.getItem('token')!=null){
       setAuth(true)
     }
     else{
       setAuth(false)
     }
-  }
+    console.log('Auth: '+auth)
 
+
+  })
 
   return (
     
@@ -43,7 +48,7 @@ function App() {
 
         <AppNavbar auth={auth}/>
         
-        <Route path="/login" component={AppLogin} /> {/* auth implementiert */}
+        <Route path="/login" component={()=> <AppLogin auth={auth} />} /> {/* auth implementiert */}
         <Route path="/register" component={AppRegister} /> {/* auth implementiert */}
 
        
@@ -62,9 +67,6 @@ function App() {
         <Route path="/admin" component={AppAdmin} />
         <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
         <Route path="/appadmin" component={()=><AppAdmin auth={auth}/>} />
-
-
-        <Route path="/test" component={Test} />
 
       </div>
     </Router>

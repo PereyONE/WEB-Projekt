@@ -19,7 +19,7 @@ export default class AppRegister extends React.Component {
   };  
 
   handleSubmit = event => {
-    localStorage.clear();
+    localStorage.setItem('warten', 'ja');
     event.preventDefault();
 
     axios
@@ -27,11 +27,16 @@ export default class AppRegister extends React.Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        
       });
-
+      window.location.reload() 
+      
   }
 
   render() {
+    if(!(localStorage.getItem('warten')===null)){
+      return <Redirect to='/login' />
+    }
     return (
 
       <Container className="Body">

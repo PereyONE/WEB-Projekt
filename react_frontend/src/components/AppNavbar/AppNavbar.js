@@ -2,7 +2,7 @@ import { Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import { ReactComponent as Wortmarke } from '../../assets/icons/wortmarke.svg';
 import './AppNavbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faWindowRestore } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from "react";
 import {Redirect} from 'react-router-dom'
 import { setAutomaticRefresh } from "react-admin";
@@ -13,7 +13,6 @@ import { setAutomaticRefresh } from "react-admin";
 
 function AppNavbar({ auth }) {
 
-  const [auth2, setAuth2]=useState(auth)
 
   const [show, setShow] = useState(false)
 
@@ -24,11 +23,10 @@ function AppNavbar({ auth }) {
 
   function logoutLeiste(){
     localStorage.clear()
-    return(
-     <Redirect to='/login' />
-    )
+    window.location.reload()
+    
   }
-  if (!auth) { return null }
+  if (!auth) { return null}
   else {
     return (
 

@@ -29,12 +29,20 @@ export default class AppLogin extends React.Component {
     .post('/api/authenticate', {"username":this.state.username,"password":this.state.password})
     .then(res => {
       localStorage.setItem('token', res.data.token);
-      return(
-      <Redirect to='/'/>
-      )
+      window.location.reload()
+      
     });
+
+   
+    
   }
   render(){
+    localStorage.removeItem('warten')
+
+    if(this.props.auth){
+      return <Redirect to='/' />
+    }
+    
     return (
 
       <Container className="Body">
@@ -57,7 +65,7 @@ export default class AppLogin extends React.Component {
           </Col>
 
           <Col>
-            <Button className="Register" type="submit"  size="lg" href="/register" block>
+            <Button className="Register"  size="lg" href="/register" block>
               Register
             </Button>
           </Col>
