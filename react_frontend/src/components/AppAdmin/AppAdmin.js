@@ -119,8 +119,8 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
 
     const addModul = (evt) => {
         evt.preventDefault();
-        if ((!(profUpdate.id === 0)) && (!(courseAdd.id === null))) {
-            console.log(courseAdd)
+        if ((!(profUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(parseInt(courseAdd) === 0))) {
+            console.log('lol')
             var tmp = profUpdate.module
             tmp.push(parseInt(courseAdd))
             setProfUpdate(
@@ -141,7 +141,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
 
     const removeModul = (evt) => {
         evt.preventDefault()
-        if ((!(profUpdate.id === 0)) && (!(courseRemove.id === null))) {
+        if ((!(profUpdate.id === 0)) && (!(courseRemove.id === null))&& (!(parseInt(courseRemove) === 0))) {
             console.log(courseRemove)
             var tmp = profUpdate.module
             var pos
@@ -317,7 +317,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
                             <label>
                                 Modul hinzufügen
                                 <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
-
+                                    <option value='0'  >Modul wählen</option>
                                     {courses.map((modul) => {
                                         if (!(profUpdate.module.includes(modul.id))) {
                                             return (
@@ -339,7 +339,7 @@ function AppAdmin({ prof, course }) { //evtl zu class umändern!!!!! Siehe Regis
                             <label>
                                 Modul entfernen
                                 <select class="custom-select" id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
-
+                                    <option value='0'  >Modul wählen</option>
                                     {profUpdate.module.map((modulID) => {
                                         var m
                                         courses.map((course) => {
