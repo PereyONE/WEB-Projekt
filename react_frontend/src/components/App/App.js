@@ -25,9 +25,6 @@ function App() {
 
   const [auth, setAuth]=useState(true)
 
-  const changeAuth=()=> {
-    
-  }
 
   useEffect(() => {
     if(localStorage.getItem('token')!=null){
@@ -37,7 +34,6 @@ function App() {
       setAuth(false)
     }
     console.log('Auth: '+auth)
-
 
   })
 
