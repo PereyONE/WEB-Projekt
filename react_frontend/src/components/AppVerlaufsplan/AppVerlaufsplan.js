@@ -699,14 +699,7 @@ function AppVerlaufsplan({ auth }) {
                                                         overflowY: 'scroll',
                                                         overflowX: 'hidden'
 
-                                                    }}
-                                                >
-
-
-
-
-
-
+                                                    }}>
 
                                                     {column.items.map((item, index) => {
                                                         if (anzeige === 0 && item.art === 'modul' && (checkedP && (item.typ === 'pflicht' || item.typ === 'gold') || checkedV && item.typ === 'vertiefung' || checkedW && item.typ === 'wahl')) {
