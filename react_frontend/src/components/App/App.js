@@ -39,6 +39,7 @@ function App() {
   return (
     
     <Router>
+      <h1>hallo</h1>
       <div className="App">
 
         <AppNavbar auth={auth}/>
