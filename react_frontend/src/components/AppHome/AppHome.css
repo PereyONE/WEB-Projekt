@@ -44,9 +44,16 @@
    }
    
    .boxpurple:hover{
-       background-color: #a42681;;
-       
+       background-color: #a42681;;   
    }
+
+   .boxorange:hover{
+    background-color: #ee6b29;;   
+}
+
+    .boxred:hover{
+    background-color: #da0f19;;   
+}
    
    .iconcolred{
        color: #9f131a;
