@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/vertiefung")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class VertiefungController {
 
     private final VertiefungService vertiefungService;
