@@ -17,5 +17,7 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
     Optional<Termin> findById(Long terminId);
 
     ArrayList<Termin> findByStudentId(Long StudentId);
+
+    String findByBeschreibung(String beschreibung);
 }
 

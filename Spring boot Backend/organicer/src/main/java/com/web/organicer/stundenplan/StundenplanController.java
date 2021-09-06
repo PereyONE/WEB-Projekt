@@ -11,12 +11,13 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping(path = "/api/stundenplan")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class StundenplanController {
 
 
     private final StundenplanService stundenplanService;
 
-    @GetMapping (path = "/{studentId}")
+    @GetMapping
     public ArrayList<Termin> getStundenplanById(@PathVariable Long studentId){
             return stundenplanService.getStundenplanById(studentId);
     }

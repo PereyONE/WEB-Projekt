@@ -11,12 +11,15 @@ const Tage = () => {
   const [eintraege, seteintraege] = useState([]);
 
   useEffect(()=> {
-    axios.get('/api/stundenplan')
+    axios.get('/api/termine')
     .then(res => {
       seteintraege(res.data)
     })
-    .catch(err => {
-      console.log(err)
+    .catch(function (error) {
+      if (error.response.status===403) {
+        localStorage.clear()
+        window.location.reload()
+      }
     })
   },[])
   const [width, setWidth] = React.useState(window.innerWidth);
