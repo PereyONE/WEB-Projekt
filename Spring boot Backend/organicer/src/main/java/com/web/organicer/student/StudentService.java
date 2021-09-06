@@ -96,4 +96,7 @@ public class StudentService implements UserDetailsService {
         return "Semester bleibt gleich";
     }
 
+    public boolean isUserAdmin(HttpServletRequest request) {
+        return getStudentFromRequest(request).getStudentRole().equals(StudentRole.ADMIN);
+    }
 }

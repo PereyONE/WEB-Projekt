@@ -31,13 +31,9 @@ public class Termin {
     @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
 
-   /* @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Module modul;*/
-
     @JsonIgnore
-    @ManyToOne
-    SvpModul svpModul;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private SvpModul svpModul;
 
     private String beschreibung;
     private String wochentag;

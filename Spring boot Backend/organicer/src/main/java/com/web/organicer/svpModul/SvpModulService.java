@@ -70,17 +70,9 @@ public class SvpModulService {
         return svpModulRepository.findByVertiefungspaket(Vertiefungspaket);
     }
 
-    public String addTerminToModul(Termin termin, SvpModul modul){
+    public SvpModul getSvpModulById(Long svpModulId){ return svpModulRepository.getById(svpModulId);}
 
-        SvpModul realModul = svpModulRepository.getById(modul.getId());
-
-        if(termin!=null&&modul!=null) {
-            realModul.setTermin(termin);
-            svpModulRepository.save(realModul);
-            return "Termin wurde hinzugefügt";
-        }
-        return "Termin oder Modul sind nicht korrekt";
-    }
+    public void saveSvpModul(SvpModul svpMoudl) { svpModulRepository.save(svpMoudl);}
 }
 
 

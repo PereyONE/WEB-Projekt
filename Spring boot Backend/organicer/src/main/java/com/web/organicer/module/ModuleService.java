@@ -35,7 +35,7 @@ public class ModuleService {
         Module modul = getOnlyModulById(modulId);
         ArrayList<Lehrende> lehrende = getLehrendeByModuleId(modulId);
 
-        map.put("Module",modul);
+        map.put("Modul",modul);
         if(lehrende!=null) {
             map.put("Lehrende", lehrende);
         }

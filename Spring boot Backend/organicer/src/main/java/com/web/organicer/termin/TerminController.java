@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @RestController
@@ -26,8 +27,8 @@ public class TerminController {
     }
 
     @PostMapping("/add")
-    public String postCustomTermin(@RequestBody TerminRequest terminRequest, HttpServletRequest request){
-        return terminService.postTermin(terminRequest.getSvpModul(),terminRequest.getTermin(),request);
+    public String postCustomTermin(@RequestBody TerminRequest terminRequest){
+        return terminService.postTermin(terminRequest.getSvpModul(),terminRequest.getTermin());
     }
 
     @DeleteMapping

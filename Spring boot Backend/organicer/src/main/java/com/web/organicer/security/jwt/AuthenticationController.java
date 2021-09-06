@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -34,4 +35,7 @@ public class AuthenticationController {
         }
         return new Jwt(jwtTokenUtil.generateToken(student));
     }
+
+    @GetMapping(path = "/authenticate/admin")
+    public boolean adminAuthentication(HttpServletRequest request){return studentService.isUserAdmin(request);}
 }
