@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -34,10 +35,8 @@ public class SvpModul {
     @OneToMany(mappedBy = "svpModul", cascade = CascadeType.ALL)
     private Set<Verlaufsplan> verlaufsplan;
 
-
-    @Transient
     @OneToMany(mappedBy = "svpModul",cascade = CascadeType.ALL)
-    private Set<Termin> termin;
+    private List<Termin> termin;
 
     int custom;
     private String name;
@@ -56,10 +55,6 @@ public class SvpModul {
         this.semester7 = semester7;
         this.semester12 = semester12;
         this.art = art;
-    }
-
-    public void setTermin(Termin addTermin) {
-        termin.add(addTermin);
     }
 }
 

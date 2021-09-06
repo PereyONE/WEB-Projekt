@@ -53,7 +53,7 @@ public class VerlaufsplanService {
     }
 
     public ArrayList<Verlaufsplan> getVerlaufplanWithoutKlausur(HttpServletRequest request){
-        return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request),"ULP");
+        return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request),"Modul");
     }
 
     /*public String addVertiefungsModulToVerlaufsplan(int vertiefung, HttpServletRequest request) {

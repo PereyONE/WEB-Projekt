@@ -14,8 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -29,27 +28,30 @@ public class TerminService {
 
     private final JwtUtil jwtUtil;
 
-    public ArrayList<Termin> getTermineById(HttpServletRequest request){
+    public ArrayList<Termin> getTermineById(HttpServletRequest request) {
 
         Student student = studentService.getStudentFromRequest(request);
 
+        //Verlaufsplan mit Terminen der SvpModule
         ArrayList<Verlaufsplan> verlaufsplan = verlaufsplanService.getVerlaufplanWithoutKlausur(request);
-
-        ArrayList<Module> module = moduleService.getModuleBySvpModule(verlaufsplan);
-
-
         //Persöhnliche Termine
         ArrayList<Termin> termine = terminRepository.findByStudentId(student.getId());
 
-
+        //Hier werden die Termine aus den SvpModulen in Abhängikeit des Semesters vom Studenten hinzugefügt
+        for (Verlaufsplan modul : verlaufsplan) {
+            if (modul.getSvpModul().getTermin() != null) {
+                for (Termin termin : modul.getSvpModul().getTermin()) {
+                    termin.setSemester(modul.getPosition());
+                    termine.add(termin);
+                }
+            }
+        }
 
         return termine;
-
-
     }
 
     // erstellen eines neuen Termins eines Studenten
-    public String postTermin(Termin termin,HttpServletRequest request){
+    public String postTermin(Termin termin, HttpServletRequest request) {
 
         //Studenten über den Token herausfinden
         Student student = studentService.getStudentFromRequest(request);
@@ -60,46 +62,47 @@ public class TerminService {
         //terminRepository.save(termin);
         //return "Neuer Termin wurde angelegt";
 
-        if(termin.getId()==null){
+        if (termin.getId() == null) {
             System.out.println("1");
             Termin tmp = addNewTermin(termin);
             return "Neuen Termin erstellt";
         }
         Termin tmp = updateTermin(termin);
-        if(tmp != null) {
+        if (tmp != null) {
             return "Termin aktualisiert";
-        }
-        else return null;
+        } else return null;
     }
-    public String postTermin(SvpModul modul, Termin termin, HttpServletRequest request){
+
+    public String postTermin(SvpModul modul, Termin termin) {
 
         //add Modul to Termin
-        termin.setSvpModul(modul);
-        terminRepository.save(termin);
+        SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
+        termin.setSvpModul(realModul);
+        List<Termin> termine = realModul.getTermin();
+        termine.add(terminRepository.save(termin));
+        realModul.setTermin(termine);
+        svpModulService.saveSvpModul(realModul);
 
         return "allet joot!";
     }
 
     //Termin in der Datenbank anlegen
-    public Termin addNewTermin(Termin termin){
-
+    public Termin addNewTermin(Termin termin) {
         return terminRepository.save(termin);
     }
-    //Termin in der Datenbank aktualisieren
-    public Termin updateTermin(Termin termin){
 
+    //Termin in der Datenbank aktualisieren
+    public Termin updateTermin(Termin termin) {
         return terminRepository.save(termin);
     }
 
     //Termin aus der Datenbank und der Terminliste eines Studenten löschen
-    public String deleteTermin(Termin termin,HttpServletRequest request){
+    public String deleteTermin(Termin termin, HttpServletRequest request) {
 
         //Den Studenten über den Token herausfinden
-        String token = request.getHeader("Authorization").substring(7);
-        String email = jwtUtil.extractUsername(token);
-        Student student = studentService.loadUserByEmail(email);
+        Student student = studentService.getStudentFromRequest(request);
 
-        if (termin.getId()==null){
+        if (termin.getId() == null) {
             return "Keine Termin Id";
         }
         //löschen eines Termines aus der Datenbank
