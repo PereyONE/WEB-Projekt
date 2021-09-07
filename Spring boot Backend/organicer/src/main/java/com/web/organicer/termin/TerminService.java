@@ -20,13 +20,11 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class TerminService {
+
     public final TerminRepository terminRepository;
     public final VerlaufsplanService verlaufsplanService;
     private final StudentService studentService;
     private final SvpModulService svpModulService;
-    private final ModuleService moduleService;
-
-    private final JwtUtil jwtUtil;
 
     public ArrayList<Termin> getTermineById(HttpServletRequest request) {
 
@@ -53,17 +51,11 @@ public class TerminService {
     // erstellen eines neuen Termins eines Studenten
     public String postTermin(Termin termin, HttpServletRequest request) {
 
-        //Studenten über den Token herausfinden
+        //Studenten über den Token herausfinden und zum Termin hizufügen
         Student student = studentService.getStudentFromRequest(request);
-
         termin.setStudent(student);
-        System.out.println(termin.getBeschreibung());
-
-        //terminRepository.save(termin);
-        //return "Neuer Termin wurde angelegt";
 
         if (termin.getId() == null) {
-            System.out.println("1");
             Termin tmp = addNewTermin(termin);
             return "Neuen Termin erstellt";
         }
@@ -75,15 +67,24 @@ public class TerminService {
 
     public String postTermin(SvpModul modul, Termin termin) {
 
-        //add Modul to Termin
-        SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
-        termin.setSvpModul(realModul);
-        List<Termin> termine = realModul.getTermin();
-        termine.add(terminRepository.save(termin));
-        realModul.setTermin(termine);
-        svpModulService.saveSvpModul(realModul);
+        if(modul.getId()!=null) {
+            if(termin.getBeschreibung().equals(terminRepository.findByBeschreibung(termin.getBeschreibung()))) {
+                //Get the real modul from database
+                SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
+                //add the modul to the termin
+                termin.setSvpModul(realModul);
+                //This is for adding the termin to the rest of the moduls termine
+                List<Termin> termine = realModul.getTermin();
+                termine.add(terminRepository.save(termin));
+                realModul.setTermin(termine);
+                //saving the Modul
+                svpModulService.saveSvpModul(realModul);
 
-        return "allet joot!";
+                return "Termin wurde hinzugefügt";
+            }
+            return "Termin gibt es schon";
+        }
+        return "Modul existiert nicht";
     }
 
     //Termin in der Datenbank anlegen
@@ -113,6 +114,4 @@ public class TerminService {
 
         return "Termin wurde gelöscht";
     }
-
-
 }

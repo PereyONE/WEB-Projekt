@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api/termine")
+@CrossOrigin(origins = "http://localhost:3000")
 @AllArgsConstructor
 public class TerminController {
 
