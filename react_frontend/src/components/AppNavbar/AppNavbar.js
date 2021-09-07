@@ -4,9 +4,7 @@ import './AppNavbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faWindowRestore } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from "react";
-import {Redirect} from 'react-router-dom'
-import { setAutomaticRefresh } from "react-admin";
-// import Hamburger from 'hamburger-react'
+
 
 
 
@@ -18,7 +16,6 @@ function AppNavbar({ auth }) {
 
   function clickHandler() {
     setShow(!show);
-    console.log(show);
   }
 
   function logoutLeiste(){
