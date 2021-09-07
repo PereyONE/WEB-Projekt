@@ -2,9 +2,9 @@ import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import { row, col, Button, Form } from 'react-bootstrap';
 import './AppEinstellungen.css';
-import axios from 'axios';
+import axios from 'axios'
 
-function AppEinstellungen({ prof, course }) {
+function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const defaultVertiefung = { module: [] }
   const [vertiefungUpdate, setVertiefungUpdate] = useState(defaultVertiefung)
@@ -24,21 +24,19 @@ function AppEinstellungen({ prof, course }) {
     });
   }
 
-  //Vertiefunspakete/namen
-  //Hier GET- Request von der API und und Vertiefungen abrufen.
+  // Vertiefunspakete/namen
+  // Hier GET- Request von der API und und Vertiefungen abrufen.
   const [courses, setCourses] = useState([]);
-
   useEffect(()=> {
     axios.get('/api/vertiefung')
     .then(res => {
       setCourses(res.data)
-      console.log(courses)
     })
     .catch(err => {
       console.log(err)
     })
   },[])
- 
+
 
   // const [courses, setCourses] = useState([
   //   { id: 1, Vertiefungsname: 'Kameratechnik' },
@@ -55,9 +53,8 @@ function AppEinstellungen({ prof, course }) {
   //Default wird erstellt
   const defaultCourse = { id: null, name: '' };
   const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
-
   const addModul = (evt) => {
-    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null))&& (!(courseAdd.id===0))) {
+    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(courseAdd.id === 0))) {
       evt.preventDefault();
       var tmp = vertiefungUpdate.module
       tmp.push(parseInt(courseAdd))
@@ -69,6 +66,7 @@ function AppEinstellungen({ prof, course }) {
       )
       console.log(vertiefungUpdate)
       setCourseAdd({ id: null })
+
     }
   }
 
@@ -95,76 +93,79 @@ function AppEinstellungen({ prof, course }) {
   }
 
 
-  //--------------------------------------------------
 
-  // const defaultWahl = { module: [0] }
-  // const [wahlUpdate, setWahlUpdate] = useState(defaultWahl)
-  // function handleClick(prof) {
-  //   //preventDefault();
-  //   setWahlUpdate(prof)
-  //   console.log(prof);
-  //   console.log(wahlUpdate)
-  // }
 
-  // // Für jeden Bereich wird eine onTodoChange- Funktion angelegt, 
-  // // damit sich die Eingabedaten nicht gegenseitig überschreiben.
-  // function onTodoChangeModule(value) {
+  const defaultWahl = { wahlen: [] }
+
+  const [wahlUpdate, setWahlUpdate] = useState(defaultWahl)
+  function handleClick(profWahl) {
+    //preventDefault();
+    setWahlUpdate(profWahl)
+    console.log(profWahl);
+    console.log(wahlUpdate)
+  }
+
+  // Für jeden Bereich wird eine onTodoChange- Funktion angelegt, 
+  // damit sich die Eingabedaten nicht gegenseitig überschreiben.
+  // function onTodoChangeWahle(value) {
   //   setWahlUpdate({
   //     ...wahlUpdate,
-  //     [module]: value,
+  //     [wahlen]: value,
   //   });
   // }
-  // //Vertiefunspakete/namen
-  // const [courses, setCourses] = useState([
-  //   { id: 0, Vertiefungsname: 'null' },
-  //   { id: 1, Vertiefungsname: 'Kameratechnik' },
-  //   { id: 2, Vertiefungsname: 'Produktion audiovisueller Medien' },
-  //   { id: 3, Vertiefungsname: 'Web-Engineering' },
-  //   { id: 4, Vertiefungsname: 'Interaktive Systeme' },
-  //   { id: 5, Vertiefungsname: 'Mediendesign' },
-  //   { id: 6, Vertiefungsname: 'Mediendistribution' },
-  //   { id: 7,  : 'Bildverarbeitung' },
-  // ])
+  //Vertiefunspakete/namen
+  const [wahlCourses, setWahlCourses] = useState([
+    { id: 0, Vertiefungsname: 'null' },
+    { id: 1, Vertiefungsname: 'Kameratechnik' },
+    { id: 2, Vertiefungsname: 'Produktion audiovisueller Medien' },
+    { id: 3, Vertiefungsname: 'Web-Engineering' },
+    { id: 4, Vertiefungsname: 'Interaktive Systeme' },
+    { id: 5, Vertiefungsname: 'Mediendesign' },
+    { id: 6, Vertiefungsname: 'Mediendistribution' },
+    { id: 7, Vertiefungsname: 'Bildverarbeitung' },
+  ])
 
-  // const [courseAdd, setCourseAdd] = useState({ id: null })
-  // const [courseRemove, setCourseRemove] = useState({ id: null })
-  // //Default wird erstellt
-  // const defaultCourse = { id: null, Vertiefungsname: '' };
-  // const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
+  const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
+  const [wahlCourseRemove, setWahlCourseRemove] = useState({ id: null })
+  //Default wird erstellt
+  const defaultWahlCourse = { id: null, name: '' };
+  const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
 
-  // const addModul = (evt) => {
-  //   evt.preventDefault();
-  //   var tmp = wahlUpdate.module
-  //   tmp.push(parseInt(courseAdd))
-  //   setWahlUpdate(
-  //     {
-  //       ...wahlUpdate,
-  //       module: tmp
-  //     }
-  //   )
-  //   console.log(wahlUpdate)
-  //   setCourseAdd({ id: null })
-  // }
-  // const removeModul = (evt) => {
-  //   evt.preventDefault()
-  //   var tmp = wahlUpdate.module
-  //   var pos
-  //   for (var i = 0; i < tmp.length; i++) {
-  //     if (tmp[i] === parseInt(courseRemove)) {
-  //       pos = i
-  //     }
-  //   }
-  //   console.log(pos)
-  //   tmp.splice(pos, 1)
-  //   setWahlUpdate(
-  //     {
-  //       ...wahlUpdate,
-  //       module: tmp
-  //     }
-  //   )
-  //   console.log(wahlUpdate)
-  //   setCourseRemove({ id: null })
-  // }
+  const addWahlModul = (evt) => {
+    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) && (!(wahlCourseAdd.id === 0))) {
+      evt.preventDefault();
+      var tmp = wahlUpdate.wahlen
+      tmp.push(parseInt(wahlCourseAdd))
+      setWahlUpdate(
+        {
+          ...wahlUpdate,
+          wahlen: tmp
+        }
+      )
+      console.log(wahlUpdate)
+      setWahlCourseAdd({ id: null })
+    }
+  }
+  const removeWahlModul = (evt) => {
+    evt.preventDefault()
+    var tmp = wahlUpdate.wahlen
+    var pos
+    for (var i = 0; i < tmp.length; i++) {
+      if (tmp[i] === parseInt(wahlCourseRemove)) {
+        pos = i
+      }
+    }
+    console.log(pos)
+    tmp.splice(pos, 1)
+    setWahlUpdate(
+      {
+        ...wahlUpdate,
+        wahlen: tmp
+      }
+    )
+    console.log(wahlUpdate)
+    setWahlCourseRemove({ id: null })
+  }
 
 
   return (
@@ -174,20 +175,23 @@ function AppEinstellungen({ prof, course }) {
       </h1>
       <br></br>
       <div class="row">
-        <div class="col-auto mr-auto">Bitte die Vertiefungsmodule auswählen!</div>
+
       </div>
       <br>
       </br>
       <div class="">
+
+
+        {/* ---------------------------------------------- */}
         <div class="row">
           <div class="col" >
             <div class=" ">
               <form onSubmit={addModul}>
                 <label>
-                  Bitte 4 Vertiefungen hinzfügen
+                  Bitte 4 Vertiefungen hinzufügen
                   <div class="width ">
                     <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
-                      <option value= {0} > Vertiefungen hinzufügen  </option> 
+                      <option value={0} > Vertiefungen hinzufügen  </option>
                       {courses.map((modul) => {
                         if (!(vertiefungUpdate.module.includes(modul.id))) {
                           return (
@@ -200,8 +204,8 @@ function AppEinstellungen({ prof, course }) {
                 </label>
                 <div class="row container">
                   <div class="width">
-                  <button class="btn btn-outline-success width" type="submit button" value="hinzufügen"> Hinzufügen</button>
-                </div>
+                    <button class="btn btn-outline-success width" type="submit button" value="hinzufügen"> Hinzufügen</button>
+                  </div>
                 </div>
 
               </form>
@@ -214,7 +218,7 @@ function AppEinstellungen({ prof, course }) {
           <div class="col">
             <form onSubmit={removeModul}>
               <label>
-                Modul entfernen
+                Vertiefung entfernen
                 <div class="">
                   <div class="width ">
                     <select class="custom-select d-flex " id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
@@ -233,8 +237,80 @@ function AppEinstellungen({ prof, course }) {
                 </div>
               </label>
               <div class="row container ">
-                <div class= "">
-                <button class="btn btn-outline-danger width" type="button submit" value="enfernen"> Entfernen</button>
+                <div class="">
+                  <button class="btn btn-outline-danger width" type="button submit" value="enfernen"> Entfernen</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mb-3 top">
+          <div class="input-group-prepend">
+            <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
+          </div>
+          <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={vertiefungUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
+        </div>
+
+
+
+        <hr class="linie"></hr>
+        <div class="row">
+          <div class="col" >
+            <div class=" ">
+              <form onSubmit={addWahlModul}>
+                <label>
+                  Bitte 2 Wahlfächer hinzufügen
+                  <div class="width ">
+                    <select class="custom-select" id="inputGroupSelect04" value={wahlCourseAdd} onChange={e => setWahlCourseAdd(e.target.value)}>
+                      <option value={0} > Vertiefungen hinzufügen  </option>
+                      {courses.map((wahl) => {
+                        if (!(wahlUpdate.wahlen.includes(wahl.id))) {
+                          return (
+                            <option value={wahl.id} >{wahl.name}</option>
+                          )
+                        }
+                      })}
+                    </select>
+                  </div>
+                </label>
+                <div class="row container">
+                  <div class="width">
+                    <button class="btn btn-outline-success width" type="submit button" value="hinzufügen"> Hinzufügen</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          {/* Liste der Lehrenden */}
+
+          {/* Inputfeld Titel */}
+
+          <div class="col">
+            <form onSubmit={removeWahlModul}>
+              <label>
+                Wahlfach entfernen
+                <div class="">
+                  <div class="width ">
+                    <select class="custom-select d-flex " id="inputGroupSelect04" value={wahlCourseRemove} onChange={e => setWahlCourseRemove(e.target.value)}>
+                      {wahlUpdate.wahlen.map((modulID) => {
+                        var m
+                        courses.map((wahlCourse) => {
+                          if (wahlCourse.id === modulID) { m = wahlCourse }
+                        })
+                        return (
+                          <option value={m.id} >{m.name}</option>
+                        )
+                      }
+                      )}
+                    </select>
+                  </div>
+                </div>
+              </label>
+              <div class="row container ">
+                <div class="">
+                  <button class="btn btn-outline-danger width" type="button submit" value="enfernen"> Entfernen</button>
                 </div>
               </div>
             </form>
@@ -249,93 +325,14 @@ function AppEinstellungen({ prof, course }) {
             <div class="input-group-prepend">
               <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
             </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={vertiefungUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
+            <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={wahlUpdate.wahlen} ></input>
           </div>
         </div>
       </div>
-      {/* <div class="row justify-content-center  ">
-        <div class= "">
-        <button type="button" class="btn btn-dark btn-lg btn-block">
-          Bestätigen
-        </button>
-        </div>
-       
-      </div> */}
+      <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" >
+        Submit
+      </button>
 
-      {/* 
-      <div class="row">
-        <div class="col" >
-          <div class="input-group ">
-            <form onSubmit={addModul}>
-              <label>
-                Modul hinzufügen
-                <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
-                  {courses.map((modul) => {
-                    if (!(profUpdate.module.includes(modul.id))) {
-                      return (
-                        <option value={modul.id} >{modul.Vertiefungsname}</option>
-                      )
-                    }
-                  })}
-                </select>
-              </label>
-              <div class="row container justify-content-center">
-                <button class= "btn btn-outline-success" type="submit button" value="hinzufügen"> Hinzufügen</button>
-              </div>
-
-            </form>
-          </div>
-        </div>
-        {/* Liste der Lehrenden */}
-
-      {/* Inputfeld Titel */}
-      {/* 
-        <div class="input-group col justify-content-end width ">
-          <form onSubmit={removeModul}>
-            <label>
-              Modul entfernen
-              <select class="custom-select "  id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
-
-                {profUpdate.module.map((modulID) => {
-                  var m
-                  courses.map((course) => {
-                    if (course.id === modulID) { m = course }
-                  })
-                  return (
-                    <option value={m.id} >{m.Vertiefungsname}</option>
-                  )
-                }
-                )}
-              </select>
-            </label>
-            <div class="row container justify-content-center">
-              <button class= "btn btn-outline-danger" type="button submit" value="enfernen"> Entfernen</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className="col top">
-        <div class="row">
-
-
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center  ">
-        <div class= "">
-        <button type="button" class="btn btn-dark btn-lg btn-block">
-          Bestätigen
-        </button>
-        </div>
-       
-      </div> */}
-
-      {/* ------------------- */}
       <hr class="linie"></hr>
       <div >
         <h3>
@@ -373,3 +370,12 @@ function AppEinstellungen({ prof, course }) {
   );
 }
 export default AppEinstellungen;
+
+
+
+
+
+
+
+
+
