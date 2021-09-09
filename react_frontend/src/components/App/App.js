@@ -15,7 +15,12 @@ import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
 import AppEinstellungen from '../AppEinstellungen/AppEinstellungen';
+
 import AppAdmin from '../AppAdmin/AppAdmin';
+import AdminLehrende from '../AppAdmin/AdminLehrende';
+import AdminModule from '../AppAdmin/AdminModule';
+import AdminFAQ from '../AppAdmin/AdminFAQ';
+import AdminVertiefung from '../AppAdmin/AdminVertiefung';
 
 function App() {
 
@@ -60,9 +65,16 @@ function App() {
         <Route path="/lehrende/:profid" component={()=><AppLehrendeProfil auth={auth}/>} />{/* auth implementiert */}
         <Route path="/faq" component={()=><AppFAQ auth={auth} />} /> {/* auth implementiert */}
         <Route path="/einstellungen" component={AppEinstellungen} />
-        <Route path="/admin" component={AppAdmin} />
         <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
-        <Route path="/appadmin" component={()=><AppAdmin auth={auth}/>} />
+
+        <Route path="/admin" exact component={AppAdmin} />
+        <Route path="/admin/lehrende" component={AdminLehrende} />
+        <Route path="/admin/module" component={AdminModule} />
+        <Route path="/admin/faqs" component={AdminFAQ} />
+        <Route path="/admin/vertiefungen" component={AdminVertiefung} />
+        
+
+
 
       </div>
     </Router>
