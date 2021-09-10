@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping(path = "/api/stundenplan")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class StundenplanController {
 
 

@@ -2,14 +2,13 @@ package com.web.organicer.module;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/modules")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class ModuleController {
 
     private final ModuleService moduleService;

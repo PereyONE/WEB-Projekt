@@ -12,7 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/api/verlaufsplan")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class VerlaufsplanController {
 
     private final VerlaufsplanService verlaufsplanService;

@@ -10,6 +10,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/api/svpModul")
 @AllArgsConstructor
+@CrossOrigin
 public class SvpModulController {
 
     private final SvpModulService svpModulService;
