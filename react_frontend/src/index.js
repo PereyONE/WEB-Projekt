@@ -5,7 +5,7 @@ import App from './components/App/App.js';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 
-axios.defaults.baseURL= 'http://139.6.101.196:8080/';
+axios.defaults.baseURL= 'http://localhost:8080/';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 ReactDOM.render(
