@@ -17,6 +17,9 @@ public class StudentController {
     private final StudentService studentService;
     private final VerlaufsplanService verlaufsplanService;
 
+    @GetMapping
+    public Student getStudent(HttpServletRequest request){return studentService.getStudentFromRequest(request);}
+
    /* @PostMapping
     public String addVertiefungsModule(@RequestBody ArrayList<Integer> vertiefungen, HttpServletRequest request){
         for(int vertiefung: vertiefungen) {

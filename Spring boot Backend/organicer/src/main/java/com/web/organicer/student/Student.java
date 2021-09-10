@@ -36,7 +36,7 @@ public class Student implements UserDetails {
     private int semester;
     private int svpSemester;
     private ArrayList<Integer> vertiefungen;
-    private ArrayList<Long> wahlId;
+    private ArrayList<Integer> wahlId;
 
     @Transient
     @JsonIgnore
