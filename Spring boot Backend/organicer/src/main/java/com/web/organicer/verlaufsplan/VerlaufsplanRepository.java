@@ -22,6 +22,12 @@ public interface VerlaufsplanRepository extends JpaRepository<Verlaufsplan, Long
 
     @Query(value = "SELECT * FROM verlaufsplan join svp_modul on svpmodul_id = svp_modul.id WHERE student_id =?1 AND svp_modul.vertiefung = 8", nativeQuery = true)
     ArrayList<Verlaufsplan> findPlatzhalterById(Long id);
+
+    @Query(value = "SELECT * FROM verlaufsplan  join svp_modul on svpmodul_id = svp_modul.id WHERE student_id =?1 and vertiefungspaket != 0",nativeQuery = true)
+    ArrayList<Verlaufsplan> findVertiefungenInVerlaufsplan(Long id);
+
+    @Query(value = "SELECT * FROM verlaufsplan  join svp_modul on svpmodul_id = svp_modul.id WHERE student_id =?1 and wahlmodul != 0",nativeQuery = true)
+    ArrayList<Verlaufsplan> findWahlmodulInVerlaufsplan(Long id);
 }
 
 

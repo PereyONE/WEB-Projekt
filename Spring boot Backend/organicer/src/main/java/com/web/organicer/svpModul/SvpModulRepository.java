@@ -14,5 +14,7 @@ public interface SvpModulRepository extends JpaRepository<SvpModul, Long> {
 
     SvpModul findByName (String Name);
 
-    SvpModul findByVertiefungspaket(int Vertiefungspaket);
+    ArrayList<SvpModul> findByVertiefungspaket(int Vertiefungspaket);
+
+    ArrayList<SvpModul> findByWahlmodul(int Wahlmodul);
 }

@@ -20,9 +20,14 @@ public class StudentController {
     @GetMapping
     public Student getStudent(HttpServletRequest request){return studentService.getStudentFromRequest(request);}
 
-    @PostMapping
-    public String addVertiefungsModule(@RequestBody Student student, HttpServletRequest request){
-        return studentService.addWahlAndVertiefungsModuleToStuden(student, request);
+    @PostMapping("/addVertiefungen")
+    public String addVertiefungsModule(@RequestBody ArrayList<Integer> vertiefungen, HttpServletRequest request){
+        return verlaufsplanService.addVertiefungsModuleToStudent(vertiefungen, request);
+    }
+
+    @PostMapping("/addWahlmodule")
+    public String addWahlModule(@RequestBody ArrayList<Integer> wahlmodule, HttpServletRequest request){
+        return verlaufsplanService.addWahlModuleToStudent(wahlmodule, request);
     }
 
     @PostMapping("/updateSemester")
