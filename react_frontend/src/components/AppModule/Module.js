@@ -10,7 +10,7 @@ import './AppModule.css'
 
 
 function Module({ kategorie, mod }) {
-    const module=mod
+    const module = mod
 
     useEffect(() => {
         console.log(module)
@@ -36,16 +36,19 @@ function Module({ kategorie, mod }) {
             answer:
                 <Row xs={1} sm={3}>
                     {module.map((m) => {
-                        if(m.oberkategorie===kategorie)
+                        if (m.oberkategorie === kategorie)
 
-                        return (
-                            <Col className="Centro">
-                                <Link to={`/module/${m.id}`}>
-                                    <Image className="" src={'/images/module/'+m.bild} alt="modul" fluid />
-                                </Link>
-                                {m.moduleName}
-                            </Col>
-                        )
+                            return (
+                                <Col className="Centro">
+                                    {m.moduleName}
+                                    <figure>
+                                        <Link to={`/module/${m.id}`}>
+                                            <Image className="" src={'/images/module/' + m.bild} alt="modul" fluid />
+                                        </Link>
+                                        <figcaption>Foto: Michael M. Schuff</figcaption>
+                                    </figure>
+                                </Col>
+                            )
                     })}
                 </Row>,
 

@@ -16,12 +16,14 @@ const Tage = () => {
       seteintraege(res.data)
     })
     .catch(function (error) {
+      console.log(error)
       if (error.response.status===403) {
         localStorage.clear()
         window.location.reload()
       }
     })
   },[])
+  
   const [width, setWidth] = React.useState(window.innerWidth);
   const breakpoint = 700;
   React.useEffect(() => {

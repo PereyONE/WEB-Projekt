@@ -21,6 +21,7 @@ import AdminLehrende from '../AppAdmin/AdminLehrende';
 import AdminModule from '../AppAdmin/AdminModule';
 import AdminFAQ from '../AppAdmin/AdminFAQ';
 import AdminVertiefung from '../AppAdmin/AdminVertiefung';
+import AdminTermine from '../AppAdmin/AdminTermine';
 
 function App() {
 
@@ -68,14 +69,12 @@ function App() {
         <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
 
         <Route path="/admin" exact component={AppAdmin} />
-        <Route path="/admin/lehrende" component={AdminLehrende} />
-        <Route path="/admin/module" component={AdminModule} />
-        <Route path="/admin/faqs" component={AdminFAQ} />
-        <Route path="/admin/vertiefungen" component={AdminVertiefung} />
+        <Route path="/adminLehrende" component={AdminLehrende} />
+        <Route path="/adminModule" component={AdminModule} />
+        <Route path="/adminFaqs" component={AdminFAQ} />
+        <Route path="/adminVertiefungen" component={AdminVertiefung} />
+        <Route path="/adminTermine" component={AdminTermine}/>
         
-
-
-
       </div>
     </Router>
 

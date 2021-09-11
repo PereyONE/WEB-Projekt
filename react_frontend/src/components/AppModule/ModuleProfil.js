@@ -1,14 +1,14 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentDots, faSnowflake, faUserClock, faWallet } from '@fortawesome/free-solid-svg-icons'
 import './AppModule.css'
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 function ModuleProfil({ modul }) {
-    const {modulid} =useParams()
+    const { modulid } = useParams()
     /*
     const [modul, setmodul] = useState([]);
 
@@ -27,8 +27,11 @@ function ModuleProfil({ modul }) {
         <div>
 
             <div className="titel">
-                <Image className="titelbild" src={modul.picture} alt="prof" fluid />
-                <h1 className="titeltext" style={{color:'white'}}>{modul.name}</h1>
+                <figure>
+                    <Image className="titelbild" src={modul.picture} alt="prof" fluid />
+                    <figcaption style={{position: 'absolute', right:'0px'}}>Foto: Michael M. Schuff </figcaption>
+                </figure>
+                <h1 className="titeltext" style={{ color: 'white' }}>{modul.name}</h1>
             </div>
 
             <div>
@@ -65,7 +68,7 @@ function ModuleProfil({ modul }) {
                                     </Col>
                                     <Col className="ProfilSchrift" xs={{ span: 8, offset: 0 }}>
                                         Regelstudienzeit<br />{modul.zeit}. Semester
-                                   </Col>
+                                    </Col>
                                 </Row>
                             </Col>
 
@@ -105,9 +108,9 @@ function ModuleProfil({ modul }) {
 
                         </Row>
                         <p>Inhalt <br />
-                        Die Produktion von auditiven, visuellen und multimedialen Medieninhalten ist geprägt
-                        durch die verwendeten Techniken und Technologien zur Aufzeichnung, Speicherung, Bearbeitung,
-                        Transport und Wiedergabe von Ton und (Bewegt-)Bild.
+                            Die Produktion von auditiven, visuellen und multimedialen Medieninhalten ist geprägt
+                            durch die verwendeten Techniken und Technologien zur Aufzeichnung, Speicherung, Bearbeitung,
+                            Transport und Wiedergabe von Ton und (Bewegt-)Bild.
                         </p>
                     </Col>
 

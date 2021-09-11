@@ -6,8 +6,104 @@ import axios from 'axios'
 
 function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
+  const [user, setUser] = useState()
+
+  const [courses, setCourses] = useState([]);
+
   const defaultVertiefung = { module: [] }
   const [vertiefungUpdate, setVertiefungUpdate] = useState(defaultVertiefung)
+
+  const [courseAdd, setCourseAdd] = useState({ id: null })
+  const [courseRemove, setCourseRemove] = useState({ id: null })
+
+  const defaultCourse = { id: null, name: '' };
+  const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
+
+
+  // const [wahlCourses, setWahlCourses] = useState([
+  //   { id: 0, Vertiefungsname: 'null' },
+  //   { id: 1, Vertiefungsname: 'Kameratechnik' },
+  //   { id: 2, Vertiefungsname: 'Produktion audiovisueller Medien' },
+  //   { id: 3, Vertiefungsname: 'Web-Engineering' },
+  //   { id: 4, Vertiefungsname: 'Interaktive Systeme' },
+  //   { id: 5, Vertiefungsname: 'Mediendesign' },
+  //   { id: 6, Vertiefungsname: 'Mediendistribution' },
+  //   { id: 7, Vertiefungsname: 'Bildverarbeitung' },
+  // ])
+
+  const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
+  const [wahlCourseRemove, setWahlCourseRemove] = useState({ id: null })
+  //Default wird erstellt
+  const defaultWahlCourse = { id: null, name: '' };
+  const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
+
+  useEffect(() => {
+    axios.get('/api/student')
+      .then(res => {
+        setUser(res.data)
+        if (!(res.data.vertiefungen === null)) {
+          setVertiefungUpdate({ ...vertiefungUpdate, module: res.data.vertiefungen })
+        }
+
+        console.log(res.data)
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  // Vertiefunspakete/namen
+  // Hier GET- Request von der API und und Vertiefungen abrufen.
+
+
+  useEffect(() => {
+    axios.get('/api/vertiefung')
+      .then(res => {
+        setCourses(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+
+
+
+  const [wahlCourses, setWahlCourses] = useState([]);
+  const [wahlHelper, setWahlHelper] = useState([])
+  useEffect(() => {
+    axios.get('api/modules')
+      .then(res => {
+        setWahlHelper(res.data)
+      })
+      .then(
+        
+
+      )
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+    console.log(wahlHelper)
+    wahlHelper.map((wahls) => {
+      if (!(wahls.moduleTyp === "Pflichtmodule")) {
+        setWahlCourses([...wahlCourses, wahls])
+      }
+    }
+    )
+
+  }, [])
+
+
+
+
+
+
+
+
   function handleClick(prof) {
     //preventDefault();
     setVertiefungUpdate(prof)
@@ -24,19 +120,6 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     });
   }
 
-  // Vertiefunspakete/namen
-  // Hier GET- Request von der API und und Vertiefungen abrufen.
-  const [courses, setCourses] = useState([]);
-  useEffect(()=> {
-    axios.get('/api/vertiefung')
-    .then(res => {
-      setCourses(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[])
-
 
   // const [courses, setCourses] = useState([
   //   { id: 1, Vertiefungsname: 'Kameratechnik' },
@@ -48,11 +131,8 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   //   { id: 7, Vertiefungsname: 'Bildverarbeitung' },
   // ])
 
-  const [courseAdd, setCourseAdd] = useState({ id: null })
-  const [courseRemove, setCourseRemove] = useState({ id: null })
-  //Default wird erstellt
-  const defaultCourse = { id: null, name: '' };
-  const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
+
+
   const addModul = (evt) => {
     if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(courseAdd.id === 0))) {
       evt.preventDefault();
@@ -68,6 +148,8 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
       setCourseAdd({ id: null })
 
     }
+    console.log(wahlCourses)
+
   }
 
 
@@ -90,6 +172,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     )
     console.log(vertiefungUpdate)
     setCourseRemove({ id: null })
+
   }
 
 
@@ -114,22 +197,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   //   });
   // }
   //Vertiefunspakete/namen
-  const [wahlCourses, setWahlCourses] = useState([
-    { id: 0, Vertiefungsname: 'null' },
-    { id: 1, Vertiefungsname: 'Kameratechnik' },
-    { id: 2, Vertiefungsname: 'Produktion audiovisueller Medien' },
-    { id: 3, Vertiefungsname: 'Web-Engineering' },
-    { id: 4, Vertiefungsname: 'Interaktive Systeme' },
-    { id: 5, Vertiefungsname: 'Mediendesign' },
-    { id: 6, Vertiefungsname: 'Mediendistribution' },
-    { id: 7, Vertiefungsname: 'Bildverarbeitung' },
-  ])
 
-  const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
-  const [wahlCourseRemove, setWahlCourseRemove] = useState({ id: null })
-  //Default wird erstellt
-  const defaultWahlCourse = { id: null, name: '' };
-  const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
 
   const addWahlModul = (evt) => {
     if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) && (!(wahlCourseAdd.id === 0))) {
@@ -146,6 +214,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
       setWahlCourseAdd({ id: null })
     }
   }
+
   const removeWahlModul = (evt) => {
     evt.preventDefault()
     var tmp = wahlUpdate.wahlen
@@ -166,6 +235,21 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     console.log(wahlUpdate)
     setWahlCourseRemove({ id: null })
   }
+
+
+  function saveModule() {
+    const update = { 'vertiefungen': vertiefungUpdate.module, 'wahlId': [] }
+    console.log(update)
+    axios.post('api/student', update)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+
 
 
   return (
@@ -194,9 +278,16 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                       <option value={0} > Vertiefungen hinzufügen  </option>
                       {courses.map((modul) => {
                         if (!(vertiefungUpdate.module.includes(modul.id))) {
-                          return (
-                            <option value={modul.id} >{modul.name}</option>
-                          )
+                          if (vertiefungUpdate.module.length < 2) {
+                            return (
+                              <option value={modul.id} >{modul.name}</option>
+                            )
+                          }
+                          else {
+                            return (
+                              <option disabled value={modul.id} >{modul.name}</option>
+                            )
+                          }
                         }
                       })}
                     </select>
@@ -249,7 +340,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
           <div class="input-group-prepend">
             <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
           </div>
-          <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={vertiefungUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
+          <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" onChange={e => onTodoChangeModule(e.target.value)}></input>
         </div>
 
 
@@ -329,7 +420,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
           </div>
         </div>
       </div>
-      <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" >
+      <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={saveModule} >
         Submit
       </button>
 

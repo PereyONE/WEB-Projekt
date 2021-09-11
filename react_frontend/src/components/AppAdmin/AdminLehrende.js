@@ -6,8 +6,29 @@ import { Redirect } from 'react-router-dom'
 
 function AdminLehrende() {
 
+    //Konstanten und States
     const [auth, setAuth] = useState(true)
+    const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', module: [] }
 
+    const [profUpdate, setProfUpdate] = useState(defaultProf)
+
+    const [courseAdd, setCourseAdd] = useState({ id: null })
+    const [courseRemove, setCourseRemove] = useState({ id: null })
+
+    const [courses, setCourses] = useState([
+        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen', verfügbarkeit: 'Wintersemester', regelstudienzeitsieben: 'erstes Semester', regelstudienzeitzwölf: 'drittes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 3, modulname: 'Mathematik 3', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 4, modulname: 'Mathematik 4', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 5, modulname: 'Mathematik 5', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 6, modulname: 'Mathematik 6', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+        { id: 7, modulname: 'Mathematik 7', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+    ])
+
+    const [profs, setProfs] = useState([])
+
+
+    //Data fetching
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
@@ -18,7 +39,6 @@ function AdminLehrende() {
             })
     }, [])
 
-    const [profs, setProfs] = useState([])
 
     useEffect(() => {
         axios.get('api/lehrende')
@@ -32,11 +52,6 @@ function AdminLehrende() {
 
 
 
-
-
-    const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', module: [] }
-
-    const [profUpdate, setProfUpdate] = useState(defaultProf)
 
     function handleClick(prof) {
         //preventDefault();
@@ -96,19 +111,9 @@ function AdminLehrende() {
         });
     }
 
-    const [courses, setCourses] = useState([
-        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen', verfügbarkeit: 'Wintersemester', regelstudienzeitsieben: 'erstes Semester', regelstudienzeitzwölf: 'drittes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 3, modulname: 'Mathematik 3', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 4, modulname: 'Mathematik 4', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 5, modulname: 'Mathematik 5', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 6, modulname: 'Mathematik 6', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 7, modulname: 'Mathematik 7', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
+    
 
-    ])
-
-    const [courseAdd, setCourseAdd] = useState({ id: null })
-    const [courseRemove, setCourseRemove] = useState({ id: null })
+    
 
 
     const addModul = (evt) => {
@@ -172,7 +177,7 @@ function AdminLehrende() {
     const fileUploadHandler = () => {
         const fd = new FormData()
         fd.append('image', profBild, profBild.name)
-        axios.post('api/fileUpload', fd)
+        axios.post('api/bilder/module', profBild)
             .then(res => {
                 console.log(res)
             })
@@ -209,7 +214,7 @@ function AdminLehrende() {
                         <div class="list-group" >
                             <button key='x' onClick={() => handleClick(defaultProf)} type="button" class="list-group-item list-group-item-action" > neue Person erstellen </button>
                             {profs.map((prof, i) => (
-                                <button key={i} onClick={() => handleClick(prof)} type="button" class="list-group-item list-group-item-action" > {prof.titel}  </button>
+                                <button key={i} onClick={() => handleClick(prof)} type="button" class="list-group-item list-group-item-action" > {prof.nachname}  </button>
                             ))}
                         </div>
                     </div>

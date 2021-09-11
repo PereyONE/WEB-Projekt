@@ -8,9 +8,12 @@ function Lehrende({ prof }) {
     return (
         <Col className="prof" lg={{ span: 4, offset: 0 }}>
             <div >
-                <Link to={`/lehrende/${prof.id}`}>
-                    <Image className="Bild" src={"/images/lehrende/"+prof.bild} alt="prof" fluid />
-                </Link>
+                <figure>
+                    <Link to={`/lehrende/${prof.id}`}>
+                        <Image className="Bild" src={"/images/lehrende/" + prof.bild} alt="prof" fluid />
+                    </Link>
+                    <figcaption>Foto: Michael M. Schuff</figcaption>
+                </figure>
             </div>
 
             <div className="Name">

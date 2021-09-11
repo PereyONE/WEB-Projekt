@@ -1,7 +1,8 @@
-//import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom'
 import React from 'react';
+import axios from 'axios';
 
 
 //import {Row} from "react-bootstrap";
@@ -10,6 +11,16 @@ import './AppHome.css'
 
 //Notiz: Die Margin-Bottom im CSS von der NavBar (die 40px) wegmachen oder verringern :-( (Default:50px)
 function AppHome({ auth }) {
+
+      useEffect(() => {
+            axios.get('/api/student')
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }, [])
 
       if (!auth) {
             return <Redirect to="/login" />

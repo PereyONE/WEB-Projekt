@@ -7,10 +7,22 @@ import { Redirect } from 'react-router-dom'
 
 function AdminModule({ prof, course }) {
 
+
+    //Konstanten und States
     const [auth, setAuth] = useState(true)
 
+    const defaultCourse = {  moduleName: '', moduleAbkürzung: '', ects: '', moduleTyp: '', vertiefung: '', prüfungsart: '', beschreibung: '', verfügbarkeit: '', regelstudienzeitsieben: '', regelstudienzeitzwölf: '', terminID: '', bild: 'platzhalter.jpg', oberkategorie:'' };
+    const [courseUpdate, setCourseUpdate] = useState(defaultCourse)
+    const [courseAdd, setCourseAdd] = useState({ id: null })
+
+    const sieben = [1, 2, 3, 4, 5, 6, 7]
+    const zwoelf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    const [courses, setCourses] = useState([])
+    const [vertiefung, setVertiefung] = useState([])
 
 
+    //Data fetching
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
@@ -21,9 +33,7 @@ function AdminModule({ prof, course }) {
             })
     }, [])
 
-    const [courses, setCourses] = useState([])
-    const [vertiefung, setVertiefung] = useState([])
-
+    
     useEffect(() => {
         axios.get('/api/modules')
             .then(res => {
@@ -46,14 +56,12 @@ function AdminModule({ prof, course }) {
             })
     }, [])
 
-    const updateModul = () =>{
-        axios.post('api/modules')
-    }
 
     const postModul = () =>{
         axios.post('api/modules', courseUpdate)
         .then(res=>{
             console.log(res)
+            fileUploadHandler()
         })
         .catch(err => {
             console.log(err)
@@ -65,7 +73,7 @@ function AdminModule({ prof, course }) {
     }
 
     const deleteModule = () => {
-        axios.delete('/api/modules/' + courseUpdate.id)
+        axios.delete('api/modules' , courseUpdate)
             .then(res => {
                 console.log(res)
             })
@@ -74,22 +82,7 @@ function AdminModule({ prof, course }) {
             })
     }
 
-
-
-
-
-
-
-
-
-
-    const [courseAdd, setCourseAdd] = useState({ id: null })
-    const [courseRemove, setCourseRemove] = useState({ id: null })
-
-    const defaultCourse = {  moduleName: '', moduleAbkürzung: '', ects: '', moduleTyp: '', vertiefung: '', prüfungsart: '', beschreibung: '', verfügbarkeit: '', regelstudienzeitsieben: '', regelstudienzeitzwölf: '', terminID: '', bild: 'platzhalter.jpg' };
-    const [courseUpdate, setCourseUpdate] = useState(defaultCourse)
-    const sieben = [1, 2, 3, 4, 5, 6, 7]
-    const zwoelf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    
 
     function handleClickCourse(course) {
         //preventDefault();
@@ -100,19 +93,6 @@ function AdminModule({ prof, course }) {
     // Für jeden Bereich wird eine onTodoChange- Funktion angelegt, 
     // damit sich die Eingabedaten nicht gegenseitig überschreiben.
 
-    function onTodoChangeModulname(value) {
-        setCourseUpdate({
-            ...courseUpdate,
-            modulname: value,
-        });
-    }
-
-    function onTodoChangeAbkuerzung(value) {
-        setCourseUpdate({
-            ...courseUpdate,
-            modulabkürzung: value,
-        });
-    }
 
     function onTodoChangeEcts(value) {
         setCourseUpdate({
@@ -149,12 +129,13 @@ function AdminModule({ prof, course }) {
         setCourseBild(e.target.files[0])
 
         console.log(courseUpdate)
+        console.log(e.target.files[0])
     }
 
     const fileUploadHandler = () => {
         const fd = new FormData()
-        fd.append('image', courseBild, courseBild.name)
-        axios.post('api/fileUpload', fd)
+        fd.append('file', courseBild)
+        axios.post('api/bilder/lehrende', fd)
             .then(res => {
                 console.log(res)
             })

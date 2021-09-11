@@ -49,7 +49,7 @@ function AdminVertiefung() {
 
     // Bild Upload
 
-    window.location.reload()
+    
 }
 
 const deleteVertiefung = () => {

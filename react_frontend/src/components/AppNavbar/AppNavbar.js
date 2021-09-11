@@ -20,9 +20,10 @@ function AppNavbar({ auth }) {
 
   function logoutLeiste(){
     localStorage.clear()
-    window.location.reload()
-    
+    window.location.reload() 
   }
+
+  
   if (!auth) { return null}
   else {
     return (
