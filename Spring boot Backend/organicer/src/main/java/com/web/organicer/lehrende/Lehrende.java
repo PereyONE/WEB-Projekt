@@ -1,6 +1,7 @@
 package com.web.organicer.lehrende;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.web.organicer.module.Module;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.*;
 
 
 @Component
@@ -40,9 +41,12 @@ public class Lehrende {
     private String raum;
     private String sprechstunde;
     private String bild;
-    private ArrayList<Long> moduleId;
 
-    public Lehrende(String titel, String vorname, String nachname, String funktion, String email, String telefonnummer, String raum, String sprechstunde, String bild, ArrayList<Long> moduleId) {
+    @JsonIgnoreProperties(value = "lehrende")
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Module> modules = new ArrayList<>();
+
+    public Lehrende(String titel, String vorname, String nachname, String funktion, String email, String telefonnummer, String raum, String sprechstunde, String bild) {
         this.titel = titel;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -52,6 +56,23 @@ public class Lehrende {
         this.raum = raum;
         this.sprechstunde = sprechstunde;
         this.bild = bild;
-        this.moduleId = moduleId;
     }
+
+    public void addModule(Module modul) {
+        modules.add(modul);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lehrende lehrender = (Lehrende) o;
+        return Objects.equals(id, lehrender.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

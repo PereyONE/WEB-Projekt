@@ -22,16 +22,16 @@ public class LehrendeController {
     }
 
     @GetMapping (path = "/{id}")// gibt Lehrenden mit entsprechener ID zurück
-    public Map<String,Object> getLehrendeById(@PathVariable("id") Long id){
+    public Lehrende getLehrendeById(@PathVariable("id") Long id){
 
         return lehrendeService.getLehrendeById(id);
     }
-
 
     @PostMapping
     public String postLehrende(@RequestBody Lehrende lehrende){
         return lehrendeService.postLehrende(lehrende);
     }
+
 
     @DeleteMapping
     public String deleteLehrende(@RequestBody Lehrende lehrende){

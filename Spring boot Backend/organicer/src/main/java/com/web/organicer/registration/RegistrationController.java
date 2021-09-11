@@ -35,8 +35,6 @@ public class RegistrationController {
         Student student = studentRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        svpModulService.connectSvpModules(student.getId());
-
         return "Deine Email-Addresse ist verifiziert, Du kannst dich jetzt einloggen";
     }
 }

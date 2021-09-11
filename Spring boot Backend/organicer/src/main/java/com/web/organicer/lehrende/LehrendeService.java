@@ -28,38 +28,16 @@ public class LehrendeService {
     }
 
     public Lehrende getOnlyLehrendeById(Long lehrendeId){
-        return lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende nor found"));
+        return lehrendeRepository.findById(lehrendeId).get();
     }
 
-    public Map<String,Object> getLehrendeById(Long lehrendeId) {
+    public Lehrende getLehrendeById(Long lehrendeId) {
 
-        Map<String,Object> map = new HashMap<>();
-
-        Lehrende lehrende = getOnlyLehrendeById(lehrendeId);
-        ArrayList<Module> module= getModuleByLehrendeId(lehrendeId);
-
-        map.put("Lehrende",lehrende);
-        if(module!=null) {
-            map.put("Module", module);
-        }
-        return map;
+        return getOnlyLehrendeById(lehrendeId);
     }
 
     public ArrayList<Module> getModuleByLehrendeId(Long lehrendeId){
-        Lehrende lehrende = lehrendeRepository.findById(lehrendeId).orElseThrow(() -> new UsernameNotFoundException("Lehrende not found"));
-        ArrayList<Long> id = lehrende.getModuleId();
-
-        if(id==null){
-            return null;
-        }
-                ArrayList<Module> module = new ArrayList<>();
-                for(Long tmp : id){
-                    Module modul = moduleRepository.findById(tmp).orElseThrow(() -> new UsernameNotFoundException("Modul not found"));
-                    if(modul != null){
-                        module.add(modul);
-            }
-        }
-        return module;
+        return new ArrayList<>(lehrendeRepository.getById(lehrendeId).getModules());
     }
 
     public String postLehrende(Lehrende lehrende){
@@ -83,9 +61,19 @@ public class LehrendeService {
         return "Mitarbeiter " + lehrende.getVorname()+ " " + lehrende.getNachname() + " hinzugefügt";
     }
 
-    public String updateLehrende(Lehrende lehrende){
-        lehrendeRepository.save(lehrende);
-        return "Mitarbeiter " + lehrende.getVorname()+ " " + lehrende.getNachname() + " aktualisiert";
+    public String updateLehrende(Lehrende lehrender){
+        if(lehrender.getModules()!=null){
+            lehrender.setModules(lehrender.getModules());
+            for(Module module: lehrender.getModules()){
+                ArrayList<Lehrende> lehrende = new ArrayList<>(module.getLehrende());
+                lehrende.add(lehrender);
+                module.setLehrende(lehrende);
+            }
+            lehrendeRepository.save(lehrender);
+            return "Mitarbeiter " + lehrender.getVorname()+ " " + lehrender.getNachname() + " aktualisiert";
+        }
+        lehrendeRepository.save(lehrender);
+        return "Mitarbeiter " + lehrender.getVorname()+ " " + lehrender.getNachname() + " aktualisiert";
     }
 
     public String deleteLehrende(Lehrende lehrende){
