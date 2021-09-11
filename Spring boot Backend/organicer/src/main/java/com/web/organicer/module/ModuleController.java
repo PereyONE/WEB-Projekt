@@ -19,10 +19,7 @@ public class ModuleController {
     }
 
     @GetMapping (path = "/{id}")// gibt Modul mit entsprechener ID zurück
-    public Map<String,Object> getModulById(@PathVariable("id") Long id){
-
-        return moduleService.getModulById(id);
-    }
+    public Module getModulById(@PathVariable("id") Long id){ return moduleService.getModulById(id);}
 
     @PostMapping
     public String postModule(@RequestBody Module module){

@@ -3,6 +3,7 @@ package com.web.organicer.student;
 import com.web.organicer.registration.token.ConfirmationToken;
 import com.web.organicer.registration.token.ConfirmationTokenService;
 import com.web.organicer.security.jwt.JwtUtil;
+import com.web.organicer.svpModul.SvpModulService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class StudentService implements UserDetailsService {
 
     private final StudentRepository studentRepository;
+    private final SvpModulService svpModulService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService conformationTokenService;
     private final JwtUtil jwtUtil;
@@ -47,7 +49,8 @@ public class StudentService implements UserDetailsService {
 
         student.setSvpSemester(7);
 
-        studentRepository.save(student);
+        Student realStudent = studentRepository.save(student);
+        svpModulService.connectSvpModules(realStudent.getId());
 
         String token = UUID.randomUUID().toString();
         ConfirmationToken conformationToken = new ConfirmationToken(token, student);

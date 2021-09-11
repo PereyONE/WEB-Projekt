@@ -20,13 +20,10 @@ public class StudentController {
     @GetMapping
     public Student getStudent(HttpServletRequest request){return studentService.getStudentFromRequest(request);}
 
-   /* @PostMapping
-    public String addVertiefungsModule(@RequestBody ArrayList<Integer> vertiefungen, HttpServletRequest request){
-        for(int vertiefung: vertiefungen) {
-            verlaufsplanService.addVertiefungsModulToVerlaufsplan(vertiefung, request);
-        }
-        return studentService.addVertiefungsModuleToStuden(vertiefungen, request);
-    }*/
+    @PostMapping
+    public String addVertiefungsModule(@RequestBody Student student, HttpServletRequest request){
+        return studentService.addWahlAndVertiefungsModuleToStuden(student, request);
+    }
 
     @PostMapping("/updateSemester")
     public String updateSemester(@RequestBody Student student, HttpServletRequest request){ return studentService.updateSemester(student, request); }
