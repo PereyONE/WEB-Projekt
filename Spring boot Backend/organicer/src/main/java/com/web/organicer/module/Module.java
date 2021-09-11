@@ -39,6 +39,7 @@ public class Module {
     private String regelstudienzeitsieben;//int
     private String regelstudienzeitzwölf;//int
     private String bild;
+    private String bildrechte;
 
 
 }
