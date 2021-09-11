@@ -56,33 +56,25 @@ public class VerlaufsplanService {
         return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request),"Modul");
     }
 
-    /*public String addVertiefungsModulToVerlaufsplan(int vertiefung, HttpServletRequest request) {
+    public String addVertiefungenToVerlaufsplan(ArrayList<Integer> vertiefung, HttpServletRequest request) {
 
-        if(vertiefung!=0) {
-            ArrayList<SvpModul> module = new ArrayList<>();
-            Student student = studentService.getStudentFromRequest(request);
-            if (!student.getVertiefungen().contains(vertiefung)) {
-                student.setVertiefungen(vertiefung);
-                svpModulService.getSvpModulByVertiefungspaket(vertiefung);
+        ArrayList<Verlaufsplan> verlaufsplan = getVerlaufsplanById(request);
 
-                switch (student.getVertiefungen().size()){
-                    case 0:
-                        verlaufsplanService.getSvpModuleByVertiefungspaket(request,vertiefung);
-                        break;
-                }
+        for(int vertiefungid : vertiefung){
 
-                return "Vertiefung wurde hinzugefügt";
-            }
-            return "Vertiefung schon drin";
         }
-        return "Vertiefung ist null";
-    }*/
+        return "Läuft";
+    }
 
-    /*private ArrayList<SvpModul> getSvpModuleByVertiefungspaket(HttpServletRequest request, int vertiefungspaket) {
+    private ArrayList<Verlaufsplan> getPlatzhalter(Long id) {
+        return verlaufsplanRepository.findPlatzhalterById(id);
+    }
+
+    private ArrayList<SvpModul> getSvpModuleByVertiefungspaket(HttpServletRequest request, int vertiefungspaket) {
 
         Long id = studentService.getStudentIdFromRequest(request);
-        //ArrayList<SvpModul> vertiefungen = new ArrayList<>(verlaufsplanRepository.findByStudentIdAndVertiefungspaket(id,vertiefungspaket));
+        ArrayList<SvpModul> vertiefungen = new ArrayList<>(verlaufsplanRepository.findByStudentIdAndVertiefungspaket(id,vertiefungspaket));
 
         return vertiefungen;
-    }*/
+    }
 }

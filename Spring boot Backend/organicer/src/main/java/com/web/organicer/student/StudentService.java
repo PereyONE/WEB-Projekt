@@ -76,11 +76,12 @@ public class StudentService implements UserDetailsService {
 
     public Long getStudentIdFromRequest(HttpServletRequest request){ return getStudentFromRequest(request).getId(); }
 
-    public String addVertiefungsModuleToStuden(ArrayList<Integer> vertiefungen, HttpServletRequest request) {
+    public String addWahlAndVertiefungsModuleToStuden(Student student, HttpServletRequest request) {
 
-        Student student = getStudentFromRequest(request);
+        Student realStudent = getStudentFromRequest(request);
 
-        for(int vertiefung: vertiefungen){
+        for(int vertiefung: student.getVertiefungen()){
+            realStudent.setVertiefungen(vertiefung);
 
         }
 
