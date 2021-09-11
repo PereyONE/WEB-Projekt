@@ -11,7 +11,7 @@ function AdminModule({ prof, course }) {
     //Konstanten und States
     const [auth, setAuth] = useState(true)
 
-    const defaultCourse = {  moduleName: '', moduleAbkürzung: '', ects: '', moduleTyp: '', vertiefung: '', prüfungsart: '', beschreibung: '', verfügbarkeit: '', regelstudienzeitsieben: '', regelstudienzeitzwölf: '', terminID: '', bild: 'platzhalter.jpg', oberkategorie:'' };
+    const defaultCourse = { moduleName: '', moduleAbkürzung: '', ects: '', moduleTyp: '', vertiefung: '', prüfungsart: '', beschreibung: '', verfügbarkeit: '', regelstudienzeitsieben: '', regelstudienzeitzwölf: '', terminID: '', bild: 'platzhalter1.png', bildrechte: '', oberkategorie: '' };
     const [courseUpdate, setCourseUpdate] = useState(defaultCourse)
     const [courseAdd, setCourseAdd] = useState({ id: null })
 
@@ -33,7 +33,7 @@ function AdminModule({ prof, course }) {
             })
     }, [])
 
-    
+
     useEffect(() => {
         axios.get('/api/modules')
             .then(res => {
@@ -57,23 +57,24 @@ function AdminModule({ prof, course }) {
     }, [])
 
 
-    const postModul = () =>{
+    const postModul = () => {
         axios.post('api/modules', courseUpdate)
-        .then(res=>{
-            console.log(res)
-            fileUploadHandler()
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                console.log(res)
+                fileUploadHandler()
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
         //Bild Upload
 
-        // window.location.reload()
+         
     }
 
     const deleteModule = () => {
-        axios.delete('api/modules' , courseUpdate)
+        axios.delete('api/modules', courseUpdate)
             .then(res => {
                 console.log(res)
             })
@@ -82,7 +83,7 @@ function AdminModule({ prof, course }) {
             })
     }
 
-    
+
 
     function handleClickCourse(course) {
         //preventDefault();
@@ -135,10 +136,16 @@ function AdminModule({ prof, course }) {
     const fileUploadHandler = () => {
         const fd = new FormData()
         fd.append('file', courseBild)
-        axios.post('api/bilder/lehrende', fd)
+        axios.post('api/bilder/module', fd,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
             .then(res => {
                 console.log(res)
             })
+            window.location.reload()
     }
 
 
@@ -182,7 +189,7 @@ function AdminModule({ prof, course }) {
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulname</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.moduleName} onChange={e => setCourseUpdate({...courseUpdate, moduleName: e.target.value})}></input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.moduleName} onChange={e => setCourseUpdate({ ...courseUpdate, moduleName: e.target.value })}></input>
                         </div>
 
                         {/* Inputfeld Modulabkürzung */}
@@ -190,7 +197,7 @@ function AdminModule({ prof, course }) {
                             <div class="input-group-prepend">
                                 <span class="input-group-text lenge" id="inputGroup-sizing-sm">Modulabkürzung</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.moduleAbkürzung} onChange={e => setCourseUpdate({...courseUpdate, moduleAbkürzung:e.target.value})}></input>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.moduleAbkürzung} onChange={e => setCourseUpdate({ ...courseUpdate, moduleAbkürzung: e.target.value })}></input>
                         </div>
 
                         {/* Inputfeld ECTS */}
@@ -283,19 +290,19 @@ function AdminModule({ prof, course }) {
                         </form>
                     </div>
 
-                    {/* Vertiefung und Oberkategorie */}
+                    {/* Vertiefung */}
                     <div class="input-group marg">
                         <form >
                             <label>
                                 Vertiefung auswählen
-                                <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseUpdate({...courseUpdate,vertiefung:e.target.value})}>
+                                <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.vertiefung} onChange={e => setCourseUpdate({ ...courseUpdate, vertiefung: e.target.value, oberkategorie:e.target.value })}>
                                     <option value='0'  >Vertiefung wählen</option>
                                     {vertiefung.map((v) => {
                                         if (courseUpdate.moduleTyp === 'Vertiefungsmodule') {
-                                            return (<option value={v.id} >{v.name}</option>)
+                                            return (<option value={v.name} >{v.name}</option>)
                                         }
-                                        else{
-                                            return (<option disabled value={v.id} >{v.name}</option>)
+                                        else {
+                                            return (<option disabled value={v.name} >{v.name}</option>)
                                         }
 
                                     })}
@@ -306,10 +313,35 @@ function AdminModule({ prof, course }) {
 
                     </div>
 
+                    {/*  Oberkategorie */}
+                    Kategorie wählen (zB: Mathematik, Phototechnik etc.)
+                    <div class="input-group input-group-sm mb-3">
+
+                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Kategorie</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.oberkategorie} onChange={e => { setCourseUpdate({ ...courseUpdate, oberkategorie: e.target.value,  }) }}></input>
+                        
+
+
+
+
+
+                    </div>
+
                     {/*Bilder upload */}
 
                     <label for="formFileSm" class="form-label">Bild auswählen: </label>
                     <input class=" form-control-sm" id="formFileSm" type="file" accept='image/*' onChange={fileSelectHandler} />
+
+                    {/* Inputfeld Bildrechte */}
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text lenge" id="inputGroup-sizing-sm">Bildrechte</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.bildrechte} onChange={e => { setCourseUpdate({ ...courseUpdate, bildrechte: e.target.value }) }}></input>
+                    </div>
 
 
                     <br />

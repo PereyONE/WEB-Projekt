@@ -20,15 +20,22 @@ function AppAdmin({ prof, course }) {
             })
     }, [])
 
+    if (!(auth)) {
+        return (
+            <Redirect to='/' />
+
+        )
+    }
+
     return (
         <div className='container' style={{}}>
             <h1>Was möchten Sie bearbeiten?</h1>
             <div >
-                <a style={{color:'black', fontSize:'30px', margin:'50px'}}href='/adminLehrende'>Lehrende</a>
-                <a style={{color:'black', fontSize:'30px', margin:'50px'}}href='/adminModule'>Module</a>
-                <a style={{color:'black', fontSize:'30px', margin:'50px'}}href='/adminVertiefungen'>Vertiefungen</a>
-                <a style={{color:'black', fontSize:'30px', margin:'50px'}}href='adminTermine'>Termine</a>
-                <a style={{color:'black', fontSize:'30px', margin:'50px'}}href='adminFaqs'>FAQs</a>
+                <a style={{ color: 'black', fontSize: '30px', margin: '50px' }} href='/adminLehrende'>Lehrende</a>
+                <a style={{ color: 'black', fontSize: '30px', margin: '50px' }} href='/adminModule'>Module</a>
+                <a style={{ color: 'black', fontSize: '30px', margin: '50px' }} href='/adminVertiefungen'>Vertiefungen</a>
+                <a style={{ color: 'black', fontSize: '30px', margin: '50px' }} href='/adminTermine'>Termine</a>
+                <a style={{ color: 'black', fontSize: '30px', margin: '50px' }} href='/adminFaqs'>FAQs</a>
             </div>
         </div>
     )

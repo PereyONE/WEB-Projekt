@@ -22,10 +22,10 @@ import java.nio.file.StandardCopyOption;
 
 
 @RestController
-@RequestMapping(path = "/api/bilder")
+@RequestMapping(path = "/api/bilder/lehrende")
 @AllArgsConstructor
 @CrossOrigin
-public class BilderController {
+public class BilderLehrendeController {
 
     @PostMapping(path = "/{modul}")
     public String uploadBildModul(@RequestBody MultipartFile file){
@@ -50,7 +50,7 @@ public class BilderController {
         }
     }
 
-    @PostMapping(path = "/{lehrende}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping( consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadBildLehrende(@RequestParam("file") MultipartFile file) throws IOException {
         if(file==null){
             System.out.println("pech gehabt");
@@ -68,7 +68,7 @@ public class BilderController {
 
         //Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         //file.transferTo(dest);
-        Path root = Paths.get("/upload");
+        Path root = Paths.get("/Users\\justu\\WPR\\neuesRepo\\WEB-Projekt\\react_frontend\\public\\images\\lehrende");
         if (!Files.exists(root)) {
             init();
         }
@@ -77,6 +77,37 @@ public class BilderController {
 
         return "Bild hochgeladen";
     }
+    /*
+
+    @PostMapping(path = "/{module}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String uploadBildModule(@RequestParam("file") MultipartFile file) throws IOException {
+        if(file==null){
+            System.out.println("pech gehabt");
+        }
+        System.out.println("1");
+        String filePath = ("public/images/lehrende");
+
+        //+ file.getOriginalFilename()
+        System.out.println("2");
+        String realPath = request.getServletContext().getRealPath(filePath);
+        System.out.println("3");
+
+        File dest = new File(filePath);
+        System.out.println(dest.getName());
+
+        //Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+        //file.transferTo(dest);
+        Path root = Paths.get("/Users\\justu\\WPR\\neuesRepo\\WEB-Projekt\\react_frontend\\public\\images\\module");
+        if (!Files.exists(root)) {
+            init();
+        }
+        Files.copy(file.getInputStream(), root.resolve(file.getOriginalFilename()));
+        System.out.println("5");
+
+        return "Bild hochgeladen";
+    }
+
+     */
 
 
     @PostMapping("/posts")
@@ -104,4 +135,5 @@ public class BilderController {
         multipartFile.transferTo(file);
     }
 }
+
 
