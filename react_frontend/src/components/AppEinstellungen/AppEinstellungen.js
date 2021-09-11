@@ -78,7 +78,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
         setWahlHelper(res.data)
       })
       .then(
-        
+
 
       )
       .catch(err => {
@@ -134,8 +134,9 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
 
   const addModul = (evt) => {
-    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(courseAdd.id === 0))) {
-      evt.preventDefault();
+    evt.preventDefault();
+    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) &&  (!(parseInt(courseAdd) === 0))) {
+  
       var tmp = vertiefungUpdate.module
       tmp.push(parseInt(courseAdd))
       setVertiefungUpdate(
@@ -155,6 +156,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const removeModul = (evt) => {
     evt.preventDefault()
+    if ((!(vertiefungUpdate.id === 0)) && (!(courseRemove.id === null)) && (!(parseInt(courseRemove) === 0))) {
     var tmp = vertiefungUpdate.module
     var pos
     for (var i = 0; i < tmp.length; i++) {
@@ -174,7 +176,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     setCourseRemove({ id: null })
 
   }
-
+  }
 
 
 
@@ -200,8 +202,9 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
 
   const addWahlModul = (evt) => {
-    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) && (!(wahlCourseAdd.id === 0))) {
-      evt.preventDefault();
+    evt.preventDefault();
+    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) &&  (!(parseInt(wahlCourseAdd) === 0))) {
+    
       var tmp = wahlUpdate.wahlen
       tmp.push(parseInt(wahlCourseAdd))
       setWahlUpdate(
@@ -217,6 +220,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const removeWahlModul = (evt) => {
     evt.preventDefault()
+    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseRemove.id === null)) && (!(parseInt(wahlCourseRemove) === 0))) {
     var tmp = wahlUpdate.wahlen
     var pos
     for (var i = 0; i < tmp.length; i++) {
@@ -235,6 +239,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     console.log(wahlUpdate)
     setWahlCourseRemove({ id: null })
   }
+}
 
 
   function saveModule() {
@@ -275,10 +280,10 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                   Bitte 4 Vertiefungen hinzufügen
                   <div class="width ">
                     <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
-                      <option value={0} > Vertiefungen hinzufügen  </option>
+                      <option value='0' > Vertiefungen hinzufügen  </option>
                       {courses.map((modul) => {
                         if (!(vertiefungUpdate.module.includes(modul.id))) {
-                          if (vertiefungUpdate.module.length < 2) {
+                          if (vertiefungUpdate.module.length < 4) {
                             return (
                               <option value={modul.id} >{modul.name}</option>
                             )
@@ -313,6 +318,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                 <div class="">
                   <div class="width ">
                     <select class="custom-select d-flex " id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
+                    <option value='0' >Vertiefung entfernen  </option>
                       {vertiefungUpdate.module.map((modulID) => {
                         var m
                         courses.map((course) => {
@@ -336,12 +342,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
           </div>
         </div>
 
-        <div class="input-group input-group-sm mb-3 top">
-          <div class="input-group-prepend">
-            <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
-          </div>
-          <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" onChange={e => onTodoChangeModule(e.target.value)}></input>
-        </div>
+
 
 
 
@@ -354,12 +355,18 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                   Bitte 2 Wahlfächer hinzufügen
                   <div class="width ">
                     <select class="custom-select" id="inputGroupSelect04" value={wahlCourseAdd} onChange={e => setWahlCourseAdd(e.target.value)}>
-                      <option value={0} > Vertiefungen hinzufügen  </option>
+                      <option value='0' > Wahlmodul hinzufügen  </option>
                       {courses.map((wahl) => {
                         if (!(wahlUpdate.wahlen.includes(wahl.id))) {
-                          return (
-                            <option value={wahl.id} >{wahl.name}</option>
-                          )
+                          if (wahlUpdate.wahlen.length < 2) {
+                            return (<option value={wahl.id}>{wahl.name} </option>
+                            )
+                          }
+                          else {
+                            return (
+                              <option disabled value={wahl.id} >{wahl.name}</option>
+                            )
+                          }
                         }
                       })}
                     </select>
@@ -385,6 +392,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                 <div class="">
                   <div class="width ">
                     <select class="custom-select d-flex " id="inputGroupSelect04" value={wahlCourseRemove} onChange={e => setWahlCourseRemove(e.target.value)}>
+                    <option value='0' >Wahlmodul entfernen  </option>
                       {wahlUpdate.wahlen.map((modulID) => {
                         var m
                         courses.map((wahlCourse) => {
@@ -393,6 +401,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                         return (
                           <option value={m.id} >{m.name}</option>
                         )
+
                       }
                       )}
                     </select>
@@ -412,12 +421,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
         <div class="row">
 
 
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text lenge" id="inputGroup-sizing-sm">Vertiefungen</span>
-            </div>
-            <input type="text" class="form-control" disabled aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={wahlUpdate.wahlen} ></input>
-          </div>
+
         </div>
       </div>
       <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={saveModule} >
