@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(path = "/api")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
