@@ -145,7 +145,7 @@ function AdminModule({ prof, course }) {
             .then(res => {
                 console.log(res)
             })
-            window.location.reload()
+            
     }
 
 
