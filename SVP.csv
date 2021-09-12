@@ -1,0 +1,7 @@
+﻿id;custum;name;typ;etcs;semester7;semester12;vertiefungspaket;wahlmodul;verfügbarkeit;art
+1;1;Pam1;Vertiefungsmodul;6;4;6;7;0;Sommersemester;Modul
+2;1;Pam1;Vertiefungsmodul;6;4;6;7;0;Sommersemester;ULP
+3;1;Pam1;Vertiefungsmodul;6;4;6;7;0;Sommersemester;Klausur
+4;1;Pam2;Vertiefungsmodul;6;4;6;7;0;Wintersemester;Modul
+5;1;Pam2;Vertiefungsmodul;6;4;6;7;0;Wintersemester;ULP
+6;1;Pam2;Vertiefungsmodul;6;4;6;7;0;Wintersemester;Klausur
