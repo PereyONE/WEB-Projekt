@@ -23,7 +23,7 @@ export default class AppRegister extends React.Component {
     event.preventDefault();
 
     axios
-      .post('http://localhost:8080/api/registration', {"username":this.state.username,"email":this.state.email,"password":this.state.password})
+      .post('/api/registration', {"username":this.state.username,"email":this.state.email,"password":this.state.password})
       .then(res => {
         console.log(res);
         console.log(res.data);
