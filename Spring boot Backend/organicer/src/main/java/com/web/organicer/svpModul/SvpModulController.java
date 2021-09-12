@@ -15,14 +15,11 @@ public class SvpModulController {
 
     private final SvpModulService svpModulService;
 
-    //Todo
-    //get-/updateDummySvp, get-/updateSvpbyUser
-
     @GetMapping
-    public List<SvpModul> getSvpModul(){
-        return svpModulService.getSvpModul();
-    }
+    public List<SvpModul> getSvpModul(){ return svpModulService.getSvpModul(); }
 
+    @GetMapping("/wahlmodule")
+    public List<SvpModul> getSvpWahlmodule(){ return  svpModulService.getWahlSvpModule();}
 
     @PostMapping
     public String postSvpModul(@RequestBody SvpModul svpModul){

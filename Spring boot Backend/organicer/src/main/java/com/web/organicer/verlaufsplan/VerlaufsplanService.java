@@ -72,20 +72,20 @@ public class VerlaufsplanService {
 
         Student realStudent = studentService.getStudentFromRequest(request);
 
-        ArrayList<Verlaufsplan> allVerläufe = getVerlaufsplanById(request);
+        ArrayList<Verlaufsplan> allVerlaeufe = getVerlaufsplanById(request);
 
         //alte Vertiefungen entfernen
         ArrayList<Verlaufsplan> alteVertiefungen = getVertiefungenInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteVertiefungen) {
             verlaufsplanRepository.delete(plan);
-            allVerläufe.remove(plan);
+            allVerlaeufe.remove(plan);
         }
 
         //neue Vertiefungen hinzufügen
         for (int vertiefungsnummer : vertiefungen) {
             for (SvpModul modul : svpModulService.getSvpModulByVertiefungspaket(vertiefungsnummer)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerläufe.add(plan);
+                allVerlaeufe.add(plan);
             }
         }
 
@@ -93,13 +93,13 @@ public class VerlaufsplanService {
         for (int i = vertiefungen.size(); i < 5; i++) {
             for (SvpModul modul : svpModulService.getSvpModulByVertiefungspaket(i + 8)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerläufe.add(plan);
+                allVerlaeufe.add(plan);
             }
         }
 
 
         //Verlaufsplan updaten
-        updateVerlaufsplan(allVerläufe, request);
+        updateVerlaufsplan(allVerlaeufe, request);
 
         return "Vertiefung/en hinzugefügt";
     }

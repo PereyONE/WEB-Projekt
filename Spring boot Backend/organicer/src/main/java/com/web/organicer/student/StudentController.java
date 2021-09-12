@@ -30,6 +30,9 @@ public class StudentController {
         return verlaufsplanService.addWahlModuleToStudent(wahlmodule, request);
     }
 
+    @PostMapping("/updatePasswort")
+    public String updatePasswort(@RequestBody String passwort, HttpServletRequest request){return studentService.updatePasswort(passwort, request);}
+
     @PostMapping("/updateSemester")
     public String updateSemester(@RequestBody Student student, HttpServletRequest request){ return studentService.updateSemester(student, request); }
 
