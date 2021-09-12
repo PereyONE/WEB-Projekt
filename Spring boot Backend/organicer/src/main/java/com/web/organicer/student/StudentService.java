@@ -3,7 +3,10 @@ package com.web.organicer.student;
 import com.web.organicer.registration.token.ConfirmationToken;
 import com.web.organicer.registration.token.ConfirmationTokenService;
 import com.web.organicer.security.jwt.JwtUtil;
+import com.web.organicer.svpModul.SvpModul;
 import com.web.organicer.svpModul.SvpModulService;
+import com.web.organicer.verlaufsplan.Verlaufsplan;
+import com.web.organicer.verlaufsplan.VerlaufsplanService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -76,17 +79,6 @@ public class StudentService implements UserDetailsService {
 
     public Long getStudentIdFromRequest(HttpServletRequest request){ return getStudentFromRequest(request).getId(); }
 
-    public String addWahlAndVertiefungsModuleToStuden(Student student, HttpServletRequest request) {
-
-        Student realStudent = getStudentFromRequest(request);
-
-        for(int vertiefung: student.getVertiefungen()){
-            realStudent.setVertiefungen(vertiefung);
-
-        }
-
-        return "yo";
-    }
 
     public String updateSemester(Student studentSemester, HttpServletRequest request) {
 
@@ -102,5 +94,20 @@ public class StudentService implements UserDetailsService {
 
     public boolean isUserAdmin(HttpServletRequest request) {
         return getStudentFromRequest(request).getStudentRole().equals(StudentRole.ADMIN);
+    }
+
+    public String updatePasswort(String passwort, HttpServletRequest request) {
+
+        if(passwort.length()<8) {
+            //Student Laden
+            Student student = getStudentFromRequest(request);
+            //Neues Passwort setzten
+            student.setPassword(bCryptPasswordEncoder.encode(passwort));
+            //Upgedateten Studenten speichern
+            studentRepository.save(student);
+
+            return "Passwort upgedated";
+        }
+        return "Passwort zu kurz";
     }
 }

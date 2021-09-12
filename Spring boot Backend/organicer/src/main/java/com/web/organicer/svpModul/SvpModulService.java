@@ -66,13 +66,19 @@ public class SvpModulService {
 
     public SvpModul findByName(String name){return svpModulRepository.findByName(name);}
 
-    public SvpModul getSvpModulByVertiefungspaket(int Vertiefungspaket) {
+    public ArrayList<SvpModul> getSvpModulByVertiefungspaket(int Vertiefungspaket) {
         return svpModulRepository.findByVertiefungspaket(Vertiefungspaket);
+    }
+
+    public ArrayList<SvpModul> getSvpModulByWahlmodul(int Wahlmodul) {
+        return svpModulRepository.findByWahlmodul(Wahlmodul);
     }
 
     public SvpModul getSvpModulById(Long svpModulId){ return svpModulRepository.getById(svpModulId);}
 
     public void saveSvpModul(SvpModul svpMoudl) { svpModulRepository.save(svpMoudl);}
+
+    public List<SvpModul> getWahlSvpModule() { return svpModulRepository.findWahlSvpmodule();}
 }
 
 
