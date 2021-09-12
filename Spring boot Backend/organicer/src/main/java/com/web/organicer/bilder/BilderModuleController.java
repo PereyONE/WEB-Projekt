@@ -97,7 +97,7 @@ public class BilderModuleController {
 
         //Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         //file.transferTo(dest);
-        Path root = Paths.get("/Users\\justu\\WPR\\neuesRepo\\WEB-Projekt\\react_frontend\\public\\images\\module");
+        Path root = Paths.get("/var/www/html/build/images/module");
         if (!Files.exists(root)) {
             init();
         }
