@@ -31,9 +31,16 @@ public class RegistrationService {
         student.setStudentRole(StudentRole.USER);
         String token = studentService.signUpStudent(student);
 
+        /*  Das hier wäre eigentlich für die Email-Verifikation aber da wir keinen Emailserver
+            ist das auskommentiert und man kann sich über die Antwort im Register request freischlaten
         String link = "http://localhost:8080/api/registration/confirm?token=" + token;
         emailSender.send(student.getEmail(), buildEmail(student.getUsername(), link));
-        return token;
+        return token;*/
+
+        //Deswegen wird hier noch der Student enabled dies wäre mit laufendem Mailserver hier nicht der Fall
+        studentService.enableStudent(student.getEmail());
+
+        return "Erfolgreich registriert";
     }
 
     @Transactional
