@@ -10,7 +10,7 @@ function AppModuleProfil() {
   const modul =
   {
     name:"Mathematik 1",
-    picture: "/images/module/platzhalter.jpg",
+    picture: "/images/module/mathe1.jpg",
     zeit: "1",
     ulp:"Wintersemester",
     klausur:"schriftlich",

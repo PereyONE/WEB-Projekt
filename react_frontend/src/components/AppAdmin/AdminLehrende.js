@@ -177,7 +177,7 @@ function AdminLehrende() {
     const fileUploadHandler = () => {
         const fd = new FormData()
         fd.append('image', profBild, profBild.name)
-        axios.post('api/bilder/module', profBild)
+        axios.post('api/bilder/lehrende', profBild)
             .then(res => {
                 console.log(res)
             })

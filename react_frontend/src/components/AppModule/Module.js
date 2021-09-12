@@ -5,10 +5,6 @@ import { Col, Image, Row } from 'react-bootstrap';
 import './AppModule.css'
 
 
-
-
-
-
 function Module({ kategorie, mod }) {
     const module = mod
 
@@ -40,12 +36,12 @@ function Module({ kategorie, mod }) {
 
                             return (
                                 <Col className="Centro">
-                                    {m.moduleName}
+                                    
                                     <figure>
                                         <Link to={`/module/${m.id}`}>
                                             <Image className="" src={'/images/module/' + m.bild} alt="modul" fluid />
                                         </Link>
-                                        <figcaption>Foto: Michael M. Schuff</figcaption>
+                                        {m.moduleName}
                                     </figure>
                                 </Col>
                             )

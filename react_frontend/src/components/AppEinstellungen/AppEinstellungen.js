@@ -8,8 +8,6 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const [user, setUser] = useState()
 
-  const [courses, setCourses] = useState([]);
-
   const defaultVertiefung = { module: [] }
   const [vertiefungUpdate, setVertiefungUpdate] = useState(defaultVertiefung)
 
@@ -20,16 +18,23 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   const [coursesUpdate, setCourseUpdate] = useState(defaultCourse)
 
 
-  // const [wahlCourses, setWahlCourses] = useState([
-  //   { id: 0, Vertiefungsname: 'null' },
-  //   { id: 1, Vertiefungsname: 'Kameratechnik' },
-  //   { id: 2, Vertiefungsname: 'Produktion audiovisueller Medien' },
-  //   { id: 3, Vertiefungsname: 'Web-Engineering' },
-  //   { id: 4, Vertiefungsname: 'Interaktive Systeme' },
-  //   { id: 5, Vertiefungsname: 'Mediendesign' },
-  //   { id: 6, Vertiefungsname: 'Mediendistribution' },
-  //   { id: 7, Vertiefungsname: 'Bildverarbeitung' },
-  // ])
+  const [courses, setCourses] = useState([
+    { id: 1, name: 'Bildverarbeitung' },
+    { id: 2, name: 'Web-Engineering' },
+    { id: 3, name: 'Interaktive Computergrafik' },
+    { id: 4, name: 'Mediendesign' },
+    { id: 5, name: 'Kameratechnik' },
+    { id: 6, name: 'Mediendistribution und -wiedergabe' },
+    { id: 7, name: 'Produktionstechnik audiovisueller Medien' },
+  ])
+
+  const [wahlCourses, setWahlCourses] = useState([
+    { id: 1, name: 'Postproduction' },
+    { id: 2, name: 'Stereoskopie' },
+    { id: 3, name: 'CGI Workshop' },
+    { id: 4, name: 'Film und Postproduction' },
+    { id: 5, name: 'Themen der Computergrafik' },
+  ])
 
   const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
   const [wahlCourseRemove, setWahlCourseRemove] = useState({ id: null })
@@ -55,53 +60,6 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   // Vertiefunspakete/namen
   // Hier GET- Request von der API und und Vertiefungen abrufen.
-
-
-  useEffect(() => {
-    axios.get('/api/vertiefung')
-      .then(res => {
-        setCourses(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
-
-
-
-
-  const [wahlCourses, setWahlCourses] = useState([]);
-  const [wahlHelper, setWahlHelper] = useState([])
-  useEffect(() => {
-    axios.get('api/modules')
-      .then(res => {
-        setWahlHelper(res.data)
-      })
-      .then(
-
-
-      )
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
-
-  useEffect(() => {
-    console.log(wahlHelper)
-    wahlHelper.map((wahls) => {
-      if (!(wahls.moduleTyp === "Pflichtmodule")) {
-        setWahlCourses([...wahlCourses, wahls])
-      }
-    }
-    )
-
-  }, [])
-
-
-
-
-
-
 
 
   function handleClick(prof) {
@@ -135,8 +93,8 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const addModul = (evt) => {
     evt.preventDefault();
-    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) &&  (!(parseInt(courseAdd) === 0))) {
-  
+    if ((!(vertiefungUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(parseInt(courseAdd) === 0))) {
+
       var tmp = vertiefungUpdate.module
       tmp.push(parseInt(courseAdd))
       setVertiefungUpdate(
@@ -149,7 +107,6 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
       setCourseAdd({ id: null })
 
     }
-    console.log(wahlCourses)
 
   }
 
@@ -157,25 +114,25 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   const removeModul = (evt) => {
     evt.preventDefault()
     if ((!(vertiefungUpdate.id === 0)) && (!(courseRemove.id === null)) && (!(parseInt(courseRemove) === 0))) {
-    var tmp = vertiefungUpdate.module
-    var pos
-    for (var i = 0; i < tmp.length; i++) {
-      if (tmp[i] === parseInt(courseRemove)) {
-        pos = i
+      var tmp = vertiefungUpdate.module
+      var pos
+      for (var i = 0; i < tmp.length; i++) {
+        if (tmp[i] === parseInt(courseRemove)) {
+          pos = i
+        }
       }
-    }
-    console.log(pos)
-    tmp.splice(pos, 1)
-    setVertiefungUpdate(
-      {
-        ...vertiefungUpdate,
-        module: tmp
-      }
-    )
-    console.log(vertiefungUpdate)
-    setCourseRemove({ id: null })
+      console.log(pos)
+      tmp.splice(pos, 1)
+      setVertiefungUpdate(
+        {
+          ...vertiefungUpdate,
+          module: tmp
+        }
+      )
+      console.log(vertiefungUpdate)
+      setCourseRemove({ id: null })
 
-  }
+    }
   }
 
 
@@ -203,8 +160,8 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
   const addWahlModul = (evt) => {
     evt.preventDefault();
-    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) &&  (!(parseInt(wahlCourseAdd) === 0))) {
-    
+    if ((!(wahlUpdate.id === 0)) && (!(wahlCourseAdd.id === null)) && (!(parseInt(wahlCourseAdd) === 0))) {
+
       var tmp = wahlUpdate.wahlen
       tmp.push(parseInt(wahlCourseAdd))
       setWahlUpdate(
@@ -221,37 +178,52 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   const removeWahlModul = (evt) => {
     evt.preventDefault()
     if ((!(wahlUpdate.id === 0)) && (!(wahlCourseRemove.id === null)) && (!(parseInt(wahlCourseRemove) === 0))) {
-    var tmp = wahlUpdate.wahlen
-    var pos
-    for (var i = 0; i < tmp.length; i++) {
-      if (tmp[i] === parseInt(wahlCourseRemove)) {
-        pos = i
+      var tmp = wahlUpdate.wahlen
+      var pos
+      for (var i = 0; i < tmp.length; i++) {
+        if (tmp[i] === parseInt(wahlCourseRemove)) {
+          pos = i
+        }
       }
+      console.log(pos)
+      tmp.splice(pos, 1)
+      setWahlUpdate(
+        {
+          ...wahlUpdate,
+          wahlen: tmp
+        }
+      )
+      console.log(wahlUpdate)
+      setWahlCourseRemove({ id: null })
     }
-    console.log(pos)
-    tmp.splice(pos, 1)
-    setWahlUpdate(
-      {
-        ...wahlUpdate,
-        wahlen: tmp
-      }
-    )
-    console.log(wahlUpdate)
-    setWahlCourseRemove({ id: null })
   }
-}
 
 
-  function saveModule() {
-    const update = { 'vertiefungen': vertiefungUpdate.module, 'wahlId': [] }
-    console.log(update)
-    axios.post('api/student', update)
+  function saveVertiefung() {
+    console.log(vertiefungUpdate.module)
+    axios.post('api/student/addVertiefungen', vertiefungUpdate.module)
       .then(res => {
         console.log(res)
       })
       .catch(err => {
         console.log(err)
       })
+  }
+
+  function saveWahl() {
+    console.log(wahlUpdate.wahlen)
+    axios.post('api/student/addWahlmodule', wahlUpdate.wahlen)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  function changePasswort(){
+    console.log()
+    axios.post('api/student/updatePasswort')
   }
 
 
@@ -318,7 +290,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                 <div class="">
                   <div class="width ">
                     <select class="custom-select d-flex " id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
-                    <option value='0' >Vertiefung entfernen  </option>
+                      <option value='0' >Vertiefung entfernen  </option>
                       {vertiefungUpdate.module.map((modulID) => {
                         var m
                         courses.map((course) => {
@@ -341,6 +313,9 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
             </form>
           </div>
         </div>
+        <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={saveVertiefung} >
+          Submit
+        </button>
 
 
 
@@ -356,7 +331,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                   <div class="width ">
                     <select class="custom-select" id="inputGroupSelect04" value={wahlCourseAdd} onChange={e => setWahlCourseAdd(e.target.value)}>
                       <option value='0' > Wahlmodul hinzufügen  </option>
-                      {courses.map((wahl) => {
+                      {wahlCourses.map((wahl) => {
                         if (!(wahlUpdate.wahlen.includes(wahl.id))) {
                           if (wahlUpdate.wahlen.length < 2) {
                             return (<option value={wahl.id}>{wahl.name} </option>
@@ -392,10 +367,10 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
                 <div class="">
                   <div class="width ">
                     <select class="custom-select d-flex " id="inputGroupSelect04" value={wahlCourseRemove} onChange={e => setWahlCourseRemove(e.target.value)}>
-                    <option value='0' >Wahlmodul entfernen  </option>
+                      <option value='0' >Wahlmodul entfernen  </option>
                       {wahlUpdate.wahlen.map((modulID) => {
                         var m
-                        courses.map((wahlCourse) => {
+                        wahlCourses.map((wahlCourse) => {
                           if (wahlCourse.id === modulID) { m = wahlCourse }
                         })
                         return (
@@ -424,7 +399,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
 
         </div>
       </div>
-      <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={saveModule} >
+      <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={saveWahl} >
         Submit
       </button>
 
@@ -434,13 +409,13 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
           Password ändern
         </h3>
         <Form >
-          <div className="formGroup">
+          {/* <div className="formGroup">
             <label>
               Old Password
             </label>
             <input type="password" className="form-control" placeholder="Password"
             />
-          </div>
+          </div> */}
           <div className="formGroup">
             <label>
               New Password
@@ -455,7 +430,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
             <input type="password" className="form-control" placeholder="New Password confirm"
             />
           </div>
-          <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" >
+          <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center"  onClick={changePasswort}>
             Submit
           </button>
         </Form>

@@ -29,7 +29,7 @@ function ModuleProfil({ modul }) {
             <div className="titel">
                 <figure>
                     <Image className="titelbild" src={modul.picture} alt="prof" fluid />
-                    <figcaption style={{position: 'absolute', right:'0px'}}>Foto: Michael M. Schuff </figcaption>
+                    <figcaption style={{position: 'absolute', right:'0px'}}>Foto: {modul.bildrechte}</figcaption>
                 </figure>
                 <h1 className="titeltext" style={{ color: 'white' }}>{modul.name}</h1>
             </div>

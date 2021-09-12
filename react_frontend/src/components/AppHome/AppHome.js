@@ -12,15 +12,7 @@ import './AppHome.css'
 //Notiz: Die Margin-Bottom im CSS von der NavBar (die 40px) wegmachen oder verringern :-( (Default:50px)
 function AppHome({ auth }) {
 
-      useEffect(() => {
-            axios.get('/api/student')
-                .then(res => {
-                    console.log(res.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }, [])
+     
 
       if (!auth) {
             return <Redirect to="/login" />

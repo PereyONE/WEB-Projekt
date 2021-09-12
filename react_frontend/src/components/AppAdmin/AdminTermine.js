@@ -221,7 +221,8 @@ function AdminTermine() {
                                     <select class="custom-select" id="inputGroupSelect04" value={terminUpdate.typ} onChange={e => setTerminUpdate({ ...terminUpdate, typ: e.target.value })}>
                                         <option value='Vorlesung'>Vorlesung</option>
                                         <option value='Praktikum'>Praktikum</option>
-                                        <option value='Vorlesung'>Übung</option>
+                                        <option value='Übung'>Übung</option>
+                                        <option value='Tutorium'>Tutorium</option>
                                         <option value='Sonstiges'>Sonstiges</option>
                                         
                                     </select>

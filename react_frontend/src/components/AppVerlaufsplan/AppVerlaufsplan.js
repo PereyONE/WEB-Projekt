@@ -11,20 +11,25 @@ import axios from 'axios';
 
 function AppVerlaufsplan({ auth }) {
 
-    const [itemsFromBackend2, setItemsFromBackend] = useState([]);
+    const [itemsFromBackend, setItemsFromBackend] = useState([]);
 
     useEffect(() => {
         axios.get('/api/verlaufsplan')
             .then(res => {
-                setItemsFromBackend(res.data)
+                setItemsFromBackend(res.data.SvpSemester)
+                console.log(res.data.SvpSemester)
+                console.log(res.data.Verlaufsplan)
+                
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
 
+    
 
-    const itemsFromBackend = [
+
+    const itemsFromBackend2 = [
         { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
         { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
         { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
