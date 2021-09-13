@@ -4,11 +4,11 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom'
 
 
-function AdminLehrende({auth}) {
+function AdminLehrende({ auth }) {
 
     //Konstanten und States
     const [authAdmin, setAuthAdmin] = useState(true)
-    const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', modules: [] }
+    const defaultProf = { titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', modules: [] }
 
     const [profUpdate, setProfUpdate] = useState(defaultProf)
 
@@ -54,6 +54,7 @@ function AdminLehrende({auth}) {
         axios.post('api/lehrende', profUpdate)
             .then(res => {
                 console.log(res)
+                fileUploadHandler()
             })
             .catch(err => {
                 console.log(err)
@@ -162,16 +163,29 @@ function AdminLehrende({auth}) {
     const fileSelectHandler = e => {
         setProfUpdate({ ...profUpdate, bild: e.target.files[0].name })
         setProfBild(e.target.files[0])
-
-
     }
 
     const fileUploadHandler = () => {
         const fd = new FormData()
         fd.append('file', profBild)
-        axios.post('api/bilder/lehrende', fd)
+        axios.post('api/bilder/lehrende', fd, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
             .then(res => {
                 console.log(res)
+            })
+    }
+
+    function deleteProf() {
+        console.log(profUpdate)
+        axios.delete('api/lehrende', {data:profUpdate})
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err=>{
+                console.log(err)
             })
     }
 
@@ -197,7 +211,7 @@ function AdminLehrende({auth}) {
             <div class="row">
                 <div class="col-auto mr-auto">Zu bearbeitenden Lehrenden auswählen</div>
                 <div class="col-auto ">
-                    <button type="button" class="btn-small btn btn-danger  ">Mitarbeiter löschen!</button>
+                    <button type="button" class="btn-small btn btn-danger" onClick={deleteProf}>Mitarbeiter löschen!</button>
                 </div>
 
             </div>
@@ -294,11 +308,11 @@ function AdminLehrende({auth}) {
                             Funktion
                             <select class="custom-select" id="inputGroupSelect04" value={profUpdate.funktion} onChange={e => setProfUpdate({ ...profUpdate, funktion: e.target.value })}>
                                 <option value='0'  >Funktion wählen</option>
-                                
-                                    <option value='Professor'>Professor*in</option>
-                                    <option value='Mitarbeiter'>Mitarbeiter*in</option>
-                                    <option value='Externe'>Externe</option>
-                                
+
+                                <option value='Professor'>Professor*in</option>
+                                <option value='Mitarbeiter'>Mitarbeiter*in</option>
+                                <option value='Externe'>Externe</option>
+
                             </select>
                         </label>
                     </form>

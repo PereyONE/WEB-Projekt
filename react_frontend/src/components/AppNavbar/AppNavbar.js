@@ -3,7 +3,8 @@ import { ReactComponent as Wortmarke } from '../../assets/icons/wortmarke.svg';
 import './AppNavbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faWindowRestore } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
@@ -13,18 +14,29 @@ function AppNavbar({ auth }) {
 
 
   const [show, setShow] = useState(false)
+  const [authAdmin, setAuthAdmin] = useState(false)
 
   function clickHandler() {
     setShow(!show);
   }
 
-  function logoutLeiste(){
+  function logoutLeiste() {
     localStorage.clear()
-    window.location.reload() 
+    window.location.reload()
   }
 
-  
-  if (!auth) { return null}
+  useEffect(() => {
+    axios.get('/api/authenticate/admin')
+        .then(res => {
+            setAuthAdmin(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}, [])
+
+
+  if (!auth) { return null }
   else {
     return (
 
@@ -93,19 +105,24 @@ function AppNavbar({ auth }) {
         </Container>
 
         <ul className={(show ? "NavLinksSide-Active" : "NavLinksSide")}>
-     
+
           <li>
             <button className="Red" onClick={logoutLeiste}>Logout</button>
           </li>
-      
+
+          <li>
+            <Nav.Link href="/admin">{authAdmin ? 'Admin':''}</Nav.Link>
+          </li>
+
+
           <li class="top">
-          <Nav.Link href="/info">Information</Nav.Link>
+            <Nav.Link href="/info">Information</Nav.Link>
           </li>
 
           <li>
-          <Nav.Link href="/impressum">Impressum</Nav.Link>
+            <Nav.Link href="/impressum">Impressum</Nav.Link>
           </li>
-      
+
         </ul>
       </Navbar>
     );

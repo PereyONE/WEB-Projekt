@@ -62,13 +62,13 @@ function AdminTermine({auth}) {
     }
 
     const deleteTermin = () => {
-        // axios.delete('/api/vertiefung', terminUpdate)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
+        axios.delete('/api/termine', {data: terminUpdate})
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         console.log(terminUpdate.beschreibung + ' löschen')
     }
 

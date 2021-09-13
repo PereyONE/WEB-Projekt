@@ -13,7 +13,7 @@ function Stundenplan(semester) {
         axios.get('/api/termine')
             .then(res => {
                 seteintraege(res.data)
-                console.log(eintraege)
+                console.log(res.data)
             })
             .catch(function (error) {
 
@@ -42,7 +42,7 @@ function Stundenplan(semester) {
                     Montag<br></br>
                     {eintraege.map((eintrag, i) => {
 
-                        if ((eintrag.wochentag === "Montag") && (eintrag.semester === semester.semester)) {
+                        if (eintrag.wochentag =="Montag" && eintrag.semester == semester.semester) {
                             return (<Ereignis eintrag={eintrag} index={i} semester={semester} />)
                         }
                     })}

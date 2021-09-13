@@ -6,50 +6,64 @@ import { Row } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
 import axios from 'axios';
 
-function Ereignis ({eintrag}){
+function Ereignis({ eintrag }) {
     const [show, setShow] = useState(false);
     const [formular, setformular] = useState(
-      {
-        beschreibung: eintrag.beschreibung,
-        typ: eintrag.typ,
-        raum: eintrag.raum,
-        wochentag: eintrag.wochentag,
-        startzeit: eintrag.startzeit,
-        endzeit: eintrag.endzeit,
-        semester: eintrag.semester,
-      }
+        {
+            id: eintrag.id,
+            beschreibung: eintrag.beschreibung,
+            typ: eintrag.typ,
+            raum: eintrag.raum,
+            wochentag: eintrag.wochentag,
+            startzeit: eintrag.startzeit,
+            endzeit: eintrag.endzeit,
+            semester: eintrag.semester,
+        }
     );
     const handleClose1 = () => setShow(false);
     const handleClose2 = event => {
-      setShow(false);
-      event.preventDefault();
-      
-      console.log(formular)
-      axios.post('/api/stundenplan', formular)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        setShow(false);
+        event.preventDefault();
+
+        console.log(formular)
+        axios.post('/api/termine', formular)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
+
     const handleClose3 = event => {
         setShow(false);
         event.preventDefault();
-        
+
         console.log(formular)
-        axios.delete('/api/stundenplan', formular)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      }
+        var test=
+        {
+            "id": 3,
+            "beschreibung": "sport",
+            "wochentag": "Montag",
+            "startzeit": "10:00",
+            "endzeit": "11:00",
+            "raum": "4",
+            "typ": "Vorlesung",
+            "semester": 1
+        }
+
+        axios.delete('/api/termine', {data: formular})
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     const handleShow = () => setShow(true);
-    
-    if(eintrag.typ=="Vorlesung"){
-        return(
+
+    if (eintrag.typ == "Vorlesung") {
+        return (
             <>
                 <div className="ereignis Vorlesung" onClick={handleShow}>
                     <p className="abstand">{eintrag.startzeit} - {eintrag.endzeit}</p>
@@ -133,10 +147,10 @@ function Ereignis ({eintrag}){
                     </Modal.Footer>
                 </Modal></>
         )
-        
+
     }
-    else if(eintrag.typ=="Übung"){
-        return(
+    else if (eintrag.typ == "Übung") {
+        return (
             <>
                 <div className="ereignis Übung" onClick={handleShow}>
                     <p className="abstand">{eintrag.startzeit} - {eintrag.endzeit}</p>
@@ -220,11 +234,11 @@ function Ereignis ({eintrag}){
                     </Modal.Footer>
                 </Modal>
             </>
-            
+
         )
     }
-    else if(eintrag.typ=="Praktikum"){
-        return(
+    else if (eintrag.typ == "Praktikum") {
+        return (
             <>
                 <div className="ereignis Praktikum" onClick={handleShow}>
                     <p className="abstand">{eintrag.startzeit} - {eintrag.endzeit}</p>
@@ -308,11 +322,11 @@ function Ereignis ({eintrag}){
                     </Modal.Footer>
                 </Modal>
             </>
-            
+
         )
     }
-    else{
-        return(
+    else {
+        return (
             <>
                 <div className="ereignis Tutorial" onClick={handleShow}>
                     <p className="abstand">{eintrag.startzeit} - {eintrag.endzeit}</p>
@@ -396,11 +410,11 @@ function Ereignis ({eintrag}){
                     </Modal.Footer>
                 </Modal>
             </>
-            
+
         )
     }
-        
-    
+
+
 }
 
 export default Ereignis

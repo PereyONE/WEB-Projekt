@@ -33,7 +33,7 @@ function AppLehrendeProfil({ auth }) {
     return (
 
         <Container>
-            <div >
+            <div style={{marginTop: '50px'}}>
                 <LehrendeProfil prof={prof} />
             </div>
             

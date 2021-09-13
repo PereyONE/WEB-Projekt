@@ -29,9 +29,9 @@ function LehrendeProfil({ prof }) {
             question: 'Module',
             answer:
                 <div>
-                    {prof.modules.map((modul)=>{
+                    {prof.modules.map((modul) => {
                         console.log(modul)
-                        return(
+                        return (
                             <Link to='/'>{modul.moduleName}</Link>
                         )
                     })}
@@ -98,10 +98,20 @@ function LehrendeProfil({ prof }) {
                     </Row>
                 </Col>
             </Row>
-            <div className="faqs">
-                {faqs.map((faq, i) => (
-                    <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} color="lila" />
-                ))}
+            <div style={{ color: 'black', display: 'flex' }}>
+                <h2>Module:</h2>
+                <ul style={{ color: 'black' }}>
+                    {prof.modules.map((modul) => {
+                        console.log(modul)
+                        return (
+                            <li style={{ color: 'black', left: '0px', display:'flex', justifyContent:'space-around'}}>
+                                <Link to={`/module/${modul.id}`} style={{ color: 'black', margin:'5px'}}>
+                                    <h4 style={{ color: 'black'}}>{modul.moduleName}</h4>
+                                    {/* <Image className="" src={'/images/module/' + modul.bild} alt="prof" fluid /> */}
+                                </Link></li>
+                        )
+                    })}
+                </ul>
             </div>
         </div>
 

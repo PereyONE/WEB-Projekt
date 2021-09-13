@@ -53,6 +53,11 @@ public class ModuleService {
     }
 
     public String updateModule(Module module) {
+        ArrayList<Lehrende> realLehrende=new ArrayList<>();
+        for(Lehrende lehrende : module.getLehrende()){
+            realLehrende.add(lehrende);
+        }
+        module.setLehrende(realLehrende);
         moduleRepository.save(module);
         return "Module " + module.getModuleName() + " wurde aktualisiert";
     }

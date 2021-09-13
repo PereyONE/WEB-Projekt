@@ -546,7 +546,9 @@ function AppVerlaufsplan({ auth }) {
         if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan verwerfen und den Standardverlaufsplan für 7 Semester einstellen möchtest?")) {
 
             itemsFromBackend.map((item, index) => {
-                item.position = item.semester7;
+                if (item.art === 'modul') {
+                    item.position = item.semester7;
+                }
 
             })
 
@@ -603,7 +605,12 @@ function AppVerlaufsplan({ auth }) {
 
         if (window.confirm("Bist du dir sicher, dass du deinen Studienverlaufsplan verwerfen und den Standardverlaufsplan für 12 Semester einstellen möchtest?")) {
             itemsFromBackend.map((item, index) => {
-                item.position = item.semester12;
+                itemsFromBackend.map((item, index) => {
+                    if (item.art === 'modul') {
+                        item.position = item.semester12;
+                    }
+    
+                })
 
             })
 
@@ -687,7 +694,7 @@ function AppVerlaufsplan({ auth }) {
 
 
                 <div style={{ alignSelf: 'flex-end', display: 'flex', justifyContent: 'space-around' }}>
-                    <Button variant="outline-dark" className="Loeschen" onClick={e => { setColumns(columnsFromBackend()) }} ><i class="fas fa-play"></i></Button>
+                    <Button variant="outline-dark" className="Loeschen" onClick={e => { setColumns(columnsFromBackend()); console.log(columns) }} ><i class="fas fa-play"></i></Button>
 
                     <Droppable droppableId="delete" key="delete">
                         {(provided, snapshot) => {

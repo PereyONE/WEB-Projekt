@@ -19,12 +19,13 @@ function Popup({semester}) {
       }
     );
     const handleClose1 = () => setShow(false);
+
     const handleClose2 = event => {
       setShow(false);
       event.preventDefault();
       
-      console.log(formular)
-      axios.post('/api/stundenplan', formular)
+      console.log('halo')
+      axios.post('/api/termine', formular)
       .then(res => {
         console.log(res)
       })

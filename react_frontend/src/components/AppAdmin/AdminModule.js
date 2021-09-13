@@ -74,7 +74,7 @@ function AdminModule({ auth }) {
     }
 
     const deleteModule = () => {
-        axios.delete('api/modules', courseUpdate)
+        axios.delete('api/modules', {data: courseUpdate})
             .then(res => {
                 console.log(res)
             })

@@ -29,7 +29,7 @@ public class Module {
     private Long id;
     private String moduleName;
     @JsonIgnoreProperties(value = "modules")
-    @ManyToMany(mappedBy = "modules",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "modules",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Lehrende> lehrende = new ArrayList<>();
     private String moduleAbkürzung;
     private String ects;
