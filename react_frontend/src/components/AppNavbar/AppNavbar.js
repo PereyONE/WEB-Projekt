@@ -93,14 +93,20 @@ function AppNavbar({ auth }) {
         </Container>
 
         <ul className={(show ? "NavLinksSide-Active" : "NavLinksSide")}>
+     
           <li>
             <button className="Red" onClick={logoutLeiste}>Logout</button>
           </li>
-          <li>
-            <Nav.Link href="/impressum">Impressum</Nav.Link>
+      
+          <li class="top">
+          <Nav.Link href="/info">Information</Nav.Link>
           </li>
-        </ul>
 
+          <li>
+          <Nav.Link href="/impressum">Impressum</Nav.Link>
+          </li>
+      
+        </ul>
       </Navbar>
     );
 
