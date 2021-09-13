@@ -4,34 +4,20 @@ import { Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentDots, faSnowflake, faUserClock, faWallet } from '@fortawesome/free-solid-svg-icons'
 import './AppModule.css'
-import { useParams } from "react-router-dom";
-import axios from 'axios';
+
 
 function ModuleProfil({ modul }) {
-    const { modulid } = useParams()
-    /*
-    const [modul, setmodul] = useState([]);
-
-    useEffect(()=> {
-        axios.get('/api/modules/'+{modulid})
-        .then(res => {
-        setmodul(res.data)
-        })
-        .catch(err => {
-        console.log(err)
-        })
-    },[])
-    */
+    
     return (
 
         <div>
 
             <div className="titel">
                 <figure>
-                    <Image className="titelbild" src={modul.picture} alt="prof" fluid />
+                    <Image className="titelbild" src={'/images/module/'+modul.bild} alt="modul" fluid />
                     <figcaption style={{position: 'absolute', right:'0px'}}>Foto: {modul.bildrechte}</figcaption>
                 </figure>
-                <h1 className="titeltext" style={{ color: 'white' }}>{modul.name}</h1>
+                <h1 className="titeltext" style={{ color: 'white' }}>{modul.moduleName}</h1>
             </div>
 
             <div>
@@ -40,15 +26,15 @@ function ModuleProfil({ modul }) {
                     <Col xs={{ span: 12, order: 'last' }} lg={{ span: 4, order: 'first' }}>
                         <h3>Personen</h3>
                         <Row xs={2} lg={1}>
-                            {modul.personen.map((p) => (
-                                <Link to="/lehrende/prof.name">
+                            {modul.lehrende.map((p) => (
+                                <Link to={`/lehrende/${p.id}`}>
                                     <Col>
                                         <Row className="personCard" xs={2}>
                                             <Col lg={{ span: 4, offset: 0 }}>
-                                                <Image className="thumbnailperson" src={p.picture} alt="" />
+                                                <Image className="thumbnailperson" src={'/images/lehrende/'+p.bild} alt="" />
                                             </Col>
                                             <Col className="nameFrame" lg={{ span: 8, offset: 0 }} >
-                                                <h5 className="nameperson">{p.name}</h5>
+                                                <h5 className="nameperson">{p.titel} {p.vorname} {p.nachname}</h5>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -67,7 +53,7 @@ function ModuleProfil({ modul }) {
                                         <FontAwesomeIcon className="ModulIcon" icon={faUserClock} />
                                     </Col>
                                     <Col className="ProfilSchrift" xs={{ span: 8, offset: 0 }}>
-                                        Regelstudienzeit<br />{modul.zeit}. Semester
+                                        Regelstudienzeit<br />{modul.regelstudienzeitsieben}. Semester
                                     </Col>
                                 </Row>
                             </Col>
@@ -78,7 +64,7 @@ function ModuleProfil({ modul }) {
                                         <FontAwesomeIcon className="ModulIcon" icon={faSnowflake} />
                                     </Col>
                                     <Col className="ProfilSchrift" xs={{ span: 7, offset: 0 }}>
-                                        ULP und Vorlesung<br />{modul.ulp}
+                                        ULP und Vorlesung<br />{modul.verfügbarkeit}
                                     </Col>
                                 </Row>
                             </Col>
@@ -89,7 +75,7 @@ function ModuleProfil({ modul }) {
                                         <FontAwesomeIcon className="ModulIcon" icon={faCommentDots} />
                                     </Col>
                                     <Col className="ProfilSchrift" xs={{ span: 7, offset: 0 }}>
-                                        Prüfungsform<br />{modul.klausur}
+                                        Prüfungsform<br />{modul.prüfungsart}
                                     </Col>
                                 </Row>
                             </Col>
@@ -108,9 +94,7 @@ function ModuleProfil({ modul }) {
 
                         </Row>
                         <p>Inhalt <br />
-                            Die Produktion von auditiven, visuellen und multimedialen Medieninhalten ist geprägt
-                            durch die verwendeten Techniken und Technologien zur Aufzeichnung, Speicherung, Bearbeitung,
-                            Transport und Wiedergabe von Ton und (Bewegt-)Bild.
+                            {modul.beschreibung}
                         </p>
                     </Col>
 

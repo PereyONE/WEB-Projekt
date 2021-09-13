@@ -56,11 +56,12 @@ function App() {
         <Route path="/studienverlaufsplan" component={()=><AppVerlaufsplan auth={auth} />} /> {/* auth implementiert */}
         <Route path="/stundenplan" component={()=> <AppStundenplan auth={auth} />} />{/* auth implementiert */}
         <Route path="/module" exact component={()=> <AppModule auth={auth} />} />{/* auth implementiert */}
-        <Route path="/module/:modulid" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
+        <Route path="/module/:id" component={()=> <AppModuleProfil auth={auth} />} />{/* auth implementiert */}
 
 
         <Route path="/lehrende" exact component={()=><AppLehrende auth={auth}/>} /> {/* auth implementiert */}
         <Route path="/lehrende/:id" component={()=><AppLehrendeProfil auth={auth}/>} />{/* auth implementiert */}
+        
         <Route path="/faq" component={()=><AppFAQ auth={auth} />} /> {/* auth implementiert */}
         <Route path="/einstellungen" component={AppEinstellungen} />
         <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
