@@ -18,6 +18,6 @@ public interface TerminRepository extends JpaRepository<Termin, Long>{
 
     ArrayList<Termin> findByStudentId(Long StudentId);
 
-    String findByBeschreibung(String beschreibung);
+    String findByBeschreibung(String Beschreibung);
 }
 

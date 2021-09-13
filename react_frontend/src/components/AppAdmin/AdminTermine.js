@@ -8,26 +8,26 @@ import TimePicker from 'react-time-picker';
 
 function AdminTermine() {
 
-    const test = [
-        {
-            id: 1, termin: [
-                { id: 1, beschreibung: 'Vorlesung Mathe 1 (1)', wochentag: 'Montag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-                { id: 1, beschreibung: 'Vorlesung Mathe 1 (2)', wochentag: 'Mittwoch', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-            ], name: 'Mathe 1',
-        },
-        {
-            id: 2, termin: [
-                { id: 1, beschreibung: 'Vorlesung Mathe 2 (1)', wochentag: 'Montag', startzeit: '10:00', endzeit: '12:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
-                { id: 1, beschreibung: 'Vorlesung Mathe 2 (2)', wochentag: 'Mittwoch', startzeit: '14:00', endzeit: '16:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
-            ], name: 'Mathe 2',
-        },
-        {
-            id: 3, termin: [
-                { id: 1, beschreibung: 'Vorlesung Siga (1)', wochentag: 'Dienstag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-                { id: 1, beschreibung: 'Vorlesung Siga (2)', wochentag: 'Donnerstag', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-            ], name: 'Siga',
-        },
-    ]
+    // const test = [
+    //     {
+    //         id: 1, termin: [
+    //             { id: 1, beschreibung: 'Vorlesung Mathe 1 (1)', wochentag: 'Montag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
+    //             { id: 1, beschreibung: 'Vorlesung Mathe 1 (2)', wochentag: 'Mittwoch', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
+    //         ], name: 'Mathe 1',
+    //     },
+    //     {
+    //         id: 2, termin: [
+    //             { id: 1, beschreibung: 'Vorlesung Mathe 2 (1)', wochentag: 'Montag', startzeit: '10:00', endzeit: '12:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
+    //             { id: 1, beschreibung: 'Vorlesung Mathe 2 (2)', wochentag: 'Mittwoch', startzeit: '14:00', endzeit: '16:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
+    //         ], name: 'Mathe 2',
+    //     },
+    //     {
+    //         id: 3, termin: [
+    //             { id: 1, beschreibung: 'Vorlesung Siga (1)', wochentag: 'Dienstag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
+    //             { id: 1, beschreibung: 'Vorlesung Siga (2)', wochentag: 'Donnerstag', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
+    //         ], name: 'Siga',
+    //     },
+    // ]
 
     const defaultModul = { termin: [], name: '' }
     const [modulUpdate, setModulUpdate] = useState(defaultModul)
@@ -37,7 +37,7 @@ function AdminTermine() {
     //Hier weitermachen!
     const [auth, setAuth] = useState(true)
     const [termine, setTermine] = useState([])
-    const [module, setModule] = useState(test)
+    const [module, setModule] = useState([])
     const [terminUpdate, setTerminUpdate] = useState(defaultTermin)
 
     useEffect(() => {
@@ -61,33 +61,35 @@ function AdminTermine() {
             })
     }, [])
 
-    // useEffect(() => {
-    //     axios.get('/api/svpModul')
-    //         .then(res => {
-    //             setModule(res.data)
-    //             console.log(res.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }, [])
+    useEffect(() => {
+        axios.get('/api/svpModul')
+            .then(res => {
+                setModule(res.data)
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
 
 
 
 
 
     const postTermin = () => {
-        // axios.post('api/vertiefung', vertiefungUpdate)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
+        console.log(modulUpdate)
+        console.log(terminUpdate)
+        var update={svpModul:modulUpdate, termin:terminUpdate}
+        axios.post('api/termine/add', update) 
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
         // Bild Upload
         console.log(modulUpdate, terminUpdate)
-
 
     }
 

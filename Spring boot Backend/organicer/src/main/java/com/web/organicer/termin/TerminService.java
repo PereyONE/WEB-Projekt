@@ -68,7 +68,7 @@ public class TerminService {
     public String postTermin(SvpModul modul, Termin termin) {
 
         if(modul.getId()!=null) {
-            if(termin.getBeschreibung().equals(terminRepository.findByBeschreibung(termin.getBeschreibung()))) {
+            if(!termin.getBeschreibung().equals(terminRepository.findByBeschreibung(termin.getBeschreibung()))) {
                 //Get the real modul from database
                 SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
                 //add the modul to the termin

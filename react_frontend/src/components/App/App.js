@@ -15,6 +15,7 @@ import AppImpressum from '../AppImpressum/AppImpressum';
 import AppLehrendeProfil from '../AppLehrende/AppLehrendeProfil';
 import AppModuleProfil from '../AppModule/AppModuleProfil'
 import AppEinstellungen from '../AppEinstellungen/AppEinstellungen';
+import AppInfo from '../AppInfo/AppInfo'
 
 import AppAdmin from '../AppAdmin/AppAdmin';
 import AdminLehrende from '../AppAdmin/AdminLehrende';
@@ -22,6 +23,7 @@ import AdminModule from '../AppAdmin/AdminModule';
 import AdminFAQ from '../AppAdmin/AdminFAQ';
 import AdminVertiefung from '../AppAdmin/AdminVertiefung';
 import AdminTermine from '../AppAdmin/AdminTermine';
+
 
 function App() {
 
@@ -65,6 +67,7 @@ function App() {
         <Route path="/faq" component={()=><AppFAQ auth={auth} />} /> {/* auth implementiert */}
         <Route path="/einstellungen" component={AppEinstellungen} />
         <Route path="/impressum" component={()=><AppImpressum auth={auth} />} /> {/* auth implementiert */}
+        <Route path="/info" component={()=><AppInfo auth={auth} />} /> {/* auth implementiert */}
 
         <Route path="/admin" exact component={AppAdmin} />
         <Route path="/adminLehrende" component={AdminLehrende} />

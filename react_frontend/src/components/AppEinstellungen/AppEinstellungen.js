@@ -29,11 +29,11 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
   ])
 
   const [wahlCourses, setWahlCourses] = useState([
-    { id: 1, name: 'Postproduction' },
-    { id: 2, name: 'Stereoskopie' },
-    { id: 3, name: 'CGI Workshop' },
-    { id: 4, name: 'Film und Postproduction' },
-    { id: 5, name: 'Themen der Computergrafik' },
+    { id: 3, name: 'Postproduction' },
+    { id: 4, name: 'Stereoskopie' },
+    { id: 5, name: 'CGI Workshop' },
+    { id: 6, name: 'Film und Postproduction' },
+    { id: 7, name: 'Themen der Computergrafik' },
   ])
 
   const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
@@ -221,7 +221,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
       })
   }
 
-  function changePasswort(){
+  function changePasswort() {
     console.log()
     axios.post('api/student/updatePasswort')
   }
@@ -430,7 +430,7 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
             <input type="password" className="form-control" placeholder="New Password confirm"
             />
           </div>
-          <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center"  onClick={changePasswort}>
+          <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={changePasswort}>
             Submit
           </button>
         </Form>

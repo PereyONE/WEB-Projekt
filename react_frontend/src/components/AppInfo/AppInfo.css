@@ -1,0 +1,21 @@
+.liniepurple{
+    margin-top: 50px;
+    padding-bottom: 1px;
+    border-radius: 50px;
+    background-color: #bd5aa1;
+}
+
+.linieRed{
+    margin-top: 50px;
+    padding-bottom: 1px;
+    border-radius: 50px;
+    background-color: #d84248;
+}
+
+.linieOrange{
+ 
+    padding-bottom: 2px;
+   
+    background-color: #ef814c;
+}
+
