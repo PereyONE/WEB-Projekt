@@ -1,30 +1,30 @@
-﻿id;bild;bildrechte;email;funktion;module_id;nachname;raum;sprechstunde;telefonnummer;titel;vorname
-1;platzhalter1.jpg;;dominik.eickemeier@th-koeln.de;Externe;;Eickemeier;;;;;Dominik
-2;fischer.png;Michael M. Schuff;gregor.fischer@th-koeln.de;Professor;;Fischer;ZN 10-02;nach Vereinbarung;+49 221-8275-2535;Prof. Dr.-Ing.;Gregor
-3;fuhrmann.png;Michael M. Schuff;arnulph.fuhrmann@th-koeln.de;Professor;;Fuhrmann;ZW 11-10;Online mittels Zoom nach Vereinbarung per Email.;+49 221-8275-2614;Prof. Dr.-Ing.;Arnulph
-4;platzhalter3.jpg;;axel.gaertner@th-koeln.de;Mitarbeiter;;Gärtner;HO 2-89;Mittwoch, 14.00 bis 15.00 Uhr Bitte melden Sie sich immer vorher über Email an. Andere Termine ausserhalb der Sprechzeiten sind natürlich auch möglich.;+49 221-8275-2517;Dipl.-Ing. ;Axel
-5;gruenvogel.png;Michael M. Schuff;stefan.gruenvogel@th-koeln.de;Professor;;Grünvogel;ZW 11-06;nach Vereinbarung;+49 221-8275-2526;Prof. Dr. rer. nat.;Stefan Michael
-6;platzhalter2.jpg;;benjamin.klapper@th-koeln.de;Externe;;Klapper;;;;Dipl.-Ing. ;Benjamin
-7;kunz.png;Michael M. Schuff;dietmar.kunz@th-koeln.de;Professor;;Kunz;ZS 08-07;Corona-bedingt findet die Sprechstunde bis auf weiteres nur per Telefon oder Video-Konferenz nach vorheriger Verabredung per E-Mail statt.;+49 221-8275-2513;Prof. Dr. rer. nat.;Dietmar
-8;nissen.png;Michael M. Schuff;hans.nissen@th-koeln.de;Professor;;Nissen;ZN 06-08;Sprechstuden laut Aushang;+49 221-8275-2489;Prof. Dr.;Hans W.
-9;platzhalter3.jpg;;anne.ohlen@th-koeln.de;Externe;;Ohlen;;;;;Anne
-10;poggemann.png;Michael M. Schuff;dirk.poggemann@th-koeln.de;Professor;;Poggemann;ZW 10-05;Nach Vereinbarung;+49 221-8275-2515;Prof. Dr.-Ing.;Dirk
-11;poerschmann.png;Michael M. Schuff;christoph.poerschmann@th-koeln.de;Professor;;Pörschmann;ZW 08-01;Aufgrund der aktuellen Corona-Situation finden Sprechstunden nur nach Terminvereinbarung statt. Sie können mich per Email hierzu kontaktieren.;+49 221-8275-2495;Prof. Dr.-Ing.;Christoph
-12;reiter.png;Michael M. Schuff;ulrich.reiter@th-koeln.de;Professor;;Reiter;ZS 08-05;Sprechstunden finden zur Zeit nur nach Vereinbarung statt, bitte kontaktieren Sie mich per email!;+49 221-8275-2073;Prof. Dr.-Ing.;Ulrich
-13;ruelberg.png;Michael M. Schuff;klaus.ruelberg@th-koeln.de;Professor;;Ruelberg;ZN 10-09;Donnerstag, 13.00 bis 14.00 Uhr oder nach Vereinbarung;+49 221-8275-2936;Prof. Dr.;Klaus
-14;russi.png;Michael M. Schuff;nicole.russi@th-koeln.de;Professor;;Russi;ZS 08-06;Die Sprechstunden finden digital über Zoom statt. Bitte melden Sie sich immer vorher über Email an. Zusätzliche Sprechstunden nach Vereinbarung. In der vorlesungsfreien Zeit nur nach Vereinbarung.;+49 221-8275-2066;Prof. Dipl.-Des.;Nicole
-15;thieling.png;Michael M. Schuff;lothar.thieling@th-koeln.de;Professor;;Thieling;ZW 07-12;;+49 221-8275-2469;Prof. Dr.-Ing.;Lothar
-16;platzhalter1.jpg;;chong.kim@th-koeln.de;Professor;;Chong Dae;HN 2-24;;+49 221-8275-2947;Dr.;Kim
-17;wiehlpuetz.png;Michael M. Schuff;nadine.wiehlpuetz@th-koeln.de;Mitarbeiter;;Wiehlpütz;HO 2-95;;+49 221-8275-2520;Dipl.-Ing. ;Nadine
-18;linke.png;Michael M. Schuff;claudia.linke@th-koeln.de;Mitarbeiter;;Linke;HO 2-93;;+49 221-8275-2030;Dipl.-Ing. ;Claudia
-19;derichs.png;Michael M. Schuff;ursula.derichs@th-koeln.de;Mitarbeiter;;Derichs;ZW-11-07;;+49 221-8275-2920;Dipl.-Inf.;Ursula
-20;platzhalter2.jpg;;turhan.civelek@th-koeln.de;Mitarbeiter;;Cevelek;ZW-11-07;;;Dr.;Turhan
-21;platzhalter3.jpg;;olaf.clausen@smail.th-koeln.de;Mitarbeiter;;Clausen;;;+49 221-8275-4159;;Olaf 
-22;platzhalter1.jpg;;benjamin.hoetter@th-koeln.de;Mitarbeiter;;Hoetter;;;;;Benjamin
-23;loebich.png;Michael M. Schuff;christian.loebich@th-koeln.de;Mitarbeiter;;Loebich;ZW10-6;;+49 221-8275-2616;Dipl.-Ing. ;Christian
-24;platzhalter2.jpg;;martin.misiak@th-koeln.de;Mitarbeiter;;Misiak;;;+49 221-8275-4552;M.Sc.;Martin
-25;moritz.png;Michael M. Schuff;sylvia.moritz@th-koeln.de;Mitarbeiter;;Moritz;HO-02-94;;+49 221-8275-2540;;Sylvia
-26;nguyen.png;Michael M. Schuff;viet.nguyen@th-koeln.de;Mitarbeiter;;Nguyen; ZW 10-24;nach Vereinbarung;+49 221-8275-2783;M.Sc.;Hoai Viet
-27;platzhalter3.jpg;;tobias.pauers@th-koeln.de;Mitarbeiter;;Pauers;ZW 10-2/3;;+49 221-8275-4374;;Tobias Michael
-28;platzhalter1.jpg;;kristoffer.waldow@th-koeln.de;Mitarbeiter;;Waldow;;;+49 221-8275-4232;;Kristoffer
-29;zuelke.png;Michael M. Schuff;erika.zuehlke@th-koeln.de;Mitarbeiter;;Zühlke;ZN-10-01;Öffnungszeiten des Sekretaritats: Montag, Dienstag, Mitwoch, Donnerstag, 10.00 bis 12.00 Uhr erreichbar: sekretariat-imp-f07@th-koeln.de;+49 221-8275-2512;;Erika
+﻿id;bild;bildrechte;email;funktion;nachname;raum;sprechstunde;telefonnummer;titel;vorname
+1;platzhalter1.jpg;;dominik.eickemeier@th-koeln.de;Externe;Eickemeier;;;;;Dominik
+2;fischer.png;Michael M. Schuff;gregor.fischer@th-koeln.de;Professor;Fischer;ZN 10-02;nach Vereinbarung;+49 221-8275-2535;Prof. Dr.-Ing.;Gregor
+3;fuhrmann.png;Michael M. Schuff;arnulph.fuhrmann@th-koeln.de;Professor;Fuhrmann;ZW 11-10;Online mittels Zoom nach Vereinbarung per Email.;+49 221-8275-2614;Prof. Dr.-Ing.;Arnulph
+4;platzhalter3.jpg;;axel.gaertner@th-koeln.de;Mitarbeiter;Gärtner;HO 2-89;Mittwoch, 14.00 bis 15.00 Uhr Bitte melden Sie sich immer vorher über Email an. Andere Termine ausserhalb der Sprechzeiten sind natürlich auch möglich.;+49 221-8275-2517;Dipl.-Ing. ;Axel
+5;gruenvogel.png;Michael M. Schuff;stefan.gruenvogel@th-koeln.de;Professor;Grünvogel;ZW 11-06;nach Vereinbarung;+49 221-8275-2526;Prof. Dr. rer. nat.;Stefan Michael
+6;platzhalter2.jpg;;benjamin.klapper@th-koeln.de;Externe;Klapper;;;;Dipl.-Ing. ;Benjamin
+7;kunz.png;Michael M. Schuff;dietmar.kunz@th-koeln.de;Professor;Kunz;ZS 08-07;Corona-bedingt findet die Sprechstunde bis auf weiteres nur per Telefon oder Video-Konferenz nach vorheriger Verabredung per E-Mail statt.;+49 221-8275-2513;Prof. Dr. rer. nat.;Dietmar
+8;nissen.png;Michael M. Schuff;hans.nissen@th-koeln.de;Professor;Nissen;ZN 06-08;Sprechstuden laut Aushang;+49 221-8275-2489;Prof. Dr.;Hans W.
+9;platzhalter3.jpg;;anne.ohlen@th-koeln.de;Externe;Ohlen;;;;;Anne
+10;poggemann.png;Michael M. Schuff;dirk.poggemann@th-koeln.de;Professor;Poggemann;ZW 10-05;Nach Vereinbarung;+49 221-8275-2515;Prof. Dr.-Ing.;Dirk
+11;poerschmann.png;Michael M. Schuff;christoph.poerschmann@th-koeln.de;Professor;Pörschmann;ZW 08-01;Aufgrund der aktuellen Corona-Situation finden Sprechstunden nur nach Terminvereinbarung statt. Sie können mich per Email hierzu kontaktieren.;+49 221-8275-2495;Prof. Dr.-Ing.;Christoph
+12;reiter.png;Michael M. Schuff;ulrich.reiter@th-koeln.de;Professor;Reiter;ZS 08-05;Sprechstunden finden zur Zeit nur nach Vereinbarung statt, bitte kontaktieren Sie mich per email!;+49 221-8275-2073;Prof. Dr.-Ing.;Ulrich
+13;ruelberg.png;Michael M. Schuff;klaus.ruelberg@th-koeln.de;Professor;Ruelberg;ZN 10-09;Donnerstag, 13.00 bis 14.00 Uhr oder nach Vereinbarung;+49 221-8275-2936;Prof. Dr.;Klaus
+14;russi.png;Michael M. Schuff;nicole.russi@th-koeln.de;Professor;Russi;ZS 08-06;Die Sprechstunden finden digital über Zoom statt. Bitte melden Sie sich immer vorher über Email an. Zusätzliche Sprechstunden nach Vereinbarung. In der vorlesungsfreien Zeit nur nach Vereinbarung.;+49 221-8275-2066;Prof. Dipl.-Des.;Nicole
+15;thieling.png;Michael M. Schuff;lothar.thieling@th-koeln.de;Professor;Thieling;ZW 07-12;;+49 221-8275-2469;Prof. Dr.-Ing.;Lothar
+16;platzhalter1.jpg;;chong.kim@th-koeln.de;Professor;Chong Dae;HN 2-24;;+49 221-8275-2947;Dr.;Kim
+17;wiehlpuetz.png;Michael M. Schuff;nadine.wiehlpuetz@th-koeln.de;Mitarbeiter;Wiehlpütz;HO 2-95;;+49 221-8275-2520;Dipl.-Ing. ;Nadine
+18;linke.png;Michael M. Schuff;claudia.linke@th-koeln.de;Mitarbeiter;Linke;HO 2-93;;+49 221-8275-2030;Dipl.-Ing. ;Claudia
+19;derichs.png;Michael M. Schuff;ursula.derichs@th-koeln.de;Mitarbeiter;Derichs;ZW-11-07;;+49 221-8275-2920;Dipl.-Inf.;Ursula
+20;platzhalter2.jpg;;turhan.civelek@th-koeln.de;Mitarbeiter;Cevelek;ZW-11-07;;;Dr.;Turhan
+21;platzhalter3.jpg;;olaf.clausen@smail.th-koeln.de;Mitarbeiter;Clausen;;;+49 221-8275-4159;;Olaf 
+22;platzhalter1.jpg;;benjamin.hoetter@th-koeln.de;Mitarbeiter;Hoetter;;;;;Benjamin
+23;loebich.png;Michael M. Schuff;christian.loebich@th-koeln.de;Mitarbeiter;Loebich;ZW10-6;;+49 221-8275-2616;Dipl.-Ing. ;Christian
+24;platzhalter2.jpg;;martin.misiak@th-koeln.de;Mitarbeiter;Misiak;;;+49 221-8275-4552;M.Sc.;Martin
+25;moritz.png;Michael M. Schuff;sylvia.moritz@th-koeln.de;Mitarbeiter;Moritz;HO-02-94;;+49 221-8275-2540;;Sylvia
+26;nguyen.png;Michael M. Schuff;viet.nguyen@th-koeln.de;Mitarbeiter;Nguyen; ZW 10-24;nach Vereinbarung;+49 221-8275-2783;M.Sc.;Hoai Viet
+27;platzhalter3.jpg;;tobias.pauers@th-koeln.de;Mitarbeiter;Pauers;ZW 10-2/3;;+49 221-8275-4374;;Tobias Michael
+28;platzhalter1.jpg;;kristoffer.waldow@th-koeln.de;Mitarbeiter;Waldow;;;+49 221-8275-4232;;Kristoffer
+29;zuelke.png;Michael M. Schuff;erika.zuehlke@th-koeln.de;Mitarbeiter;Zühlke;ZN-10-01;Öffnungszeiten des Sekretaritats: Montag, Dienstag, Mitwoch, Donnerstag, 10.00 bis 12.00 Uhr erreichbar: sekretariat-imp-f07@th-koeln.de;+49 221-8275-2512;;Erika
