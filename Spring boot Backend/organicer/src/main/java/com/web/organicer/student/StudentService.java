@@ -46,6 +46,7 @@ public class StudentService implements UserDetailsService {
             throw new IllegalStateException("email already taken");
         }
 
+        if(student.getPassword()== null){return "Kein Passwort";}
         String encodedPassword = bCryptPasswordEncoder.encode(student.getPassword());
 
         student.setPassword(encodedPassword);
@@ -60,7 +61,7 @@ public class StudentService implements UserDetailsService {
 
         conformationTokenService.saveConformationToken(conformationToken);
 
-        return token;
+        return "Erfolgreich registriert hier freischalten: http://139.6.101.196:8080/api/registration/confirm?"+token;
     }
 
     public void saveStudent(Student student){ studentRepository.save(student);}

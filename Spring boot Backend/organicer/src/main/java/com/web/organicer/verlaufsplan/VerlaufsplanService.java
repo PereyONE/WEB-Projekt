@@ -55,7 +55,7 @@ public class VerlaufsplanService {
     }
 
     public ArrayList<Verlaufsplan> getVerlaufplanWithoutKlausur(HttpServletRequest request) {
-        return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request), "Modul");
+        return verlaufsplanRepository.findByStudentIdAndArt(studentService.getStudentIdFromRequest(request));
     }
 
     public String addVertiefungenToVerlaufsplan(ArrayList<Integer> vertiefung, HttpServletRequest request) {
@@ -72,20 +72,17 @@ public class VerlaufsplanService {
 
         Student realStudent = studentService.getStudentFromRequest(request);
 
-        ArrayList<Verlaufsplan> allVerlaeufe = getVerlaufsplanById(request);
-
         //alte Vertiefungen entfernen
         ArrayList<Verlaufsplan> alteVertiefungen = getVertiefungenInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteVertiefungen) {
             verlaufsplanRepository.delete(plan);
-            allVerlaeufe.remove(plan);
         }
 
         //neue Vertiefungen hinzufügen
         for (int vertiefungsnummer : vertiefungen) {
             for (SvpModul modul : svpModulService.getSvpModulByVertiefungspaket(vertiefungsnummer)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerlaeufe.add(plan);
+                verlaufsplanRepository.save(plan);
             }
         }
 
@@ -93,48 +90,39 @@ public class VerlaufsplanService {
         for (int i = vertiefungen.size(); i < 5; i++) {
             for (SvpModul modul : svpModulService.getSvpModulByVertiefungspaket(i + 8)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerlaeufe.add(plan);
+                verlaufsplanRepository.save(plan);
             }
         }
-
-
-        //Verlaufsplan updaten
-        updateVerlaufsplan(allVerlaeufe, request);
 
         return "Vertiefung/en hinzugefügt";
     }
 
     public String addWahlModuleToStudent(ArrayList<Integer> wahlmodule, HttpServletRequest request) {
+
         Student realStudent = studentService.getStudentFromRequest(request);
 
-        ArrayList<Verlaufsplan> allVerläufe = getVerlaufsplanById(request);
 
         //alte Wahlmodule entfernen
         ArrayList<Verlaufsplan> alteWahlmodule = getWahlmodulInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteWahlmodule) {
             verlaufsplanRepository.delete(plan);
-            allVerläufe.remove(plan);
         }
 
         //neue Vertiefungen hinzufügen
         for (int vertiefungsnummer : wahlmodule) {
             for (SvpModul modul : svpModulService.getSvpModulByWahlmodul(vertiefungsnummer)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerläufe.add(plan);
+                verlaufsplanRepository.save(plan);
             }
         }
 
         //Platzhalter hinzufügen falls nicht 4 Vertiefungen gewählt wurden
-        for (int i = wahlmodule.size(); i < 2; i++) {
+        for (int i = wahlmodule.size()+1; i < 3; i++) {
             for (SvpModul modul : svpModulService.getSvpModulByWahlmodul(i)) {
                 Verlaufsplan plan = new Verlaufsplan(realStudent, modul, 0);
-                allVerläufe.add(plan);
+                verlaufsplanRepository.save(plan);
             }
         }
-
-
-        //Verlaufsplan updaten
-        updateVerlaufsplan(allVerläufe, request);
 
         return "Wahlmodule hinzugefügt";
     }

@@ -1,35 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import ModuleProfil from './ModuleProfil';
 import './AppModule.css'
+import axios from 'axios';
+import { Link, useParams, Redirect } from 'react-router-dom';
+
+function AppModuleProfil({ auth }) {
+  const { id } = useParams();
+  const [modul, setmodul] = useState({lehrende:[]});
+
+  useEffect(() => {
+    console.log('hallo')
+    axios.get(`api/modules/${id}`)
+      .then(res => {
+        setmodul(res.data)
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
 
 
-function AppModuleProfil() {
-
-  const modul =
-  {
-    name:"Mathematik 1",
-    picture: "/images/module/mathe1.jpg",
-    zeit: "1",
-    ulp:"Wintersemester",
-    klausur:"schriftlich",
-    ects:"10",
-    inhalt:"lorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolorlorem ipsum sit amet dolor",
-    personen:[
-      {
-        name:"Prof. Dr. Dietmar Kunz",
-        picture: "/images/lehrende/platzhalter.jpg"
-      },
-      {
-        name:"Claudia Linke",
-        picture: "/images/lehrende/platzhalter.jpg"
-      },
-      {
-        name:"Nadine Wiehlpütz",
-        picture: "/images/lehrende/platzhalter.jpg"
-      }
-    ]
+  if (!auth) {
+    return <Redirect to="/login" />
   }
 
   return (

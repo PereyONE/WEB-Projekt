@@ -45,6 +45,17 @@ function AppLehrende({ auth }) {
           })}
         </Row>
       </div>
+
+      <h1>Externe Mitarbeiter*innen</h1>
+      <div className="profs">
+        <Row >
+          {profs.map((prof, i) => {
+            if(prof.funktion == "Externe"){
+              return(<Lehrende prof={prof} index={i} />)
+            }
+          })}
+        </Row>
+      </div>
     </Container>
 
 

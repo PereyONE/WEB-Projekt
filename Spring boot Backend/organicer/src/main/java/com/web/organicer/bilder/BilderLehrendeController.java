@@ -68,7 +68,7 @@ public class BilderLehrendeController {
 
         //Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         //file.transferTo(dest);
-        Path root = Paths.get("/Users\\justu\\WPR\\neuesRepo\\WEB-Projekt\\react_frontend\\public\\images\\lehrende");
+        Path root = Paths.get("/var/www/html/build/images/lehrende");
         if (!Files.exists(root)) {
             init();
         }

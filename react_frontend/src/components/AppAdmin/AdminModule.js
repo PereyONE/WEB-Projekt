@@ -62,7 +62,7 @@ function AdminModule({ prof, course }) {
             .then(res => {
                 console.log(res)
                 fileUploadHandler()
-                
+
             })
             .catch(err => {
                 console.log(err)
@@ -70,7 +70,7 @@ function AdminModule({ prof, course }) {
 
         //Bild Upload
 
-         
+
     }
 
     const deleteModule = () => {
@@ -145,7 +145,7 @@ function AdminModule({ prof, course }) {
             .then(res => {
                 console.log(res)
             })
-            
+
     }
 
 
@@ -223,40 +223,45 @@ function AdminModule({ prof, course }) {
                             </div>
                             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.beschreibung} onChange={e => onTodoChangeBeschreibung(e.target.value)}></input>
                         </div>
+
+                        {/* Semesterauswahl */}
+                    <form >
+                        <label>
+                            Angeboten im
+                            <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.verfügbarkeit} onChange={e => setCourseUpdate({ ...courseUpdate, verfügbarkeit: e.target.value })}>
+                                <option value='0'  >Semester wählen</option>
+                                <option value='Wintersemester'>Wintersemester</option>
+                                <option value='Sommersemester'>Sommersemester</option>
+                                
+
+
+                            </select>
+                        </label>
+                    </form>
+
+                    {/* Typauswahl */}
+
+                    <form >
+                        <label>
+                            Modultyp
+                            <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.moduleTyp} onChange={e => setCourseUpdate({ ...courseUpdate, moduleTyp: e.target.value })}>
+                                <option value='0'  >Typ wählen</option>
+
+                                <option value='Pflichtmodule'>Pflichtmodul</option>
+                                <option value='Vertiefungsmodule'>Vertiefungsmodul</option>
+                                <option value='Wahlmodule'>Wahlmodul</option>
+
+
+                            </select>
+                        </label>
+                    </form>
                     </div>
                 </div>
 
                 <div class="col ">
 
-                    {/* Semesterauswahl */}
-                    <h6 class="font">Angeboten im:</h6>
-                    <div onChange={onTodoChangeVerfügbarkeit}>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="verf" id="inlineRadio2" value="ws" ></input>
-                            <label class="form-check-label" for="inlineRadio2">Wintersemester</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="verf" id="inlineRadio1" value="ss"></input>
-                            <label class="form-check-label" for="inlineRadio1">Sommersemester</label>
-                        </div>
-                    </div>
+                    
 
-                    {/* Typauswahl */}
-                    <h6 class="font">Angeboten im:</h6>
-                    <div onChange={e => { setCourseUpdate({ ...courseUpdate, moduleTyp: e.target.value }) }}>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="typ" id="inlineRadio2" value="Pflichtmodule" ></input>
-                            <label class="form-check-label" for="inlineRadio2">Pflichtmodul</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="typ" id="inlineRadio1" value="Vertiefungsmodule"></input>
-                            <label class="form-check-label" for="inlineRadio1">Vertiefungsmodul</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="typ" id="inlineRadio3" value="Wahlmodule"></input>
-                            <label class="form-check-label" for="inlineRadio1">Wahlmodul</label>
-                        </div>
-                    </div>
 
                     {/* Regelstudiensemesterauswahl */}
                     <h6>Regelstudienzeit</h6>
@@ -272,7 +277,6 @@ function AdminModule({ prof, course }) {
 
                                 </select>
                             </label>
-                            <input type="submit" value="auswählen" />
                         </form>
 
                         <form >
@@ -286,7 +290,7 @@ function AdminModule({ prof, course }) {
 
                                 </select>
                             </label>
-                            <input type="submit" value="auswählen" />
+
                         </form>
                     </div>
 
@@ -295,7 +299,7 @@ function AdminModule({ prof, course }) {
                         <form >
                             <label>
                                 Vertiefung auswählen
-                                <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.vertiefung} onChange={e => setCourseUpdate({ ...courseUpdate, vertiefung: e.target.value, oberkategorie:e.target.value })}>
+                                <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.vertiefung} onChange={e => setCourseUpdate({ ...courseUpdate, vertiefung: e.target.value, oberkategorie: e.target.value })}>
                                     <option value='0'  >Vertiefung wählen</option>
                                     {vertiefung.map((v) => {
                                         if (courseUpdate.moduleTyp === 'Vertiefungsmodule') {
@@ -317,12 +321,12 @@ function AdminModule({ prof, course }) {
                     Kategorie wählen (zB: Mathematik, Phototechnik etc.)
                     <div class="input-group input-group-sm mb-3">
 
-                        
-                            <div class="input-group-prepend">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Kategorie</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.oberkategorie} onChange={e => { setCourseUpdate({ ...courseUpdate, oberkategorie: e.target.value,  }) }}></input>
-                        
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text lenge" id="inputGroup-sizing-sm">Kategorie</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={courseUpdate.oberkategorie} onChange={e => { setCourseUpdate({ ...courseUpdate, oberkategorie: e.target.value, }) }}></input>
+
 
 
 
