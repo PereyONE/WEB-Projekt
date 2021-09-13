@@ -32,8 +32,8 @@ public class Module {
     @ManyToMany(mappedBy = "modules",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Lehrende> lehrende = new ArrayList<>();
     private String moduleAbkürzung;
-    private String ects;//int
-    private String moduleTyp;//int
+    private String ects;
+    private String moduleTyp;
     private String vertiefung;
     private String prüfungsart;
     private String beschreibung;
