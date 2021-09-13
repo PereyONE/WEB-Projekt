@@ -1,6 +1,7 @@
 package com.web.organicer.verlaufsplan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.web.organicer.student.Student;
 import com.web.organicer.svpModul.SvpModul;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class Verlaufsplan {
     private Student student;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = "verlaufsplan")
     @JoinColumn(name = "svpmodul_id")
     private SvpModul svpModul;
 
