@@ -14,8 +14,8 @@ public interface VerlaufsplanRepository extends JpaRepository<Verlaufsplan, Long
 
     ArrayList<Verlaufsplan> findByStudentId(Long StudentId);
 
-    @Query(value = "SELECT * FROM verlaufsplan  join svp_modul on svpmodul_id = svp_modul.id WHERE student_id =?1 and art = ?2",nativeQuery = true)
-    ArrayList<Verlaufsplan> findByStudentIdAndArt(Long StudentId, String Art);
+    @Query(value = "SELECT * FROM verlaufsplan  join svp_modul on svpmodul_id = svp_modul.id WHERE student_id =?1 and art = \"modul\" or art = \"ulp\"",nativeQuery = true)
+    ArrayList<Verlaufsplan> findByStudentIdAndArt(Long StudentId);
 
     @Query(value = "SELECT * FROM svp_modul join verlaufsplan on verlaufsplan.svpmodul_id = id WHERE vertiefungspaket = ?2 And verlaufsplan.student_id = ?1",nativeQuery = true)
     ArrayList<SvpModul> findByStudentIdAndVertiefungspaket(Long Id, int Vertiefungspaket);
