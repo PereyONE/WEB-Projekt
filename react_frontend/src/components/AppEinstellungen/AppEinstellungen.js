@@ -1,10 +1,10 @@
-import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
-import { row, col, Button, Form } from 'react-bootstrap';
+import {  Form } from 'react-bootstrap';
 import './AppEinstellungen.css';
 import axios from 'axios'
+import { Redirect } from 'react-router';
 
-function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
+function AppEinstellungen({ auth }) {
 
   const [user, setUser] = useState()
 
@@ -226,7 +226,11 @@ function AppEinstellungen({ prof, course, profWahl, wahlCourse }) {
     axios.post('api/student/updatePasswort')
   }
 
-
+  if (!(auth)) {
+    return (
+      <Redirect to='/login' />
+    )
+  }
 
 
   return (

@@ -23,6 +23,7 @@ function Stundenplan(semester) {
                 }
             })
     }, [])
+    
     const [width, setWidth] = React.useState(window.innerWidth);
     const breakpoint = 700;
     React.useEffect(() => {

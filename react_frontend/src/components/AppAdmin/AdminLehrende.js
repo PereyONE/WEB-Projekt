@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom'
 
 
-function AdminLehrende() {
+function AdminLehrende({auth}) {
 
     //Konstanten und States
-    const [auth, setAuth] = useState(true)
+    const [authAdmin, setAuthAdmin] = useState(true)
     const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', modules: [] }
 
     const [profUpdate, setProfUpdate] = useState(defaultProf)
@@ -23,7 +23,7 @@ function AdminLehrende() {
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
-                setAuth(res.data)
+                setAuthAdmin(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -178,6 +178,11 @@ function AdminLehrende() {
 
 
     if (!(auth)) {
+        return (
+            <Redirect to='/login' />
+        )
+    }
+    if (!(authAdmin)) {
         return (
             <Redirect to='/' />
         )

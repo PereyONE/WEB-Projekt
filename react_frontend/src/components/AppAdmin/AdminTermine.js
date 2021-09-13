@@ -6,60 +6,28 @@ import TimePicker from 'react-time-picker';
 
 
 
-function AdminTermine() {
+function AdminTermine({auth}) {
 
-    // const test = [
-    //     {
-    //         id: 1, termin: [
-    //             { id: 1, beschreibung: 'Vorlesung Mathe 1 (1)', wochentag: 'Montag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-    //             { id: 1, beschreibung: 'Vorlesung Mathe 1 (2)', wochentag: 'Mittwoch', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-    //         ], name: 'Mathe 1',
-    //     },
-    //     {
-    //         id: 2, termin: [
-    //             { id: 1, beschreibung: 'Vorlesung Mathe 2 (1)', wochentag: 'Montag', startzeit: '10:00', endzeit: '12:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
-    //             { id: 1, beschreibung: 'Vorlesung Mathe 2 (2)', wochentag: 'Mittwoch', startzeit: '14:00', endzeit: '16:00', raum: 'H2', typ: 'Vorlesung', semester: '2' },
-    //         ], name: 'Mathe 2',
-    //     },
-    //     {
-    //         id: 3, termin: [
-    //             { id: 1, beschreibung: 'Vorlesung Siga (1)', wochentag: 'Dienstag', startzeit: '9:00', endzeit: '12:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-    //             { id: 1, beschreibung: 'Vorlesung Siga (2)', wochentag: 'Donnerstag', startzeit: '11:00', endzeit: '13:00', raum: 'H1', typ: 'Vorlesung', semester: '1' },
-    //         ], name: 'Siga',
-    //     },
-    // ]
 
     const defaultModul = { termin: [], name: '' }
     const [modulUpdate, setModulUpdate] = useState(defaultModul)
 
     const defaultTermin = { beschreibung: '', wochentag: '', startzeit: '', endzeit: '', raum: '', typ: '', semester: '' };
 
-    //Hier weitermachen!
-    const [auth, setAuth] = useState(true)
-    const [termine, setTermine] = useState([])
+    const [authAdmin, setAuthAdmin] = useState(true)
     const [module, setModule] = useState([])
     const [terminUpdate, setTerminUpdate] = useState(defaultTermin)
 
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
-                setAuth(res.data)
+                setAuthAdmin(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
 
-    useEffect(() => {
-        axios.get('/api/termine')
-            .then(res => {
-                setTermine(res.data)
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
 
     useEffect(() => {
         axios.get('/api/svpModul')
@@ -108,6 +76,12 @@ function AdminTermine() {
 
 
     if (!(auth)) {
+        return (
+            <Redirect to='/login' />
+
+        )
+    }
+    if (!(authAdmin)) {
         return (
             <Redirect to='/' />
 

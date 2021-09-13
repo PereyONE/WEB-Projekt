@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 
 
 
-function AdminModule({ prof, course }) {
+function AdminModule({ auth }) {
 
 
     //Konstanten und States
-    const [auth, setAuth] = useState(true)
+    const [authAdmin, setAuthAdmin] = useState(true)
 
     const defaultCourse = { moduleName: '', moduleAbkürzung: '', ects: '', moduleTyp: '', vertiefung: '', prüfungsart: '', beschreibung: '', verfügbarkeit: '', regelstudienzeitsieben: '', regelstudienzeitzwölf: '', terminID: '', bild: 'platzhalter1.png', bildrechte: '', oberkategorie: '' };
     const [courseUpdate, setCourseUpdate] = useState(defaultCourse)
@@ -26,7 +26,7 @@ function AdminModule({ prof, course }) {
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
-                setAuth(res.data)
+                setAuthAdmin(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -151,6 +151,11 @@ function AdminModule({ prof, course }) {
 
 
     if (!(auth)) {
+        return (
+            <Redirect to='/login' />
+        )
+    }
+    if (!(authAdmin)) {
         return (
             <Redirect to='/' />
         )

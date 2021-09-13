@@ -5,18 +5,18 @@ import { Redirect } from 'react-router-dom'
 
 
 
-function AdminFAQ() {
+function AdminFAQ({auth}) {
 
     const defaultFaq= { antwort:'', frage:'' };
 
-    const [auth, setAuth] = useState(true)
+    const [authAdmin, setAuthAdmin] = useState(true)
     const [faqs, setFaqs] = useState([])
     const [faqUpdate, setFaqUpdate]=useState(defaultFaq)
 
     useEffect(() => {
         axios.get('/api/authenticate/admin')
             .then(res => {
-                setAuth(res.data)
+                setAuthAdmin(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -66,6 +66,11 @@ function AdminFAQ() {
   
 
     if (!(auth)) {
+        return (
+            <Redirect to='/login' />
+        )
+    }
+    if (!(authAdmin)) {
         return (
             <Redirect to='/' />
         )
