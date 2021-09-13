@@ -41,6 +41,7 @@ public class Lehrende {
     private String raum;
     private String sprechstunde;
     private String bild;
+    private String bildrechte;
 
     @JsonIgnoreProperties(value = "lehrende")
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
