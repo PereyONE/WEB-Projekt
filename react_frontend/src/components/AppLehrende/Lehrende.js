@@ -12,7 +12,7 @@ function Lehrende({ prof }) {
                     <Link to={`/lehrende/${prof.id}`}>
                         <Image className="Bild" src={"/images/lehrende/" + prof.bild} alt="prof" fluid />
                     </Link>
-                    <figcaption>Foto: Michael M. Schuff</figcaption>
+                    
                 </figure>
             </div>
 

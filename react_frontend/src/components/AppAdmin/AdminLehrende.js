@@ -8,23 +8,14 @@ function AdminLehrende() {
 
     //Konstanten und States
     const [auth, setAuth] = useState(true)
-    const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', module: [] }
+    const defaultProf = { id: null, titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', modules: [] }
 
     const [profUpdate, setProfUpdate] = useState(defaultProf)
 
-    const [courseAdd, setCourseAdd] = useState({ id: null })
+    const [courseAdd, setCourseAdd] = useState()
     const [courseRemove, setCourseRemove] = useState({ id: null })
 
-    const [courses, setCourses] = useState([
-        { id: 1, modulname: 'Mathematik 1', modulabkürzung: 'MA1', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen', verfügbarkeit: 'Wintersemester', regelstudienzeitsieben: 'erstes Semester', regelstudienzeitzwölf: 'drittes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 2, modulname: 'Mathematik 2', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 3, modulname: 'Mathematik 3', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 4, modulname: 'Mathematik 4', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 5, modulname: 'Mathematik 5', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 6, modulname: 'Mathematik 6', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-        { id: 7, modulname: 'Mathematik 7', modulabkürzung: 'MA2', ects: '10', modultyp: '', vertiefung: 'keine', prüfungsart: 'schriftlich', beschreibung: 'Es geht um lineare Algebra und Funktionen, aber mit 2', verfügbarkeit: 'Sommersemester', regelstudienzeitsieben: 'zweites Semester', regelstudienzeitzwölf: 'viertes Semester', terminID: 'keine Ahnung', bild: 'Pfad einfügen oder so' },
-    ])
-
+    const [courses, setCourses] = useState([])
     const [profs, setProfs] = useState([])
 
 
@@ -44,20 +35,37 @@ function AdminLehrende() {
         axios.get('api/lehrende')
             .then(res => {
                 setProfs(res.data)
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        axios.get('api/modules')
+            .then(res => {
+                setCourses(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
 
+    function updateProf() {
+        axios.post('api/lehrende', profUpdate)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+
 
 
 
     function handleClick(prof) {
-        //preventDefault();
         setProfUpdate(prof)
-        console.log(prof);
-        console.log(profUpdate)
     }
 
     // Für jeden Bereich wird eine onTodoChange- Funktion angelegt, 
@@ -104,36 +112,28 @@ function AdminLehrende() {
             sprechstunde: value,
         });
     }
-    function onTodoChangeModule(value) {
-        setProfUpdate({
-            ...profUpdate,
-            [module]: value,
-        });
-    }
 
-    
 
-    
+
+
+
 
 
     const addModul = (evt) => {
         evt.preventDefault();
         if ((!(profUpdate.id === 0)) && (!(courseAdd.id === null)) && (!(parseInt(courseAdd) === 0))) {
-            console.log('lol')
-            var tmp = profUpdate.module
-            tmp.push(parseInt(courseAdd))
+            const test = courses.find(course => course.id === parseInt(courseAdd))
+            var tmp = profUpdate.modules
+            tmp.push(test)
             setProfUpdate(
                 {
                     ...profUpdate,
-                    module: tmp
+                    modules: tmp
 
                 }
-
             )
-            console.log(profUpdate)
             setCourseAdd({ id: null })
         }
-        console.log(profUpdate)
 
     }
 
@@ -142,26 +142,18 @@ function AdminLehrende() {
     const removeModul = (evt) => {
         evt.preventDefault()
         if ((!(profUpdate.id === 0)) && (!(courseRemove.id === null)) && (!(parseInt(courseRemove) === 0))) {
-            console.log(courseRemove)
-            var tmp = profUpdate.module
-            var pos
-            for (var i = 0; i < tmp.length; i++) {
-                if (tmp[i] === parseInt(courseRemove)) {
-                    pos = i
-                }
+            var tmp = profUpdate.modules
+            var pos = tmp.findIndex(course => course.id === parseInt(courseRemove))
 
-            }
-
-            console.log(pos)
             tmp.splice(pos, 1)
             setProfUpdate(
                 {
                     ...profUpdate,
-                    module: tmp
+                    modules: tmp
                 }
 
             )
-            console.log(profUpdate)
+
             setCourseRemove({ id: null })
         }
     }
@@ -171,13 +163,13 @@ function AdminLehrende() {
         setProfUpdate({ ...profUpdate, bild: e.target.files[0].name })
         setProfBild(e.target.files[0])
 
-        console.log(profUpdate)
+
     }
 
     const fileUploadHandler = () => {
         const fd = new FormData()
-        fd.append('image', profBild, profBild.name)
-        axios.post('api/bilder/lehrende', profBild)
+        fd.append('file', profBild)
+        axios.post('api/bilder/lehrende', fd)
             .then(res => {
                 console.log(res)
             })
@@ -283,19 +275,28 @@ function AdminLehrende() {
                             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.sprechstunde} onChange={e => onTodoChangeZeit(e.target.value)}></input>
                         </div>
 
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text lenge" id="inputGroup-sizing-sm">Module</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value={profUpdate.module} onChange={e => onTodoChangeModule(e.target.value)}></input>
-                        </div>
+
+
+
 
                     </div>
                 </div>
 
                 <div class="col ">
 
-
+                    <form >
+                        <label>
+                            Funktion
+                            <select class="custom-select" id="inputGroupSelect04" value={profUpdate.funktion} onChange={e => setProfUpdate({ ...profUpdate, funktion: e.target.value })}>
+                                <option value='0'  >Funktion wählen</option>
+                                
+                                    <option value='Professor'>Professor*in</option>
+                                    <option value='Mitarbeiter'>Mitarbeiter*in</option>
+                                    <option value='Externe'>Externe</option>
+                                
+                            </select>
+                        </label>
+                    </form>
 
 
                     <div class="input-group marg">
@@ -308,9 +309,14 @@ function AdminLehrende() {
                                 <select class="custom-select" id="inputGroupSelect04" value={courseAdd} onChange={e => setCourseAdd(e.target.value)}>
                                     <option value='0'  >Modul wählen</option>
                                     {courses.map((modul) => {
-                                        if (!(profUpdate.module.includes(modul.id))) {
+                                        console.log(modul)
+                                        console.log(profUpdate.modules.find(course => course.id === modul.id))
+                                        var test = profUpdate.modules.find(course => course.id === modul.id)
+
+
+                                        if (typeof test === 'undefined') {
                                             return (
-                                                <option value={modul.id} >{modul.modulname}</option>
+                                                <option value={modul.id} >{modul.moduleName}</option>
 
                                             )
                                         }
@@ -329,13 +335,10 @@ function AdminLehrende() {
                                 Modul entfernen
                                 <select class="custom-select" id="inputGroupSelect04" value={courseRemove} onChange={e => setCourseRemove(e.target.value)}>
                                     <option value='0'  >Modul wählen</option>
-                                    {profUpdate.module.map((modulID) => {
-                                        var m
-                                        courses.map((course) => {
-                                            if (course.id === modulID) { m = course }
-                                        })
+                                    {profUpdate.modules.map((modul) => {
+
                                         return (
-                                            <option value={m.id} >{m.modulname}</option>
+                                            <option value={modul.id} >{modul.moduleName}</option>
 
                                         )
                                     }
@@ -354,8 +357,7 @@ function AdminLehrende() {
                     <input class=" form-control-sm" id="formFileSm" type="file" accept='image/*' onChange={fileSelectHandler} />
 
 
-                    <button type="button" class="btn btn-info btn-lg btn-block">Alle Änderungen speichern!</button>
-                    <button type="button" class="btn btn-success btn-lg btn-block">Neuen Lehrenden hinzufügen!</button>
+                    <button type="button" class="btn btn-info btn-lg btn-block" onClick={updateProf}>Alle Änderungen speichern!</button>
 
 
                 </div>
