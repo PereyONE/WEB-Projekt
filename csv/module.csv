@@ -1,50 +1,50 @@
 ﻿id;beschreibung;bild;ects;module_abkürzung;module_name;module_typ;oberkategorie;prüfungsart;regelstudienzeitsieben;regelstudienzeitzwölf;verfügbarkeit;vertiefung;bildrechte
-1;;mathe1.jpg;10;MA1;Mathematik 1;Pflichtfach;Mathematik;schriftliche Klausur;1;1;Wintersemester;;
-2;;info1.jpg;6;INF1;Informatik 1;Pflichtfach;Informatik;schriftliche Klauur;1;3;Wintersemester;;
-3;;photo1.jpg;5;PHO1;Phototechnik 1;Pflichtfach;Phototechnik;schriftliche Klausur;1;3;Wintersemester;;Michael M. Schuff
-4;;elektronik.jgp;5;ELE;Elektronik;Pflichtfach;Elektronik;schriftliche Klausur;1;1;Wintersemester;;
-5;;visuelle_und_auditive_wahrnehmung.jpg;3;AVW;Visuelle und auditive Wahrnehmung;Pflichtfach;Rest;wöchentliche Tests;1;1;Wintersemester;;
-6;;platzhalter1.png;1;SMM;Selbstmanagement im Studium;Pflichtfach;Rest;schriftliche Abgaben;1;1;Wintersemester;;
-7;;mathe2.jpg;10;MA2;Mathematik 2;Pflichtfach;Mathematik;schriftliche Klausur;2;2;Sommersemester;;
-8;;info2.jpg;6;INF2;Informatik 2;Pflichtfach;Informatik;schriftliche Klauur;2;4;Sommersemester;;
-9;;photo2.jpg;5;PHO2;Phototechnik 2;Pflichtfach;Phototechnik;schriftliche Klausur;2;4;Sommersemester;;Michael M. Schuff
-10;;platzhalter2.png;5;EM1;Elektronische Medien 1;Pflichtfach;Elektronik;schriftliche Klausur;2;2;Sommersemester;;
-11;;grundlagen_der_gestaltung_von_medien1.jpg;4;GGM1;Grundlagen der Gestaltung von Medien 1;Pflichtfach;Mediengestaltung;Abgaben;2;4;Sommersemester;;Michael M. Schuff
-12;;platzhalter3.png;7;SIGA;Signaltheorie und Angewandte Mathematik;Pflichtfach;Mathematik;schriftliche Klausur;3;5;Wintersemester;;Michael M. Schuff
-13;;info3.jpg;7;INF3;Informatik 3;Pflichtfach;Informatik;schriftliche Klauur;3;7;Wintersemester;;Michael M. Schuff
-14;;photo3.jpg;6;PHO3;Phototechnik 3;Pflichtfach;Phototechnik;schriftliche Klausur;3;5;Wintersemester;;Michael M. Schuff
-15;;grundlagen_der_gestaltung_von_medien2.jpg;5;EM2;Elektronische Medien 2;Pflichtfach;Elektronik;schriftliche Klausur;3;3;Wintersemester;;
-16;;platzhalter1.png;5;GGM2;Grundlagen der Gestaltung von Medien 2;Pflichtfach;Mediengestaltung;Abgabe;3;5;Wintersemester;;Michael M. Schuff
-17;;platzhalter2.png;5;MEG;Medienethik und Gesellschaft;Pflichtfach;Geisteswissenschaft;Abgabe;4;6;Sommersemester;;
-18;;platzhalter3.png;2;IDP;Interdisziplinäres Projekt;Pflichtfach;Geisteswissenschaft;Abgabe;4;6;Sommersemester;;
-19;;recht.jpg;3;REC;Medienrecht;Pflichtfach;Recht;schriftliche Klausur;4;9;Sommersemester;;
-20;;bildverarbeitung.jpg;5;BV1;Bildverarbeitung;Vertiefungsfach;Bildverarbeitung;mündliche Prüfung;4;;Sommersemester;Bildverarbeitung;
-21;;webengineering1.jpg;5;WEB1;Webengineering 1;Vertiefungsfach;Webengineering;schriftliche Klausur;4;;Sommersemester;Webengineering;Michael M. Schuff
-22;;computergrafik.jpg;5;CG;Computergrafik;Vertiefungsfach;Interaktive Computergrafik;schriftliche Klausur;4;;Sommersemester;Interaktive Computergrafik;Michael M. Schuff
-23;;gestaltung.jpg;5;GM1;Vertiefende Methoden und Theorien der Gestaltung;Vertiefungsfach;Gestaltung von Medien;Abgabe;4;;Sommersemester;Gestaltung von Medien;Michael M. Schuff
-24;;bildsenortechnik.jpg;5;KAT1;Bildsensortechnik;Vertiefungsfach;Kameratechnik;schriftliche Klausur;4;;Sommersemester;Kameratechnik;Michael M. Schuff
-25;;displaytechnik.jpg;5;DIS;Displaytechnik;Vertiefungsfach;Mediendistribution und -wiedergabe;schriftliche Klausur;4;;Sommersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
-26;;tonstudiotechnik.jpg;5;TST;Tonstudiottechnik;Vertiefungsfach;Produktionstechnik audiovisueller Medien;mündliche Prüfung;4;;Sommersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
-27;;platzhalter1.png;5;BWR;Betriebswirtschaft und Recht;Pflichtfach;Recht;Abgaben;5;9;Wintersemester;;Michael M. Schuff
-28;;mustererkennung.jpg;5;BV2;Mustererkennung;Vertiefungsfach;Bildverarbeitung;mündliche Prüfung;5;;Wintersemester;Bildverarbeitung;
-29;;webengineering2.jpg;5;WEB2;Webengineering 2;Vertiefungsfach;Webengineering;schriftliche Klausur;5;;Wintersemester;Webengineering;Michael M. Schuff
-30;;computeranimation.jpg;5;CA;Computeranimation;Vertiefungsfach;Interaktive Computergrafik;mündliche Prüfung;5;;Wintersemester;Interaktive Computergrafik;Michael M. Schuff
-31;;medienkonzeption.jpg;5;GM2;Medienkonzeption & Storytelling;Vertiefungsfach;Gestaltung von Medien;Abgabe;5;;Wintersemester;Gestaltung von Medien;Michael M. Schuff
-32;;kameratechnik.jpg;5;KAT2;Kameratechnik;Vertiefungsfach;Kameratechnik;schriftliche Klausur;5;;Wintersemester;Kameratechnik;Michael M. Schuff
-33;;medienuebertragung.jpg;5;MUS;Medienübertragung und -speicherung;Vertiefungsfach;Mediendistribution und -wiedergabe;schriftliche Klausur;5;;Wintersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
-34;;videostudiotechnik.jpg;5;VST;Videostudiotechnik;Vertiefungsfach;Produktionstechnik audiovisueller Medien;schriftliche Klausur;5;;Wintersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
-35;;projekt_mustererkennung.jpg;6;BV3;Projekt Bildverarbeitung / Mustererkennung;Vertiefungsfach;Bildverarbeitung;Abgabe;6;;Sommersemester;Bildverarbeitung;Michael M. Schuff
-36;;projekt_webengineering.jpg;6;WEB3;Projekt Webengineering;Vertiefungsfach;Webengineering;Abgabe;6;;Sommersemester;Webengineering;Michael M. Schuff
-37;;projekt_interaktive_systeme.jpg;6;IA;Projekt Interaktive Systeme;Vertiefungsfach;Interaktive Computergrafik;Abgabe;6;;Sommersemester;Interaktive Computergrafik;Michael M. Schuff
-38;;projekt_mediendesign.jpg;6;GM3;Projekt Mediendesign;Vertiefungsfach;Gestaltung von Medien;Abgabe;6;;Sommersemester;Gestaltung von Medien;Michael M. Schuff
-39;;projekt_kameratechnik.jpg;6;AKAT;Projekt Anwendungen der Kameratechnik;Vertiefungsfach;Kameratechnik;Abgabe;6;;Sommersemester;Kameratechnik;Michael M. Schuff
-40;;projekt_produktionstechnik.jpg;6;PMPT;Projekt Produktionstechnik audiovisueller Medien;Vertiefungsfach;Produktionstechnik audiovisueller Medien;Abgabe;6;;Sommersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
-41;;projekt_mediendistribution.jpg;6;PMW;Projekt Mediendistribution und-wiedergabe;Vertiefungsfach;Mediendistribution und -wiedergabe;Abgabe;6;;Sommersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
-42;;platzhalter1.png;15;PMP;Praxis- und Mobilitätsphase;Pflichtfach;Bachelor;Abgabe schriftlicher Bericht;7;11;Wintersemester;;
-43;;platzhalter2.png;12;BAA;Bachelorarbeit;Pflichtfach;Bachelor;Abgabe Bachelorarbeit;7;12;Wintersemester;;
-44;;platzhalter3.png;3;KOLL;Kolloquium zur Bachelorarbeit;Pflichtfach;Bachelor;mündlicher Ergebnisbericht;7;12;Wintersemester;;
-45;;platzhalter1.png;5;POP;Postproduktion;Wahlfach;Wahlfach Sommersemester;Abgabe;;;Sommersemester;;
-46;;platzhalter2.png;5;FPO;Film-und Postproduktion;Wahlfach;Wahlfach Wintersemester;Abgabe;;;Wintersemester;;
-47;;platzhalter3.png;5;S3D;Stereoskopie;Wahlfach;Wahlfach Sommersemester;Hausarbeit;;;Sommersemester;;
-48;;platzhalter1.png;5;CGI;CGI-Workshop;Wahlfach;Wahlfach Wintersemester;Abgaben;;;Wintersemester;;
-49;;platzhalter2.png;5;TCG;Themen der Computergrafik;Wahlfach;Wahlfach Wintersemester;tba;;;Wintersemester;;
+1;\N;mathe1.jpg;10;MA1;Mathematik 1;Pflichtfach;Mathematik;schriftliche Klausur;1;1;Wintersemester;\N;\N
+2;\N;info1.jpg;6;INF1;Informatik 1;Pflichtfach;Informatik;schriftliche Klauur;1;3;Wintersemester;\N;\N
+3;\N;photo1.jpg;5;PHO1;Phototechnik 1;Pflichtfach;Phototechnik;schriftliche Klausur;1;3;Wintersemester;\N;Michael M. Schuff
+4;\N;elektronik.jgp;5;ELE;Elektronik;Pflichtfach;Elektronik;schriftliche Klausur;1;1;Wintersemester;\N;\N
+5;\N;visuelle_und_auditive_wahrnehmung.jpg;3;AVW;Visuelle und auditive Wahrnehmung;Pflichtfach;Rest;wöchentliche Tests;1;1;Wintersemester;\N;\N
+6;\N;platzhalter1.png;1;SMM;Selbstmanagement im Studium;Pflichtfach;Rest;schriftliche Abgaben;1;1;Wintersemester;\N;\N
+7;\N;mathe2.jpg;10;MA2;Mathematik 2;Pflichtfach;Mathematik;schriftliche Klausur;2;2;Sommersemester;\N;\N
+8;\N;info2.jpg;6;INF2;Informatik 2;Pflichtfach;Informatik;schriftliche Klauur;2;4;Sommersemester;\N;\N
+9;\N;photo2.jpg;5;PHO2;Phototechnik 2;Pflichtfach;Phototechnik;schriftliche Klausur;2;4;Sommersemester;\N;Michael M. Schuff
+10;\N;platzhalter2.png;5;EM1;Elektronische Medien 1;Pflichtfach;Elektronik;schriftliche Klausur;2;2;Sommersemester;\N;\N
+11;\N;grundlagen_der_gestaltung_von_medien1.jpg;4;GGM1;Grundlagen der Gestaltung von Medien 1;Pflichtfach;Mediengestaltung;Abgaben;2;4;Sommersemester;\N;Michael M. Schuff
+12;\N;platzhalter3.png;7;SIGA;Signaltheorie und Angewandte Mathematik;Pflichtfach;Mathematik;schriftliche Klausur;3;5;Wintersemester;\N;Michael M. Schuff
+13;\N;info3.jpg;7;INF3;Informatik 3;Pflichtfach;Informatik;schriftliche Klauur;3;7;Wintersemester;\N;Michael M. Schuff
+14;\N;photo3.jpg;6;PHO3;Phototechnik 3;Pflichtfach;Phototechnik;schriftliche Klausur;3;5;Wintersemester;\N;Michael M. Schuff
+15;\N;grundlagen_der_gestaltung_von_medien2.jpg;5;EM2;Elektronische Medien 2;Pflichtfach;Elektronik;schriftliche Klausur;3;3;Wintersemester;\N;\N
+16;\N;platzhalter1.png;5;GGM2;Grundlagen der Gestaltung von Medien 2;Pflichtfach;Mediengestaltung;Abgabe;3;5;Wintersemester;\N;Michael M. Schuff
+17;\N;platzhalter2.png;5;MEG;Medienethik und Gesellschaft;Pflichtfach;Geisteswissenschaft;Abgabe;4;6;Sommersemester;\N;\N
+18;\N;platzhalter3.png;2;IDP;Interdisziplinäres Projekt;Pflichtfach;Geisteswissenschaft;Abgabe;4;6;Sommersemester;\N;\N
+19;\N;recht.jpg;3;REC;Medienrecht;Pflichtfach;Recht;schriftliche Klausur;4;9;Sommersemester;\N;\N
+20;\N;bildverarbeitung.jpg;5;BV1;Bildverarbeitung;Vertiefungsfach;Bildverarbeitung;mündliche Prüfung;4;\N;Sommersemester;Bildverarbeitung;\N
+21;\N;webengineering1.jpg;5;WEB1;Webengineering 1;Vertiefungsfach;Webengineering;schriftliche Klausur;4;\N;Sommersemester;Webengineering;Michael M. Schuff
+22;\N;computergrafik.jpg;5;CG;Computergrafik;Vertiefungsfach;Interaktive Computergrafik;schriftliche Klausur;4;\N;Sommersemester;Interaktive Computergrafik;Michael M. Schuff
+23;\N;gestaltung.jpg;5;GM1;Vertiefende Methoden und Theorien der Gestaltung;Vertiefungsfach;Gestaltung von Medien;Abgabe;4;\N;Sommersemester;Gestaltung von Medien;Michael M. Schuff
+24;\N;bildsenortechnik.jpg;5;KAT1;Bildsensortechnik;Vertiefungsfach;Kameratechnik;schriftliche Klausur;4;\N;Sommersemester;Kameratechnik;Michael M. Schuff
+25;\N;displaytechnik.jpg;5;DIS;Displaytechnik;Vertiefungsfach;Mediendistribution und -wiedergabe;schriftliche Klausur;4;\N;Sommersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
+26;\N;tonstudiotechnik.jpg;5;TST;Tonstudiottechnik;Vertiefungsfach;Produktionstechnik audiovisueller Medien;mündliche Prüfung;4;\N;Sommersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
+27;\N;platzhalter1.png;5;BWR;Betriebswirtschaft und Recht;Pflichtfach;Recht;Abgaben;5;9;Wintersemester;\N;Michael M. Schuff
+28;\N;mustererkennung.jpg;5;BV2;Mustererkennung;Vertiefungsfach;Bildverarbeitung;mündliche Prüfung;5;\N;Wintersemester;Bildverarbeitung;\N
+29;\N;webengineering2.jpg;5;WEB2;Webengineering 2;Vertiefungsfach;Webengineering;schriftliche Klausur;5;\N;Wintersemester;Webengineering;Michael M. Schuff
+30;\N;computeranimation.jpg;5;CA;Computeranimation;Vertiefungsfach;Interaktive Computergrafik;mündliche Prüfung;5;\N;Wintersemester;Interaktive Computergrafik;Michael M. Schuff
+31;\N;medienkonzeption.jpg;5;GM2;Medienkonzeption & Storytelling;Vertiefungsfach;Gestaltung von Medien;Abgabe;5;\N;Wintersemester;Gestaltung von Medien;Michael M. Schuff
+32;\N;kameratechnik.jpg;5;KAT2;Kameratechnik;Vertiefungsfach;Kameratechnik;schriftliche Klausur;5;\N;Wintersemester;Kameratechnik;Michael M. Schuff
+33;\N;medienuebertragung.jpg;5;MUS;Medienübertragung und -speicherung;Vertiefungsfach;Mediendistribution und -wiedergabe;schriftliche Klausur;5;\N;Wintersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
+34;\N;videostudiotechnik.jpg;5;VST;Videostudiotechnik;Vertiefungsfach;Produktionstechnik audiovisueller Medien;schriftliche Klausur;5;\N;Wintersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
+35;\N;projekt_mustererkennung.jpg;6;BV3;Projekt Bildverarbeitung / Mustererkennung;Vertiefungsfach;Bildverarbeitung;Abgabe;6;\N;Sommersemester;Bildverarbeitung;Michael M. Schuff
+36;\N;projekt_webengineering.jpg;6;WEB3;Projekt Webengineering;Vertiefungsfach;Webengineering;Abgabe;6;\N;Sommersemester;Webengineering;Michael M. Schuff
+37;\N;projekt_interaktive_systeme.jpg;6;IA;Projekt Interaktive Systeme;Vertiefungsfach;Interaktive Computergrafik;Abgabe;6;\N;Sommersemester;Interaktive Computergrafik;Michael M. Schuff
+38;\N;projekt_mediendesign.jpg;6;GM3;Projekt Mediendesign;Vertiefungsfach;Gestaltung von Medien;Abgabe;6;\N;Sommersemester;Gestaltung von Medien;Michael M. Schuff
+39;\N;projekt_kameratechnik.jpg;6;AKAT;Projekt Anwendungen der Kameratechnik;Vertiefungsfach;Kameratechnik;Abgabe;6;\N;Sommersemester;Kameratechnik;Michael M. Schuff
+40;\N;projekt_produktionstechnik.jpg;6;PMPT;Projekt Produktionstechnik audiovisueller Medien;Vertiefungsfach;Produktionstechnik audiovisueller Medien;Abgabe;6;\N;Sommersemester;Produktionstechnik audiovisueller Medien;Michael M. Schuff
+41;\N;projekt_mediendistribution.jpg;6;PMW;Projekt Mediendistribution und-wiedergabe;Vertiefungsfach;Mediendistribution und -wiedergabe;Abgabe;6;\N;Sommersemester;Mediendistribution und -wiedergabe;Michael M. Schuff
+42;\N;platzhalter1.png;15;PMP;Praxis- und Mobilitätsphase;Pflichtfach;Bachelor;Abgabe schriftlicher Bericht;7;11;Wintersemester;\N;\N
+43;\N;platzhalter2.png;12;BAA;Bachelorarbeit;Pflichtfach;Bachelor;Abgabe Bachelorarbeit;7;12;Wintersemester;\N;\N
+44;\N;platzhalter3.png;3;KOLL;Kolloquium zur Bachelorarbeit;Pflichtfach;Bachelor;mündlicher Ergebnisbericht;7;12;Wintersemester;\N;\N
+45;\N;platzhalter1.png;5;POP;Postproduktion;Wahlfach;Wahlfach Sommersemester;Abgabe;\N;\N;Sommersemester;\N;\N
+46;\N;platzhalter2.png;5;FPO;Film-und Postproduktion;Wahlfach;Wahlfach Wintersemester;Abgabe;\N;\N;Wintersemester;\N;\N
+47;\N;platzhalter3.png;5;S3D;Stereoskopie;Wahlfach;Wahlfach Sommersemester;Hausarbeit;\N;\N;Sommersemester;\N;\N
+48;\N;platzhalter1.png;5;CGI;CGI-Workshop;Wahlfach;Wahlfach Wintersemester;Abgaben;\N;\N;Wintersemester;\N;\N
+49;\N;platzhalter2.png;5;TCG;Themen der Computergrafik;Wahlfach;Wahlfach Wintersemester;tba;\N;\N;Wintersemester;\N;\N
