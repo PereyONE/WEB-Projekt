@@ -129,7 +129,7 @@ function AppVerlaufsplan({ auth }) {
         }
         if (position === 0) {
             module.sort(function (a, b) {
-                return b.semester7 - a.semester7;
+                return a.semester7 - b.semester7;
             })
         }
 
