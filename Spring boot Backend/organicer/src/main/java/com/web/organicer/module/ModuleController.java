@@ -3,7 +3,6 @@ package com.web.organicer.module;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/modules")
@@ -13,6 +12,7 @@ public class ModuleController {
 
     private final ModuleService moduleService;
 
+    //
     @GetMapping
     public List<Module> getModules(){
         return moduleService.getModules();

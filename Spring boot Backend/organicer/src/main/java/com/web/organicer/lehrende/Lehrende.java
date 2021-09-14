@@ -7,10 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.*;
-
 
 @Component
 @Getter
@@ -40,8 +38,8 @@ public class Lehrende {
     private String telefonnummer;
     private String raum;
     private String sprechstunde;
-    private String bild;
-    private String bildrechte;
+    private String bild;//Name des Bildes
+    private String bildrechte;//Name des Rechteinhabers
 
     @JsonIgnoreProperties(value = "lehrende")
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
@@ -75,5 +73,4 @@ public class Lehrende {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }

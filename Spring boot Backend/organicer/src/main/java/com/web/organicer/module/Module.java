@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.web.organicer.lehrende.Lehrende;
 import lombok.*;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
