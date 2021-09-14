@@ -237,7 +237,7 @@ function AppVerlaufsplan({ auth }) {
     const moduleULPPF = () => {
         const module = []
         for (let index = 0; index < itemsFromBackend.length; index++) {
-            if (itemsFromBackend[index].art !== 'modul') {
+            if (itemsFromBackend[index].art !== 'modul' || itemsFromBackend[index].semester12===0) {
                 module.push(itemsFromBackend[index])
             }
         }

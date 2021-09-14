@@ -12,8 +12,18 @@ function Stundenplan(semester) {
     useEffect(() => {
         axios.get('/api/termine')
             .then(res => {
-                seteintraege(res.data)
-                console.log(res.data)
+                var tmp = res.data
+                console.log(tmp)
+                tmp.sort(function compare(a, b) {
+                    if (a.startzeit < b.startzeit) {
+                        return -1;
+                    }
+                    if (a.startzeit > b.startzeit) {
+                        return 1;
+                    }
+                    return 0;
+                })
+                seteintraege(tmp)
             })
             .catch(function (error) {
                 if (error.response.status === 403) {
@@ -22,7 +32,7 @@ function Stundenplan(semester) {
                 }
             })
     }, [])
-    
+
     const [width, setWidth] = React.useState(window.innerWidth);
     const breakpoint = 700;
     React.useEffect(() => {
@@ -41,7 +51,7 @@ function Stundenplan(semester) {
                     Montag<br></br>
                     {eintraege.map((eintrag, i) => {
 
-                        if (eintrag.wochentag =="Montag" && eintrag.semester == semester.semester) {
+                        if (eintrag.wochentag == "Montag" && eintrag.semester == semester.semester) {
                             return (<Ereignis eintrag={eintrag} index={i} semester={semester} />)
                         }
                     })}

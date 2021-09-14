@@ -20,6 +20,8 @@ function Ereignis({ eintrag }) {
             semester: eintrag.semester,
         }
     );
+
+    const custom = false
     const handleClose1 = () => setShow(false);
     const handleClose2 = event => {
         setShow(false);
@@ -40,8 +42,8 @@ function Ereignis({ eintrag }) {
         event.preventDefault();
 
         console.log(formular)
-        
-        axios.delete(`/api/termine` , {data:{id:formular.id}})
+
+        axios.delete(`/api/termine/` + formular.id, { data: formular })
             .then(res => {
                 console.log(res)
             })
@@ -49,7 +51,13 @@ function Ereignis({ eintrag }) {
                 console.log(err)
             })
     }
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        if (eintrag.custom) {
+            setShow(true)
+        }
+    };
+
+
 
     if (eintrag.typ == "Vorlesung") {
         return (
@@ -129,7 +137,8 @@ function Ereignis({ eintrag }) {
                     <Modal.Footer>
                         <div className="button1" onClick={handleClose3}>
                             Löschen
-                        </div>
+                        </div> 
+
                         <div className="button2" onClick={handleClose2}>
                             Speichern
                         </div>

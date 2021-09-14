@@ -8,7 +8,7 @@ function AdminLehrende({ auth }) {
 
     //Konstanten und States
     const [authAdmin, setAuthAdmin] = useState(true)
-    const defaultProf = { titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: '', modules: [] }
+    const defaultProf = { titel: '', vorname: '', nachname: "", email: '', telefonnummer: '', raum: '', sprechstunde: '', funktion: '', bild: 'platzhalter1.jpg', modules: [] }
 
     const [profUpdate, setProfUpdate] = useState(defaultProf)
 

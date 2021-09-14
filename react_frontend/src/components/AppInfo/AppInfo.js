@@ -34,7 +34,7 @@ function AppInfo({ auth }) {
                     <br />
                     Unter dem Menüpunkt Studienverlaufsplaner kannst du dir deinen individuellen Studienverlaufsplan erstellen. So hast du immer einen guten Überblick welche Module dir noch fehlen und wie viele Semester du dafür noch benötigst.
 
-
+                    Mit dem PLAY-Button startest du den Verlaufsplaner.
 
                     In der linken Spalte unter Module findest du alle Module wieder die du im Bachelor belegen kannst. Diese kannst du nach Plicht-, Vertiefung- und Wahlmodulen filtern.  Du kannst dich auch entscheiden, ob du das ganze Modul, nur die ULP oder nur die Klausur in einem Semester belegen möchtest. Solltest du beispielsweise eine Klausur nicht bestehen aber bereits die ULP besitzen kannst du so anstelle des ganzen Modules die beiden Elemente ULP und Klausur im Studienverlaufsplan verwenden. Alle Elemente lassen sich durch Drag-and-Drop verschieben.
 
