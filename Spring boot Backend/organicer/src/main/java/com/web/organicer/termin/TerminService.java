@@ -47,6 +47,7 @@ public class TerminService {
         //Studenten über den Token herausfinden und zum Termin hizufügen
         Student student = studentService.getStudentFromRequest(request);
         termin.setStudent(student);
+        termin.setCustom(true);
 
         if (termin.getId() == null) {
             Termin tmp = addNewTermin(termin);

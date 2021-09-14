@@ -33,6 +33,7 @@ public class Termin {
     private SvpModul svpModul;
 
     private String beschreibung;
+    private boolean custom;
     private String wochentag;
     private String startzeit;
     private String endzeit;
