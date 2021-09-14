@@ -2,16 +2,12 @@ package com.web.organicer.svpModul;
 
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentRepository;
-import com.web.organicer.termin.Termin;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import com.web.organicer.verlaufsplan.VerlaufsplanRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @AllArgsConstructor

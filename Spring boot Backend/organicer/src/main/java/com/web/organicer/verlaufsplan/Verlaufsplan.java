@@ -6,15 +6,12 @@ import com.web.organicer.student.Student;
 import com.web.organicer.svpModul.SvpModul;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Data
 @Entity
 @NoArgsConstructor
 public class Verlaufsplan {
-
 
     @Id
     @SequenceGenerator(

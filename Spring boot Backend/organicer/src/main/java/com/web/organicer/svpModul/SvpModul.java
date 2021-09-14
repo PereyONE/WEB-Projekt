@@ -1,13 +1,11 @@
 package com.web.organicer.svpModul;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.web.organicer.student.Student;
 import com.web.organicer.termin.Termin;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -41,12 +39,12 @@ public class SvpModul {
     int custom;
     private String name;
     private String typ;//Pflichtmodul,Wahlmodul,Vertiefungsmodul
-    private int ects;
-    private int semester7;
-    private int semester12;
+    private int ects;//ects punkte
+    private int semester7;//position in der regelstudienzeit mit 7 semestern
+    private int semester12;//position in der regelstudienzeit mit 12 semestern
     private int vertiefungspaket;
     private int wahlmodul;
-    private String verfuegbarkeit;
+    private String verfuegbarkeit;//wintersemester,sommersemester
     private String art;//ULP,Klausur,Modul
 
     public SvpModul(String name, int custom, String typ, int ects, int semester7, int semester12, String art) {

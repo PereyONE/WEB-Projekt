@@ -1,13 +1,9 @@
 package com.web.organicer.termin;
 
-import com.web.organicer.svpModul.SvpModul;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Map;
-
 
 @RestController
 @RequestMapping(path = "/api/termine")

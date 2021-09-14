@@ -1,13 +1,10 @@
 package com.web.organicer.termin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.web.organicer.module.Module;
 import com.web.organicer.student.Student;
 import com.web.organicer.svpModul.SvpModul;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Data
@@ -42,5 +39,4 @@ public class Termin {
     private String raum;
     private String typ;
     private int semester;
-
 }

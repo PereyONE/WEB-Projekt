@@ -4,17 +4,10 @@ import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
 import com.web.organicer.svpModul.SvpModulService;
-import com.web.organicer.vertiefung.Vertiefung;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 
 @Service
 @AllArgsConstructor
@@ -101,7 +94,6 @@ public class VerlaufsplanService {
 
         Student realStudent = studentService.getStudentFromRequest(request);
 
-
         //alte Wahlmodule entfernen
         ArrayList<Verlaufsplan> alteWahlmodule = getWahlmodulInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteWahlmodule) {
@@ -123,7 +115,6 @@ public class VerlaufsplanService {
                 verlaufsplanRepository.save(plan);
             }
         }
-
         return "Wahlmodule hinzugefügt";
     }
 
