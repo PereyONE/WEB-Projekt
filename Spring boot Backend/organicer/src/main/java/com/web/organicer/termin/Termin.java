@@ -29,7 +29,7 @@ public class Termin {
     private Student student;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private SvpModul svpModul;
 
     private String beschreibung;

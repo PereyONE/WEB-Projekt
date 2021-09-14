@@ -61,21 +61,22 @@ public class TerminService {
     public String postTermin(SvpModul modul, Termin termin) {
 
         if(modul.getId()!=null) {
-            if(!termin.getBeschreibung().equals(terminRepository.findByBeschreibung(termin.getBeschreibung()))) {
+
                 //Get the real modul from database
                 SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
+
                 //add the modul to the termin
                 termin.setSvpModul(realModul);
+
                 //This is for adding the termin to the rest of the moduls termine
                 List<Termin> termine = realModul.getTermin();
                 termine.add(terminRepository.save(termin));
                 realModul.setTermin(termine);
+
                 //saving the Modul
                 svpModulService.saveSvpModul(realModul);
 
                 return "Termin wurde hinzugefügt";
-            }
-            return "Termin gibt es schon";
         }
         return "Modul existiert nicht";
     }
