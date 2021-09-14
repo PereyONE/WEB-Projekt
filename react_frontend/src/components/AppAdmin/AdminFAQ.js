@@ -56,7 +56,7 @@ function AdminFAQ({auth}) {
     }
 
     const deleteFAQ = () => {
-        axios.delete('/api/faqs',  {data:faqUpdate})
+        axios.delete('/api/faqs/'+faqUpdate.id,  {data:faqUpdate})
             .then(res => {
                 console.log(res)
             })

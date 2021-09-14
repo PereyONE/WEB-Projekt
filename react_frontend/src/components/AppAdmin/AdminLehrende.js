@@ -183,7 +183,7 @@ function AdminLehrende({ auth }) {
 
     function deleteProf() {
         console.log(profUpdate)
-        axios.delete('api/lehrende', { data: profUpdate })
+        axios.delete('api/lehrende/'+profUpdate.id, { data: profUpdate })
             .then(res => {
                 console.log(res)
             })
