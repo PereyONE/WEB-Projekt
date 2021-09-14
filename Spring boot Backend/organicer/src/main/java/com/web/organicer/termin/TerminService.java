@@ -1,8 +1,5 @@
 package com.web.organicer.termin;
 
-import com.web.organicer.module.Module;
-import com.web.organicer.module.ModuleService;
-import com.web.organicer.security.jwt.JwtUtil;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
@@ -10,12 +7,9 @@ import com.web.organicer.svpModul.SvpModulService;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import com.web.organicer.verlaufsplan.VerlaufsplanService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
 
 @Service
 @AllArgsConstructor
@@ -44,7 +38,6 @@ public class TerminService {
                 }
             }
         }
-
         return termine;
     }
 
@@ -101,7 +94,6 @@ public class TerminService {
     public String deleteTermin(Long id, HttpServletRequest request) {
 
         //Den Studenten über den Token herausfinden
-
         if (id == null) {
             return "Keine Termin Id";
         }

@@ -3,7 +3,6 @@ package com.web.organicer.vertiefung;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter
