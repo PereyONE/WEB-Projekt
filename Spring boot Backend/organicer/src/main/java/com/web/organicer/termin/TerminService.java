@@ -63,6 +63,8 @@ public class TerminService {
 
         if(modul.getId()!=null) {
 
+                //Setzten, dass der Termin kein custom termin vom studenten ist
+                termin.setCustom(false);
                 //Get the real modul from database
                 SvpModul realModul = svpModulService.getSvpModulById(modul.getId());
 
