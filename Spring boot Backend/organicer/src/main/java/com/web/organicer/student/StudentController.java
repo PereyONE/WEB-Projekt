@@ -31,7 +31,7 @@ public class StudentController {
     }
 
     @PostMapping("/updatePasswort")
-    public String updatePasswort(@RequestBody String passwort, HttpServletRequest request){return studentService.updatePasswort(passwort, request);}
+    public String updatePasswort(@RequestBody Student student, HttpServletRequest request){return studentService.updatePasswort(student, request);}
 
     @PostMapping("/updateSemester")
     public String updateSemester(@RequestBody Student student, HttpServletRequest request){ return studentService.updateSemester(student, request); }

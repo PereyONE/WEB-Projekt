@@ -97,15 +97,15 @@ public class StudentService implements UserDetailsService {
         return getStudentFromRequest(request).getStudentRole().equals(StudentRole.ADMIN);
     }
 
-    public String updatePasswort(String passwort, HttpServletRequest request) {
+    public String updatePasswort(Student student, HttpServletRequest request) {
 
-        if(passwort.length()>7) {
+        if(student.getPassword().length()>7) {
             //Student Laden
-            Student student = getStudentFromRequest(request);
+            Student realStudent = getStudentFromRequest(request);
             //Neues Passwort setzten
-            student.setPassword(bCryptPasswordEncoder.encode(passwort));
+            realStudent.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
             //Upgedateten Studenten speichern
-            studentRepository.save(student);
+            studentRepository.save(realStudent);
 
             return "Passwort upgedated";
         }
