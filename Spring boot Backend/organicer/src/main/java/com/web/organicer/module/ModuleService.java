@@ -53,7 +53,11 @@ public class ModuleService {
     }
 
     public String updateModule(Module module) {
-        module.setLehrende(moduleRepository.findById(module.getId()).get().getLehrende());
+        if (module.getLehrende() != null) {
+            module.setLehrende(moduleRepository.findById(module.getId()).get().getLehrende());
+            moduleRepository.save(module);
+            return "Module " + module.getModuleName() + " wurde aktualisiert";
+        }
         moduleRepository.save(module);
         return "Module " + module.getModuleName() + " wurde aktualisiert";
     }
