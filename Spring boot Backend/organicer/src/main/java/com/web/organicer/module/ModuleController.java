@@ -22,7 +22,7 @@ public class ModuleController {
     public Module getModulById(@PathVariable("id") Long id){ return moduleService.getModulById(id);}
 
     @PostMapping
-    public String postModule(@PathVariable("id") Module module){ return moduleService.postModule(module); }
+    public String postModule(@RequestBody Module module){ return moduleService.postModule(module); }
 
     @DeleteMapping(path = "/{id}")
     public String deleteModule(@PathVariable("id") Long id){ return moduleService.deleteModule(id); }
