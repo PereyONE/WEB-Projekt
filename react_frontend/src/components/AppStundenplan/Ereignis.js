@@ -41,7 +41,7 @@ function Ereignis({ eintrag }) {
 
         console.log(formular)
         
-        axios.delete(`/api/termine/${formular.id}` , {data: formular.id})
+        axios.delete(`/api/termine` , {data:{id:formular.id}})
             .then(res => {
                 console.log(res)
             })

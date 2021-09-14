@@ -31,10 +31,7 @@ function AppNavbar({ auth }) {
             setAuthAdmin(res.data)
         })
         .catch(err => {
-          if (err.response.status === 403) {
-            localStorage.clear()
-            window.location.reload()
-        }
+         console.log(err)
         })
 }, [])
 
