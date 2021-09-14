@@ -19,7 +19,14 @@ function AdminModule({ auth }) {
     const zwoelf = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
     const [courses, setCourses] = useState([])
-    const [vertiefung, setVertiefung] = useState([])
+    const [vertiefung, setVertiefung] = useState([{ id: 1, name: 'Bildverarbeitung' },
+    { id: 2, name: 'Web-Engineering' },
+    { id: 3, name: 'Interaktive Computergrafik' },
+    { id: 4, name: 'Mediendesign' },
+    { id: 5, name: 'Kameratechnik' },
+    { id: 6, name: 'Mediendistribution und -wiedergabe' },
+    { id: 7, name: 'Produktionstechnik audiovisueller Medien' }
+    ])
 
 
     //Data fetching
@@ -45,16 +52,7 @@ function AdminModule({ auth }) {
             })
     }, [])
 
-    useEffect(() => {
-        axios.get('/api/vertiefung')
-            .then(res => {
-                setVertiefung(res.data)
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+
 
 
     const postModul = () => {
@@ -74,7 +72,7 @@ function AdminModule({ auth }) {
     }
 
     const deleteModule = () => {
-        axios.delete('api/modules', {data: courseUpdate})
+        axios.delete('api/modules', { data: courseUpdate })
             .then(res => {
                 console.log(res)
             })
@@ -230,42 +228,42 @@ function AdminModule({ auth }) {
                         </div>
 
                         {/* Semesterauswahl */}
-                    <form >
-                        <label>
-                            Angeboten im
-                            <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.verfügbarkeit} onChange={e => setCourseUpdate({ ...courseUpdate, verfügbarkeit: e.target.value })}>
-                                <option value='0'  >Semester wählen</option>
-                                <option value='Wintersemester'>Wintersemester</option>
-                                <option value='Sommersemester'>Sommersemester</option>
-                                
+                        <form >
+                            <label>
+                                Angeboten im
+                                <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.verfügbarkeit} onChange={e => setCourseUpdate({ ...courseUpdate, verfügbarkeit: e.target.value })}>
+                                    <option value='0'  >Semester wählen</option>
+                                    <option value='Wintersemester'>Wintersemester</option>
+                                    <option value='Sommersemester'>Sommersemester</option>
 
 
-                            </select>
-                        </label>
-                    </form>
 
-                    {/* Typauswahl */}
+                                </select>
+                            </label>
+                        </form>
 
-                    <form >
-                        <label>
-                            Modultyp
-                            <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.moduleTyp} onChange={e => setCourseUpdate({ ...courseUpdate, moduleTyp: e.target.value })}>
-                                <option value='0'  >Typ wählen</option>
+                        {/* Typauswahl */}
 
-                                <option value='Pflichtmodule'>Pflichtmodul</option>
-                                <option value='Vertiefungsmodule'>Vertiefungsmodul</option>
-                                <option value='Wahlmodule'>Wahlmodul</option>
+                        <form >
+                            <label>
+                                Modultyp
+                                <select class="custom-select" id="inputGroupSelect04" value={courseUpdate.moduleTyp} onChange={e => setCourseUpdate({ ...courseUpdate, moduleTyp: e.target.value })}>
+                                    <option value='0'  >Typ wählen</option>
+
+                                    <option value='Pflichtmodule'>Pflichtmodul</option>
+                                    <option value='Vertiefungsmodule'>Vertiefungsmodul</option>
+                                    <option value='Wahlmodule'>Wahlmodul</option>
 
 
-                            </select>
-                        </label>
-                    </form>
+                                </select>
+                            </label>
+                        </form>
                     </div>
                 </div>
 
                 <div class="col ">
 
-                    
+
 
 
                     {/* Regelstudiensemesterauswahl */}

@@ -42,6 +42,9 @@ function AppEinstellungen({ auth }) {
   const defaultWahlCourse = { id: null, name: '' };
   const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
 
+  const [passwort, setPasswort]=useState()
+  const [passwort2, setPasswort2]=useState()
+
   useEffect(() => {
     axios.get('/api/student')
       .then(res => {
@@ -221,9 +224,19 @@ function AppEinstellungen({ auth }) {
       })
   }
 
-  function changePasswort() {
-    console.log()
-    axios.post('api/student/updatePasswort')
+  const changePasswort= (e) => {
+    e.preventDefault()
+    if(passwort===passwort2 && passwort.length>7){
+      console.log('success')
+      axios.post('api/student/updatePasswort', passwort)
+      .then(res=>{
+        console.log(res)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+    
   }
 
   if (!(auth)) {
@@ -412,7 +425,7 @@ function AppEinstellungen({ auth }) {
         <h3>
           Password ändern
         </h3>
-        <Form >
+        <Form onSubmit={changePasswort} >
           {/* <div className="formGroup">
             <label>
               Old Password
@@ -422,19 +435,17 @@ function AppEinstellungen({ auth }) {
           </div> */}
           <div className="formGroup">
             <label>
-              New Password
+              Neues Passwort (mind. 8 Zeichen lang)
             </label>
-            <input type="password" className="form-control" placeholder="New Password"
-            />
+            <input type="password" className="form-control" value={passwort} placeholder="New Password" onChange={e =>{setPasswort(e.target.value)}}/>
           </div>
           <div className="formGroup">
             <label>
-              New Password confirm
+              Neues Passwort bestätigen
             </label>
-            <input type="password" className="form-control" placeholder="New Password confirm"
-            />
+            <input type="password" className="form-control" value={passwort2} placeholder="New Password confirm" onChange={e =>{setPasswort2(e.target.value)}}/>
           </div>
-          <button type="submit" className="top bottom btn btn-primary btn-block buttonstyle text-center" onClick={changePasswort}>
+          <button  type='submit' className="top bottom btn btn-primary btn-block buttonstyle text-center" >
             Submit
           </button>
         </Form>

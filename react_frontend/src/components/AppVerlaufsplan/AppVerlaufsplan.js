@@ -123,9 +123,12 @@ function AppVerlaufsplan({ auth }) {
                 module.push(itemsFromBackend[index])
             }
         }
-        module.sort(function (a, b) {
-            return b.ects - a.ects;
-        })
+        if (position === 0) {
+            module.sort(function (a, b) {
+                return b.semester7 - a.semester7;
+            })
+        }
+        
         return module;
     }
 
@@ -609,7 +612,7 @@ function AppVerlaufsplan({ auth }) {
                     if (item.art === 'modul') {
                         item.position = item.semester12;
                     }
-    
+
                 })
 
             })
