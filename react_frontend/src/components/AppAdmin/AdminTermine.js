@@ -6,7 +6,7 @@ import TimePicker from 'react-time-picker';
 
 
 
-function AdminTermine({auth}) {
+function AdminTermine({ auth }) {
 
 
     const defaultModul = { termin: [], name: '' }
@@ -32,11 +32,22 @@ function AdminTermine({auth}) {
     useEffect(() => {
         axios.get('/api/svpModul')
             .then(res => {
-                setModule(res.data)
+                var mods = res.data
+                var mods2 = []
+                mods.map((mod) => {
+                    if (!(mod.art === 'pf')) {
+                        mods2.push(mod)
+                    }
+                })
+                setModule(mods2)
                 console.log(res.data)
             })
             .catch(err => {
                 console.log(err)
+                if (err.response.status === 403) {
+                    localStorage.clear()
+                    window.location.reload()
+                }
             })
     }, [])
 
@@ -47,8 +58,8 @@ function AdminTermine({auth}) {
     const postTermin = () => {
         console.log(modulUpdate)
         console.log(terminUpdate)
-        var update={svpModul:modulUpdate, termin:terminUpdate}
-        axios.post('api/termine/add', update) 
+        var update = { svpModul: modulUpdate, termin: terminUpdate }
+        axios.post('api/termine/add', update)
             .then(res => {
                 console.log(res)
             })
@@ -62,7 +73,7 @@ function AdminTermine({auth}) {
     }
 
     const deleteTermin = () => {
-        axios.delete('/api/termine', {data: terminUpdate})
+        axios.delete('/api/termine', { data: terminUpdate })
             .then(res => {
                 console.log(res)
             })
@@ -115,7 +126,7 @@ function AdminTermine({auth}) {
                     <div class="Scroll">
                         <div class="list-group" >
                             {module.map((modul, i) => (
-                                <button key={i} onClick={() => { setModulUpdate(modul); setTerminUpdate(defaultTermin)}} type="button" class="list-group-item list-group-item-action" > {modul.name}  </button>
+                                <button key={i} onClick={() => { setModulUpdate(modul); setTerminUpdate(defaultTermin) }} type="button" class="list-group-item list-group-item-action" > {modul.name} {modul.art}  </button>
                             ))}
                         </div>
                     </div>
@@ -191,20 +202,20 @@ function AdminTermine({auth}) {
 
                     {/* Typ */}
                     <div>
-                            <form >
-                                <label>
-                                    Termintyp
-                                    <select class="custom-select" id="inputGroupSelect04" value={terminUpdate.typ} onChange={e => setTerminUpdate({ ...terminUpdate, typ: e.target.value })}>
-                                        <option value='Vorlesung'>Vorlesung</option>
-                                        <option value='Praktikum'>Praktikum</option>
-                                        <option value='Übung'>Übung</option>
-                                        <option value='Tutorium'>Tutorium</option>
-                                        <option value='Sonstiges'>Sonstiges</option>
-                                        
-                                    </select>
-                                </label>
-                            </form>
-                        </div>
+                        <form >
+                            <label>
+                                Termintyp
+                                <select class="custom-select" id="inputGroupSelect04" value={terminUpdate.typ} onChange={e => setTerminUpdate({ ...terminUpdate, typ: e.target.value })}>
+                                    <option value='Vorlesung'>Vorlesung</option>
+                                    <option value='Praktikum'>Praktikum</option>
+                                    <option value='Übung'>Übung</option>
+                                    <option value='Tutorium'>Tutorium</option>
+                                    <option value='Sonstiges'>Sonstiges</option>
+
+                                </select>
+                            </label>
+                        </form>
+                    </div>
 
                 </div>
 

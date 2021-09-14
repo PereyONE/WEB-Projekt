@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Lehrende from './Lehrende'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 
 function AppLehrende({ auth }) {
   const [profs, setprofs] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     axios.get('/api/lehrende')
-    .then(res => {
-      setprofs(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[])
+      .then(res => {
+        setprofs(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+        if (err.response.status === 403) {
+          localStorage.clear()
+          window.location.reload()
+        }
+      })
+  }, [])
 
   if (!auth) {
     return <Redirect to="/login" />
-}
+  }
 
   return (
 
@@ -28,8 +32,8 @@ function AppLehrende({ auth }) {
       <div className="profs">
         <Row xs={2} lg={3}>
           {profs.map((prof, i) => {
-            if(prof.funktion == "Professor"){
-              return(<Lehrende prof={prof} index={i} />)
+            if (prof.funktion == "Professor") {
+              return (<Lehrende prof={prof} index={i} />)
             }
           })}
         </Row>
@@ -39,8 +43,8 @@ function AppLehrende({ auth }) {
       <div className="profs">
         <Row >
           {profs.map((prof, i) => {
-            if(prof.funktion == "Mitarbeiter"){
-              return(<Lehrende prof={prof} index={i} />)
+            if (prof.funktion == "Mitarbeiter") {
+              return (<Lehrende prof={prof} index={i} />)
             }
           })}
         </Row>
@@ -50,8 +54,8 @@ function AppLehrende({ auth }) {
       <div className="profs">
         <Row >
           {profs.map((prof, i) => {
-            if(prof.funktion == "Externe"){
-              return(<Lehrende prof={prof} index={i} />)
+            if (prof.funktion == "Externe") {
+              return (<Lehrende prof={prof} index={i} />)
             }
           })}
         </Row>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import './AppEinstellungen.css';
 import axios from 'axios'
 import { Redirect } from 'react-router';
@@ -42,8 +42,8 @@ function AppEinstellungen({ auth }) {
   const defaultWahlCourse = { id: null, name: '' };
   const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
 
-  const [passwort, setPasswort]=useState()
-  const [passwort2, setPasswort2]=useState()
+  const [passwort, setPasswort] = useState()
+  const [passwort2, setPasswort2] = useState()
 
   useEffect(() => {
     axios.get('/api/student')
@@ -58,6 +58,11 @@ function AppEinstellungen({ auth }) {
       })
       .catch(err => {
         console.log(err)
+        if (err.response.status === 403) {
+          localStorage.clear()
+          window.location.reload()
+        }
+
       })
   }, [])
 
@@ -224,19 +229,20 @@ function AppEinstellungen({ auth }) {
       })
   }
 
-  const changePasswort= (e) => {
+  const changePasswort = (e) => {
     e.preventDefault()
-    if(passwort===passwort2 && passwort.length>7){
+    if (passwort === passwort2 && passwort.length > 7) {
+      console.log(passwort)
       console.log('success')
-      axios.post('api/student/updatePasswort', passwort)
-      .then(res=>{
-        console.log(res)
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+      axios.post('api/student/updatePasswort', { password: passwort })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-    
+
   }
 
   if (!(auth)) {
@@ -437,15 +443,15 @@ function AppEinstellungen({ auth }) {
             <label>
               Neues Passwort (mind. 8 Zeichen lang)
             </label>
-            <input type="password" className="form-control" value={passwort} placeholder="New Password" onChange={e =>{setPasswort(e.target.value)}}/>
+            <input type="password" className="form-control" value={passwort} placeholder="New Password" onChange={e => { setPasswort(e.target.value) }} />
           </div>
           <div className="formGroup">
             <label>
               Neues Passwort bestätigen
             </label>
-            <input type="password" className="form-control" value={passwort2} placeholder="New Password confirm" onChange={e =>{setPasswort2(e.target.value)}}/>
+            <input type="password" className="form-control" value={passwort2} placeholder="New Password confirm" onChange={e => { setPasswort2(e.target.value) }} />
           </div>
-          <button  type='submit' className="top bottom btn btn-primary btn-block buttonstyle text-center" >
+          <button type='submit' className="top bottom btn btn-primary btn-block buttonstyle text-center" >
             Submit
           </button>
         </Form>

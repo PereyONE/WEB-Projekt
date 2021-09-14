@@ -30,7 +30,10 @@ function AdminFAQ({auth}) {
                 console.log(res.data)
             })
             .catch(err => {
-                console.log(err)
+                if (err.response.status === 403) {
+                    localStorage.clear()
+                    window.location.reload()
+                }
             })
     }, [])
 

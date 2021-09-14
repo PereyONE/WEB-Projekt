@@ -16,7 +16,6 @@ function Stundenplan(semester) {
                 console.log(res.data)
             })
             .catch(function (error) {
-
                 if (error.response.status === 403) {
                     localStorage.clear()
                     window.location.reload()

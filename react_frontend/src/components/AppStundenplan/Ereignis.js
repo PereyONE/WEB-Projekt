@@ -40,19 +40,8 @@ function Ereignis({ eintrag }) {
         event.preventDefault();
 
         console.log(formular)
-        var test=
-        {
-            "id": 3,
-            "beschreibung": "sport",
-            "wochentag": "Montag",
-            "startzeit": "10:00",
-            "endzeit": "11:00",
-            "raum": "4",
-            "typ": "Vorlesung",
-            "semester": 1
-        }
-
-        axios.delete('/api/termine', {data: formular})
+        
+        axios.delete(`/api/termine/${formular.id}` , {data: formular.id})
             .then(res => {
                 console.log(res)
             })

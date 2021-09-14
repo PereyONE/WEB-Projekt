@@ -31,7 +31,10 @@ function AppNavbar({ auth }) {
             setAuthAdmin(res.data)
         })
         .catch(err => {
-            console.log(err)
+          if (err.response.status === 403) {
+            localStorage.clear()
+            window.location.reload()
+        }
         })
 }, [])
 
@@ -111,7 +114,8 @@ function AppNavbar({ auth }) {
           </li>
 
           <li>
-            <Nav.Link href="/admin">{authAdmin ? 'Admin':''}</Nav.Link>
+            {authAdmin ?  <Nav.Link href="/admin">Admin</Nav.Link> :  <></>}
+            {/* <Nav.Link href="/admin" disabled>{authAdmin ? 'Admin':''}</Nav.Link> */}
           </li>
 
 

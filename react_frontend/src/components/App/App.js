@@ -21,7 +21,6 @@ import AppAdmin from '../AppAdmin/AppAdmin';
 import AdminLehrende from '../AppAdmin/AdminLehrende';
 import AdminModule from '../AppAdmin/AdminModule';
 import AdminFAQ from '../AppAdmin/AdminFAQ';
-import AdminVertiefung from '../AppAdmin/AdminVertiefung';
 import AdminTermine from '../AppAdmin/AdminTermine';
 
 

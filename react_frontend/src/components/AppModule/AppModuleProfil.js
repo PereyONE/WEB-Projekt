@@ -7,10 +7,9 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 
 function AppModuleProfil({ auth }) {
   const { id } = useParams();
-  const [modul, setmodul] = useState({lehrende:[]});
+  const [modul, setmodul] = useState({ lehrende: [] });
 
   useEffect(() => {
-    console.log('hallo')
     axios.get(`api/modules/${id}`)
       .then(res => {
         setmodul(res.data)
@@ -18,6 +17,10 @@ function AppModuleProfil({ auth }) {
       })
       .catch(err => {
         console.log(err)
+        if (err.response.status === 403) {
+          localStorage.clear()
+          window.location.reload()
+        }
       })
   }, [])
 

@@ -19,10 +19,14 @@ function AppLehrendeProfil({ auth }) {
             })
             .catch(err => {
                 console.log(err)
+                if (err.response.status === 403) {
+                    localStorage.clear()
+                    window.location.reload()
+                }
             })
     }, [])
 
-    
+
 
     if (!auth) {
         return <Redirect to="/login" />
@@ -33,10 +37,10 @@ function AppLehrendeProfil({ auth }) {
     return (
 
         <Container>
-            <div style={{marginTop: '50px'}}>
+            <div style={{ marginTop: '50px' }}>
                 <LehrendeProfil prof={prof} />
             </div>
-            
+
         </Container>
 
 

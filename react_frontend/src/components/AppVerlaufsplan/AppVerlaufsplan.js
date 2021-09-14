@@ -45,6 +45,10 @@ function AppVerlaufsplan({ auth }) {
             })
             .catch(err => {
                 console.log(err)
+                if (err.response.status === 403) {
+                    localStorage.clear()
+                    window.location.reload()
+                }
             })
     }, [])
 
@@ -128,7 +132,7 @@ function AppVerlaufsplan({ auth }) {
                 return b.semester7 - a.semester7;
             })
         }
-        
+
         return module;
     }
 

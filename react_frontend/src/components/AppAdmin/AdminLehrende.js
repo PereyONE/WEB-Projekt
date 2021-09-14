@@ -38,7 +38,10 @@ function AdminLehrende({ auth }) {
                 console.log(res.data)
             })
             .catch(err => {
-                console.log(err)
+                if (err.response.status === 403) {
+                    localStorage.clear()
+                    window.location.reload()
+                }
             })
 
         axios.get('api/modules')
@@ -180,11 +183,11 @@ function AdminLehrende({ auth }) {
 
     function deleteProf() {
         console.log(profUpdate)
-        axios.delete('api/lehrende', {data:profUpdate})
+        axios.delete('api/lehrende', { data: profUpdate })
             .then(res => {
                 console.log(res)
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     }
