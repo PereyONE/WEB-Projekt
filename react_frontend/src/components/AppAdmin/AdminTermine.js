@@ -161,6 +161,7 @@ function AdminTermine({ auth }) {
                                 <label>
                                     Wochentag
                                     <select class="custom-select" id="inputGroupSelect04" value={terminUpdate.wochentag} onChange={e => setTerminUpdate({ ...terminUpdate, wochentag: e.target.value })}>
+                                        <option value='Wochentag auswählen'>Wochentag auswählen</option>
                                         <option value='Montag'>Montag</option>
                                         <option value='Dienstag'>Dienstag</option>
                                         <option value='Mittwoch'>Mittwoch</option>
@@ -205,6 +206,7 @@ function AdminTermine({ auth }) {
                             <label>
                                 Termintyp
                                 <select class="custom-select" id="inputGroupSelect04" value={terminUpdate.typ} onChange={e => setTerminUpdate({ ...terminUpdate, typ: e.target.value })}>
+                                    <option value='Typ auswählen'>Typ auswählen</option>
                                     <option value='Vorlesung'>Vorlesung</option>
                                     <option value='Praktikum'>Praktikum</option>
                                     <option value='Übung'>Übung</option>
