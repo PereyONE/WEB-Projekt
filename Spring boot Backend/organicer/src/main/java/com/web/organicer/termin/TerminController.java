@@ -29,7 +29,7 @@ public class TerminController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTermin(@PathVariable Long id,HttpServletRequest request){
-        return terminService.deleteTermin(id,request);
+    public String deleteTermin(@PathVariable Long id){
+        return terminService.deleteTermin(id);
     }
 }

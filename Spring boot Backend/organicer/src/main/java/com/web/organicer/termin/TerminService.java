@@ -91,7 +91,7 @@ public class TerminService {
     }
 
     //Termin aus der Datenbank und der Terminliste eines Studenten löschen
-    public String deleteTermin(Long id, HttpServletRequest request) {
+    public String deleteTermin(Long id) {
 
         //Den Studenten über den Token herausfinden
         if (id == null) {
