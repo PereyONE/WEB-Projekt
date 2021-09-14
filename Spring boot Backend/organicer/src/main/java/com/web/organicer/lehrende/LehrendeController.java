@@ -33,9 +33,9 @@ public class LehrendeController {
     }
 
 
-    @DeleteMapping
-    public String deleteLehrende(@RequestBody Lehrende lehrende){
-        return lehrendeService.deleteLehrende(lehrende);
+    @DeleteMapping("{id}")
+    public String deleteLehrende(@PathVariable Long id){
+        return lehrendeService.deleteLehrende(id);
     }
 }
 

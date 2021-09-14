@@ -18,17 +18,13 @@ public class ModuleController {
         return moduleService.getModules();
     }
 
-    @GetMapping (path = "/{id}")// gibt Modul mit entsprechener ID zurück
+    @GetMapping(path = "/{id}")// gibt Modul mit entsprechener ID zurück
     public Module getModulById(@PathVariable("id") Long id){ return moduleService.getModulById(id);}
 
     @PostMapping
-    public String postModule(@RequestBody Module module){
-        return moduleService.postModule(module);
-    }
+    public String postModule(@PathVariable("id") Module module){ return moduleService.postModule(module); }
 
-    @DeleteMapping
-    public String deleteModule(@RequestBody Module module){
-        return moduleService.deleteModule(module);
-    }
+    @DeleteMapping(path = "/{id}")
+    public String deleteModule(@PathVariable("id") Long id){ return moduleService.deleteModule(id); }
 
 }

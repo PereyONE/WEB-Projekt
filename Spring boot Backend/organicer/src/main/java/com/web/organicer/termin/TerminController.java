@@ -32,8 +32,8 @@ public class TerminController {
         return terminService.postTermin(terminRequest.getSvpModul(),terminRequest.getTermin());
     }
 
-    @DeleteMapping
-    public String deleteTermin(@RequestBody Termin termin,HttpServletRequest request){
-        return terminService.deleteTermin(termin,request);
+    @DeleteMapping("{id}")
+    public String deleteTermin(@PathVariable Long id,HttpServletRequest request){
+        return terminService.deleteTermin(id,request);
     }
 }

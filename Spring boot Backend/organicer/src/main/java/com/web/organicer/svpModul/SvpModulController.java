@@ -26,9 +26,9 @@ public class SvpModulController {
         return svpModulService.postSvpModul(svpModul);
     }
 
-    @DeleteMapping
-    public String deleteSvpModulq(@RequestBody SvpModul svpModul){
-        return svpModulService.deleteSvpModul(svpModul);
+    @DeleteMapping("{id}")
+    public String deleteSvpModulq(@PathVariable Long id){
+        return svpModulService.deleteSvpModul(id);
     }
 }
 

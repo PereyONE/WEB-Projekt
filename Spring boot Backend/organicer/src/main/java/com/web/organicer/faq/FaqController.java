@@ -29,9 +29,9 @@ public class FaqController {
         return faqService.postFaq(faq);
     }
 
-    @DeleteMapping
-    public String deleteFaq(@RequestBody Faq faq){
-        return faqService.deleteFaq(faq);
+    @DeleteMapping("{id}")
+    public String deleteFaq(@PathVariable Long id){
+        return faqService.deleteFaq(id);
     }
 
 }

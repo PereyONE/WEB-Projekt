@@ -98,19 +98,16 @@ public class TerminService {
     }
 
     //Termin aus der Datenbank und der Terminliste eines Studenten löschen
-    public String deleteTermin(Termin termin, HttpServletRequest request) {
+    public String deleteTermin(Long id, HttpServletRequest request) {
 
         //Den Studenten über den Token herausfinden
-        Student student = studentService.getStudentFromRequest(request);
 
-        if (termin.getId() == null) {
+        if (id == null) {
             return "Keine Termin Id";
         }
+        Termin termin = terminRepository.findById(id).get();
         //löschen eines Termines aus der Datenbank
         terminRepository.delete(termin);
-
-        //löschen des Termines aus der Terminliste
-        //student.getTerminId().remove(termin.getId());
 
         return "Termin wurde gelöscht";
     }

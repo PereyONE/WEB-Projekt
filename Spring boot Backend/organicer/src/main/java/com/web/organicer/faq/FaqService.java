@@ -39,10 +39,11 @@ public class FaqService {
         return "Faq aktualisiert";
     }
 
-    public String deleteFaq(Faq faq){
-        if (faq.getId()==null){
+    public String deleteFaq(Long id){
+        if (id==null){
             return "Keine Faq Id";
             }
+        Faq faq = faqRepository.findById(id).get();
         faqRepository.delete(faq);
         return "Faq wurde gelöscht";
     }

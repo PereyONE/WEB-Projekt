@@ -99,7 +99,7 @@ public class StudentService implements UserDetailsService {
 
     public String updatePasswort(String passwort, HttpServletRequest request) {
 
-        if(passwort.length()<8) {
+        if(passwort.length()>7) {
             //Student Laden
             Student student = getStudentFromRequest(request);
             //Neues Passwort setzten

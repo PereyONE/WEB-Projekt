@@ -76,10 +76,11 @@ public class LehrendeService {
         return "Mitarbeiter " + lehrender.getVorname()+ " " + lehrender.getNachname() + " aktualisiert";
     }
 
-    public String deleteLehrende(Lehrende lehrende){
-        if(lehrende.getId()==null){
+    public String deleteLehrende(Long id){
+        if(id==null){
             return "Keine Mitarbeiter Id";
         }
+        Lehrende lehrende = lehrendeRepository.findById(id).get();
         lehrendeRepository.delete(lehrende);
         return "Mitarbeiter " + lehrende.getVorname()+ " " + lehrende.getNachname() + " wurde gelöscht";
     }

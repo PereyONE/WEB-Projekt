@@ -53,19 +53,16 @@ public class ModuleService {
     }
 
     public String updateModule(Module module) {
-        ArrayList<Lehrende> realLehrende=new ArrayList<>();
-        for(Lehrende lehrende : module.getLehrende()){
-            realLehrende.add(lehrende);
-        }
-        module.setLehrende(realLehrende);
+        module.setLehrende(moduleRepository.findById(module.getId()).get().getLehrende());
         moduleRepository.save(module);
         return "Module " + module.getModuleName() + " wurde aktualisiert";
     }
 
-    public String deleteModule(Module module) {
-        if (module.getId() == null) {
+    public String deleteModule(Long id) {
+        if (id == null) {
             return "Keine Modul id";
         }
+        Module module = moduleRepository.findById(id).get();
         moduleRepository.delete(module);
         return "Module " + module.getModuleName() + " wurde gelöscht";
     }

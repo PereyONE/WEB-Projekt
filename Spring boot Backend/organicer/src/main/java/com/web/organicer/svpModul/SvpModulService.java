@@ -43,10 +43,11 @@ public class SvpModulService {
         return "Studienverlaufsplanmodul aktualisiert";
     }
 
-    public String deleteSvpModul(SvpModul svpModul){
-        if (svpModul.getId()==null){
+    public String deleteSvpModul(Long id){
+        if (id==null){
             return "Keine Studienverlaufsplanmodul Id";
         }
+        SvpModul svpModul = svpModulRepository.findById(id).get();
         svpModulRepository.delete(svpModul);
         return "Studienverlaufplanmodul wurde gelöscht";
     }
