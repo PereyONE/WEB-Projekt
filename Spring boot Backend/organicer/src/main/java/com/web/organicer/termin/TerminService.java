@@ -1,6 +1,7 @@
 package com.web.organicer.termin;
 
 import com.web.organicer.student.Student;
+import com.web.organicer.student.StudentRole;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
 import com.web.organicer.svpModul.SvpModulService;
@@ -95,16 +96,28 @@ public class TerminService {
     }
 
     //Termin aus der Datenbank und der Terminliste eines Studenten löschen
-    public String deleteTermin(Long id) {
+    public String deleteTermin(Long id, HttpServletRequest request) {
 
         //Den Studenten über den Token herausfinden
         if (id == null) {
             return "Keine Termin Id";
         }
         Termin termin = terminRepository.findById(id).get();
+
+        if(termin.isCustom()){
+        termin.setStudent(null);
         //löschen eines Termines aus der Datenbank
         terminRepository.delete(termin);
+            return "Termin wurde gelöscht";
+        }
+        if(studentService.getStudentFromRequest(request).getStudentRole()== StudentRole.ADMIN){
+            termin.setStudent(null);
+            //löschen eines Termines aus der Datenbank
+            terminRepository.delete(termin);
+            return "Termin wurde gelöscht";
+        }
 
-        return "Termin wurde gelöscht";
+
+        return "Keine Autorisierung!";
     }
 }

@@ -99,7 +99,7 @@ function Popup({semester}) {
               </div>
               <div>
               <p className="titel">Semester:</p>
-              <select className="input" name="wochentag" onChange={e => setformular({...formular, typ: e.target.value})}>
+              <select className="input" name="wochentag" onChange={e => setformular({...formular, semester: e.target.value})}>
                 <option value="1">1.Semester</option>
                 <option value="2">2.Semester</option>
                 <option value="3">3.Semester</option>

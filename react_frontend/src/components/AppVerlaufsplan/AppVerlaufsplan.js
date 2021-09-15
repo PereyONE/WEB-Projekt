@@ -234,7 +234,20 @@ function AppVerlaufsplan({ auth }) {
     }
 
 
-    const moduleULPPF = () => {
+    const moduleULPPF7 = () => {
+        const module = []
+        for (let index = 0; index < itemsFromBackend.length; index++) {
+            if (itemsFromBackend[index].art !== 'modul' ) {
+                module.push(itemsFromBackend[index])
+            }
+        }
+        module.sort(function (a, b) {
+            return b.ects - a.ects;
+        })
+
+        return module;
+    }
+    const moduleULPPF12 = () => {
         const module = []
         for (let index = 0; index < itemsFromBackend.length; index++) {
             if (itemsFromBackend[index].art !== 'modul' || itemsFromBackend[index].semester12===0) {
@@ -564,7 +577,7 @@ function AppVerlaufsplan({ auth }) {
             const newColumns = {
                 0: {
                     name: "Semester 0",
-                    items: moduleULPPF(5)
+                    items: moduleULPPF7(5)
                 },
                 1: {
                     name: "Semester 1",
@@ -624,7 +637,7 @@ function AppVerlaufsplan({ auth }) {
             const newColumns = {
                 0: {
                     name: "Semester 0",
-                    items: moduleULPPF(1)
+                    items: moduleULPPF12(1)
                 },
                 1: {
                     name: "Semester 1",
