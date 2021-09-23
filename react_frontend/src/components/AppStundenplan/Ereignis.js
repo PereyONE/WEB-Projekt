@@ -46,6 +46,9 @@ function Ereignis({ eintrag }) {
         axios.delete(`/api/termine/` + formular.id, { data: formular })
             .then(res => {
                 console.log(res)
+                if (window.confirm("Möchtest du deinen neuen Stundenplan laden?")) {
+                    window.location.reload()
+                  }
             })
             .catch(err => {
                 console.log(err)
