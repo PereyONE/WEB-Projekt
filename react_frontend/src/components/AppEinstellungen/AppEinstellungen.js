@@ -30,9 +30,9 @@ function AppEinstellungen({ auth }) {
 
   const [wahlCourses, setWahlCourses] = useState([
     { id: 3, name: 'Postproduction' },
-    { id: 4, name: 'Stereoskopie' },
-    { id: 5, name: 'CGI Workshop' },
-    { id: 6, name: 'Film und Postproduction' },
+    { id: 4, name: 'Film und Postproduction' },
+    { id: 5, name: 'Stereoskopie' },
+    { id: 6, name: 'CGI Workshop' },
     { id: 7, name: 'Themen der Computergrafik' },
   ])
 
@@ -53,6 +53,7 @@ function AppEinstellungen({ auth }) {
           setVertiefungUpdate({ ...vertiefungUpdate, module: res.data.vertiefungen })
         }
 
+        console.log(res.data.vertiefungen)
         console.log(res.data)
 
       })
