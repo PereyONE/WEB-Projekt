@@ -25,6 +25,9 @@ public class VerlaufsplanController {
         return plan;
     }
 
+    @GetMapping("/module/{module}")
+    public Long getModuleIdBySvp(@PathVariable String module){return verlaufsplanService.getModuleByModuleAbkürzung(module);}
+
     @PostMapping
     public String updateVerlaufsplan(@RequestBody ArrayList<Verlaufsplan> verlaufsplan, HttpServletRequest request){
         return verlaufsplanService.updateVerlaufsplan(verlaufsplan, request);

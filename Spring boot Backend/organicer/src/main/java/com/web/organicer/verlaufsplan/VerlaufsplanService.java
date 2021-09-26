@@ -1,5 +1,7 @@
 package com.web.organicer.verlaufsplan;
 
+import com.web.organicer.module.Module;
+import com.web.organicer.module.ModuleService;
 import com.web.organicer.student.Student;
 import com.web.organicer.student.StudentService;
 import com.web.organicer.svpModul.SvpModul;
@@ -16,6 +18,7 @@ public class VerlaufsplanService {
     private final VerlaufsplanRepository verlaufsplanRepository;
     private final StudentService studentService;
     private final SvpModulService svpModulService;
+    private final ModuleService moduleService;
 
     public ArrayList<Verlaufsplan> getVerlaufsplanById(HttpServletRequest request) {
 
@@ -122,6 +125,8 @@ public class VerlaufsplanService {
         }
         return "Wahlmodule hinzugefügt";
     }
+
+    public Long getModuleByModuleAbkürzung(String modul){ return moduleService.getModulByModuleAbkürzung(modul); }
 
     public ArrayList<Verlaufsplan> getVertiefungenInVerlaufsplan(Long id) {
         return verlaufsplanRepository.findVertiefungenInVerlaufsplan(id);

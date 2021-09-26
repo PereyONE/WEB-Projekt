@@ -4,6 +4,7 @@ import com.web.organicer.lehrende.Lehrende;
 import com.web.organicer.verlaufsplan.Verlaufsplan;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,5 +67,10 @@ public class ModuleService {
             module.add(moduleRepository.getByModuleName(plan.getSvpModul().getName()));
         }
         return module;
+    }
+
+    public Long getModulByModuleAbkürzung(String moduleAbkürzung) {
+        Module module = moduleRepository.getByModuleAbkürzung(moduleAbkürzung);
+        return module.getId();
     }
 }
