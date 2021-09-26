@@ -97,6 +97,8 @@ public class VerlaufsplanService {
 
         Student realStudent = studentService.getStudentFromRequest(request);
 
+        realStudent.setWahlId(wahlmodule);
+
         //alte Wahlmodule entfernen
         ArrayList<Verlaufsplan> alteWahlmodule = getWahlmodulInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteWahlmodule) {
