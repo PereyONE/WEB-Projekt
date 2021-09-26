@@ -67,8 +67,6 @@ public class Student implements UserDetails {
         return Collections.singletonList(authority);
     }
 
-    public void setVertiefungen(int vertiefung){vertiefungen.add(vertiefung);}
-
     @Override
     public String getPassword() {
         return password;

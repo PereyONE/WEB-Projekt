@@ -65,6 +65,9 @@ public class VerlaufsplanService {
 
         Student realStudent = studentService.getStudentFromRequest(request);
 
+        //Vertiefung zum Student hinzufügen
+        realStudent.setVertiefungen(vertiefungen);
+
         //alte Vertiefungen entfernen
         ArrayList<Verlaufsplan> alteVertiefungen = getVertiefungenInVerlaufsplan(realStudent.getId());
         for (Verlaufsplan plan : alteVertiefungen) {
