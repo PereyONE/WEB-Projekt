@@ -39,7 +39,7 @@ function AppEinstellungen({ auth }) {
   const [wahlCourseAdd, setWahlCourseAdd] = useState({ id: null })
   const [wahlCourseRemove, setWahlCourseRemove] = useState({ id: null })
   //Default wird erstellt
-  const defaultWahlCourse = { id: null, name: '' };
+  const defaultWahlCourse = { module:[] };
   const [wahlCoursesUpdate, setWahlCourseUpdate] = useState(defaultWahlCourse)
 
   const [passwort, setPasswort] = useState()
@@ -52,6 +52,10 @@ function AppEinstellungen({ auth }) {
         if (!(res.data.vertiefungen === null)) {
           setVertiefungUpdate({ ...vertiefungUpdate, module: res.data.vertiefungen })
         }
+        if (!(res.data.wahlId === null)) {
+          setWahlUpdate({ ...wahlUpdate, wahlen: res.data.wahlId })
+        }
+        
 
         console.log(res.data.vertiefungen)
         console.log(res.data)

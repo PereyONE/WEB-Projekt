@@ -54,71 +54,6 @@ function AppVerlaufsplan({ auth }) {
 
 
 
-
-
-
-    const itemsFromBackend2 = [
-        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'modul', verfuegbarkeit: 'ws', position: 0 },
-
-        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'ulp', verfuegbarkeit: 'ws', position: 0 },
-
-        { id: uuid(), name: "Mathe 1", typ: "pflicht", semester7: 1, semester12: 1, ects: 10, art: 'pf', position: 0 },
-        { id: uuid(), name: "Photo 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 5, art: 'pf', position: 0 },
-        { id: uuid(), name: "Info 1", typ: "pflicht", semester7: 1, semester12: 3, ects: 6, art: 'pf', position: 0 },
-        { id: uuid(), name: "Elektronik", typ: "pflicht", semester7: 1, semester12: 1, ects: 5, art: 'pf', position: 0 },
-        { id: uuid(), name: "SMM", typ: "pflicht", semester7: 1, semester12: 1, ects: 1, art: 'pf', position: 0 },
-        { id: uuid(), name: "AVW", typ: "pflicht", semester7: 1, semester12: 1, ects: 3, art: 'pf', position: 0 },
-
-        { id: uuid(), name: "Mathe 2", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', verfuegbarkeit: 'ss', position: 0 },
-        { id: uuid(), name: "Photo 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
-        { id: uuid(), name: "Info 2", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
-        { id: uuid(), name: "EM 1", typ: "pflicht", semester7: 2, semester12: 2, art: 'modul', position: 0 },
-        { id: uuid(), name: "GMG 1", typ: "pflicht", semester7: 2, semester12: 4, art: 'modul', position: 0 },
-
-        { id: uuid(), name: "Siga", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
-        { id: uuid(), name: "Photo 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
-        { id: uuid(), name: "Info 3", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
-        { id: uuid(), name: "EM 2", typ: "pflicht", semester7: 3, semester12: 3, art: 'modul', position: 0 },
-        { id: uuid(), name: "GMG 2", typ: "pflicht", semester7: 3, semester12: 5, art: 'modul', position: 0 },
-
-        { id: uuid(), name: "VPA 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPB 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPC 1", typ: "vertiefung", semester7: 4, semester12: 8, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPD 1", typ: "vertiefung", semester7: 4, semester12: 6, art: 'modul', position: 0 },
-        { id: uuid(), name: "WPB 1", typ: "wahl", semester7: 4, semester12: 10, art: 'modul', position: 0 },
-
-        { id: uuid(), name: "VPA 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPB 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPC 2", typ: "vertiefung", semester7: 5, semester12: 9, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPD 2", typ: "vertiefung", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-        { id: uuid(), name: "WPB 2", typ: "wahl", semester7: 5, semester12: 11, art: 'modul', position: 0 },
-        { id: uuid(), name: "BWR", typ: "pflicht", semester7: 5, semester12: 7, art: 'modul', position: 0 },
-        { id: uuid(), name: "REC", typ: "pflicht", semester7: 5, semester12: 9, art: 'modul', position: 0 },
-
-        { id: uuid(), name: "VPA 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPB 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPC 3", typ: "vertiefung", semester7: 6, semester12: 10, art: 'modul', position: 0 },
-        { id: uuid(), name: "VPD 3", typ: "vertiefung", semester7: 6, semester12: 8, art: 'modul', position: 0 },
-
-        { id: uuid(), name: "Praktikum", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
-        { id: uuid(), name: "Bachelorarbeit", typ: "gold", semester7: 7, semester12: 11, art: 'modul', position: 0 },
-        { id: uuid(), name: "Kolloquium", typ: "gold", semester7: 7, semester12: 12, art: 'modul', position: 0 },
-
-
-    ];
-
-
-
     //Funktion um alle Module für das jeweils angegebene Semester anhand ihrer Position 
     const modulePosition = (position) => {
         const module = []
@@ -237,7 +172,7 @@ function AppVerlaufsplan({ auth }) {
     const moduleULPPF7 = () => {
         const module = []
         for (let index = 0; index < itemsFromBackend.length; index++) {
-            if (itemsFromBackend[index].art !== 'modul' ) {
+            if (itemsFromBackend[index].art !== 'modul') {
                 module.push(itemsFromBackend[index])
             }
         }
@@ -250,7 +185,7 @@ function AppVerlaufsplan({ auth }) {
     const moduleULPPF12 = () => {
         const module = []
         for (let index = 0; index < itemsFromBackend.length; index++) {
-            if (itemsFromBackend[index].art !== 'modul' || itemsFromBackend[index].semester12===0) {
+            if (itemsFromBackend[index].art !== 'modul' || itemsFromBackend[index].semester12 === 0) {
                 module.push(itemsFromBackend[index])
             }
         }
@@ -697,6 +632,18 @@ function AppVerlaufsplan({ auth }) {
 
     }
 
+    const info = (e, abk) => {
+        e.preventDefault()
+        axios.get('/api/verlaufsplan/module/' + abk)
+            .then(res => {
+                console.log(res.data)
+                window.location = "/module/" + res.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
 
     if (!auth) {
         return <Redirect to="/login" />
@@ -730,6 +677,7 @@ function AppVerlaufsplan({ auth }) {
                         }}
 
                     </Droppable>
+
                     <Button variant="outline-dark" className="Loeschen" onClick={saveSemester} ><i class="far fa-save"></i></Button>
                     <Button variant="outline-dark" className="Loeschen" onClick={siebenSemester}>7</Button>
                     <Button variant="outline-dark" className="Loeschen" onClick={zwoelfSemester}>12</Button>
@@ -762,6 +710,7 @@ function AppVerlaufsplan({ auth }) {
                                 <div style={{ margin: 8 }}>
 
                                     <ButtonGroup aria-label="Basic example">
+
                                         <Button variant="outline-secondary" onClick={setModul}>Modul</Button>
                                         <Button variant="outline-secondary" onClick={setULP} >ULP</Button>
                                         <Button variant="outline-secondary" onClick={setPF}>Klausur</Button>
@@ -803,19 +752,18 @@ function AppVerlaufsplan({ auth }) {
                                                                 >
                                                                     {(provided, snapshot) => {
                                                                         return (
+
                                                                             <div
                                                                                 className="Drag"
                                                                                 id={item.typ}
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
-
-
-
                                                                             >
-                                                                                <div>{item.name}</div><div>{item.ects} ECTS</div>
+                                                                                <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button> <div>{item.name}</div><div>{item.ects} ECTS</div>
 
                                                                             </div>
+
                                                                         );
                                                                     }}
                                                                 </Draggable>
@@ -841,7 +789,7 @@ function AppVerlaufsplan({ auth }) {
 
 
                                                                             >
-                                                                                <div>{item.name}</div><div>ULP</div>
+                                                                                <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button><div>{item.name}</div><div>ULP</div>
 
                                                                             </div>
                                                                         );
@@ -869,7 +817,7 @@ function AppVerlaufsplan({ auth }) {
 
 
                                                                             >
-                                                                                <div>{item.name}</div><div>PF</div>
+                                                                                <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button><div>{item.name}</div><div>PF</div>
 
                                                                             </div>
                                                                         );
@@ -941,7 +889,7 @@ function AppVerlaufsplan({ auth }) {
 
 
                                                                             >
-                                                                                <div>{item.name}</div><div>{item.ects} ECTS</div>
+                                                                                <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button><div>{item.name}</div><div>{item.ects} ECTS</div>
 
                                                                             </div>
                                                                         );
@@ -969,7 +917,7 @@ function AppVerlaufsplan({ auth }) {
 
 
                                                                             >
-                                                                                <div>{item.name}</div><div>ULP</div>
+                                                                                <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button><div>{item.name}</div><div>ULP</div>
 
                                                                             </div>
                                                                         );
@@ -994,7 +942,7 @@ function AppVerlaufsplan({ auth }) {
                                                                                 {...provided.draggableProps}
                                                                                 {...provided.dragHandleProps}
                                                                             >
-                                                                                <div>{item.name}</div><div>PF</div>
+                                                                               <Button variant="outline-dark" className="LoeschenS" onClick={e => info(e, item.name)} ><i class="fas fa-info"></i></Button> <div>{item.name}</div><div>PF</div>
 
                                                                             </div>
                                                                         );
