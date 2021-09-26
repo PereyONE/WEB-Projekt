@@ -72,7 +72,6 @@ function App() {
         <Route path="/adminLehrende" component={()=><AdminLehrende auth={auth} />} />{/* auth implementiert */}
         <Route path="/adminModule" component={()=><AdminModule auth={auth} />} />{/* auth implementiert */}
         <Route path="/adminFaqs" component={()=><AdminFAQ auth={auth} />} />
-        {/* <Route path="/adminVertiefungen" component={()=><AdminVertiefung auth={auth} />} /> */}
         <Route path="/adminTermine" component={()=><AdminTermine auth={auth} />}/>{/* auth implementiert */}
         
       </div>
